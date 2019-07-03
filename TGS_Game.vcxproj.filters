@@ -43,6 +43,9 @@
     <Filter Include="ソース ファイル\Actor\Enemy\EnemyManager">
       <UniqueIdentifier>{f45539de-87ca-4df5-b62f-b9dceb979e70}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Actor\NPC\NpcManager">
+      <UniqueIdentifier>{6910018e-cc61-4e55-996e-a1db97898040}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameSystem.cpp">
@@ -99,11 +102,11 @@
     <ClCompile Include="Source\Player.cpp">
       <Filter>ソース ファイル\Actor\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Source\NpcManager.cpp">
-      <Filter>ソース ファイル\Actor\NPC</Filter>
-    </ClCompile>
     <ClCompile Include="Source\EnemyManager.cpp">
       <Filter>ソース ファイル\Actor\Enemy\EnemyManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\NpcManager.cpp">
+      <Filter>ソース ファイル\Actor\NPC\NpcManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -161,11 +164,11 @@
     <ClInclude Include="Source\Player.h">
       <Filter>ソース ファイル\Actor\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Source\NpcManager.h">
-      <Filter>ソース ファイル\Actor\NPC</Filter>
-    </ClInclude>
     <ClInclude Include="Source\EnemyManager.h">
       <Filter>ソース ファイル\Actor\Enemy\EnemyManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\NpcManager.h">
+      <Filter>ソース ファイル\Actor\NPC\NpcManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

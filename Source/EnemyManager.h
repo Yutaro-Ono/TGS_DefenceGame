@@ -27,7 +27,7 @@ private:
 
 	int m_enemySourceHandle;            // エネミーモデルのハンドル
 
-	std::vector<Actor*> enemy;
+	std::vector<Actor*> enemy;          // エネミー
 
 
 	static const int MAX_ENEMY_NUM;     // 敵の一度に出現する最大数

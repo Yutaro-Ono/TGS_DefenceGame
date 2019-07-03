@@ -8,14 +8,14 @@
 
 class PlayerManager;
 
-#define USE_LERP_CAMERA 1
+#define USE_LERP_CAMERA 1        // Lerpを使用するかしないか
 
 // コンストラクタ
 Camera::Camera()
 {
 	//奥行0.1～1000までをカメラの描画範囲とする
 	SetCameraNearFar(1.0f, 40000.0f);
-
+	// ポジションの設定
 	pos = VGet(0.0f, 90.0f, -130.0f);
 }
 

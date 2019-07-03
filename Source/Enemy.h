@@ -1,7 +1,7 @@
 //-----------------------------------------------------------+
 // エネミークラス
 //      : エネミーの固有処理
-//                                  Last Update : 2019/07/02
+//                                  Last Update : 2019/07/03
 //-----------------------------------------------------------+
 #pragma once
 #include "Actor.h"
@@ -22,5 +22,7 @@ public:
 
 	void Initialize() override;                      // 各種初期化処理
 
-	void SeeIdol();
+	void Emergence(const VECTOR popPos);             // 最初の出現位置設定
+
+	void GazeTarget();                               // ターゲットの方向に向く
 };

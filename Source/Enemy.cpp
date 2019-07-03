@@ -20,7 +20,16 @@ void Enemy::Initialize()
 
 }
 
-void Enemy::SeeIdol()
+// 出現位置設定
+void Enemy::Emergence(const VECTOR popPos)
+{
+	m_position = popPos;
+
+	MV1SetPosition(m_modelHandle, m_position);
+}
+
+// ターゲットの方向に向く
+void Enemy::GazeTarget()
 {
 
 }

@@ -21,6 +21,7 @@ public:
 
 	// ポジションのゲッター/セッター
 	const VECTOR& GetPosition() const { return m_position; };
+
 	void SetPos(const VECTOR set) { m_position = set; }
 	// 半径の取得(当たり判定用)
 	float GetRadius() const { return m_radius; }

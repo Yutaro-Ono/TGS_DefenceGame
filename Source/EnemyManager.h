@@ -7,8 +7,12 @@
 #include <iostream>
 #include <vector>
 #include "DxLib.h"
+#include "Common.h"
+#include "Actor.h"
 #include "Enemy.h"
 
+class Actor;
+class Enemy;
 
 class EnemyManager final
 {
@@ -27,10 +31,10 @@ private:
 
 	int m_enemySourceHandle;            // エネミーモデルのハンドル
 
-	std::vector<Actor*> enemy;          // エネミー
+	std::vector<class Enemy*> enemy;          // エネミー
 
 
-	static const int MAX_ENEMY_NUM;     // 敵の一度に出現する最大数
-
+	static const int ENEMY_MAX_NUM;     // 敵の一度に出現する最大数
+	static const int ENEMY_ALL_NUM;     // 敵の合計数
 
 };

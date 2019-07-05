@@ -7,12 +7,14 @@
 #include "DxLib.h"
 #include "SceneBase.h"
 #include "PlayerManager.h"
+#include "EnemyManager.h"
 #include "ObjectManager.h"
 #include "NpcManager.h"
 #include "Camera.h"
 
 class SceneBase;
 class PlayerManager;
+class EnemyManager;
 class ObjectManager;
 class Player;
 class Camera;
@@ -35,6 +37,8 @@ public:
 private:
 
 	PlayerManager* m_player;           // プレイヤー
+
+	EnemyManager* m_enemy;             // エネミー
 
 	ObjectManager* m_obj;              // オブジェクト
 

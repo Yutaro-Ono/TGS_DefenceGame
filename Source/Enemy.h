@@ -22,7 +22,11 @@ public:
 
 	void Initialize() override;                      // 各種初期化処理
 
-	void Emergence(const VECTOR popPos);             // 最初の出現位置設定
+	void Delete()override {};
+
+	void Update()override {};
+
+	void SetEmergence(const VECTOR popPos);             // 最初の出現位置設定
 
 	void GazeTarget();                               // ターゲットの方向に向く
 };

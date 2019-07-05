@@ -21,7 +21,7 @@ void Enemy::Initialize()
 }
 
 // èoåªà íuê›íË
-void Enemy::Emergence(const VECTOR popPos)
+void Enemy::SetEmergence(const VECTOR popPos)
 {
 	m_position = popPos;
 

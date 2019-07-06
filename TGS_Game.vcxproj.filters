@@ -108,6 +108,9 @@
     <ClCompile Include="Source\NpcManager.cpp">
       <Filter>ソース ファイル\Actor\NPC\NpcManager</Filter>
     </ClCompile>
+    <ClCompile Include="Source\ObjectVisibleWall.cpp">
+      <Filter>ソース ファイル\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameSystem.h">
@@ -169,6 +172,9 @@
     </ClInclude>
     <ClInclude Include="Source\NpcManager.h">
       <Filter>ソース ファイル\Actor\NPC\NpcManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ObjectVisibleWall.h">
+      <Filter>ソース ファイル\Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -7,11 +7,9 @@
 // コンストラクタ
 SceneBase::SceneBase()
 {
-	
 }
 
 // デストラクタ
 SceneBase::~SceneBase()
 {
-
 }

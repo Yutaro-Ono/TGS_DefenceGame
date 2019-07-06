@@ -39,11 +39,8 @@ bool GameSystem::Initialize()
 		ChangeWindowMode(TRUE);
 	}
 
-
 	// 画面設定を更新
 	SetGraphMode(m_screenWidth, m_screenHeight, 32, 60);
-
-
 
 	SetMouseDispFlag(TRUE);      // マウスカーソルの表示
 
@@ -106,7 +103,6 @@ void GameSystem::RunLoop()
 
 		// シーンの更新
 		m_scene->Update(*m_camera);
-
 
 		ClearDrawScreen();
 

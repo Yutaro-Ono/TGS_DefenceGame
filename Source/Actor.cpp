@@ -9,7 +9,7 @@ Actor::Actor(const int sourceModelHandle)
 {
 	m_modelHandle = MV1DuplicateModel(sourceModelHandle);     // モデルを複製
 
-	printfDx("モデルをロード\n");
+	// printfDx("モデルをロード\n");
 
 }
 

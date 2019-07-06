@@ -11,7 +11,6 @@ SceneInGame::SceneInGame()
 {
 	m_player = NULL;
 	m_enemy = NULL;
-
 }
 
 // デストラクタ

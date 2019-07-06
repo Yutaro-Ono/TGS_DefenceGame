@@ -83,5 +83,4 @@ void ObjectManager::Draw()
 	m_fieldObj->Draw();
 	// スカイドームの描画
 	m_skyObj->Draw();
-
 }

@@ -12,7 +12,6 @@ ObjectField::ObjectField(int sourceModelHandle)
 	m_position = VGet(0.0f, 0.0f, 0.0f);
 	m_direction = VGet(0.0f, 0.0f, 0.0f);
 	m_radius = 0.0f;
-
 }
 
 ObjectField::~ObjectField()

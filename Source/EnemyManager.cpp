@@ -11,7 +11,7 @@ const int EnemyManager::ENEMY_ALL_NUM = 25;          // 敵の合計数
 void EnemyManager::Initialize()
 {
 	// エネミーモデルの読み込み
-	m_enemySourceHandle = MV1LoadModel("Data/Model/Actor/Enemy/モブ/モブ.pmx");
+	m_enemySourceHandle = MV1LoadModel("Data/Model/Actor/Enemy/koibreder/koibreder.pmx");
 
 	// エネミーの生成
 	for (int i = 0; i < ENEMY_ALL_NUM; i++)

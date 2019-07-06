@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------+
 #include "ObjectSky.h"
 
-const VECTOR ObjectSky::SCALE_SIZE = { 0.5f, 0.5f, 0.5f };
+const VECTOR ObjectSky::SCALE_SIZE = { 12.0f, 12.0f, 12.0f };
 const VECTOR ObjectSky::ROTATE_RAD = { 15.0f * DX_PI_F / 180.0f, 0.0f, 0.0f };
 
 ObjectSky::ObjectSky(int sourceModelHandle)

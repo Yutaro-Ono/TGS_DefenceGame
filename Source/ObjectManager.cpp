@@ -5,6 +5,9 @@
 #include "ObjectManager.h"
 #include "ObjectField.h"
 #include "ObjectSky.h"
+#include "ObjectVisibleWall.h"
+
+const int ObjectManager::WALL_NUM = 25;        // 見えない壁の数
 
 // コンストラクタ
 ObjectManager::ObjectManager()
@@ -30,16 +33,27 @@ ObjectManager::~ObjectManager()
 void ObjectManager::Initialize()
 {
 	// フィールドモデルのロード
-	m_fieldSourceHandle = MV1LoadModel("Data/Model/Field/vstage/IT_バレンタインステージ風舞台.mv1");
+	m_fieldSourceHandle = MV1LoadModel("Data/Model/Field/チェックなドームルームver100/チェックなドームルームver100.mv1");
 	// スカイドームのロード
-	m_skySourceHandle = MV1LoadModel("Data/Skydome/24-hours_SkyDome/24hours_skydome.pmx");
+	m_skySourceHandle = MV1LoadModel("Data/Skydome/Universe/Universe.mv1");
 
 	// フィールドを生成
 	m_fieldObj = new ObjectField(m_fieldSourceHandle);
 	m_fieldObj->Initialize();
-	// スカイドームを生成
-	m_skyObj = new ObjectSky(m_skySourceHandle);
-	m_skyObj->Initialize();
+	//// スカイドームを生成
+	//m_skyObj = new ObjectSky(m_skySourceHandle);
+	//m_skyObj->Initialize();
+
+	//// 見えない壁を生成
+	//for (int i = 0; i < WALL_NUM; i++)
+	//{
+	//	m_visibleWall.push_back(new ObjectVisibleWall);
+	//}
+
+	//for (int i = 0; m_visibleWall.size(); i++)
+	//{
+	//	m_visibleWall[i]->SetPosition(VGet(cos((360.0f - (360.0f / m_visibleWall.size()) * i) * PI / 180.0f) * 90.0f, 0, 40.0f + sin(((360.0f / m_visibleWall.size()) * i) * PI / 180.0f) * 90.0f));
+	//}
 
 	//// フィールドを生成
 	//for (int i = 0; i < OBJECT_NUM_H; i++)
@@ -60,6 +74,12 @@ void ObjectManager::Delete()
 	MV1DeleteModel(m_skySourceHandle);
 	delete (m_skyObj);
 
+	//for (int i = 0; m_visibleWall.size(); i++)
+	//{
+	//	delete(m_visibleWall[i]);
+	//	m_visibleWall[i] = NULL;
+	//}
+
 	for (int i = 0; i < OBJECT_NUM_H; i++)
 	{
 		for (int j = 0; j < OBJECT_NUM_W; j++)
@@ -68,6 +88,8 @@ void ObjectManager::Delete()
 			m_object[i][j] = NULL;
 		}
 	}
+
+	
 }
 
 // 更新処理
@@ -83,4 +105,9 @@ void ObjectManager::Draw()
 	m_fieldObj->Draw();
 	// スカイドームの描画
 	m_skyObj->Draw();
+
+	//for (int i = 0; m_visibleWall.size(); i++)
+	//{
+	//	m_visibleWall[i]->Update();
+	//}
 }

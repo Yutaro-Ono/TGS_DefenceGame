@@ -4,7 +4,8 @@
 //-----------------------------------------------------------------------+
 #include "ObjectField.h"
 
-const VECTOR ObjectField::SCALE_SIZE = { 1.8f, 1.5f, 1.8f };      // ƒ‚ƒfƒ‹‚ÌŠg‘å—¦
+//const VECTOR ObjectField::SCALE_SIZE = { 1.8f, 1.5f, 1.8f };      // ƒ‚ƒfƒ‹‚ÌŠg‘å—¦
+const VECTOR ObjectField::SCALE_SIZE = { 0.5f, 0.5f, 0.5f };      // ƒ‚ƒfƒ‹‚ÌŠg‘å—¦
 
 ObjectField::ObjectField(int sourceModelHandle)
 	:ObjectBase(sourceModelHandle)

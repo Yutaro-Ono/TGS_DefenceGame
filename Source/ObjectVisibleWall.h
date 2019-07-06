@@ -6,14 +6,22 @@
 #pragma once
 #include "DxLib.h"
 #include "ObjectBase.h"
+#include "HitChecker.h"
 
-class ObjectVisibleWall : public ObjectBase
+
+
+class ObjectVisibleWall
 {
 public:
 
-	ObjectVisibleWall(int m_modelHandle);
+	ObjectVisibleWall();
 	~ObjectVisibleWall();
+
+	void SetPosition(const VECTOR in_position) { m_position = in_position; }
+
+	void Update();
 
 private:
 
+	VECTOR m_position;
 };

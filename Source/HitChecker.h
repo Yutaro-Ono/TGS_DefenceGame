@@ -8,6 +8,9 @@
 #include "PlayerManager.h"
 #include "ObjectManager.h"
 
+class PlayerManager;
+class ObjectManager;
+
 class HitChecker final
 {
 public:

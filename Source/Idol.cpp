@@ -22,6 +22,6 @@ void Idol::Delete()
 {
 }
 
-void Idol::Update()
+void Idol::Update(float deltaTime)
 {
 }

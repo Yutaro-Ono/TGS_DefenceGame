@@ -11,7 +11,7 @@ const int EnemyManager::ENEMY_ALL_NUM = 25;          // 敵の合計数
 void EnemyManager::Initialize()
 {
 	// エネミーモデルの読み込み
-	m_enemySourceHandle = MV1LoadModel("Data/Model/Actor/Enemy/koibreder/koibreder.pmx");
+	m_enemySourceHandle = MV1LoadModel("Data/Model/Actor/Enemy/Low_poly_ufo_FBX/Low_poly_UFO.mv1");
 
 	// エネミーの生成
 	for (int i = 0; i < ENEMY_ALL_NUM; i++)
@@ -24,7 +24,7 @@ void EnemyManager::Initialize()
 	{
 		// cos((360.0f - (360.0f / enemy.size()) * i) * PI / 180.0f)
 		//                                                   半径
-		enemy[i]->SetEmergence(VGet(cos((360.0f - (360.0f / enemy.size()) * i) * PI / 180.0f) * 90.0f, 0, 40.0f + sin(((360.0f / enemy.size()) * i) * PI / 180.0f) * 90.0f));
+		enemy[i]->SetEmergence(VGet(cos((360.0f - (360.0f / enemy.size()) * i) * PI / 180.0f) * 120.0f, 0, 40.0f + sin(((360.0f / enemy.size()) * i) * PI / 180.0f) * 120.0f));
 	}
 }
 
@@ -43,9 +43,13 @@ void EnemyManager::Delete()
 }
 
 // 更新処理
-void EnemyManager::Update()
+void EnemyManager::Update(PlayerManager& playerManager, float deltaTime)
 {
-
+	for (int i = 0; i < enemy.size(); i++)
+	{
+		enemy[i]->Update(deltaTime);
+		enemy[i]->GazeTarget(playerManager, deltaTime);
+	}
 }
 
 // 描画処理

@@ -40,9 +40,9 @@ void ObjectManager::Initialize()
 	// フィールドを生成
 	m_fieldObj = new ObjectField(m_fieldSourceHandle);
 	m_fieldObj->Initialize();
-	//// スカイドームを生成
-	//m_skyObj = new ObjectSky(m_skySourceHandle);
-	//m_skyObj->Initialize();
+	// スカイドームを生成
+	m_skyObj = new ObjectSky(m_skySourceHandle);
+	m_skyObj->Initialize();
 
 	//// 見えない壁を生成
 	//for (int i = 0; i < WALL_NUM; i++)

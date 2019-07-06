@@ -25,7 +25,7 @@ PlayerManager::~PlayerManager()
 void PlayerManager::Initialize()
 {
 	// モデルを読み込み
-	m_sourceModelHandle = MV1LoadModel("Data/Model/Actor/Player/けんもうくん改/けんもうくん改.pmx");	
+	m_sourceModelHandle = MV1LoadModel("Data/Model/Actor/Player/humster/model/humster.mv1");	
 	
 	if (m_sourceModelHandle <= -1)
 	{
@@ -41,9 +41,9 @@ void PlayerManager::Delete()
 }
 
 // 更新処理
-void PlayerManager::Update()
+void PlayerManager::Update(float deltaTime)
 {
-	m_player->Update();
+	m_player->Update(deltaTime);
 	// ポジションをセット
 	MV1SetPosition(m_sourceModelHandle, VGet(0.0f, 0.0f, 0.0f));
 

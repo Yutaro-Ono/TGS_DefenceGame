@@ -17,7 +17,7 @@ public:
 
 	void Delete();                // 各種解放処理
 
-	void Update();                // 更新
+	void Update(float deltaTime);                // 更新
 
 	void Draw();                  // 描画
 

@@ -31,10 +31,10 @@ void NpcManager::Delete()
 }
 
 // 更新処理
-void NpcManager::Update()
+void NpcManager::Update(float deltaTime)
 {
 	// アイドルの更新
-	m_idol->Update();
+	m_idol->Update(deltaTime);
 }
 
 // 描画処理

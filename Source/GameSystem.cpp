@@ -102,7 +102,7 @@ void GameSystem::RunLoop()
 		prevTick = nowTick;
 
 		// シーンの更新
-		m_scene->Update(*m_camera);
+		m_scene->Update(*m_camera, m_deltaTime);
 
 		ClearDrawScreen();
 

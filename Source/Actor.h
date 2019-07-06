@@ -16,13 +16,13 @@ public:
 
 	virtual void Delete() = 0;
 
-	virtual void Update() = 0;
+	virtual void Update(float deltaTime) = 0;
 	void Draw();
 
 	// ポジションのゲッター/セッター
-	const VECTOR& GetPosition() const { return m_position; };
+	virtual const VECTOR& GetPosition() const { return m_position; };
 
-	void SetPos(const VECTOR set) { m_position = set; }
+	virtual void SetPos(const VECTOR set) { m_position = set; }
 	// 半径の取得(当たり判定用)
 	float GetRadius() const { return m_radius; }
 
@@ -31,6 +31,8 @@ protected:
 	VECTOR m_position;
 	VECTOR m_direction;
 	float m_radius;
+
+	float m_angle;
 
 	int m_modelHandle;
 

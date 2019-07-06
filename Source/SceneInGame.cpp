@@ -45,16 +45,16 @@ void SceneInGame::Delete()
 }
 
 // 更新処理
-void SceneInGame::Update(Camera& camera)
+void SceneInGame::Update(Camera& camera, float deltaTime)
 {
 	// カメラの更新
 	camera.Update(*m_player);
 	// プレイヤーの更新
-	m_player->Update();
+	m_player->Update(deltaTime);
 	// エネミーの更新
-	m_enemy->Update();
+	m_enemy->Update(*m_player, deltaTime);
 	// NPCの更新
-	m_npc->Update();
+	m_npc->Update(deltaTime);
 }
 
 // 描画処理

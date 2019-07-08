@@ -1,16 +1,17 @@
 //-----------------------------------------------------------------------+
 // エネミークラス                            
-//                                              Last Update : 2019/07/03
+//                                              Last Update : 2019/07/08
 //-----------------------------------------------------------------------+
 #include "Enemy.h"
 
 const VECTOR Enemy::SCALE_SIZE = { 0.3f, 0.3f, 0.3f };
-const float Enemy::MOVE_SPEED = 3.0f;
+const float Enemy::MOVE_SPEED = 20.0f;
 
 // コンストラクタ
 Enemy::Enemy(int sourceModelHandle)
 	:Actor(sourceModelHandle)
-	,m_hitRadius(5.0f)
+	,m_hitRadius(10.0f)
+	,m_hitPlayer(false)
 {
 	m_targetVec = VGet(0.0f, 0.0f, 0.0f);
 }
@@ -30,8 +31,7 @@ void Enemy::Update(float deltaTime)
 {
 	// 角度を設定
 	MV1SetRotationXYZ(m_modelHandle, VGet(0.0f, m_angle / 180.0f * DX_PI_F, 0.0f));
-
-
+	// モデルの位置を設定
 	MV1SetPosition(m_modelHandle, m_position);
 }
 
@@ -52,18 +52,39 @@ void Enemy::SetEmergence(const VECTOR popPos)
 	MV1SetPosition(m_modelHandle, m_position);
 }
 
-// ターゲットの方向に向く
+// 他のエネミーに当たった時
+void Enemy::OnHitOtherEnemy(Enemy& other_enemy)
+{
+	// 自分自身の位置を障害物のあたり判定分ずらす.
+    // Z軸とX軸の二次元座標として位置ずらしを行う.
+	VECTOR yZeroPlayer = VGet(m_position.x, 0, m_position.z);
+	VECTOR yZeroObstruct = VGet(other_enemy.GetPosition().x, 0, other_enemy.GetPosition().z);
+
+	VECTOR obsToPlayer = VSub(yZeroPlayer, yZeroObstruct);
+
+	// ぶつかったときに離す距離。ちょうどだとfloat誤差で重なり続けるので少し間をあける.
+	float awayRange = (m_hitRadius + other_enemy.GetRadius() + 0.01f);
+
+	VECTOR awayVec = VScale(VNorm(obsToPlayer), awayRange);
+	m_position = VAdd(yZeroObstruct, awayVec);
+
+}
+
+// ターゲットの方向に移動
 void Enemy::GazeTarget(PlayerManager& playerManager, float deltaTime)
 {
-	Actor* player = playerManager.GetPlayerPointer();
-	VECTOR pVec = player->GetPosition();
-	// 目標までの距離検出
-	m_targetVec.x = pVec.x - m_position.x;
-	m_targetVec.z = pVec.z - m_position.z;
+	if(!m_hitPlayer)
+	{
+		Actor* player = playerManager.GetPlayerPointer();
+		VECTOR pVec = player->GetPosition();
+		// 目標までの距離検出
+		m_targetVec.x = pVec.x - m_position.x;
+		m_targetVec.z = pVec.z - m_position.z;
 
-	// 角度と移動量を取得
-	m_angle = atan2(m_targetVec.z, m_targetVec.x);
+		// 角度と移動量を取得
+		m_angle = atan2(m_targetVec.z, m_targetVec.x);
 
-	m_position.x += cos(m_angle * MOVE_SPEED);
-	m_position.z += sin(m_angle * MOVE_SPEED);
+		m_position.x += cos(m_angle + MOVE_SPEED);
+		m_position.z += sin(m_angle + MOVE_SPEED);
+	}
 }

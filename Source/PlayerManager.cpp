@@ -41,9 +41,9 @@ void PlayerManager::Delete()
 }
 
 // 更新処理
-void PlayerManager::Update(float deltaTime)
+void PlayerManager::Update(Input& input, float deltaTime)
 {
-	m_player->Update(deltaTime);
+	m_player->Update(input, deltaTime);
 	// ポジションをセット
 	MV1SetPosition(m_sourceModelHandle, VGet(0.0f, 0.0f, 0.0f));
 

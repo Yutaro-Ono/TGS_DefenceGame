@@ -29,39 +29,38 @@ Player::~Player()
 }
 
 // 更新
-void Player::Update(float deltaTime)
+void Player::Update(Input& input, float deltaTime)
 {
-	int key = GetJoypadInputState(DX_INPUT_KEY_PAD1);
 
 	//-----------------------------------------//
 	// 移動処理
 	//----------------------------------------//
-	if (key & PAD_INPUT_UP)
+	if (input.GetKeyPad() & PAD_INPUT_UP)
 	{
 		m_position.z += MOVE_SPEED * deltaTime;
 		m_angle = 0.0f;
 	}
 
-	if (key & PAD_INPUT_DOWN)
+	if (input.GetKeyPad() & PAD_INPUT_DOWN)
 	{
 		m_position.z -= MOVE_SPEED * deltaTime;
 		m_angle = -180.0f;
 	}
 
-	if (key & PAD_INPUT_LEFT)
+	if (input.GetKeyPad() & PAD_INPUT_LEFT)
 	{
 		m_position.x -= MOVE_SPEED * deltaTime;
 		m_angle = -90.0f;
 	}
 
-	if (key & PAD_INPUT_RIGHT)
+	if (input.GetKeyPad() & PAD_INPUT_RIGHT)
 	{
 		m_position.x += MOVE_SPEED * deltaTime;
 		m_angle = 90.0f;
 	}
 
 	// いずれかのキーが押されている時
-	if (key != 0)
+	if (input.GetKeyPad() != 0)
 	{
 		if (m_moveFlag == false)
 		{
@@ -116,7 +115,7 @@ void Player::MotionMove(float deltaTime)
 void Player::OnHitEnemy(Enemy & enemy)
 {
 	// 自分自身の位置を障害物のあたり判定分ずらす.
-// Z軸とX軸の二次元座標として位置ずらしを行う.
+    // Z軸とX軸の二次元座標として位置ずらしを行う.
 	VECTOR yZeroPlayer = VGet(m_position.x, 0, m_position.z);
 	VECTOR yZeroObstruct = VGet(enemy.GetPosition().x, 0, enemy.GetPosition().z);
 

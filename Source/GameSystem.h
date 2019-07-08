@@ -7,6 +7,7 @@
 #include "DxLib.h"
 #include "Math.h"
 #include "ModelLoader.h"
+#include "Input.h"
 #include "Camera.h"
 #include "ObjectBase.h"
 #include "ObjectManager.h"
@@ -17,6 +18,7 @@
 
 #pragma comment(lib, "winmm.lib")
 
+class Input;
 class Camera;
 
 class GameSystem
@@ -65,6 +67,8 @@ private:
 	bool ProgramLoop();    // Windowsプロセスのエラーを返す
 
 	SceneBase* m_scene;                  // インゲームシーン
+
+	Input* m_input;                        // 入力関連
 
 	Camera* m_camera;                      // カメラ
 

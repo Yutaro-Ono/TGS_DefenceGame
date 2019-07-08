@@ -19,7 +19,11 @@ public:
 	HitChecker();               // コンストラクタ
 	~HitChecker();              // デストラクタ
 
+
+	// プレイヤーとエネミー同士の当たり判定チェッカー
 	static void CheckHit(PlayerManager& playerManager, EnemyManager& enemyManager);
+	// エネミー同士の当たり判定チェッカー
+	static void CheckHitEnemy(EnemyManager& enemyManager, int enemy_num);
 
 private:
 

@@ -89,6 +89,8 @@ void GameSystem::RunLoop()
 	m_scene = new SceneInGame();
 	m_scene->Initialize();
 
+	m_input = new Input();
+
 	m_camera = new Camera();
 
 	while (ProgramLoop())
@@ -102,7 +104,7 @@ void GameSystem::RunLoop()
 		prevTick = nowTick;
 
 		// シーンの更新
-		m_scene->Update(*m_camera, m_deltaTime);
+		m_scene->Update(*m_input, *m_camera, m_deltaTime);
 
 		ClearDrawScreen();
 

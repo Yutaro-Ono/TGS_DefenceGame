@@ -5,8 +5,10 @@
 //----------------------------------------------------------+
 #pragma once
 #include "DxLib.h"
+#include "Input.h"
 #include "Actor.h"
 #include "Player.h"
+class Input;
 class Actor;
 class Player;
 
@@ -21,7 +23,7 @@ public:
 
 	void Delete();           // 削除処理
 
-	void Update(float deltaTime);           // 更新処理
+	void Update(Input& input, float deltaTime);           // 更新処理
 
 	void Draw();             // 描画処理
 

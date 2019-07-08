@@ -47,8 +47,11 @@ void EnemyManager::Update(PlayerManager& playerManager, float deltaTime)
 {
 	for (int i = 0; i < m_enemy.size(); i++)
 	{
-		m_enemy[i]->Update(deltaTime);
-		m_enemy[i]->GazeTarget(playerManager, deltaTime);
+		if (!m_enemy[i]->GetHitPlayer())
+		{
+			m_enemy[i]->Update(deltaTime);
+			m_enemy[i]->GazeTarget(playerManager, deltaTime);
+		}
 	}
 }
 

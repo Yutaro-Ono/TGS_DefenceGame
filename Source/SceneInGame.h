@@ -30,7 +30,7 @@ public:
 
 	void Delete() override;
 
-	void Update(Camera& camera, float deltaTime)override;
+	void Update(Input& input, Camera& camera, float deltaTime)override;
 
 	void Draw()override;
 

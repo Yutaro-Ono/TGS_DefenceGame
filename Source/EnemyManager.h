@@ -28,6 +28,8 @@ public:
 
 	// 生成したエネミーごとのポインタを取得する
 	Enemy* GetEnemyPointer(int enemyNum) { return m_enemy[enemyNum]; }
+	//// アクティブなエネミーの数を返す
+	//int GetActiveEnemy(){ return m_enemy.size(); }
 
 private:
 

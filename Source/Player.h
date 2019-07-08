@@ -20,7 +20,8 @@ public:
 
 	void Delete() override {};
 
-	void Update(float deltaTime) override;                       // プレイヤー関連の更新
+	void Update(float deltaTime)override {};
+	void Update(Input& input, float deltaTime);                       // プレイヤー関連の更新
 
 	void Draw()override;                                         // プレイヤーの描画
 
@@ -28,7 +29,10 @@ public:
 
 	// 当たり判定関連の処理
 	const float& GetRadius()const { return m_hitRadius; }        // 当たり判定半径のゲッター
+	void SetHitEnemy(bool hit_e) { m_hitEnemy = hit_e; }         // エネミーとの当たり判定フラグのセッター
 	void OnHitEnemy(Enemy& enemy);                               // エネミーとの当たり判定処理
+
+	// void SetHitInterval();
 
 private:
 
@@ -37,6 +41,7 @@ private:
 	float velocityY;                          // 上方向加速度
 
 	float m_hitRadius;                        // 当たり判定用半径
+	bool m_hitEnemy;                            // エネミーに当たったかどうかのフラグ
 
 	static const float MOVE_SPEED;            // プレイヤーの移動速度
 

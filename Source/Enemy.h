@@ -26,16 +26,19 @@ public:
 	~Enemy();                                        // デストラクタ
 
 	void Initialize() override;                      // 各種初期化処理
-
 	void Delete()override {};
 
 	void Update(float deltaTime)override;
-
 	void Draw()override;
 
-	void SetEmergence(const VECTOR popPos);             // 最初の出現位置設定
+	void GazeTarget(PlayerManager& playerManager, float deltaTime);                               // ターゲットの方向に移動
 
-	void GazeTarget(PlayerManager& playerManager, float deltaTime);                               // ターゲットの方向に向く
+	const bool& GetHitPlayer()const { return m_hitPlayer; }                       // プレイヤーと衝突しているかどうかのゲッター
+
+	void SetEmergence(const VECTOR popPos);                                // 最初の出現位置設定
+	void SetHitPlayer(bool p_hit) { m_hitPlayer = p_hit; }                 // プレイヤーと衝突しているかどうかのセッター
+	void OnHitOtherEnemy(Enemy& other_enemy);                              // 他エネミーと当たった時の処理
+
 
 	const float& GetRadius()const { return m_hitRadius; }
 

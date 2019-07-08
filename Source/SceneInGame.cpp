@@ -46,13 +46,16 @@ void SceneInGame::Delete()
 }
 
 // 更新処理
-void SceneInGame::Update(Camera& camera, float deltaTime)
+void SceneInGame::Update(Input& input, Camera& camera, float deltaTime)
 {
+	// キーの押下状態チェック
+	input.KeyChecker();
+
 	// カメラの更新
 	camera.Update(*m_player);
 
 	// プレイヤーの更新
-	m_player->Update(deltaTime);
+	m_player->Update(input, deltaTime);
 	// エネミーの更新
 	m_enemy->Update(*m_player, deltaTime);
 	// NPCの更新
@@ -60,6 +63,11 @@ void SceneInGame::Update(Camera& camera, float deltaTime)
 
 	// 当たり判定処理
 	HitChecker::CheckHit(*m_player, *m_enemy);
+	for (int i = 0; i < ALL_ENEMY; i++)
+	{
+		HitChecker::CheckHitEnemy(*m_enemy, i);
+	}
+
 }
 
 // 描画処理

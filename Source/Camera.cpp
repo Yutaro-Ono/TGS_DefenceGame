@@ -8,7 +8,7 @@
 
 class PlayerManager;
 
-#define USE_LERP_CAMERA 1        // Lerpを使用するかしないか
+#define USE_LERP_CAMERA 0        // Lerpを使用するかしないか
 
 // コンストラクタ
 Camera::Camera()
@@ -22,7 +22,7 @@ Camera::Camera()
 // デストラクタ
 Camera::~Camera()
 {
-	// 処理なし
+	
 }
 
 // 更新
@@ -31,11 +31,11 @@ void Camera::Update(PlayerManager& playerManager)
 	// プレイヤーマネージャー内のプレイヤーにアクセス
 	Actor* player = playerManager.GetPlayerPointer();
 
-	SetCameraPositionAndAngle(pos, 30.0f * DX_PI_F / 180.0f, 0, 0);
+	SetCameraPositionAndAngle(pos, 40.0f * DX_PI_F / 180.0f, 0, 0);
 
 //#if !USE_LERP_CAMERA
 //	// z軸上で、プレイヤーから一定距離離れた状態でプレイヤーを常に見続けるよう位置調整
-//	pos = VGet(0, player->GetPosition().y + 20.0f, player->GetPosition().z - 30.0f);
+//	pos = VGet(0, 10.0f, player->GetPosition().z - 30.0f);
 //#else
 //	// lerpを使用して実装.
 //	// lerp(VECTOR a, VECTOR b, float t)は
@@ -46,6 +46,6 @@ void Camera::Update(PlayerManager& playerManager)
 //	pos = VAdd(pos, scaledPosToAim);
 //#endif
 //	// カメラに位置を反映.
-//	SetCameraPositionAndTarget_UpVecY(pos, player->GetPosition());
+//	SetCameraPositionAndTarget_UpVecY(pos, VGet(player->GetPosition().x, 0.0f, player->GetPosition().y));
 //	//printfDx("pos : x = %f\ny = %f\nz = %f\n", pos.x, pos.y, pos.z);
 }

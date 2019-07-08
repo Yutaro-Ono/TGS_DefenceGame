@@ -4,20 +4,20 @@
 //-----------------------------------------------------------------------+
 #include "Player.h"
 
-const float Player::MOVE_SPEED = 500.0f;
+const float Player::MOVE_SPEED = 200.0f;
 const float Player::INITIAL_POSITION_Y = 5.0f;
 const VECTOR Player::SCALE_SIZE = { 0.05f, 0.05f, 0.05f };
-const float Player::JUMP_POWER = 10.0f;
+const float Player::JUMP_POWER = 12.0f;
 const float Player::JUMP_SUB = 0.3f;
 
 // コンストラクタ(Actorの初期化子を付ける)
 Player::Player(const int sourceModelHandle)
 	:Actor(sourceModelHandle)
+	,m_hitRadius(5.0f)
 {
-	m_jumpFlag = false;
+	m_moveFlag = false;
 	m_position = VGet(0.0f, 5.0f, 0.0f);
 	m_direction = VGet(0.0f, 0.0f, 0.0f);
-	m_radius = 0.0f;
 	m_angle = 0.0f;
 	velocityY = JUMP_POWER;
 }
@@ -63,9 +63,9 @@ void Player::Update(float deltaTime)
 	// いずれかのキーが押されている時
 	if (key != 0)
 	{
-		if (m_jumpFlag == false)
+		if (m_moveFlag == false)
 		{
-			m_jumpFlag = true;
+			m_moveFlag = true;
 		}
 	}
 
@@ -83,23 +83,49 @@ void Player::Update(float deltaTime)
 	//printfDx("pos : x = %f\ny = %f\nz = %f\n", m_position.x, m_position.y, m_position.z);
 }
 
+void Player::Draw()
+{
+	MV1DrawModel(m_modelHandle);
+
+	// 当たり判定確認用の球
+	DrawSphere3D(m_position, m_hitRadius, 5, 0x00ffff, 0x00ffff, FALSE);
+}
+
 // 移動モーションにおける小刻みなジャンプモーション
 void Player::MotionMove(float deltaTime)
 {
-	if (m_jumpFlag == true)
+	if (m_moveFlag == true)
 	{
 		m_position.y = velocityY;
 		velocityY -= JUMP_SUB;
 		if (velocityY <= INITIAL_POSITION_Y)
 		{
-			m_jumpFlag = false;
+			m_moveFlag = false;
 		}
 	}
 
-	if (m_jumpFlag == false)
+	if (m_moveFlag == false)
 	{
 		m_position.y = INITIAL_POSITION_Y;
 		velocityY = JUMP_POWER;
 	}
+
+}
+
+// エネミーとの当たり判定処理
+void Player::OnHitEnemy(Enemy & enemy)
+{
+	// 自分自身の位置を障害物のあたり判定分ずらす.
+// Z軸とX軸の二次元座標として位置ずらしを行う.
+	VECTOR yZeroPlayer = VGet(m_position.x, 0, m_position.z);
+	VECTOR yZeroObstruct = VGet(enemy.GetPosition().x, 0, enemy.GetPosition().z);
+
+	VECTOR obsToPlayer = VSub(yZeroPlayer, yZeroObstruct);
+
+	// ぶつかったときに離す距離。ちょうどだとfloat誤差で重なり続けるので少し間をあける.
+	float awayRange = (m_hitRadius + enemy.GetRadius() + 0.01f);
+
+	VECTOR awayVec = VScale(VNorm(obsToPlayer), awayRange);
+	m_position = VAdd(yZeroObstruct, awayVec);
 
 }

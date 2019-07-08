@@ -16,15 +16,15 @@ void EnemyManager::Initialize()
 	// エネミーの生成
 	for (int i = 0; i < ENEMY_ALL_NUM; i++)
 	{
-		enemy.push_back(new Enemy(m_enemySourceHandle));
+		m_enemy.push_back(new Enemy(m_enemySourceHandle));
 	}
 
 	// 出現位置の設定(円形)
-	for (int i = 0; i < enemy.size(); i++)
+	for (int i = 0; i < m_enemy.size(); i++)
 	{
 		// cos((360.0f - (360.0f / enemy.size()) * i) * PI / 180.0f)
 		//                                                   半径
-		enemy[i]->SetEmergence(VGet(cos((360.0f - (360.0f / enemy.size()) * i) * PI / 180.0f) * 120.0f, 0, 40.0f + sin(((360.0f / enemy.size()) * i) * PI / 180.0f) * 120.0f));
+		m_enemy[i]->SetEmergence(VGet(cos((360.0f - (360.0f / m_enemy.size()) * i) * PI / 180.0f) * 120.0f, 0, 40.0f + sin(((360.0f / m_enemy.size()) * i) * PI / 180.0f) * 120.0f));
 	}
 }
 
@@ -36,8 +36,8 @@ void EnemyManager::Delete()
 	
 	for (int i = 0; i < ENEMY_ALL_NUM; i++)
 	{
-		delete (enemy[i]);
-		enemy[i] = NULL;
+		delete (m_enemy[i]);
+		m_enemy[i] = NULL;
 	}
 
 }
@@ -45,18 +45,18 @@ void EnemyManager::Delete()
 // 更新処理
 void EnemyManager::Update(PlayerManager& playerManager, float deltaTime)
 {
-	for (int i = 0; i < enemy.size(); i++)
+	for (int i = 0; i < m_enemy.size(); i++)
 	{
-		enemy[i]->Update(deltaTime);
-		enemy[i]->GazeTarget(playerManager, deltaTime);
+		m_enemy[i]->Update(deltaTime);
+		m_enemy[i]->GazeTarget(playerManager, deltaTime);
 	}
 }
 
 // 描画処理
 void EnemyManager::Draw()
 {
-	for (int i = 0; i < enemy.size(); i++)
+	for (int i = 0; i < m_enemy.size(); i++)
 	{
-		enemy[i]->Draw();
+		m_enemy[i]->Draw();
 	}
 }

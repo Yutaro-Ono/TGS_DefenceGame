@@ -10,6 +10,7 @@ const float Enemy::MOVE_SPEED = 3.0f;
 // コンストラクタ
 Enemy::Enemy(int sourceModelHandle)
 	:Actor(sourceModelHandle)
+	,m_hitRadius(5.0f)
 {
 	m_targetVec = VGet(0.0f, 0.0f, 0.0f);
 }
@@ -32,6 +33,13 @@ void Enemy::Update(float deltaTime)
 
 
 	MV1SetPosition(m_modelHandle, m_position);
+}
+
+void Enemy::Draw()
+{
+	MV1DrawModel(m_modelHandle);
+	// 当たり判定確認用の球
+	DrawSphere3D(m_position, m_hitRadius, 5, 0x00ffff, 0x00ffff, FALSE);
 }
 
 // 出現位置設定

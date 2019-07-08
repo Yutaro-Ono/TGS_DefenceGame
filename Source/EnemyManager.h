@@ -26,12 +26,14 @@ public:
 
 	void Draw();                        // 描画処理
 
+	// 生成したエネミーごとのポインタを取得する
+	Enemy* GetEnemyPointer(int enemyNum) { return m_enemy[enemyNum]; }
 
 private:
 
 	int m_enemySourceHandle;            // エネミーモデルのハンドル
 
-	std::vector<class Enemy*> enemy;          // エネミー
+	std::vector<class Enemy*> m_enemy;          // エネミー
 
 
 	static const int ENEMY_MAX_NUM;     // 敵の一度に出現する最大数

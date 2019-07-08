@@ -21,6 +21,10 @@ public:
 
 	void Update(float deltaTime) override;
 
+	void Draw()override;
+
+	const float& GetRadius()const { return m_hitRadius; }
+
 private:
 
 	static const VECTOR SCALE_SIZE;          // ƒ‚ƒfƒ‹‚ÌŠg‘å—¦

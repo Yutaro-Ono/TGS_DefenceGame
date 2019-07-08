@@ -5,6 +5,7 @@
 #include "SceneInGame.h"
 #include "PlayerManager.h"
 #include "Camera.h"
+#include "HitChecker.h"
 
 // コンストラクタ
 SceneInGame::SceneInGame()
@@ -49,12 +50,16 @@ void SceneInGame::Update(Camera& camera, float deltaTime)
 {
 	// カメラの更新
 	camera.Update(*m_player);
+
 	// プレイヤーの更新
 	m_player->Update(deltaTime);
 	// エネミーの更新
 	m_enemy->Update(*m_player, deltaTime);
 	// NPCの更新
 	m_npc->Update(deltaTime);
+
+	// 当たり判定処理
+	HitChecker::CheckHit(*m_player, *m_enemy);
 }
 
 // 描画処理

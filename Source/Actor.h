@@ -17,20 +17,22 @@ public:
 	virtual void Delete() = 0;
 
 	virtual void Update(float deltaTime) = 0;
-	void Draw();
+	virtual void Draw() = 0;
 
 	// ポジションのゲッター/セッター
 	virtual const VECTOR& GetPosition() const { return m_position; };
 
 	virtual void SetPos(const VECTOR set) { m_position = set; }
+
 	// 半径の取得(当たり判定用)
-	float GetRadius() const { return m_radius; }
+	virtual const float& GetRadius() const = 0;
 
 protected:
 
 	VECTOR m_position;
 	VECTOR m_direction;
-	float m_radius;
+
+	float m_hitRadius;
 
 	float m_angle;
 

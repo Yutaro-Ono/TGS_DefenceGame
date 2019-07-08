@@ -6,8 +6,9 @@
 #pragma once
 #include "DxLib.h"
 #include "Actor.h"
-
+#include "Player.h"
 class Actor;
+class Player;
 
 class PlayerManager final
 {
@@ -26,12 +27,12 @@ public:
 
 	// 生成したプレイヤーへのポインタを取得する
 	// 主にカメラの処理に用いる
-	Actor* GetPlayerPointer() { return m_player; }
+	Player* GetPlayerPointer() { return m_player; }
 
 private:
 
 	int m_sourceModelHandle;      // モデルハンドル
-	Actor* m_player;              // プレイヤー
+	Player* m_player;              // プレイヤー
 
 
 

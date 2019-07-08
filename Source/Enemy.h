@@ -31,15 +31,21 @@ public:
 
 	void Update(float deltaTime)override;
 
+	void Draw()override;
+
 	void SetEmergence(const VECTOR popPos);             // 最初の出現位置設定
 
 	void GazeTarget(PlayerManager& playerManager, float deltaTime);                               // ターゲットの方向に向く
+
+	const float& GetRadius()const { return m_hitRadius; }
 
 private:
 
 	VECTOR m_targetVec;
 
+	float m_hitRadius;
 
+	bool m_hitPlayer;                                      // プレイヤーに当たっているかどうかのフラグ
 
 	static const VECTOR SCALE_SIZE;                        // 拡大率
 	static const float MOVE_SPEED;

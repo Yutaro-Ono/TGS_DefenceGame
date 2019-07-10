@@ -68,6 +68,8 @@ void SceneInGame::Update(Input& input, Camera& camera, float deltaTime)
 		HitChecker::CheckHitEnemy(*m_enemy, i);
 	}
 
+	Draw();
+
 }
 
 // •`‰æˆ—

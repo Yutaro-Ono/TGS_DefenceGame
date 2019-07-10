@@ -24,8 +24,9 @@ public:
 
 	virtual void Draw() = 0;
 
+
+
 protected:
 
-	bool toNextScene;
 
 };

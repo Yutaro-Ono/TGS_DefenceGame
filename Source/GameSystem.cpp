@@ -6,6 +6,7 @@
 #include <Windows.h>
 #include "Camera.h"
 #include "GameSystem.h"
+#include "SceneTitle.h"
 #include "SceneInGame.h"
 
 // コンストラクタ
@@ -13,6 +14,7 @@ GameSystem::GameSystem()
 	:m_screenWidth(0)
 	,m_screenHeight(0)
 	,m_fullScreen(false)
+	,sceneNum(0)
 	,m_deltaTime(0.0f)
 {
 	m_isGameQuit = false;
@@ -41,6 +43,8 @@ bool GameSystem::Initialize()
 
 	// 画面設定を更新
 	SetGraphMode(m_screenWidth, m_screenHeight, 32, 60);
+
+	SetFontSize(50);
 
 	SetMouseDispFlag(TRUE);      // マウスカーソルの表示
 
@@ -86,8 +90,10 @@ void GameSystem::RunLoop()
 	DWORD nowTick, prevTick;
 	prevTick = timeGetTime();
 
-	m_scene = new SceneInGame();
-	m_scene->Initialize();
+	m_titleScene = new SceneTitle();
+	m_titleScene->Initialize();
+	m_inGameScene = new SceneInGame();
+	m_inGameScene->Initialize();
 
 	m_input = new Input();
 
@@ -103,13 +109,37 @@ void GameSystem::RunLoop()
 		m_deltaTime = m_Ticks / 1000.0f;
 		prevTick = nowTick;
 
-		// シーンの更新
-		m_scene->Update(*m_input, *m_camera, m_deltaTime);
-
 		ClearDrawScreen();
 
+		switch (sceneNum)
+		{
+		case SCENE_PHASE::START:
+			m_titleScene->Update(*m_input, *m_camera, m_deltaTime);
+			sceneNum = m_titleScene->GetNextScene();
+			break;
+
+		case SCENE_PHASE::TUTORIAL:
+			break;
+
+		case SCENE_PHASE::GAME:
+			// シーンの更新
+			m_inGameScene->Update(*m_input, *m_camera, m_deltaTime);
+			break;
+
+		case SCENE_PHASE::GAME_END:
+			break;
+
+		default:
+			break;
+		}
+
+		// シーンの更新
+		//m_inGameScene->Update(*m_input, *m_camera, m_deltaTime);
+
+
+
 		// 描画
-		m_scene->Draw();
+		//m_inGameScene->Draw();
 
 		ScreenFlip();
 
@@ -120,10 +150,10 @@ void GameSystem::RunLoop()
 // 終了処理
 void GameSystem::ShutDown()
 {
-	m_scene->Delete();
+	m_inGameScene->Delete();
 
 	delete (m_camera);
-	delete (m_scene);
+	delete (m_inGameScene);
 
 	DxLib_End();
 }

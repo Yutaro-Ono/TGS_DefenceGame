@@ -13,6 +13,7 @@
 #include "ObjectManager.h"
 #include "PlayerManager.h"
 #include "SceneBase.h"
+#include "SceneTitle.h"
 #include "SceneInGame.h"
 #include <vector>
 
@@ -66,7 +67,10 @@ private:
 
 	bool ProgramLoop();    // Windowsプロセスのエラーを返す
 
-	SceneBase* m_scene;                  // インゲームシーン
+
+	SceneTitle* m_titleScene;               // タイトルシーン
+	SceneBase* m_inGameScene;              // インゲームシーン
+
 
 	Input* m_input;                        // 入力関連
 
@@ -78,6 +82,8 @@ private:
 
 	bool m_fullScreen;         // フルスクリーンかどうか
 	bool m_isGameQuit;         // ゲームを終了するかどうか
+
+	int sceneNum;              // どのシーンか
 
 	float m_deltaTime;         // 1フレームの更新時間
 };

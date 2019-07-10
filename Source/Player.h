@@ -36,6 +36,8 @@ public:
 
 private:
 
+	int hitPoint;                             // プレイヤー体力
+
 	VECTOR m_velocity;                        // 加速度
 
 	float velocityY;                          // 上方向加速度
@@ -50,6 +52,8 @@ private:
 	static const VECTOR SCALE_SIZE;           // 拡大率のサイズ
 
 	bool m_moveFlag;                          // 移動しているかどうかのフラグ
+
+	static const int MAX_HP;                  // 体力の最大値
 	static const float JUMP_POWER;            // 移動モーションにおける小刻みジャンプの上方向パワー
 	static const float JUMP_SUB;              // 移動モーションにおける小刻みジャンプの減算処理に用いる
 	

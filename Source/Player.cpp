@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------+
 #include "Player.h"
 
+const int Player::MAX_HP = 10;
 const float Player::MOVE_SPEED = 200.0f;
 const float Player::INITIAL_POSITION_Y = 5.0f;
 const VECTOR Player::SCALE_SIZE = { 0.05f, 0.05f, 0.05f };
@@ -15,6 +16,7 @@ Player::Player(const int sourceModelHandle)
 	:Actor(sourceModelHandle)
 	,m_hitRadius(5.0f)
 {
+	hitPoint = MAX_HP;
 	m_moveFlag = false;
 	m_position = VGet(0.0f, 5.0f, 0.0f);
 	m_direction = VGet(0.0f, 0.0f, 0.0f);

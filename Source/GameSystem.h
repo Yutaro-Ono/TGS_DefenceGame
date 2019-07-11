@@ -88,4 +88,4 @@ private:
 	float m_deltaTime;         // 1フレームの更新時間
 };
 
- //#define GAME_INSTANCE GameSystem::GetInstance()
+ #define GAME_INSTANCE GameSystem::GetInstance()

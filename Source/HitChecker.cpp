@@ -51,10 +51,17 @@ void HitChecker::CheckHit(PlayerManager & playerManager, EnemyManager& enemyMana
 
 				if (VSize(playerToObs) < player->GetRadius() + enemy->GetRadius())
 				{
-					printfDx("Hit!");
 					enemy->SetHitPlayer(true);
-					player->OnHitEnemy(*enemy);     // プレイヤーの位置をずらす関数を呼び出す(オブジェクトは固定)
-					//isHit = true;
+					// プレイヤーが他のエネミーに当たっていなければ
+					if (player->GetHitEnemy() == false)
+					{
+						printfDx("Hit!");
+						player->SetDamaged();
+						player->SetInterval(GetNowCount());
+						player->OnHitEnemy(*enemy);     // プレイヤーの位置をずらす関数を呼び出す(オブジェクトは固定)
+						player->SetHitEnemy(true);
+					}
+					// isHit = true;
 				}
 				
 				if (!(VSize(playerToObs) + 1.0f < player->GetRadius() + enemy->GetRadius()))

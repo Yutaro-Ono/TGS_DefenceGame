@@ -117,8 +117,14 @@
     <ClCompile Include="Source\SceneTitle.cpp">
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Source\InGameUIManager.cpp">
+      <Filter>ソース ファイル\UI</Filter>
+    </ClCompile>
     <ClCompile Include="Source\InterfaceBase.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\InterfacePlayer.cpp">
+      <Filter>ソース ファイル\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -189,6 +195,12 @@
       <Filter>ソース ファイル\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Source\InterfaceBase.h">
+      <Filter>ソース ファイル\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\InterfacePlayer.h">
+      <Filter>ソース ファイル\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\InGameUIManager.h">
       <Filter>ソース ファイル\UI</Filter>
     </ClInclude>
   </ItemGroup>

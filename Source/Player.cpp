@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------+
 #include "Player.h"
 
-const int Player::MAX_HP = 10;
+const int Player::MAX_HP = 5;
 const float Player::MOVE_SPEED = 200.0f;
 const float Player::INITIAL_POSITION_Y = 5.0f;
 const VECTOR Player::SCALE_SIZE = { 0.05f, 0.05f, 0.05f };
@@ -14,13 +14,15 @@ const float Player::JUMP_SUB = 0.3f;
 // コンストラクタ(Actorの初期化子を付ける)
 Player::Player(const int sourceModelHandle)
 	:Actor(sourceModelHandle)
-	,m_hitRadius(5.0f)
+	,m_hitRadius(8.0f)
 {
-	hitPoint = MAX_HP;
+	m_hitPoint = MAX_HP;
 	m_moveFlag = false;
+	m_hitEnemy = false;
 	m_position = VGet(0.0f, 5.0f, 0.0f);
 	m_direction = VGet(0.0f, 0.0f, 0.0f);
 	m_angle = 0.0f;
+	m_hitInterval = 0;
 	velocityY = JUMP_POWER;
 }
 
@@ -72,6 +74,8 @@ void Player::Update(Input& input, float deltaTime)
 
 	MotionMove(deltaTime);
 
+	hitInterval(deltaTime);
+
 	// モデルの拡大率セット
 	MV1SetScale(m_modelHandle, SCALE_SIZE);
 
@@ -86,6 +90,7 @@ void Player::Update(Input& input, float deltaTime)
 
 void Player::Draw()
 {
+
 	MV1DrawModel(m_modelHandle);
 
 	// 当たり判定確認用の球
@@ -113,7 +118,7 @@ void Player::MotionMove(float deltaTime)
 
 }
 
-// エネミーとの当たり判定処理
+// エネミーに当たった時の処理
 void Player::OnHitEnemy(Enemy & enemy)
 {
 	// 自分自身の位置を障害物のあたり判定分ずらす.
@@ -129,4 +134,24 @@ void Player::OnHitEnemy(Enemy & enemy)
 	VECTOR awayVec = VScale(VNorm(obsToPlayer), awayRange);
 	m_position = VAdd(yZeroObstruct, awayVec);
 
+}
+
+// エネミー衝突時、次の当たり判定処理が行われるまでのインターバル
+void Player::hitInterval(float deltaTime)
+{
+	if (m_hitEnemy == true)
+	{
+		
+		if (GetNowCount() - m_hitInterval >= 1500)
+		{
+			m_hitInterval = 0.0f;
+		}
+
+		// インターバルが初期化されたら当たり判定フラグを解除する
+		if (m_hitInterval == 0.0f)
+		{
+			m_hitEnemy = false;
+		}
+
+	}
 }

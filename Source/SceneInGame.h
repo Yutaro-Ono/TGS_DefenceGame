@@ -10,6 +10,7 @@
 #include "EnemyManager.h"
 #include "ObjectManager.h"
 #include "NpcManager.h"
+#include "InGameUIManager.h"
 #include "Camera.h"
 
 class SceneBase;
@@ -41,6 +42,8 @@ private:
 	PlayerManager* m_player;           // プレイヤー
 
 	EnemyManager* m_enemy;             // エネミー
+
+	InGameUIManager* m_UI;             // UI
 
 	ObjectManager* m_obj;              // オブジェクト
 

@@ -14,7 +14,7 @@ void EnemyManager::Initialize()
 	m_enemySourceHandle = MV1LoadModel("Data/Model/Actor/Enemy/Low_poly_ufo_FBX/Low_poly_UFO.mv1");
 
 	// エネミーの生成
-	for (int i = 0; i < ENEMY_ALL_NUM; i++)
+	for (int i = 0; i < ALL_ENEMY; i++)
 	{
 		m_enemy.push_back(new Enemy(m_enemySourceHandle));
 	}
@@ -34,7 +34,7 @@ void EnemyManager::Delete()
 	// モデルを削除
 	MV1DeleteModel(m_enemySourceHandle);
 	
-	for (int i = 0; i < ENEMY_ALL_NUM; i++)
+	for (int i = 0; i < ALL_ENEMY; i++)
 	{
 		delete (m_enemy[i]);
 		m_enemy[i] = NULL;
@@ -45,6 +45,7 @@ void EnemyManager::Delete()
 // 更新処理
 void EnemyManager::Update(PlayerManager& playerManager, float deltaTime)
 {
+
 	for (int i = 0; i < m_enemy.size(); i++)
 	{
 		if (!m_enemy[i]->GetHitPlayer())

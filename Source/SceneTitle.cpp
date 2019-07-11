@@ -5,7 +5,7 @@
 
 #include "SceneTitle.h"
 #include "Input.h"
-
+#include "GameSystem.h"
 
 SceneTitle::SceneTitle()
 	:toNext(0)
@@ -18,6 +18,9 @@ SceneTitle::~SceneTitle()
 
 void SceneTitle::Initialize()
 {
+	// タイトルロゴ画像をロード、サイズ取得
+	m_titleLogoGraph = LoadGraph("Data/Interface/Title_Logo.png");
+	GetGraphSize(m_titleLogoGraph, &m_titleLogoW, &m_titleLogoH);
 }
 
 void SceneTitle::Delete()
@@ -40,5 +43,6 @@ void SceneTitle::Update(Input & input, Camera & camera, float deltaTime)
 
 void SceneTitle::Draw()
 {
-	DrawString(500, 300, "SPACE HAMSTER\nSPACEを押してください", GetColor(255, 255, 255));
+	DrawGraph((GAME_INSTANCE.GetScreenWidth() / 2) - (m_titleLogoW / 2), (GAME_INSTANCE.GetScreenHeight() / 2 - 100) - (m_titleLogoH / 3), m_titleLogoGraph, TRUE);
+	DrawString(GAME_INSTANCE.GetScreenWidth() / 2 - 250, GAME_INSTANCE.GetScreenHeight() / 2 + 50, "SPACEキーでスタート", GetColor(255, 255, 255));
 }

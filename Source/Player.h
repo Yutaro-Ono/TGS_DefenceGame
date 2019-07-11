@@ -29,14 +29,20 @@ public:
 
 	// 当たり判定関連の処理
 	const float& GetRadius()const { return m_hitRadius; }        // 当たり判定半径のゲッター
+
+	const bool& GetHitEnemy() const { return m_hitEnemy; }       // エネミーと当たったかどうかのゲッター
 	void SetHitEnemy(bool hit_e) { m_hitEnemy = hit_e; }         // エネミーとの当たり判定フラグのセッター
 	void OnHitEnemy(Enemy& enemy);                               // エネミーとの当たり判定処理
 
-	// void SetHitInterval();
+	void hitInterval(float deltaTime);                           // エネミー衝突時、次の当たり判定処理が行われるまでのインターバル
+	void SetInterval(const int count) { m_hitInterval = count; }   // インターバルのセッター
+
+	void SetDamaged() { m_hitPoint -= 1; }    // エネミー衝突時、体力減算処理
+	const int& GetHitPoint() const { return m_hitPoint; }        // プレイヤー体力のゲッター
 
 private:
 
-	int hitPoint;                             // プレイヤー体力
+	int m_hitPoint;                             // プレイヤー体力
 
 	VECTOR m_velocity;                        // 加速度
 
@@ -44,6 +50,8 @@ private:
 
 	float m_hitRadius;                        // 当たり判定用半径
 	bool m_hitEnemy;                            // エネミーに当たったかどうかのフラグ
+
+	int m_hitInterval;                        // 当たり判定が連続で発生するまでのインターバル
 
 	static const float MOVE_SPEED;            // プレイヤーの移動速度
 

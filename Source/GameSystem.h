@@ -15,12 +15,14 @@
 #include "SceneBase.h"
 #include "SceneTitle.h"
 #include "SceneInGame.h"
+#include "SceneResult.h"
 #include <vector>
 
 #pragma comment(lib, "winmm.lib")
 
 class Input;
 class Camera;
+class SceneResult;
 
 class GameSystem
 {
@@ -55,26 +57,26 @@ public:
 	void SetScreen(const int& scrWidth, const int& scrHeight, const bool& fullScreen);
 
 private:
-	GameSystem();       // コンストラクタ   
+	GameSystem();                                // コンストラクタ   
 
 
 
-	int Update();       // Scene遷移更新用
+	int Update();                                // Scene遷移更新用
 
-	void UpdateMove();       // 移動関連の更新
+	void UpdateMove();                           // 移動関連の更新
 
-	void UpdateDraw();       // 描画関連の更新
+	void UpdateDraw();                           // 描画関連の更新
 
-	bool ProgramLoop();    // Windowsプロセスのエラーを返す
-
-
-	SceneTitle* m_titleScene;               // タイトルシーン
-	SceneInGame* m_inGameScene;              // インゲームシーン
+	bool ProgramLoop();                          // Windowsプロセスのエラーを返す
 
 
-	Input* m_input;                        // 入力関連
+	SceneTitle* m_titleScene;                    // タイトルシーン
+	SceneInGame* m_inGameScene;                  // インゲームシーン
+	SceneResult* m_resultScene;                  // リザルトシーン
 
-	Camera* m_camera;                      // カメラ
+	Input* m_input;                              // 入力関連
+
+	Camera* m_camera;                            // カメラ
 
 	// ウィンドウ(Width : 幅, Height : 高さ)
 	int m_screenWidth;

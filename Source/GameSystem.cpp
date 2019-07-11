@@ -89,11 +89,15 @@ void GameSystem::RunLoop()
 	// 現在時刻, 前回時刻を記録する
 	DWORD nowTick, prevTick;
 	prevTick = timeGetTime();
-
+	// タイトル
 	m_titleScene = new SceneTitle();
 	m_titleScene->Initialize();
+	// ゲーム中
 	m_inGameScene = new SceneInGame();
 	m_inGameScene->Initialize();
+	// リザルト
+	m_resultScene = new SceneResult();
+	m_resultScene->Initialize();
 
 	m_input = new Input();
 
@@ -111,6 +115,7 @@ void GameSystem::RunLoop()
 
 		ClearDrawScreen();
 
+		// シーンごとに更新処理
 		switch (sceneNum)
 		{
 		case SCENE_PHASE::START:
@@ -128,19 +133,13 @@ void GameSystem::RunLoop()
 			break;
 
 		case SCENE_PHASE::GAME_END:
+			m_resultScene->Draw();
+			sceneNum = m_titleScene->GetNextScene();
 			break;
 
 		default:
 			break;
 		}
-
-		// シーンの更新
-		//m_inGameScene->Update(*m_input, *m_camera, m_deltaTime);
-
-
-
-		// 描画
-		//m_inGameScene->Draw();
 
 		ScreenFlip();
 

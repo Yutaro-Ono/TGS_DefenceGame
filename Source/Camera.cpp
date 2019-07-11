@@ -16,7 +16,7 @@ Camera::Camera()
 	//奥行0.1～1000までをカメラの描画範囲とする
 	SetCameraNearFar(1.0f, 40000.0f);
 	// ポジションの設定
-	pos = VGet(0.0f, 90.0f, -130.0f);
+	pos = VGet(0.0f, 115.0f, -120.0f);
 }
 
 // デストラクタ
@@ -31,7 +31,7 @@ void Camera::Update(PlayerManager& playerManager)
 	// プレイヤーマネージャー内のプレイヤーにアクセス
 	Actor* player = playerManager.GetPlayerPointer();
 
-	SetCameraPositionAndAngle(pos, 40.0f * DX_PI_F / 180.0f, 0, 0);
+	SetCameraPositionAndAngle(pos, 50.0f * DX_PI_F / 180.0f, 0, 0);
 
 //#if !USE_LERP_CAMERA
 //	// z軸上で、プレイヤーから一定距離離れた状態でプレイヤーを常に見続けるよう位置調整

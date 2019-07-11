@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------+
 // プレイヤークラス                        
-//                                              Last Update : 2019/07/01
+//                                              Last Update : 2019/07/11
 //-----------------------------------------------------------------------+
 #include "Player.h"
 
@@ -63,6 +63,8 @@ void Player::Update(Input& input, float deltaTime)
 		m_angle = 90.0f;
 	}
 
+
+
 	// いずれかのキーが押されている時
 	if (input.GetKeyPad() != 0)
 	{
@@ -71,6 +73,9 @@ void Player::Update(Input& input, float deltaTime)
 			m_moveFlag = true;
 		}
 	}
+
+	// 簡易的なフィールド当たり判定処理(フィールドからはみ出したら戻す)
+	HitWallUpdate(deltaTime);
 
 	MotionMove(deltaTime);
 
@@ -86,6 +91,29 @@ void Player::Update(Input& input, float deltaTime)
 	MV1SetPosition(m_modelHandle, m_position);
 
 	//printfDx("pos : x = %f\ny = %f\nz = %f\n", m_position.x, m_position.y, m_position.z);
+}
+
+
+// 簡易的なフィールドの当たり判定
+void Player::HitWallUpdate(float deltaTime)
+{
+	if (m_position.x >= 110.0f)
+	{
+		m_position.x -= MOVE_SPEED * deltaTime;
+	}
+	if (m_position.x <= -110.0f)
+	{
+		m_position.x += MOVE_SPEED * deltaTime;
+	}
+
+	if (m_position.z >= 90.0f)
+	{
+		m_position.z -= MOVE_SPEED * deltaTime;
+	}
+	if (m_position.z <= -90.0f)
+	{
+		m_position.z += MOVE_SPEED * deltaTime;
+	}
 }
 
 void Player::Draw()

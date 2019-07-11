@@ -59,7 +59,7 @@ void SceneInGame::Update(Input& input, Camera& camera, float deltaTime)
 	camera.Update(*m_player);
 
 	// “–‚½‚è”»’èˆ—
-	HitChecker::CheckHit(*m_player, *m_enemy);
+	// HitChecker::CheckHit(*m_player, *m_enemy);
 	for (int i = 0; i < ALL_ENEMY; i++)
 	{
 		HitChecker::CheckHitEnemy(*m_enemy, i);

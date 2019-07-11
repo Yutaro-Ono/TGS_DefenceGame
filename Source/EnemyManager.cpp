@@ -3,6 +3,7 @@
 //                                              Last Update : 2019/07/03
 //-----------------------------------------------------------------------+
 #include "EnemyManager.h"
+#include "HitChecker.h"
 
 const int EnemyManager::ENEMY_MAX_NUM = 5;           // 敵の一度に出現する最大数
 const int EnemyManager::ENEMY_ALL_NUM = 25;          // 敵の合計数
@@ -45,11 +46,11 @@ void EnemyManager::Delete()
 // 更新処理
 void EnemyManager::Update(PlayerManager& playerManager, float deltaTime)
 {
-
 	for (int i = 0; i < m_enemy.size(); i++)
 	{
 		if (!m_enemy[i]->GetHitPlayer())
 		{
+			HitChecker::CheckHit(playerManager, *m_enemy[i]);
 			m_enemy[i]->Update(deltaTime);
 			m_enemy[i]->GazeTarget(playerManager, deltaTime);
 		}

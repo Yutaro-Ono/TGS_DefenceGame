@@ -80,6 +80,61 @@ void HitChecker::CheckHit(PlayerManager & playerManager, EnemyManager& enemyMana
 	}
 }
 
+// プレイヤーとエネミー
+void HitChecker::CheckHit(PlayerManager & playerManager, Enemy& enemy)
+{
+	Player* player = playerManager.GetPlayerPointer();
+
+	// Z軸とX軸の二次元座標としてあたり判定を行う.
+	VECTOR yZeroPlayer = VGet(player->GetPosition().x, 0, player->GetPosition().z);
+	bool isHit = true;
+
+	// 一度でもぶつかったら位置が変わるのでヒット計算をしなおす.
+	while (isHit)
+	{
+		isHit = false;
+		for (int i = 0; i < ALL_ENEMY; i++)
+		{
+			if (&enemy != NULL)
+			{
+				VECTOR yZeroEnemy = VGet(enemy.GetPosition().x, 0, enemy.GetPosition().z);
+
+				// お互いのポジションと半径の距離が重なったら当たっていることになる.
+				VECTOR playerToObs = VSub(yZeroEnemy, yZeroPlayer);
+
+				// printfDx("playerToObs:%f %f %f\n", playerToObs.x, playerToObs.y, playerToObs.z);
+
+				if (VSize(playerToObs) < player->GetRadius() + enemy.GetRadius())
+				{
+					enemy.SetHitPlayer(true);
+					// プレイヤーが他のエネミーに当たっていなければ
+					if (player->GetHitEnemy() == false)
+					{
+						printfDx("Hit!");
+						player->SetDamaged();
+						player->SetInterval(GetNowCount());
+						player->OnHitEnemy(enemy);     // プレイヤーの位置をずらす関数を呼び出す(オブジェクトは固定)
+						player->SetHitEnemy(true);
+					}
+					// isHit = true;
+				}
+
+				if (!(VSize(playerToObs) + 1.0f < player->GetRadius() + enemy.GetRadius()))
+				{
+					enemy.SetHitPlayer(false);
+					break;
+				}
+			}
+			// ヒットしてたら計算やりなおし+二次元座標としてのプレイヤーの位置を更新.
+			if (isHit)
+			{
+				yZeroPlayer = VGet(player->GetPosition().x, 0, player->GetPosition().z);
+				break;
+			}
+		}
+	}
+}
+
 void HitChecker::CheckHitEnemy(EnemyManager & enemyManager, int enemy_num)
 {
 	Enemy* main_enemy = enemyManager.GetEnemyPointer(enemy_num);

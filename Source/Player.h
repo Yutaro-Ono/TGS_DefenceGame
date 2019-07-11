@@ -34,8 +34,8 @@ public:
 	void SetHitEnemy(bool hit_e) { m_hitEnemy = hit_e; }         // エネミーとの当たり判定フラグのセッター
 	void OnHitEnemy(Enemy& enemy);                               // エネミーとの当たり判定処理
 
-	void hitInterval(float deltaTime);                           // エネミー衝突時、次の当たり判定処理が行われるまでのインターバル
-	void SetInterval(const int count) { m_hitInterval = count; }   // インターバルのセッター
+	void HitInterval();                           // エネミー衝突時、次の当たり判定処理が行われるまでのインターバル
+	void SetInterval(const int count) { m_hitTime = count; }   // インターバルのセッター
 
 	void SetDamaged() { m_hitPoint -= 1; }    // エネミー衝突時、体力減算処理
 	const int& GetHitPoint() const { return m_hitPoint; }        // プレイヤー体力のゲッター
@@ -51,7 +51,7 @@ private:
 	float m_hitRadius;                        // 当たり判定用半径
 	bool m_hitEnemy;                            // エネミーに当たったかどうかのフラグ
 
-	int m_hitInterval;                        // 当たり判定が連続で発生するまでのインターバル
+	int m_hitTime;                        // 当たり判定が連続で発生するまでのインターバル
 
 	static const float MOVE_SPEED;            // プレイヤーの移動速度
 

@@ -69,7 +69,7 @@ private:
 
 
 	SceneTitle* m_titleScene;               // タイトルシーン
-	SceneBase* m_inGameScene;              // インゲームシーン
+	SceneInGame* m_inGameScene;              // インゲームシーン
 
 
 	Input* m_input;                        // 入力関連

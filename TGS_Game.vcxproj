@@ -43,7 +43,9 @@
     <ClCompile Include="Source\SceneBase.cpp" />
     <ClCompile Include="Source\SceneInGame.cpp" />
     <ClCompile Include="Source\SceneManager.cpp" />
+    <ClCompile Include="Source\SceneResult.cpp" />
     <ClCompile Include="Source\SceneTitle.cpp" />
+    <ClCompile Include="Source\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Actor.h" />
@@ -58,6 +60,7 @@
     <ClInclude Include="Source\Input.h" />
     <ClInclude Include="Source\InterfaceBase.h" />
     <ClInclude Include="Source\InterfacePlayer.h" />
+    <ClInclude Include="Source\Item.h" />
     <ClInclude Include="Source\ModelLoader.h" />
     <ClInclude Include="Source\NpcManager.h" />
     <ClInclude Include="Source\ObjectBase.h" />
@@ -70,7 +73,9 @@
     <ClInclude Include="Source\SceneBase.h" />
     <ClInclude Include="Source\SceneInGame.h" />
     <ClInclude Include="Source\SceneManager.h" />
+    <ClInclude Include="Source\SceneResult.h" />
     <ClInclude Include="Source\SceneTitle.h" />
+    <ClInclude Include="Source\Timer.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

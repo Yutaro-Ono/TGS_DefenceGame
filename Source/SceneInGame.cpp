@@ -3,15 +3,19 @@
 //                                              Last Update : 2019/07/01
 //----------------------------------------------------------------------+
 #include "SceneInGame.h"
+#include "Timer.h"
 #include "PlayerManager.h"
 #include "Camera.h"
 #include "HitChecker.h"
+
+class Timer;
 
 // コンストラクタ
 SceneInGame::SceneInGame()
 {
 	m_player = NULL;
 	m_enemy = NULL;
+	toNext = 2;
 }
 
 // デストラクタ
@@ -37,6 +41,10 @@ void SceneInGame::Initialize()
 	// NPCを生成，初期化
 	m_npc = new NpcManager();
 	m_npc->Initialize();
+
+	// タイマーを生成
+	m_timer = new Timer();
+	m_timer->Initialize();
 }
 
 // 各種解放処理
@@ -46,12 +54,14 @@ void SceneInGame::Delete()
 	delete (m_enemy);
 	delete (m_obj);
 	delete (m_npc);
+	delete (m_timer);
 	delete (m_UI);
 }
 
 // 更新処理
 void SceneInGame::Update(Input& input, Camera& camera, float deltaTime)
 {
+
 	// キーの押下状態チェック
 	input.KeyChecker();
 
@@ -59,7 +69,7 @@ void SceneInGame::Update(Input& input, Camera& camera, float deltaTime)
 	camera.Update(*m_player);
 
 	// 当たり判定処理
-	// HitChecker::CheckHit(*m_player, *m_enemy);
+	HitChecker::CheckHit(*m_player, *m_enemy);
 	for (int i = 0; i < ALL_ENEMY; i++)
 	{
 		HitChecker::CheckHitEnemy(*m_enemy, i);
@@ -72,10 +82,28 @@ void SceneInGame::Update(Input& input, Camera& camera, float deltaTime)
 	// NPCの更新
 	m_npc->Update(deltaTime);
 
-
-
 	Draw();
 
+	m_timer->Update();
+
+	// シーンアップデート
+	SceneUpdate();
+
+}
+
+void SceneInGame::SceneUpdate()
+{
+	// タイマーが0になったら次のシーンへ
+	if (m_timer->GetTimer() <= 0)
+	{
+		toNext = 3;
+	}
+
+	// プレイヤーが死亡状態だったら次のシーンへ
+	if (m_player->GetPlayerState() == m_player->PLAYER_STATE::DEAD)
+	{
+		toNext = 3;
+	}
 }
 
 // 描画処理

@@ -12,6 +12,7 @@
 #include "NpcManager.h"
 #include "InGameUIManager.h"
 #include "Camera.h"
+#include "Timer.h"
 
 class SceneBase;
 class PlayerManager;
@@ -19,6 +20,7 @@ class EnemyManager;
 class ObjectManager;
 class Player;
 class Camera;
+class Timer;
 
 class SceneInGame : public SceneBase
 {
@@ -33,11 +35,17 @@ public:
 
 	void Update(Input& input, Camera& camera, float deltaTime)override;
 
+	void SceneUpdate();
+
 	void Draw()override;
+
+	const int& GetNextScene() const { return toNext; }             // 次のシーンのenumを返す
 
 private:
 
 	int toNext;
+
+	Timer* m_timer;                    // タイマー
 
 	PlayerManager* m_player;           // プレイヤー
 

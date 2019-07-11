@@ -124,6 +124,7 @@ void GameSystem::RunLoop()
 		case SCENE_PHASE::GAME:
 			// シーンの更新
 			m_inGameScene->Update(*m_input, *m_camera, m_deltaTime);
+			sceneNum = m_inGameScene->GetNextScene();
 			break;
 
 		case SCENE_PHASE::GAME_END:

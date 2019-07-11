@@ -48,12 +48,14 @@ void EnemyManager::Update(PlayerManager& playerManager, float deltaTime)
 {
 	for (int i = 0; i < m_enemy.size(); i++)
 	{
-		if (!m_enemy[i]->GetHitPlayer())
+		// プレイヤーとのヒットフラグが立っていない時のみ更新
+		if (m_enemy[i]->GetHitPlayer() == false)
 		{
-			HitChecker::CheckHit(playerManager, *m_enemy[i]);
 			m_enemy[i]->Update(deltaTime);
 			m_enemy[i]->GazeTarget(playerManager, deltaTime);
 		}
+
+		m_enemy[i]->HitInterval();
 	}
 }
 

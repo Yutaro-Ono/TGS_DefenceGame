@@ -22,7 +22,7 @@ Player::Player(const int sourceModelHandle)
 	m_position = VGet(0.0f, 5.0f, 0.0f);
 	m_direction = VGet(0.0f, 0.0f, 0.0f);
 	m_angle = 0.0f;
-	m_hitInterval = 0;
+	m_hitTime = 0;
 	velocityY = JUMP_POWER;
 }
 
@@ -74,7 +74,7 @@ void Player::Update(Input& input, float deltaTime)
 
 	MotionMove(deltaTime);
 
-	hitInterval(deltaTime);
+	HitInterval();
 
 	// モデルの拡大率セット
 	MV1SetScale(m_modelHandle, SCALE_SIZE);
@@ -90,8 +90,13 @@ void Player::Update(Input& input, float deltaTime)
 
 void Player::Draw()
 {
+	// エネミーに当たった時の点滅処理
+	if (m_hitEnemy == false || (GetNowCount() - m_hitTime) % 9)
+	{
+		// モデルの描画
+		MV1DrawModel(m_modelHandle);
+	}
 
-	MV1DrawModel(m_modelHandle);
 
 	// 当たり判定確認用の球
 	DrawSphere3D(m_position, m_hitRadius, 5, 0x00ffff, 0x00ffff, FALSE);
@@ -137,18 +142,18 @@ void Player::OnHitEnemy(Enemy & enemy)
 }
 
 // エネミー衝突時、次の当たり判定処理が行われるまでのインターバル
-void Player::hitInterval(float deltaTime)
+void Player::HitInterval()
 {
 	if (m_hitEnemy == true)
 	{
-		
-		if (GetNowCount() - m_hitInterval >= 1500)
+		// 1.5秒後にインターバル解除
+		if (GetNowCount() - m_hitTime >= 2000)
 		{
-			m_hitInterval = 0.0f;
+			m_hitTime = 0.0f;
 		}
 
 		// インターバルが初期化されたら当たり判定フラグを解除する
-		if (m_hitInterval == 0.0f)
+		if (m_hitTime == 0.0f)
 		{
 			m_hitEnemy = false;
 		}

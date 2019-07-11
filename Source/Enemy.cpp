@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------+
 // エネミークラス                            
-//                                              Last Update : 2019/07/08
+//                                              Last Update : 2019/07/11
 //-----------------------------------------------------------------------+
 #include "Enemy.h"
 
@@ -13,6 +13,7 @@ Enemy::Enemy(int sourceModelHandle)
 	,m_hitRadius(10.0f)
 	,m_hitPlayer(false)
 {
+	m_hitTime = 0;
 	m_targetVec = VGet(0.0f, 0.0f, 0.0f);
 }
 
@@ -52,6 +53,24 @@ void Enemy::SetEmergence(const VECTOR popPos)
 	MV1SetPosition(m_modelHandle, m_position);
 }
 
+void Enemy::HitInterval()
+{
+	// 当たり判定フラグが立ったら
+	if (m_hitPlayer == true)
+	{
+		if (GetNowCount() - m_hitTime >= 1500)
+		{
+			m_hitTime = 0.0f;
+		}
+
+		// インターバルが初期化されたら当たり判定フラグを解除する
+		if (m_hitTime == 0.0f)
+		{
+			m_hitPlayer = false;
+		}
+	}
+}
+
 // 他のエネミーに当たった時
 void Enemy::OnHitOtherEnemy(Enemy& other_enemy)
 {
@@ -73,7 +92,7 @@ void Enemy::OnHitOtherEnemy(Enemy& other_enemy)
 // ターゲットの方向に移動
 void Enemy::GazeTarget(PlayerManager& playerManager, float deltaTime)
 {
-	if(!m_hitPlayer)
+	if(m_hitPlayer == false)
 	{
 		Actor* player = playerManager.GetPlayerPointer();
 		VECTOR pVec = player->GetPosition();

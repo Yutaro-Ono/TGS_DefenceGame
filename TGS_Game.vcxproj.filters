@@ -126,6 +126,12 @@
     <ClCompile Include="Source\InterfacePlayer.cpp">
       <Filter>ソース ファイル\UI</Filter>
     </ClCompile>
+    <ClCompile Include="Source\SceneResult.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Timer.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameSystem.h">
@@ -202,6 +208,15 @@
     </ClInclude>
     <ClInclude Include="Source\InGameUIManager.h">
       <Filter>ソース ファイル\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneResult.h">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Item.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Timer.h">
+      <Filter>ソース ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

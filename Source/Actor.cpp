@@ -21,8 +21,5 @@ Actor::~Actor()
 // ƒ‚ƒfƒ‹‚Ì•`‰æ
 void Actor::Draw()
 {
-
-
-
 	//printfDx("ƒ‚ƒfƒ‹‚ð•`‰æ\n");
 }

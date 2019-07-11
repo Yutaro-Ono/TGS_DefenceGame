@@ -10,6 +10,7 @@
 // コンストラクタ
 PlayerManager::PlayerManager()
 	:m_sourceModelHandle(-1)
+	,m_playerState(PLAYER_STATE::ACTIVE)
 {
 	m_player = NULL;
 }
@@ -47,6 +48,11 @@ void PlayerManager::Update(Input& input, float deltaTime)
 	// ポジションをセット
 	MV1SetPosition(m_sourceModelHandle, VGet(0.0f, 0.0f, 0.0f));
 
+	// プレイヤーの体力が0になったら死亡状態にする
+	if (m_player->GetHitPoint() <= 0)
+	{
+		m_playerState = PLAYER_STATE::DEAD;
+	}
 }
 
 // 描画処理

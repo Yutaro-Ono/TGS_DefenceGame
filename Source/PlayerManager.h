@@ -16,6 +16,12 @@ class PlayerManager final
 {
 public:
 	
+	enum PLAYER_STATE
+	{
+		ACTIVE = 0,
+		DEAD,
+	};
+
 	PlayerManager();         // コンストラクタ
 	~PlayerManager();        // デストラクタ
 
@@ -27,14 +33,18 @@ public:
 
 	void Draw();             // 描画処理
 
+	const int& GetPlayerState() { return m_playerState; }       // プレイヤーの状態確認用
+
 	// 生成したプレイヤーへのポインタを取得する
 	// 主にカメラの処理に用いる
 	Player* GetPlayerPointer() { return m_player; }
 
 private:
 
+	int m_playerState;            // プレイヤーの状態格納
+
 	int m_sourceModelHandle;      // モデルハンドル
-	Player* m_player;              // プレイヤー
+	Player* m_player;             // プレイヤー
 
 
 

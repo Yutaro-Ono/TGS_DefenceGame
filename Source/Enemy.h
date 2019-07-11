@@ -37,6 +37,11 @@ public:
 
 	void SetEmergence(const VECTOR popPos);                                // 最初の出現位置設定
 	void SetHitPlayer(bool p_hit) { m_hitPlayer = p_hit; }                 // プレイヤーと衝突しているかどうかのセッター
+	
+	void HitInterval();                                                    // プレイヤーと衝突時、次の当たり判定が行われるまでのインターバル計測関数
+	void SetInterval(const int count) { m_hitTime = count; }           // インターバルのセッター
+
+
 	void OnHitOtherEnemy(Enemy& other_enemy);                              // 他エネミーと当たった時の処理
 
 
@@ -49,6 +54,8 @@ private:
 	float m_hitRadius;
 
 	bool m_hitPlayer;                                      // プレイヤーに当たっているかどうかのフラグ
+	int m_hitTime;                                     // プレイヤーに当たっている時に用いるインターバル
+
 
 	static const VECTOR SCALE_SIZE;                        // 拡大率
 	static const float MOVE_SPEED;

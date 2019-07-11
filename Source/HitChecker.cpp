@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------+
 // 衝突判定クラス                    
-//                                              Last Update : 2019/07/08
+//                                              Last Update : 2019/07/11
 //-----------------------------------------------------------------------+
 #include "HitChecker.h"
 #include "Actor.h"
@@ -51,7 +51,11 @@ void HitChecker::CheckHit(PlayerManager & playerManager, EnemyManager& enemyMana
 
 				if (VSize(playerToObs) < player->GetRadius() + enemy->GetRadius())
 				{
-					enemy->SetHitPlayer(true);
+					if (enemy->GetHitPlayer() == false)
+					{
+						enemy->SetInterval(GetNowCount());        // インターバルをセット
+						enemy->SetHitPlayer(true);
+					}
 					// プレイヤーが他のエネミーに当たっていなければ
 					if (player->GetHitEnemy() == false)
 					{
@@ -61,21 +65,21 @@ void HitChecker::CheckHit(PlayerManager & playerManager, EnemyManager& enemyMana
 						player->OnHitEnemy(*enemy);     // プレイヤーの位置をずらす関数を呼び出す(オブジェクトは固定)
 						player->SetHitEnemy(true);
 					}
-					// isHit = true;
+					isHit = true;
 				}
-				
-				if (!(VSize(playerToObs) + 1.0f < player->GetRadius() + enemy->GetRadius()))
-				{
-					enemy->SetHitPlayer(false);
-					break;
-				}
+				//if (!(VSize(playerToObs) + 1.0f < player->GetRadius() + enemy->GetRadius()))
+				//{
+				//	enemy->SetHitPlayer(false);
+				//	break;
+				//}
 			}
-			// ヒットしてたら計算やりなおし+二次元座標としてのプレイヤーの位置を更新.
-			if (isHit)
-			{
-				yZeroPlayer = VGet(player->GetPosition().x, 0, player->GetPosition().z);
-				break;
-			}
+		}
+
+		// ヒットしてたら計算やりなおし+二次元座標としてのプレイヤーの位置を更新.
+		if (isHit)
+		{
+			yZeroPlayer = VGet(player->GetPosition().x, 0, player->GetPosition().z);
+			break;
 		}
 	}
 }
@@ -106,7 +110,7 @@ void HitChecker::CheckHit(PlayerManager & playerManager, Enemy& enemy)
 
 				if (VSize(playerToObs) < player->GetRadius() + enemy.GetRadius())
 				{
-					enemy.SetHitPlayer(true);
+
 					// プレイヤーが他のエネミーに当たっていなければ
 					if (player->GetHitEnemy() == false)
 					{
@@ -121,7 +125,6 @@ void HitChecker::CheckHit(PlayerManager & playerManager, Enemy& enemy)
 
 				if (!(VSize(playerToObs) + 1.0f < player->GetRadius() + enemy.GetRadius()))
 				{
-					enemy.SetHitPlayer(false);
 					break;
 				}
 			}

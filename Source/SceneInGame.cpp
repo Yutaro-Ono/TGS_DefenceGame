@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------+
 // inゲーム(ゲーム中)シーン                               
-//                                              Last Update : 2019/07/01
+//                                              Last Update : 2019/07/12
 //----------------------------------------------------------------------+
 #include "SceneInGame.h"
 #include "Timer.h"
@@ -54,8 +54,13 @@ void SceneInGame::Delete()
 	delete (m_UI);
 }
 
+// オーバーライドしたアップデート(処理なし)
+void SceneInGame::Update(Input & input, Camera & camera, float deltaTime)
+{
+}
+
 // 更新処理
-void SceneInGame::Update(Input& input, Camera& camera, float deltaTime)
+void SceneInGame::Update(Input& input, Camera& camera, SceneResult& result, float deltaTime)
 {
 
 	// キーの押下状態チェック
@@ -71,38 +76,42 @@ void SceneInGame::Update(Input& input, Camera& camera, float deltaTime)
 		HitChecker::CheckHitEnemy(*m_enemy, i);
 	}
 
-	m_timer->Update();
-
 	// プレイヤーの更新
 	m_player->Update(input, deltaTime);
 	// エネミーの更新
 	m_enemy->Update(*m_player, deltaTime);
-	//// 残り時間によってエネミーを追加
-	//if (m_timer->GetTimer() % 20)
-	//{
-	//	m_enemy->AddEnemy();
-	//}
 
+	m_timer->Update();
+
+	// 描画関数総合
 	Draw();
-
 	m_timer->Draw();
 
+	// 残り時間によってエネミーを追加
+	if (m_timer->GetTimer() != 60 && m_timer->GetTimer() % 20)
+	{
+		m_enemy->AddEnemy();
+	}
+
 	// シーンアップデート
-	SceneUpdate();
+	SceneUpdate(result);
 
 }
 
-void SceneInGame::SceneUpdate()
+// シーンのアップデート(主に次シーンへの遷移処理)
+void SceneInGame::SceneUpdate(SceneResult & result)
 {
-	// タイマーが0になったら次のシーンへ
+	// タイマーが0になったら、ゲームクリアとして次のシーンへ
 	if (m_timer->GetTimer() <= 0)
 	{
+		result.SetClear(true);
 		toNext = 4;
 	}
 
-	// プレイヤーが死亡状態だったら次のシーンへ
+	// プレイヤーが死亡状態だったら、ゲームオーバーとして次のシーンへ
 	if (m_player->GetPlayerState() == m_player->PLAYER_STATE::DEAD)
 	{
+		result.SetClear(false);
 		toNext = 4;
 	}
 }

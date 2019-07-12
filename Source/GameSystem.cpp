@@ -64,13 +64,13 @@ void GameSystem::Create()
 	// リザルト
 	m_resultScene = new SceneResult();
 	m_resultScene->Initialize();
-
+	// 入力
 	m_input = new Input();
-
+	// カメラ
 	m_camera = new Camera();
 }
 
-// 削除関数
+// 削除
 void GameSystem::Delete()
 {
 	m_inGameScene->Delete();
@@ -150,7 +150,7 @@ void GameSystem::RunLoop()
 
 		case SCENE_PHASE::GAME:
 			// シーンの更新
-			m_inGameScene->Update(*m_input, *m_camera, m_deltaTime);
+			m_inGameScene->Update(*m_input, *m_camera, *m_resultScene, m_deltaTime);
 			sceneNum = m_inGameScene->GetNextScene();
 			break;
 

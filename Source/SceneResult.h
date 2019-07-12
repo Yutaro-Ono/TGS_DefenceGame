@@ -26,11 +26,14 @@ public:
 
 	const int& GetNextScene() const { return toNext; }           // 次のシーンへのセッター
 
+	void SetClear(const bool clear) { m_clear = clear; }
+
 private:
 
 	int toNext;
 
 	int m_score;
 
+	bool m_clear;           // ゲームクリアかゲームオーバーか判定するフラグ
 
 };

@@ -22,6 +22,8 @@ public:
 
 private:
 
+	int m_tutorialGraph;               // チュートリアルの画像ハンドル
+
 	InterfacePlayer* m_playerUI;       // プレイヤーのUI
 
 };

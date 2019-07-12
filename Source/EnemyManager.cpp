@@ -73,7 +73,7 @@ void EnemyManager::Draw()
 // エネミーの追加処理
 void EnemyManager::AddEnemy()
 {
-	// m_enemy.push_back(new Enemy(m_enemySourceHandle));
+	 m_enemy.emplace_back(new Enemy(m_enemySourceHandle));
 	//// エネミーの座標を設定
 	//m_enemy[m_enemy.size()]->SetEmergence(VGet(0.0f, 0.0f, 0.0f));
 }

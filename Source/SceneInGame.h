@@ -6,6 +6,7 @@
 #pragma once
 #include "DxLib.h"
 #include "SceneBase.h"
+#include "SceneResult.h"
 #include "PlayerManager.h"
 #include "EnemyManager.h"
 #include "ObjectManager.h"
@@ -14,6 +15,7 @@
 #include "Timer.h"
 
 class SceneBase;
+class SceneResult;
 class PlayerManager;
 class EnemyManager;
 class ObjectManager;
@@ -34,7 +36,9 @@ public:
 
 	void Update(Input& input, Camera& camera, float deltaTime)override;
 
-	void SceneUpdate();
+	void Update(Input& input, Camera& camera, SceneResult& result, float deltaTime);
+
+	void SceneUpdate(SceneResult& result);
 
 	void Draw()override;
 

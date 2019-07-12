@@ -41,7 +41,6 @@ private:
 
 	std::vector<class Enemy*> m_enemy;          // エネミー
 
-
 	static const int ENEMY_MAX_NUM;     // 敵の一度に出現する最大数
 	static const int ENEMY_ALL_NUM;     // 敵の合計数
 

@@ -22,6 +22,7 @@
 
 class Input;
 class Camera;
+class SceneInGame;
 class SceneResult;
 
 class GameSystem

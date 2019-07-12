@@ -39,9 +39,7 @@ void SceneInGame::Initialize()
 	m_obj = new ObjectManager();
 	m_obj->Initialize();
 
-	// タイマーを生成
-	m_timer = new Timer();
-	m_timer->Initialize();
+	TIMER_INSTANCE.Initialize();
 }
 
 // 各種解放処理
@@ -50,7 +48,6 @@ void SceneInGame::Delete()
 	delete (m_player);
 	delete (m_enemy);
 	delete (m_obj);
-	delete (m_timer);
 	delete (m_UI);
 }
 
@@ -81,14 +78,15 @@ void SceneInGame::Update(Input& input, Camera& camera, SceneResult& result, floa
 	// エネミーの更新
 	m_enemy->Update(*m_player, deltaTime);
 
-	m_timer->Update();
+	TIMER_INSTANCE.Update();
+
 
 	// 描画関数総合
 	Draw();
-	m_timer->Draw();
+
 
 	// 残り時間によってエネミーを追加
-	if (m_timer->GetTimer() != 60 && m_timer->GetTimer() % 20)
+	if (TIMER_INSTANCE.GetTimer() != 60 && TIMER_INSTANCE.GetTimer() % 20)
 	{
 		m_enemy->AddEnemy();
 	}
@@ -102,7 +100,7 @@ void SceneInGame::Update(Input& input, Camera& camera, SceneResult& result, floa
 void SceneInGame::SceneUpdate(SceneResult & result)
 {
 	// タイマーが0になったら、ゲームクリアとして次のシーンへ
-	if (m_timer->GetTimer() <= 0)
+	if (TIMER_INSTANCE.GetTimer() <= 0)
 	{
 		result.SetClear(true);
 		toNext = 4;
@@ -127,4 +125,6 @@ void SceneInGame::Draw()
 	m_player->Draw();
 	// UIの描画
 	m_UI->Draw(*m_player->GetPlayerPointer());
+	// タイマーの描画
+	TIMER_INSTANCE.Draw();
 }

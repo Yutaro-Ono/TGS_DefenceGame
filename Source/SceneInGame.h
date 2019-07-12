@@ -21,7 +21,6 @@ class EnemyManager;
 class ObjectManager;
 class Player;
 class Camera;
-class Timer;
 
 class SceneInGame : public SceneBase
 {
@@ -47,8 +46,6 @@ public:
 private:
 
 	int toNext;
-
-	Timer* m_timer;                    // タイマー
 
 	PlayerManager* m_player;           // プレイヤー
 

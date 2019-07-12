@@ -39,6 +39,7 @@ public:
 		SHUT_DOWN,
 	};
 
+	// ƒVƒ“ƒOƒ‹ƒgƒ“
 	static GameSystem& GetInstance()
 	{
 		static GameSystem system;

@@ -18,6 +18,7 @@ Timer::~Timer()
 
 void Timer::Initialize()
 {
+	m_countTimer = 0;
 	m_startTimer = GetNowCount() / 1000;
 }
 

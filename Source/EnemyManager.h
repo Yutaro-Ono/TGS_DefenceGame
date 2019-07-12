@@ -33,7 +33,7 @@ public:
 	// 生成したエネミーごとのポインタを取得する
 	Enemy* GetEnemyPointer(int enemyNum) { return m_enemy[enemyNum]; }
 	//// アクティブなエネミーの数を返す
-	const int& GetActiveEnemy() const { return m_enemy.size(); }
+	const int& GetActiveEnemy() const { size_t e_max; int num; e_max = m_enemy.size(); num = (int)e_max; return num; }
 
 private:
 

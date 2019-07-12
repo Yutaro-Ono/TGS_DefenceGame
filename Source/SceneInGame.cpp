@@ -77,11 +77,11 @@ void SceneInGame::Update(Input& input, Camera& camera, float deltaTime)
 	m_player->Update(input, deltaTime);
 	// エネミーの更新
 	m_enemy->Update(*m_player, deltaTime);
-	// 残り時間によってエネミーを追加
-	if (m_timer->GetTimer() % 20)
-	{
-		//m_enemy->AddEnemy();
-	}
+	//// 残り時間によってエネミーを追加
+	//if (m_timer->GetTimer() % 20)
+	//{
+	//	m_enemy->AddEnemy();
+	//}
 
 	Draw();
 

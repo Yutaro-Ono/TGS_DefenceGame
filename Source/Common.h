@@ -2,7 +2,7 @@
 
 
 // エネミーの最大数
-#define ALL_ENEMY 3
+#define ALL_ENEMY 5
 
 #define PI 3.14f
 // 360度

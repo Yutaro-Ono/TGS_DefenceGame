@@ -181,6 +181,13 @@ void GameSystem::ShutDown()
 	delete (m_camera);
 	delete (m_inGameScene);
 
+	// Delete’†‚Å‚È‚¯‚ê‚Îíœ‚µ‚ÄI—¹
+	if (sceneNum != SCENE_PHASE::SHUT_DOWN)
+	{
+		Delete();
+	}
+
+
 	DxLib_End();
 }
 

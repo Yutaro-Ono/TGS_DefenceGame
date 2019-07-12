@@ -15,7 +15,7 @@ SceneInGame::SceneInGame()
 {
 	m_player = NULL;
 	m_enemy = NULL;
-	toNext = 2;
+	toNext = 3;
 }
 
 // デストラクタ
@@ -38,9 +38,6 @@ void SceneInGame::Initialize()
 	// オブジェクトを生成，初期化
 	m_obj = new ObjectManager();
 	m_obj->Initialize();
-	// NPCを生成，初期化
-	m_npc = new NpcManager();
-	m_npc->Initialize();
 
 	// タイマーを生成
 	m_timer = new Timer();
@@ -53,7 +50,6 @@ void SceneInGame::Delete()
 	delete (m_player);
 	delete (m_enemy);
 	delete (m_obj);
-	delete (m_npc);
 	delete (m_timer);
 	delete (m_UI);
 }
@@ -70,21 +66,26 @@ void SceneInGame::Update(Input& input, Camera& camera, float deltaTime)
 
 	// 当たり判定処理
 	HitChecker::CheckHit(*m_player, *m_enemy);
-	for (int i = 0; i < ALL_ENEMY; i++)
+	for (int i = 0; i < m_enemy->GetActiveEnemy(); i++)
 	{
 		HitChecker::CheckHitEnemy(*m_enemy, i);
 	}
+
+	m_timer->Update();
 
 	// プレイヤーの更新
 	m_player->Update(input, deltaTime);
 	// エネミーの更新
 	m_enemy->Update(*m_player, deltaTime);
-	// NPCの更新
-	m_npc->Update(deltaTime);
+	// 残り時間によってエネミーを追加
+	if (m_timer->GetTimer() % 20)
+	{
+		//m_enemy->AddEnemy();
+	}
 
 	Draw();
 
-	m_timer->Update();
+	m_timer->Draw();
 
 	// シーンアップデート
 	SceneUpdate();
@@ -96,13 +97,13 @@ void SceneInGame::SceneUpdate()
 	// タイマーが0になったら次のシーンへ
 	if (m_timer->GetTimer() <= 0)
 	{
-		toNext = 3;
+		toNext = 4;
 	}
 
 	// プレイヤーが死亡状態だったら次のシーンへ
 	if (m_player->GetPlayerState() == m_player->PLAYER_STATE::DEAD)
 	{
-		toNext = 3;
+		toNext = 4;
 	}
 }
 
@@ -117,6 +118,4 @@ void SceneInGame::Draw()
 	m_player->Draw();
 	// UIの描画
 	m_UI->Draw(*m_player->GetPlayerPointer());
-	// NPCの描画
-	//m_npc->Draw();
 }

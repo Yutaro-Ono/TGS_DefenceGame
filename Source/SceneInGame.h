@@ -9,7 +9,6 @@
 #include "PlayerManager.h"
 #include "EnemyManager.h"
 #include "ObjectManager.h"
-#include "NpcManager.h"
 #include "InGameUIManager.h"
 #include "Camera.h"
 #include "Timer.h"
@@ -54,7 +53,5 @@ private:
 	InGameUIManager* m_UI;             // UI
 
 	ObjectManager* m_obj;              // オブジェクト
-
-	NpcManager* m_npc;                 // NPC
 
 };

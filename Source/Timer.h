@@ -17,6 +17,8 @@ public:
 
 	void Update();
 
+	void Draw();
+
 	const int& GetTimer() const { return m_countTimer; }     // カウントタイマーのゲッター
 
 private:

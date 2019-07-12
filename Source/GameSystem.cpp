@@ -14,7 +14,7 @@ GameSystem::GameSystem()
 	:m_screenWidth(0)
 	,m_screenHeight(0)
 	,m_fullScreen(false)
-	,sceneNum(0)
+	,sceneNum(1)
 	,m_deltaTime(0.0f)
 {
 	m_isGameQuit = false;
@@ -53,6 +53,33 @@ bool GameSystem::Initialize()
 	return true;
 }
 
+void GameSystem::Create()
+{
+	// タイトル
+	m_titleScene = new SceneTitle();
+	m_titleScene->Initialize();
+	// ゲーム中
+	m_inGameScene = new SceneInGame();
+	m_inGameScene->Initialize();
+	// リザルト
+	m_resultScene = new SceneResult();
+	m_resultScene->Initialize();
+
+	m_input = new Input();
+
+	m_camera = new Camera();
+}
+
+// 削除関数
+void GameSystem::Delete()
+{
+	m_inGameScene->Delete();
+
+	delete (m_titleScene);
+	delete (m_inGameScene);
+	delete (m_resultScene);
+}
+
 
 int GameSystem::Update()
 {
@@ -89,19 +116,8 @@ void GameSystem::RunLoop()
 	// 現在時刻, 前回時刻を記録する
 	DWORD nowTick, prevTick;
 	prevTick = timeGetTime();
-	// タイトル
-	m_titleScene = new SceneTitle();
-	m_titleScene->Initialize();
-	// ゲーム中
-	m_inGameScene = new SceneInGame();
-	m_inGameScene->Initialize();
-	// リザルト
-	m_resultScene = new SceneResult();
-	m_resultScene->Initialize();
 
-	m_input = new Input();
-
-	m_camera = new Camera();
+	Create();
 
 	while (ProgramLoop())
 	{
@@ -118,12 +134,18 @@ void GameSystem::RunLoop()
 		// シーンごとに更新処理
 		switch (sceneNum)
 		{
+		case SCENE_PHASE::INIT:
+			Create();
+			sceneNum = SCENE_PHASE::START;
+			break;
+
 		case SCENE_PHASE::START:
 			m_titleScene->Update(*m_input, *m_camera, m_deltaTime);
 			sceneNum = m_titleScene->GetNextScene();
 			break;
 
 		case SCENE_PHASE::TUTORIAL:
+			sceneNum = SCENE_PHASE::GAME;
 			break;
 
 		case SCENE_PHASE::GAME:
@@ -133,25 +155,29 @@ void GameSystem::RunLoop()
 			break;
 
 		case SCENE_PHASE::GAME_END:
+			m_resultScene->Update(*m_input, *m_camera, m_deltaTime);
 			m_resultScene->Draw();
-			sceneNum = m_titleScene->GetNextScene();
+			sceneNum = m_resultScene->GetNextScene();
+			break;
+
+		case SCENE_PHASE::SHUT_DOWN:
+			Delete();
+			sceneNum = SCENE_PHASE::INIT;
 			break;
 
 		default:
 			break;
 		}
-
 		ScreenFlip();
-
 	}
 
+	ShutDown();
 }
 
 // 終了処理
 void GameSystem::ShutDown()
 {
-	m_inGameScene->Delete();
-
+	delete (m_input);
 	delete (m_camera);
 	delete (m_inGameScene);
 

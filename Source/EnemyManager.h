@@ -10,9 +10,11 @@
 #include "Common.h"
 #include "Actor.h"
 #include "Enemy.h"
+#include "Timer.h"
 
 class Actor;
 class Enemy;
+class Timer;
 
 class EnemyManager final
 {
@@ -26,10 +28,12 @@ public:
 
 	void Draw();                        // 描画処理
 
+	void AddEnemy();                    // エネミーを追加する
+
 	// 生成したエネミーごとのポインタを取得する
 	Enemy* GetEnemyPointer(int enemyNum) { return m_enemy[enemyNum]; }
 	//// アクティブなエネミーの数を返す
-	//int GetActiveEnemy(){ return m_enemy.size(); }
+	const int& GetActiveEnemy() const { return m_enemy.size(); }
 
 private:
 

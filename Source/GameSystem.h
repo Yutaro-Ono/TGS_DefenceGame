@@ -30,10 +30,12 @@ public:
 
 	enum SCENE_PHASE
 	{
-		START = 0,
+		INIT = 0,
+		START,
 		TUTORIAL,
 		GAME,
 		GAME_END,
+		SHUT_DOWN,
 	};
 
 	static GameSystem& GetInstance()
@@ -45,6 +47,10 @@ public:
 	~GameSystem();            // デストラクタ
 
 	bool Initialize();        // 各種初期化処理
+
+	void Create();            // インスタンスなどの生成処理
+
+	void Delete();            // 削除関数
 
 	void RunLoop();           // ゲームループ
 

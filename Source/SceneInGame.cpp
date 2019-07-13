@@ -78,22 +78,22 @@ void SceneInGame::Update(Input& input, Camera& camera, SceneResult& result, floa
 	// エネミーの更新
 	m_enemy->Update(*m_player, deltaTime);
 
-	TIMER_INSTANCE.Update();
-
-
-	// 描画関数総合
-	Draw();
 
 
 	// 残り時間によってエネミーを追加
-	if (TIMER_INSTANCE.GetTimer() != 60 && TIMER_INSTANCE.GetTimer() % 20)
+	if (TIMER_INSTANCE.GetTimer() != 60 && TIMER_INSTANCE.GetTimer() % 5 == 0)
 	{
 		m_enemy->AddEnemy();
 	}
 
+
+	TIMER_INSTANCE.Update();
+
+	// 描画関数総合
+	Draw();
+
 	// シーンアップデート
 	SceneUpdate(result);
-
 }
 
 // シーンのアップデート(主に次シーンへの遷移処理)

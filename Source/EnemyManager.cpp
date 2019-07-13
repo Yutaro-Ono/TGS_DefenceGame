@@ -5,6 +5,7 @@
 #include "EnemyManager.h"
 #include "HitChecker.h"
 
+class Enemy;
 
 const int EnemyManager::ENEMY_MAX_NUM = 5;           // 敵の一度に出現する最大数
 const int EnemyManager::ENEMY_ALL_NUM = 25;          // 敵の合計数
@@ -73,7 +74,7 @@ void EnemyManager::Draw()
 // エネミーの追加処理
 void EnemyManager::AddEnemy()
 {
-	 m_enemy.push_back(new Enemy(m_enemySourceHandle));
-	//// エネミーの座標を設定
-	//m_enemy[m_enemy.size()]->SetEmergence(VGet(0.0f, 0.0f, 0.0f));
+	 m_enemy.emplace_back(new Enemy(m_enemySourceHandle));
+	// エネミーの座標を設定
+	m_enemy.back()->SetEmergence(VGet(0.0f, 0.0f, 0.0f));
 }

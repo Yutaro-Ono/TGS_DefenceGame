@@ -7,6 +7,7 @@ Timer::Timer()
 	:m_countTimer(0)
 	,m_startTimer(0)
 	,m_limitTime(LIMIT_TIME)
+	,m_prevTimer(0)
 {
 
 }
@@ -20,6 +21,7 @@ void Timer::Initialize()
 {
 	m_countTimer = 0;
 	m_startTimer = GetNowCount() / 1000;
+	m_prevTimer = m_startTimer;
 }
 
 void Timer::Delete()
@@ -30,6 +32,12 @@ void Timer::Update()
 {
 	// カウントダウンタイマーを取得
 	m_countTimer = m_limitTime - ((GetNowCount() / 1000) - m_startTimer);
+
+	// prevTimerを更新
+	if ((m_countTimer - m_prevTimer) >= 1)
+	{
+		m_prevTimer = m_countTimer;
+	}
 }
 
 void Timer::Draw()

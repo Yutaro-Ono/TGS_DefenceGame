@@ -13,6 +13,8 @@ Enemy::Enemy(int sourceModelHandle)
 	,m_hitRadius(10.0f)
 	,m_hitPlayer(false)
 {
+	m_position = VGet(0.0f, 0.0f, 0.0f);
+	m_direction = VGet(0.0f, 0.0f, 0.0f);
 	m_hitTime = 0;
 	m_targetVec = VGet(0.0f, 0.0f, 0.0f);
 }

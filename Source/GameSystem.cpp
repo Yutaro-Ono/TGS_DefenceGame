@@ -177,15 +177,11 @@ void GameSystem::RunLoop()
 // I—¹ˆ—
 void GameSystem::ShutDown()
 {
+	Delete();
+
 	delete (m_input);
 	delete (m_camera);
 	delete (m_inGameScene);
-
-	// Delete’†‚Å‚È‚¯‚ê‚Îíœ‚µ‚ÄI—¹
-	if (sceneNum != SCENE_PHASE::SHUT_DOWN)
-	{
-		Delete();
-	}
 
 
 	DxLib_End();

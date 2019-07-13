@@ -47,6 +47,8 @@ private:
 
 	int toNext;
 
+
+
 	PlayerManager* m_player;           // プレイヤー
 
 	EnemyManager* m_enemy;             // エネミー

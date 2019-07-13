@@ -1,15 +1,11 @@
 #pragma once
 
-
 // エネミーの最大数
 #define ALL_ENEMY 5
-
+// PI
 #define PI 3.14f
 // 360度
 #define PI2 (3.141592654f*2)
-
-
-
 
 
 

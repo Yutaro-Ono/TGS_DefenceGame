@@ -69,6 +69,7 @@ void SceneInGame::Update(Input& input, Camera& camera, SceneResult& result, floa
 
 	// 当たり判定処理
 	HitChecker::CheckHit(*m_player, *m_enemy);
+
 	for (int i = 0; i < m_enemy->GetActiveEnemy(); i++)
 	{
 		HitChecker::CheckHitEnemy(*m_enemy, i);
@@ -80,25 +81,27 @@ void SceneInGame::Update(Input& input, Camera& camera, SceneResult& result, floa
 	m_enemy->Update(*m_player, deltaTime);
 
 	// 残り時間によってエネミーを追加
-	if (TIMER_INSTANCE.GetPrevTimer() - TIMER_INSTANCE.GetTimer() == 1 )
+	if (TIMER_INSTANCE.GetTimer() == 50 && m_popCount == 0)
 	{
-		if (TIMER_INSTANCE.GetTimer() == 50 && m_popCount == 0)
-		{
-			m_enemy->AddEnemy();
-			m_popCount = 1;
-		}
+		m_enemy->AddEnemy();
+		m_popCount = 1;
+	}
 
-		if (TIMER_INSTANCE.GetTimer() == 40 && m_popCount == 1)
-		{
-			m_enemy->AddEnemy();
-			m_popCount = 2;
-		}
+	if (TIMER_INSTANCE.GetTimer() == 40 && m_popCount == 1)
+	{
+		m_enemy->AddEnemy();
+		m_popCount = 2;
+	}
 
-		if (TIMER_INSTANCE.GetTimer() == 30 && m_popCount == 2)
-		{
-			m_enemy->AddEnemy();
-			m_popCount = 3;
-		}
+	if (TIMER_INSTANCE.GetTimer() == 30 && m_popCount == 2)
+	{
+		m_enemy->AddEnemy();
+		m_popCount = 3;
+	}
+	
+	if (TIMER_INSTANCE.GetPrevTimer() - TIMER_INSTANCE.GetTimer() >= 1 )
+	{
+		
 	}
 
 	TIMER_INSTANCE.Update();

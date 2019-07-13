@@ -34,7 +34,7 @@ void Timer::Update()
 	m_countTimer = m_limitTime - ((GetNowCount() / 1000) - m_startTimer);
 
 	// prevTimer‚ðXV
-	if ((m_countTimer - m_prevTimer) >= 1)
+	if ((m_prevTimer - m_countTimer) >= 1)
 	{
 		m_prevTimer = m_countTimer;
 	}

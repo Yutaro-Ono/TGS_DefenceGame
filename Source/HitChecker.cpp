@@ -37,7 +37,7 @@ void HitChecker::CheckHit(PlayerManager & playerManager, EnemyManager& enemyMana
 	while (isHit)
 	{
 		isHit = false;
-		for (int i = 0; i < ALL_ENEMY; i++)
+		for (int i = 0; i < enemyManager.GetActiveEnemy(); i++)
 		{
 			Enemy* enemy = enemyManager.GetEnemyPointer(i);
 			if (enemy != NULL)
@@ -96,7 +96,7 @@ void HitChecker::CheckHitEnemy(EnemyManager & enemyManager, int enemy_num)
 	while (isHit)
 	{
 		isHit = false;
-		for (int i = 0; i < ALL_ENEMY; i++)
+		for (int i = 0; i < enemyManager.GetActiveEnemy(); i++)
 		{
 			Enemy* other_enemy = enemyManager.GetEnemyPointer(i);
 			if (other_enemy != NULL && i != enemy_num)

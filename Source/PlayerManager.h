@@ -29,7 +29,7 @@ public:
 
 	void Delete();           // 削除処理
 
-	void Update(Input& input, float deltaTime);           // 更新処理
+	void Update(float deltaTime);           // 更新処理
 
 	void Draw();             // 描画処理
 

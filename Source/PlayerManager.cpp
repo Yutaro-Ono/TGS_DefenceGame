@@ -27,12 +27,12 @@ void PlayerManager::Initialize()
 {
 	// モデルを読み込み
 	m_sourceModelHandle = MV1LoadModel("Data/Model/Actor/Player/humster/model/humster.mv1");	
-	
+	// モデルのロード失敗時に表示
 	if (m_sourceModelHandle <= -1)
 	{
 		printfDx("Player : モデル読み込み失敗\n");
 	}
-
+	// プレイヤー生成
 	m_player = new Player(m_sourceModelHandle);
 }
 
@@ -42,11 +42,10 @@ void PlayerManager::Delete()
 }
 
 // 更新処理
-void PlayerManager::Update(Input& input, float deltaTime)
+void PlayerManager::Update(float deltaTime)
 {
-	m_player->Update(input, deltaTime);
-	// ポジションをセット
-	MV1SetPosition(m_sourceModelHandle, VGet(0.0f, 0.0f, 0.0f));
+	// プレイヤーの更新
+	m_player->Update(deltaTime);
 
 	// プレイヤーの体力が0になったら死亡状態にする
 	if (m_player->GetHitPoint() <= 0)
@@ -59,6 +58,4 @@ void PlayerManager::Update(Input& input, float deltaTime)
 void PlayerManager::Draw()
 {
 	m_player->Draw();
-
-
 }

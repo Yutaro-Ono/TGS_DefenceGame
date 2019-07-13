@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------+
 // エネミークラス                            
-//                                              Last Update : 2019/07/11
+//                                              Last Update : 2019/07/13
 //-----------------------------------------------------------------------+
 #include "Enemy.h"
 
@@ -13,6 +13,7 @@ Enemy::Enemy(int sourceModelHandle)
 	,m_hitRadius(10.0f)
 	,m_hitPlayer(false)
 {
+	// 各種初期化
 	m_position = VGet(0.0f, 0.0f, 0.0f);
 	m_direction = VGet(0.0f, 0.0f, 0.0f);
 	m_hitTime = 0;
@@ -49,9 +50,9 @@ void Enemy::Draw()
 void Enemy::SetEmergence(const VECTOR popPos)
 {
 	m_position = popPos;
-
+	// スケール(拡大率)の調整
 	MV1SetScale(m_modelHandle, SCALE_SIZE);
-
+	// 描画する座標を設定
 	MV1SetPosition(m_modelHandle, m_position);
 }
 
@@ -60,6 +61,7 @@ void Enemy::HitInterval()
 	// 当たり判定フラグが立ったら
 	if (m_hitPlayer == true)
 	{
+		// 1.5秒たつまで
 		if (GetNowCount() - m_hitTime >= 1500)
 		{
 			m_hitTime = 0.0f;
@@ -94,6 +96,7 @@ void Enemy::OnHitOtherEnemy(Enemy& other_enemy)
 // ターゲットの方向に移動
 void Enemy::GazeTarget(PlayerManager& playerManager, float deltaTime)
 {
+	// プレイヤーに当たった時はストップ
 	if(m_hitPlayer == false)
 	{
 		Actor* player = playerManager.GetPlayerPointer();

@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------+
 // エネミーマネージャークラス                              
-//                                              Last Update : 2019/07/03
+//                                              Last Update : 2019/07/13
 //-----------------------------------------------------------------------+
 #include "EnemyManager.h"
 #include "HitChecker.h"
@@ -16,7 +16,7 @@ void EnemyManager::Initialize()
 	// エネミーモデルの読み込み
 	m_enemySourceHandle = MV1LoadModel("Data/Model/Actor/Enemy/Low_poly_ufo_FBX/Low_poly_UFO.mv1");
 
-	// エネミーの生成(初期値)
+	// エネミーの生成(初期出現分のみ)
 	for (int i = 0; i < ALL_ENEMY; i++)
 	{
 		m_enemy.push_back(new Enemy(m_enemySourceHandle));
@@ -57,7 +57,7 @@ void EnemyManager::Update(PlayerManager& playerManager, float deltaTime)
 			m_enemy[i]->Update(deltaTime);
 			m_enemy[i]->GazeTarget(playerManager, deltaTime);
 		}
-
+		// ヒットインターバル計算
 		m_enemy[i]->HitInterval();
 	}
 }
@@ -71,10 +71,12 @@ void EnemyManager::Draw()
 	}
 }
 
-// エネミーの追加処理
+// エネミーをゲーム上に追加する処理
 void EnemyManager::AddEnemy()
 {
+	// エネミー追加
 	 m_enemy.emplace_back(new Enemy(m_enemySourceHandle));
+
 	// エネミーの座標を設定
 	m_enemy.back()->SetEmergence(VGet(0.0f, 0.0f, 0.0f));
 }

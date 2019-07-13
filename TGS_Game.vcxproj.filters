@@ -49,6 +49,9 @@
     <Filter Include="ソース ファイル\UI">
       <UniqueIdentifier>{368b5a80-4188-4920-a511-072e62658b63}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Sound">
+      <UniqueIdentifier>{a0e91eba-251d-40c8-b654-13314da1a561}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameSystem.cpp">
@@ -135,6 +138,9 @@
     <ClCompile Include="Source\Item.cpp">
       <Filter>ソース ファイル\Object</Filter>
     </ClCompile>
+    <ClCompile Include="SoundFX.cpp">
+      <Filter>ソース ファイル\Sound</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameSystem.h">
@@ -220,6 +226,9 @@
     </ClInclude>
     <ClInclude Include="Source\Item.h">
       <Filter>ソース ファイル\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundFX.h">
+      <Filter>ソース ファイル\Sound</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

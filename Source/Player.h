@@ -20,8 +20,7 @@ public:
 
 	void Delete() override {};
 
-	void Update(float deltaTime)override {};
-	void Update(Input& input, float deltaTime);                       // プレイヤー関連の更新
+	void Update(float deltaTime) override;                       // プレイヤー関連の更新
 	void HitWallUpdate(float deltaTime);                                             // 簡易的なフィールドの当たり判定
 
 

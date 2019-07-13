@@ -33,31 +33,31 @@ Player::~Player()
 }
 
 // 更新
-void Player::Update(Input& input, float deltaTime)
+void Player::Update(float deltaTime)
 {
 
 	//-----------------------------------------//
 	// 移動処理
 	//----------------------------------------//
-	if (input.GetKeyPad() & PAD_INPUT_UP)
+	if (INPUT_INSTANCE.GetKeyPad() & PAD_INPUT_UP)
 	{
 		m_position.z += MOVE_SPEED * deltaTime;
 		m_angle = 0.0f;
 	}
 
-	if (input.GetKeyPad() & PAD_INPUT_DOWN)
+	if (INPUT_INSTANCE.GetKeyPad() & PAD_INPUT_DOWN)
 	{
 		m_position.z -= MOVE_SPEED * deltaTime;
 		m_angle = -180.0f;
 	}
 
-	if (input.GetKeyPad() & PAD_INPUT_LEFT)
+	if (INPUT_INSTANCE.GetKeyPad() & PAD_INPUT_LEFT)
 	{
 		m_position.x -= MOVE_SPEED * deltaTime;
 		m_angle = -90.0f;
 	}
 
-	if (input.GetKeyPad() & PAD_INPUT_RIGHT)
+	if (INPUT_INSTANCE.GetKeyPad() & PAD_INPUT_RIGHT)
 	{
 		m_position.x += MOVE_SPEED * deltaTime;
 		m_angle = 90.0f;
@@ -66,7 +66,7 @@ void Player::Update(Input& input, float deltaTime)
 
 
 	// いずれかのキーが押されている時
-	if (input.GetKeyPad() != 0)
+	if (INPUT_INSTANCE.GetKeyPad() != 0)
 	{
 		if (m_moveFlag == false)
 		{

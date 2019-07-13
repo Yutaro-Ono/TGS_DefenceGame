@@ -21,7 +21,7 @@ void SceneResult::Delete()
 {
 }
 
-void SceneResult::Update(Input & input, Camera & camera, float deltaTime)
+void SceneResult::Update(Camera & camera, float deltaTime)
 {
 	if (CheckHitKey(KEY_INPUT_RETURN))
 	{

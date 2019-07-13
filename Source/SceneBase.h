@@ -20,7 +20,7 @@ public:
 
 	virtual void Delete() = 0;
 
-	virtual void Update(Input& input, Camera& camera, float deltaTime) = 0;
+	virtual void Update(Camera& camera, float deltaTime) = 0;
 
 	virtual void Draw() = 0;
 

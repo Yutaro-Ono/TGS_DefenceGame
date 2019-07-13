@@ -90,12 +90,12 @@ private:
 	int m_screenWidth;
 	int m_screenHeight;
 
-	bool m_fullScreen;         // フルスクリーンかどうか
-	bool m_isGameQuit;         // ゲームを終了するかどうか
+	bool m_fullScreen;                           // フルスクリーンかどうか
+	bool m_isGameQuit;                           // ゲームを終了するかどうか
 
-	int sceneNum;              // どのシーンか
+	int sceneNum;                                // どのシーンか
 
-	float m_deltaTime;         // 1フレームの更新時間
+	float m_deltaTime;                           // 1フレームの更新時間
 };
 
  #define GAME_INSTANCE GameSystem::GetInstance()

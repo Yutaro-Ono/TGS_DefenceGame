@@ -64,8 +64,6 @@ void GameSystem::Create()
 	// リザルト
 	m_resultScene = new SceneResult();
 	m_resultScene->Initialize();
-	// 入力
-	m_input = new Input();
 	// カメラ
 	m_camera = new Camera();
 }
@@ -140,7 +138,7 @@ void GameSystem::RunLoop()
 			break;
 
 		case SCENE_PHASE::START:
-			m_titleScene->Update(*m_input, *m_camera, m_deltaTime);
+			m_titleScene->Update(*m_camera, m_deltaTime);
 			sceneNum = m_titleScene->GetNextScene();
 			break;
 
@@ -150,12 +148,12 @@ void GameSystem::RunLoop()
 
 		case SCENE_PHASE::GAME:
 			// シーンの更新
-			m_inGameScene->Update(*m_input, *m_camera, *m_resultScene, m_deltaTime);
+			m_inGameScene->Update(*m_camera, *m_resultScene, m_deltaTime);
 			sceneNum = m_inGameScene->GetNextScene();
 			break;
 
 		case SCENE_PHASE::GAME_END:
-			m_resultScene->Update(*m_input, *m_camera, m_deltaTime);
+			m_resultScene->Update(*m_camera, m_deltaTime);
 			m_resultScene->Draw();
 			sceneNum = m_resultScene->GetNextScene();
 			break;
@@ -178,11 +176,8 @@ void GameSystem::RunLoop()
 void GameSystem::ShutDown()
 {
 	Delete();
-
-	delete (m_input);
 	delete (m_camera);
 	delete (m_inGameScene);
-
 
 	DxLib_End();
 }

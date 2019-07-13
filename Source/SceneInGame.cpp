@@ -1,6 +1,6 @@
 //----------------------------------------------------------------------+
 // inゲーム(ゲーム中)シーン                               
-//                                              Last Update : 2019/07/12
+//                                              Last Update : 2019/07/13
 //----------------------------------------------------------------------+
 #include "SceneInGame.h"
 #include "Timer.h"
@@ -53,16 +53,16 @@ void SceneInGame::Delete()
 }
 
 // オーバーライドしたアップデート(処理なし)
-void SceneInGame::Update(Input & input, Camera & camera, float deltaTime)
+void SceneInGame::Update(Camera & camera, float deltaTime)
 {
 }
 
 // 更新処理
-void SceneInGame::Update(Input& input, Camera& camera, SceneResult& result, float deltaTime)
+void SceneInGame::Update(Camera& camera, SceneResult& result, float deltaTime)
 {
 
 	// キーの押下状態チェック
-	input.KeyChecker();
+	INPUT_INSTANCE.KeyChecker();
 
 	// カメラの更新
 	camera.Update(*m_player);
@@ -76,7 +76,7 @@ void SceneInGame::Update(Input& input, Camera& camera, SceneResult& result, floa
 	}
 
 	// プレイヤーの更新
-	m_player->Update(input, deltaTime);
+	m_player->Update(deltaTime);
 	// エネミーの更新
 	m_enemy->Update(*m_player, deltaTime);
 
@@ -122,12 +122,8 @@ void SceneInGame::Update(Input& input, Camera& camera, SceneResult& result, floa
 		m_enemy->AddEnemy();
 		m_popCount = 7;
 	}
-	
-	if (TIMER_INSTANCE.GetPrevTimer() - TIMER_INSTANCE.GetTimer() >= 1 )
-	{
-		
-	}
 
+	// タイマーの更新
 	TIMER_INSTANCE.Update();
 
 	// 描画関数総合
@@ -137,22 +133,26 @@ void SceneInGame::Update(Input& input, Camera& camera, SceneResult& result, floa
 	SceneUpdate(result);
 }
 
-// シーンのアップデート(主に次シーンへの遷移処理)
+// シーンのアップデート(リザルトシーンへの遷移処理)
 void SceneInGame::SceneUpdate(SceneResult & result)
 {
 	// タイマーが0になったら、ゲームクリアとして次のシーンへ
 	if (TIMER_INSTANCE.GetTimer() <= 0)
 	{
-		result.SetClear(true);
-		toNext = 4;
+		result.SetClear(true);      // ゲームを無事クリアした
+		toNext = 4;                 // リザルトへ
 	}
 
 	// プレイヤーが死亡状態だったら、ゲームオーバーとして次のシーンへ
 	if (m_player->GetPlayerState() == m_player->PLAYER_STATE::DEAD)
 	{
-		result.SetClear(false);
-		toNext = 4;
+		result.SetClear(false);      // ゲームオーバーとなった
+		toNext = 4;                  // リザルトへ
 	}
+}
+
+void SceneInGame::PlaceEnemyByTime()
+{
 }
 
 // 描画処理

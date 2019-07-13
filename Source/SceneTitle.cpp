@@ -20,6 +20,7 @@ void SceneTitle::Initialize()
 {
 	// タイトルロゴ画像をロード、サイズ取得
 	m_titleLogoGraph = LoadGraph("Data/Interface/Title_Logo.png");
+	// タイトルロゴの画像サイズを取得
 	GetGraphSize(m_titleLogoGraph, &m_titleLogoW, &m_titleLogoH);
 }
 
@@ -27,16 +28,14 @@ void SceneTitle::Delete()
 {
 }
 
-void SceneTitle::Update(Input & input, Camera & camera, float deltaTime)
+void SceneTitle::Update(Camera & camera, float deltaTime)
 {
-
-	input.KeyChecker();
+	INPUT_INSTANCE.KeyChecker();
 
 	if (CheckHitKey(KEY_INPUT_SPACE))
 	{
 		toNext = 3;
 	}
-	
 	
 	Draw();
 }

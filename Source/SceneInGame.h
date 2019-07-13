@@ -1,7 +1,7 @@
 //----------------------------------------------------------------------+
 // inゲーム(ゲーム中)のシーンクラス
 //      : ゲーム中の総合的な処理をここで行う (シーン基底クラスを継承)
-//                                             Last Update : 2019/07/02
+//                                             Last Update : 2019/07/13
 //----------------------------------------------------------------------+
 #pragma once
 #include "DxLib.h"
@@ -29,32 +29,39 @@ public:
 	SceneInGame();                                // コンストラクタ
 	~SceneInGame();                               // デストラクタ
 
-	void Initialize() override;
+	void Initialize() override;                   // 各種初期化処理
 
-	void Delete() override;
+	void Delete() override;                       // 各種解放処理
 
-	void Update(Input& input, Camera& camera, float deltaTime)override;
+	void SceneUpdate(SceneResult& result);        // シーンの更新処理(主にリザルトシーンへの遷移処理)
 
-	void Update(Input& input, Camera& camera, SceneResult& result, float deltaTime);
+	void PlaceEnemyByTime();                      // 時間ごとにエネミーを追加配置する関数
 
-	void SceneUpdate(SceneResult& result);
+	void Draw()override;                          // 描画処理
 
-	void Draw()override;
+	// オーバーライドした更新処理(不要な関数のため掃除予定)
+	void Update(Camera& camera, float deltaTime)override;
 
-	const int& GetNextScene() const { return toNext; }             // 次のシーンのenumを返す
+	// 更新処理
+	void Update(Camera& camera, SceneResult& result, float deltaTime);
+
+	//--------------------------------------------------------------------------------+
+	// Getter/Setter 関連
+	//--------------------------------------------------------------------------------+
+	// 次のシーン(リザルト)へのenumを返す
+	const int& GetNextScene() const { return toNext; }
+
+
 
 private:
 
-	int toNext;
+	int toNext;                                    // 次シーンへのハンドル
 
-	int m_popCount;        // エネミーの出現カウンター
+	int m_popCount;                                // エネミーの出現カウンター
 
-	PlayerManager* m_player;           // プレイヤー
-
-	EnemyManager* m_enemy;             // エネミー
-
-	InGameUIManager* m_UI;             // UI
-
-	ObjectManager* m_obj;              // オブジェクト
+	PlayerManager* m_player;                       // プレイヤー
+	EnemyManager* m_enemy;                         // エネミー
+	InGameUIManager* m_UI;                         // UI
+	ObjectManager* m_obj;                          // オブジェクト
 
 };

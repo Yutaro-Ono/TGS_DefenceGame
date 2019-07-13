@@ -26,6 +26,7 @@ GameSystem::~GameSystem()
 	// 処理なし
 }
 
+// 各種初期化
 bool GameSystem::Initialize()
 {
 	if (DxLib_Init() == -1)		// ＤＸライブラリ初期化処理
@@ -33,6 +34,7 @@ bool GameSystem::Initialize()
 		return false;			// エラーが起きたら直ちに終了
 	}
 
+	// 画面を設定
 	SetScreen(1600, 900, true);
 
 	// 全画面表示フラグがオフだったらウィンドウモードにする
@@ -44,7 +46,7 @@ bool GameSystem::Initialize()
 	// 画面設定を更新
 	SetGraphMode(m_screenWidth, m_screenHeight, 32, 60);
 
-	SetFontSize(50);
+	SetFontSize(50);             // 使用するフォントサイズを設定
 
 	SetMouseDispFlag(TRUE);      // マウスカーソルの表示
 
@@ -53,6 +55,7 @@ bool GameSystem::Initialize()
 	return true;
 }
 
+// 生成処理
 void GameSystem::Create()
 {
 	// タイトル
@@ -78,12 +81,11 @@ void GameSystem::Delete()
 	delete (m_resultScene);
 }
 
-
+// 更新処理
 int GameSystem::Update()
 {
 	return 0;
 }
-
 
 // 移動関連の更新
 void GameSystem::UpdateMove()
@@ -94,7 +96,6 @@ void GameSystem::UpdateMove()
 void GameSystem::UpdateDraw()
 {
 }
-
 
 // エラー監視
 bool GameSystem::ProgramLoop()
@@ -166,6 +167,7 @@ void GameSystem::RunLoop()
 		default:
 			break;
 		}
+
 		ScreenFlip();
 	}
 

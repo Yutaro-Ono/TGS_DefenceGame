@@ -35,6 +35,7 @@ void Enemy::Update(float deltaTime)
 {
 	// 角度を設定
 	MV1SetRotationXYZ(m_modelHandle, VGet(0.0f, m_angle / 180.0f * DX_PI_F, 0.0f));
+	
 	// モデルの位置を設定
 	MV1SetPosition(m_modelHandle, m_position);
 }
@@ -50,8 +51,10 @@ void Enemy::Draw()
 void Enemy::SetEmergence(const VECTOR popPos)
 {
 	m_position = popPos;
+
 	// スケール(拡大率)の調整
 	MV1SetScale(m_modelHandle, SCALE_SIZE);
+	
 	// 描画する座標を設定
 	MV1SetPosition(m_modelHandle, m_position);
 }
@@ -93,8 +96,8 @@ void Enemy::OnHitOtherEnemy(Enemy& other_enemy)
 
 }
 
-// ターゲットの方向に移動
-void Enemy::GazeTarget(PlayerManager& playerManager, float deltaTime)
+// ターゲット(プレイヤー)の追跡処理
+void Enemy::ChaseTarget(PlayerManager& playerManager, float deltaTime)
 {
 	// プレイヤーに当たった時はストップ
 	if(m_hitPlayer == false)

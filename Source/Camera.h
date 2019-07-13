@@ -1,10 +1,9 @@
 //-----------------------------------------------------------+
 // カメラクラス
 //      : カメラの設定，更新を管理
-//                                  Last Update : 2019/07/01
+//                                  Last Update : 2019/07/13
 //-----------------------------------------------------------+
 #pragma once
-
 #include "DxLib.h"
 
 class PlayerManager;
@@ -12,15 +11,20 @@ class PlayerManager;
 class Camera final
 {
 public:
-	Camera();							// コンストラクタ.
-	~Camera();							// デストラクタ.
+	Camera();							// コンストラクタ
+	~Camera();							// デストラクタ
 
-	void Update(PlayerManager& playerManager);	// 更新.
+	// 更新
+	void Update(PlayerManager& playerManager);	
 
-	// ポジションのgetter/setter.
-	const VECTOR& GetPos() const { return pos; }
+	//---------------------------------------------------+
+	// Getter/Setter 関連
+	//---------------------------------------------------+
+	// ポジションのゲッター/セッター
+	const VECTOR& GetPos() const { return m_position; }
 
 private:
-	VECTOR	pos;			// ポジション.
+
+	VECTOR	m_position;			            // ポジション
 
 };

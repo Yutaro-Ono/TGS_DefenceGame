@@ -29,6 +29,7 @@ class GameSystem
 {
 public:
 
+	// ゲームシーン毎をフェーズとして定義
 	enum SCENE_PHASE
 	{
 		INIT = 0,
@@ -45,29 +46,30 @@ public:
 		static GameSystem system;
 		return system;
 	}
+	
+	~GameSystem();                               // デストラクタ
 
-	~GameSystem();            // デストラクタ
+	bool Initialize();                           // 各種初期化処理
 
-	bool Initialize();        // 各種初期化処理
+	void Create();                               // インスタンスなどの生成処理
 
-	void Create();            // インスタンスなどの生成処理
+	void Delete();                               // 削除関数
 
-	void Delete();            // 削除関数
+	void RunLoop();                              // ゲームループ
 
-	void RunLoop();           // ゲームループ
+	void ShutDown();                             // 終了処理
 
-	void ShutDown();          // 終了処理
-
-	// 画面設定のgetter
+	//--------------------------------------------------------------------------+
+	// Getter/Setter 関連
+	//--------------------------------------------------------------------------+
+	// 画面設定(縦横)のゲッター
 	const int& GetScreenWidth()const { return m_screenWidth; }
 	const int& GetScreenHeight()const { return m_screenHeight; }
-	// 画面設定のsetter
+	// 画面設定のセッター
 	void SetScreen(const int& scrWidth, const int& scrHeight, const bool& fullScreen);
 
 private:
-	GameSystem();                                // コンストラクタ   
-
-
+	GameSystem();                                // コンストラクタ
 
 	int Update();                                // Scene遷移更新用
 
@@ -81,9 +83,6 @@ private:
 	SceneTitle* m_titleScene;                    // タイトルシーン
 	SceneInGame* m_inGameScene;                  // インゲームシーン
 	SceneResult* m_resultScene;                  // リザルトシーン
-
-	Input* m_input;                              // 入力関連
-
 	Camera* m_camera;                            // カメラ
 
 	// ウィンドウ(Width : 幅, Height : 高さ)

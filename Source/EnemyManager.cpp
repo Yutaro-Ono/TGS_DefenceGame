@@ -55,7 +55,7 @@ void EnemyManager::Update(PlayerManager& playerManager, float deltaTime)
 		if (m_enemy[i]->GetHitPlayer() == false)
 		{
 			m_enemy[i]->Update(deltaTime);
-			m_enemy[i]->GazeTarget(playerManager, deltaTime);
+			m_enemy[i]->ChaseTarget(playerManager, deltaTime);
 		}
 		// ヒットインターバル計算
 		m_enemy[i]->HitInterval();

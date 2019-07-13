@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------+
 // プレイヤークラス                        
-//                                              Last Update : 2019/07/11
+//                                              Last Update : 2019/07/13
 //-----------------------------------------------------------------------+
 #include "Player.h"
 
@@ -16,6 +16,7 @@ Player::Player(const int sourceModelHandle)
 	:Actor(sourceModelHandle)
 	,m_hitRadius(3.0f)
 {
+	// 各種初期化
 	m_hitPoint = MAX_HP;
 	m_moveFlag = false;
 	m_hitEnemy = false;
@@ -63,8 +64,6 @@ void Player::Update(float deltaTime)
 		m_angle = 90.0f;
 	}
 
-
-
 	// いずれかのキーが押されている時
 	if (INPUT_INSTANCE.GetKeyPad() != 0)
 	{
@@ -77,8 +76,10 @@ void Player::Update(float deltaTime)
 	// 簡易的なフィールド当たり判定処理(フィールドからはみ出したら戻す)
 	HitWallUpdate(deltaTime);
 
+	// 移動モーション
 	MotionMove(deltaTime);
 
+	// 当たり判定のインターバル処理
 	HitInterval();
 
 	// モデルの拡大率セット
@@ -116,6 +117,7 @@ void Player::HitWallUpdate(float deltaTime)
 	}
 }
 
+// 描画処理
 void Player::Draw()
 {
 	// エネミーに当たった時の点滅処理
@@ -184,6 +186,5 @@ void Player::HitInterval()
 		{
 			m_hitEnemy = false;
 		}
-
 	}
 }

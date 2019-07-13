@@ -39,7 +39,7 @@ void SceneInGame::Initialize()
 	m_obj = new ObjectManager();
 	m_obj->Initialize();
 
-	TIMER_INSTANCE.Initialize();
+	m_setTimer = false;
 	m_popCount = 0;
 }
 
@@ -60,6 +60,12 @@ void SceneInGame::Update(Camera & camera, float deltaTime)
 // 更新処理
 void SceneInGame::Update(Camera& camera, SceneResult& result, float deltaTime)
 {
+
+	if (m_setTimer == false)
+	{
+		TIMER_INSTANCE.Initialize();
+		m_setTimer = true;
+	}
 
 	// キーの押下状態チェック
 	INPUT_INSTANCE.KeyChecker();

@@ -179,7 +179,6 @@ void GameSystem::ShutDown()
 {
 	Delete();
 	delete (m_camera);
-	delete (m_inGameScene);
 
 	DxLib_End();
 }

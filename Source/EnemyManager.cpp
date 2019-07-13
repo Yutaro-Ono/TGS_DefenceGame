@@ -27,7 +27,7 @@ void EnemyManager::Initialize()
 	{
 		// cos((360.0f - (360.0f / enemy.size()) * i) * PI / 180.0f)
 		//                                                   ”¼Œa
-		m_enemy[i]->SetEmergence(VGet(cos((360.0f - (360.0f / m_enemy.size()) * i) * PI / 180.0f) * 120.0f, 0, 40.0f + sin(((360.0f / m_enemy.size()) * i) * PI / 180.0f) * 120.0f));
+		m_enemy[i]->SetEmergence(VGet(cos((360.0f - (360.0f / m_enemy.size()) * i) * PI / 180.0f) * 500.0f, 0, 40.0f + sin(((360.0f / m_enemy.size()) * i) * PI / 180.0f) * 500.0f));
 	}
 }
 

@@ -5,7 +5,7 @@
 #include "Enemy.h"
 
 const VECTOR Enemy::SCALE_SIZE = { 0.3f, 0.3f, 0.3f };
-const float Enemy::MOVE_SPEED = 20.0f;
+const float Enemy::MOVE_SPEED = 93.0f;
 
 // コンストラクタ
 Enemy::Enemy(int sourceModelHandle)

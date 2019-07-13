@@ -86,17 +86,41 @@ void SceneInGame::Update(Input& input, Camera& camera, SceneResult& result, floa
 		m_enemy->AddEnemy();
 		m_popCount = 1;
 	}
-
-	if (TIMER_INSTANCE.GetTimer() == 40 && m_popCount == 1)
+	if (TIMER_INSTANCE.GetTimer() == 45 && m_popCount == 1)
 	{
 		m_enemy->AddEnemy();
 		m_popCount = 2;
 	}
-
-	if (TIMER_INSTANCE.GetTimer() == 30 && m_popCount == 2)
+	if (TIMER_INSTANCE.GetTimer() == 40 && m_popCount == 2)
 	{
 		m_enemy->AddEnemy();
+		m_enemy->AddEnemy();
+		m_enemy->AddEnemy();
 		m_popCount = 3;
+	}
+	if (TIMER_INSTANCE.GetTimer() == 35 && m_popCount == 3)
+	{
+		m_enemy->AddEnemy();
+		m_enemy->AddEnemy();
+		m_popCount = 4;
+	}
+	if (TIMER_INSTANCE.GetTimer() == 30 && m_popCount == 4)
+	{
+		m_enemy->AddEnemy();
+		m_enemy->AddEnemy();
+		m_popCount = 5;
+	}
+	if (TIMER_INSTANCE.GetTimer() == 25 && m_popCount == 5)
+	{
+		m_enemy->AddEnemy();
+		m_enemy->AddEnemy();
+		m_popCount = 6;
+	}
+	if (TIMER_INSTANCE.GetTimer() == 20 && m_popCount == 6)
+	{
+		m_enemy->AddEnemy();
+		m_enemy->AddEnemy();
+		m_popCount = 7;
 	}
 	
 	if (TIMER_INSTANCE.GetPrevTimer() - TIMER_INSTANCE.GetTimer() >= 1 )

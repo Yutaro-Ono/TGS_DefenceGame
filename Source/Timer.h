@@ -27,6 +27,8 @@ public:
 
 	const int& GetTimer() const { return m_countTimer; }     // カウントタイマーのゲッター
 
+	const int& GetLimitTime() const { return m_limitTime; }  // 制限時間のゲッター
+
 	const int& GetPrevTimer() const { return m_prevTimer; }  // 一秒前のタイマーゲッター
 
 private:

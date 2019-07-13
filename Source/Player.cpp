@@ -5,16 +5,16 @@
 #include "Player.h"
 
 const int Player::MAX_HP = 5;
-const float Player::MOVE_SPEED = 200.0f;
+const float Player::MOVE_SPEED = 80.0f;
 const float Player::INITIAL_POSITION_Y = 5.0f;
-const VECTOR Player::SCALE_SIZE = { 0.05f, 0.05f, 0.05f };
+const VECTOR Player::SCALE_SIZE = { 0.03f, 0.03f, 0.03f };
 const float Player::JUMP_POWER = 12.0f;
 const float Player::JUMP_SUB = 0.3f;
 
 // コンストラクタ(Actorの初期化子を付ける)
 Player::Player(const int sourceModelHandle)
 	:Actor(sourceModelHandle)
-	,m_hitRadius(8.0f)
+	,m_hitRadius(3.0f)
 {
 	m_hitPoint = MAX_HP;
 	m_moveFlag = false;

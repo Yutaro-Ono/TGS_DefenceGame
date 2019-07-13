@@ -40,6 +40,7 @@ void SceneInGame::Initialize()
 	m_obj->Initialize();
 
 	TIMER_INSTANCE.Initialize();
+	m_popCount = 0;
 }
 
 // 各種解放処理
@@ -78,14 +79,27 @@ void SceneInGame::Update(Input& input, Camera& camera, SceneResult& result, floa
 	// エネミーの更新
 	m_enemy->Update(*m_player, deltaTime);
 
-
-
 	// 残り時間によってエネミーを追加
-	if (TIMER_INSTANCE.GetTimer() != 60 && TIMER_INSTANCE.GetTimer() % 5 == 0)
+	if (TIMER_INSTANCE.GetPrevTimer() - TIMER_INSTANCE.GetTimer() == 1 )
 	{
-		m_enemy->AddEnemy();
-	}
+		if (TIMER_INSTANCE.GetTimer() == 50 && m_popCount == 0)
+		{
+			m_enemy->AddEnemy();
+			m_popCount = 1;
+		}
 
+		if (TIMER_INSTANCE.GetTimer() == 40 && m_popCount == 1)
+		{
+			m_enemy->AddEnemy();
+			m_popCount = 2;
+		}
+
+		if (TIMER_INSTANCE.GetTimer() == 30 && m_popCount == 2)
+		{
+			m_enemy->AddEnemy();
+			m_popCount = 3;
+		}
+	}
 
 	TIMER_INSTANCE.Update();
 

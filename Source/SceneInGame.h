@@ -47,7 +47,7 @@ private:
 
 	int toNext;
 
-
+	int m_popCount;        // エネミーの出現カウンター
 
 	PlayerManager* m_player;           // プレイヤー
 

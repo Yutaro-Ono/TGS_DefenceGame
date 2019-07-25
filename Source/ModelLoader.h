@@ -5,18 +5,50 @@
 ////-----------------------------------------------------------//
 //#pragma once
 //#include "DxLib.h"
+//#include <iostream>
+//#include <map>
+//
+//#define STR(var) #var    // 引数を文字列リテラルとして返すマクロ関数
 //
 //class ModelLoader final
 //{
 //public:
 //
 //	// モデルの種類と最大数
-//	enum Model
+//	enum MODEL
 //	{
-//		PLAYER = 0,
+//		PLAYER,
+//		ENEMY,
 //		FIELD,
-//		OBJECT,
+//		ITEM,
 //		MODEL_ALLNUM,
+//	};
+//
+//	// プレイヤーモデルの種類
+//	enum MODEL_PLAYER
+//	{
+//		MAIN,
+//	};
+//
+//	// エネミーモデルの種類
+//	enum MODEL_ENEMY
+//	{
+//		MAIN,
+//	};
+//
+//	// フィールドモデルの種類
+//	enum MODEL_FIELD
+//	{
+//		STAGE,
+//		SKYDOME,
+//
+//	};
+//
+//	// アイテムモデルの種類
+//	enum MODEL_ITEM
+//	{
+//		SCORE,
+//		CURE,
 //	};
 //
 //
@@ -25,9 +57,12 @@
 //
 //	void LoadModel();
 //
+//
 //	void DeleteModel();
 //
-//	int m_modelHandle[MODEL_ALLNUM];
+//	const int& GetModelNum(int in_num) { return MODEL::in_num; };
+//
+//	const char GetModel(const char* in_fileName, int in_num);
 //
 //public:
 //
@@ -40,9 +75,9 @@
 //
 //	~ModelLoader();
 //
-//	static int& GetModelHandle(Model model);    // 要求されたモデルの種類に応じてハンドルを返す
+//	std::map<std::string, int> m_modelHandle;
 //
-//
+//	static const std::string 
 //
 //};
 //

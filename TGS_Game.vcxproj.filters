@@ -52,6 +52,12 @@
     <Filter Include="ソース ファイル\Sound">
       <UniqueIdentifier>{a0e91eba-251d-40c8-b654-13314da1a561}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Item">
+      <UniqueIdentifier>{88e01236-f142-41c7-86c7-c3af08c87652}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Item\ItemManager">
+      <UniqueIdentifier>{d771efd3-eb3c-4117-834d-6e690886d5f9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameSystem.cpp">
@@ -135,11 +141,14 @@
     <ClCompile Include="Source\Timer.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Item.cpp">
-      <Filter>ソース ファイル\Object</Filter>
-    </ClCompile>
     <ClCompile Include="SoundFX.cpp">
       <Filter>ソース ファイル\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Item.cpp">
+      <Filter>ソース ファイル\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ItemManager.cpp">
+      <Filter>ソース ファイル\Item\ItemManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -224,11 +233,14 @@
     <ClInclude Include="Source\Timer.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Item.h">
-      <Filter>ソース ファイル\Object</Filter>
-    </ClInclude>
     <ClInclude Include="SoundFX.h">
       <Filter>ソース ファイル\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Item.h">
+      <Filter>ソース ファイル\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ItemManager.h">
+      <Filter>ソース ファイル\Item\ItemManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

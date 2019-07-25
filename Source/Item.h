@@ -10,6 +10,14 @@ class Item : public ObjectBase
 {
 public:
 
+	enum STATE_ITEM
+	{
+		NONE,
+		ACTIVE,
+		DEACTIVE,
+		DEAD
+	};
+
 	Item(int sourceModelHandle);
 	~Item();
 
@@ -17,7 +25,7 @@ public:
 
 	void Update();
 
-	void Draw() {};
+	void Draw();
 
 private:
 

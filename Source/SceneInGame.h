@@ -9,6 +9,7 @@
 #include "SceneResult.h"
 #include "PlayerManager.h"
 #include "EnemyManager.h"
+#include "ItemManager.h"
 #include "ObjectManager.h"
 #include "InGameUIManager.h"
 #include "Camera.h"
@@ -18,6 +19,7 @@ class SceneBase;
 class SceneResult;
 class PlayerManager;
 class EnemyManager;
+class ItemManager;
 class ObjectManager;
 class Player;
 class Camera;
@@ -63,6 +65,7 @@ private:
 
 	PlayerManager* m_player;                       // プレイヤー
 	EnemyManager* m_enemy;                         // エネミー
+	ItemManager* m_item;
 	InGameUIManager* m_UI;                         // UI
 	ObjectManager* m_obj;                          // オブジェクト
 

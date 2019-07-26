@@ -1,6 +1,6 @@
 #include "Item.h"
 
-const float Item::FALL_SPEED = 100.0f;
+const float Item::FALL_SPEED = 50.0f;
 
 // コンストラクタ
 Item::Item(int sourceModelHandle)
@@ -18,7 +18,7 @@ Item::~Item()
 void Item::Initialize()
 {
 	// 状態をアクティブに
-	m_state = (int)Item::POP;
+	m_state = Item::POP;
 
 	
 }
@@ -26,16 +26,22 @@ void Item::Initialize()
 // 更新処理
 void Item::Update()
 {
-
+	MV1SetPosition(m_modelHandle, m_position);
 }
 
 // 出現時落下処理
 void Item::Fall(float deltaTime)
 {
 	// 空中にある時に落下
-	if (m_position.y < 0)
+	if (m_position.y >= 1.0f)
 	{
-		m_position.y += FALL_SPEED * deltaTime;
+		m_position.y -= FALL_SPEED * deltaTime;
+	}
+
+	// 座標が一定値以下でアクティブに
+	if (m_position.y <= 1.0f)
+	{
+		m_state = Item::ACTIVE;
 	}
 
 }
@@ -43,4 +49,5 @@ void Item::Fall(float deltaTime)
 // 描画処理
 void Item::Draw()
 {
+	MV1DrawModel(m_modelHandle);
 }

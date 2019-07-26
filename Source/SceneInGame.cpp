@@ -15,6 +15,7 @@ SceneInGame::SceneInGame()
 {
 	m_player = NULL;
 	m_enemy = NULL;
+	m_item = NULL;
 	toNext = 3;
 }
 
@@ -32,6 +33,9 @@ void SceneInGame::Initialize()
 	// エネミーを生成，初期化
 	m_enemy = new EnemyManager();
 	m_enemy->Initialize();
+	// アイテムを生成
+	m_item = new ItemManager();
+	m_item->Initialize();
 	// UIを生成、初期化
 	m_UI = new InGameUIManager();
 	m_UI->Initialize();
@@ -46,8 +50,11 @@ void SceneInGame::Initialize()
 // 各種解放処理
 void SceneInGame::Delete()
 {
+	m_item->Delete();
+
 	delete (m_player);
 	delete (m_enemy);
+	delete (m_item);
 	delete (m_obj);
 	delete (m_UI);
 }
@@ -85,16 +92,21 @@ void SceneInGame::Update(Camera& camera, SceneResult& result, float deltaTime)
 	m_player->Update(deltaTime);
 	// エネミーの更新
 	m_enemy->Update(*m_player, deltaTime);
+	// アイテムの更新
+	m_item->Update(deltaTime);
 
-	// 残り時間によってエネミーを追加
+
+	// 残り時間によってエネミーとアイテムを追加
 	if (TIMER_INSTANCE.GetTimer() == 50 && m_popCount == 0)
 	{
 		m_enemy->AddEnemy();
+		m_item->AddItem();
 		m_popCount = 1;
 	}
 	if (TIMER_INSTANCE.GetTimer() == 45 && m_popCount == 1)
 	{
 		m_enemy->AddEnemy();
+		m_item->AddItem();
 		m_popCount = 2;
 	}
 	if (TIMER_INSTANCE.GetTimer() == 40 && m_popCount == 2)
@@ -102,30 +114,37 @@ void SceneInGame::Update(Camera& camera, SceneResult& result, float deltaTime)
 		m_enemy->AddEnemy();
 		m_enemy->AddEnemy();
 		m_enemy->AddEnemy();
+		m_item->AddItem();
+		m_item->AddItem();
 		m_popCount = 3;
 	}
 	if (TIMER_INSTANCE.GetTimer() == 35 && m_popCount == 3)
 	{
 		m_enemy->AddEnemy();
 		m_enemy->AddEnemy();
+		m_item->AddItem();
+		m_item->AddItem();
 		m_popCount = 4;
 	}
 	if (TIMER_INSTANCE.GetTimer() == 30 && m_popCount == 4)
 	{
 		m_enemy->AddEnemy();
 		m_enemy->AddEnemy();
+		m_item->AddItem();
 		m_popCount = 5;
 	}
 	if (TIMER_INSTANCE.GetTimer() == 25 && m_popCount == 5)
 	{
 		m_enemy->AddEnemy();
 		m_enemy->AddEnemy();
+		m_item->AddItem();
 		m_popCount = 6;
 	}
 	if (TIMER_INSTANCE.GetTimer() == 20 && m_popCount == 6)
 	{
 		m_enemy->AddEnemy();
 		m_enemy->AddEnemy();
+
 		m_popCount = 7;
 	}
 
@@ -165,9 +184,11 @@ void SceneInGame::PlaceEnemyByTime()
 void SceneInGame::Draw()
 {
 	// オブジェクトの描画
-	m_obj->Draw();
+	//m_obj->Draw();
 	// エネミーの描画
 	m_enemy->Draw();
+	// アイテムの描画
+	m_item->Draw();
 	// プレイヤーの描画
 	m_player->Draw();
 	// UIの描画

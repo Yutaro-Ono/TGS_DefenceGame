@@ -5,8 +5,11 @@
 //-----------------------------------------------------------+
 #pragma once
 #include "DxLib.h"
+#include <stdio.h>
 #include <vector>
 #include "Item.h"
+#include "SceneInGame.h"
+#include "Timer.h"
 
 class Item;
 
@@ -28,7 +31,7 @@ public:
 	void AddItem();
 
 	// ランダムな出現位置のゲッター
-	const VECTOR& GetRandomPosition() const;
+	const VECTOR& GetRandomPosition(const float sizeFieldX, const float sizeFieldZ) const;
 
 private:
 
@@ -38,6 +41,7 @@ private:
 
 	int m_numOnField;                        // 現在のフィールド上にあるアイテムの総数
 
+	static const int ITEM_START_NUM;         // 開始時のアイテムの数
 	static const int ITEM_MAX;               // アイテムの最大数
 
 };

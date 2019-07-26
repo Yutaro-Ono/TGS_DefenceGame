@@ -1,7 +1,7 @@
 //-----------------------------------------------------------+
 // アイテムクラス
 //      : アイテム
-//                                  Last Update : 2019/07/12
+//                                  Last Update : 2019/07/25
 //-----------------------------------------------------------+
 #pragma once
 #include "ObjectBase.h"
@@ -13,6 +13,7 @@ public:
 	enum STATE_ITEM
 	{
 		NONE,
+		POP,
 		ACTIVE,
 		DEACTIVE,
 		DEAD
@@ -21,13 +22,25 @@ public:
 	Item(int sourceModelHandle);
 	~Item();
 
-	void Initialize();
+	void Initialize();                // 各種初期化処理
 
-	void Update();
+	void Update();                    // 更新処理
+
+	void Fall(float deltaTime);       // 出現時の落下処理
 
 	void Draw();
 
+
+	// 状態のゲッター
+	const int& GetState() const { return m_state; }
+
+	// ポジションのセッター
+	void SetEmergence(const VECTOR popPos) { m_position = popPos; }
+
 private:
 
+	int m_state;       // ゲーム中の状態
 
+
+	static const float FALL_SPEED;       // 落下速度
 };

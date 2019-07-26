@@ -58,6 +58,9 @@
     <Filter Include="ソース ファイル\Item\ItemManager">
       <UniqueIdentifier>{d771efd3-eb3c-4117-834d-6e690886d5f9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Scene\InGame">
+      <UniqueIdentifier>{f4f4e35b-6f75-496e-a440-7db5319f55f1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameSystem.cpp">
@@ -92,9 +95,6 @@
     </ClCompile>
     <ClCompile Include="Source\SceneManager.cpp">
       <Filter>ソース ファイル\Scene\SceneManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\SceneInGame.cpp">
-      <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Source\HitChecker.cpp">
       <Filter>ソース ファイル</Filter>
@@ -150,6 +150,9 @@
     <ClCompile Include="Source\ItemManager.cpp">
       <Filter>ソース ファイル\Item\ItemManager</Filter>
     </ClCompile>
+    <ClCompile Include="Source\SceneInGame.cpp">
+      <Filter>ソース ファイル\Scene\InGame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameSystem.h">
@@ -181,9 +184,6 @@
     </ClInclude>
     <ClInclude Include="Source\SceneManager.h">
       <Filter>ソース ファイル\Scene\SceneManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SceneInGame.h">
-      <Filter>ソース ファイル\Scene</Filter>
     </ClInclude>
     <ClInclude Include="Source\HitChecker.h">
       <Filter>ソース ファイル</Filter>
@@ -241,6 +241,9 @@
     </ClInclude>
     <ClInclude Include="Source\ItemManager.h">
       <Filter>ソース ファイル\Item\ItemManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SceneInGame.h">
+      <Filter>ソース ファイル\Scene\InGame</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

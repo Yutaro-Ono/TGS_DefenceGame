@@ -10,7 +10,6 @@
 
 class Item;
 
-
 class ItemManager final
 {
 public:
@@ -22,11 +21,14 @@ public:
 
 	void Delete();
 
-	void Update();
+	void Update(float deltaTime);
 
 	void Draw();
 
 	void AddItem();
+
+	// ランダムな出現位置のゲッター
+	const VECTOR& GetRandomPosition() const;
 
 private:
 

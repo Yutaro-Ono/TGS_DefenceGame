@@ -155,22 +155,18 @@ void HitChecker::CheckHitItem(PlayerManager & playerManager, ItemManager & itemM
 
 				if (VSize(playerToObs) < player->GetRadius() + item->GetRadius())
 				{
-					// アイテムが有効状態であれば無効に
+
+					// プレイヤーの所持アイテムを加算し、アイテムが有効状態であれば無効に
 					if (item->GetState() == Item::ACTIVE)
 					{
-						item->SetDeactive();
+						printfDx("アイテムにHIT");
+						player->AddHoldItem();                // プレイヤーのアイテム所持数を加算
+						item->SetDeactive();                  // アイテムを無効状態に
 					}
 
-					// プレイヤーのアイテム所持数を加算
-					player->AddHoldItem();
 					
 					isHit = true;
 				}
-				//if (!(VSize(playerToObs) + 1.0f < player->GetRadius() + enemy->GetRadius()))
-				//{
-				//	enemy->SetHitPlayer(false);
-				//	break;
-				//}
 			}
 		}
 

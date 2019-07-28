@@ -149,7 +149,7 @@ void Player::MotionMove(float deltaTime)
 			m_moveFlag = false;
 		}
 	}
-
+	// ˆÚ“®‚µ‚Ä‚¢‚È‚¢‚Æ‚«Œ³‚ÌYÀ•W‚É–ß‚µAY²‰Á‘¬“x‚ğ‰Šú‰»
 	if (m_moveFlag == false)
 	{
 		m_position.y = INITIAL_POSITION_Y;

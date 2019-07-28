@@ -27,7 +27,7 @@ void ItemManager::Initialize()
 	// モデルのロード
 	m_sourceModelHandle = MV1LoadModel("Data/Model/Item/Score/20facestar.mv1");
 
-
+	// エラー表記
 	if (m_sourceModelHandle == -1)
 	{
 		printfDx("モデルロード失敗 : アイテム");
@@ -58,7 +58,7 @@ void ItemManager::Delete()
 	{
 		delete m_item.back();
 	}
-
+	// アイテムベクトルのクリア
 	m_item.clear();
 }
 
@@ -103,7 +103,7 @@ void ItemManager::AddItem()
 	// フィールド上のアイテムの総数が最大値より少なかったら
 	if (m_item.size() < ITEM_MAX)
 	{
-		// 追加
+		// 最後尾に生成
 		m_item.emplace_back(new Item(m_sourceModelHandle));
 		// 生成したアイテムの初期化
 		m_item.back()->Initialize();

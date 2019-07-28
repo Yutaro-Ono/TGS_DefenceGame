@@ -38,7 +38,8 @@ public:
 	const bool& GetHitEnemy() const { return m_hitEnemy; }       // エネミーと当たったかどうかのゲッター
 	const int& GetHitPoint() const { return m_hitPoint; }        // プレイヤー体力のゲッター
 
-	void AddHoldItem() { m_holdItemNum++; };                    // 所持しているアイテムの数を増やす
+	const int& GetHoldItem() const { return m_holdItemNum; }     // 所持しているアイテムの数を返す
+	void AddHoldItem() { m_holdItemNum++; };                     // 所持しているアイテムの数を増やす
 
 	void SetHitEnemy(bool hit_e) { m_hitEnemy = hit_e; }         // エネミーとの当たり判定フラグのセッター
 	void SetInterval(const int count) { m_hitTime = count; }     // インターバルのセッター

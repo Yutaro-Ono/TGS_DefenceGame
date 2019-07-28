@@ -103,7 +103,8 @@ void SceneInGame::Update(Camera& camera, SceneResult& result, float deltaTime)
 	m_enemy->Update(*m_player, deltaTime);
 	// アイテムの更新
 	m_item->Update(deltaTime);
-
+	// オブジェクトの更新
+	m_obj->Update();
 
 	// 残り時間によってエネミーとアイテムを追加
 	if (TIMER_INSTANCE.GetTimer() == 50 && m_popCount == 0)

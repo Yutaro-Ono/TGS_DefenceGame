@@ -115,7 +115,7 @@ void ItemManager::AddItem()
 // ランダムな出現位置のゲッター
 const VECTOR & ItemManager::GetRandomPosition(const float sizeFieldX, const float sizeFieldZ) const
 {
-	VECTOR randPos = VGet(0.0f, 20.0f, 0.0f);
+	VECTOR randPos = VGet(0.0f, 100.0f, 0.0f);
 
 	// X座標のポジション設定
 	randPos.x = GetRand(sizeFieldX);

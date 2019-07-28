@@ -95,7 +95,7 @@ void ObjectManager::Delete()
 // XVˆ—
 void ObjectManager::Update()
 {
-
+	m_fieldObj->Update();
 }
 
 // •`‰æˆ—

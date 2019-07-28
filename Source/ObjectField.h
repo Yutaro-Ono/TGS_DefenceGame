@@ -21,6 +21,8 @@ public:
 
 private:
 
+	VERTEX3D m_vertex[6];
+
 	static const VECTOR SCALE_SIZE;     // ƒ‚ƒfƒ‹‚ÌŠg‘å—¦
 
 };

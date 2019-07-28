@@ -14,9 +14,10 @@ public:
 
 	void Draw(Player& player);
 
-
 private:
 
+	// スコアアイテム所持数
+	int m_holdItem;
 
 	// 画像ハンドル関連
 	int hpGauge[5];

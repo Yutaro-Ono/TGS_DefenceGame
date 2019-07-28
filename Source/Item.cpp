@@ -45,7 +45,6 @@ void Item::Fall(float deltaTime)
 	{
 		m_state = Item::ACTIVE;
 	}
-
 }
 
 // •`‰æˆ—

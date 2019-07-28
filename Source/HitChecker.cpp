@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------+
 // 衝突判定クラス                    
-//                                              Last Update : 2019/07/13
+//                                              Last Update : 2019/07/28
 //-----------------------------------------------------------------------+
 #include "HitChecker.h"
 #include "Actor.h"
@@ -159,7 +159,7 @@ void HitChecker::CheckHitItem(PlayerManager & playerManager, ItemManager & itemM
 					// プレイヤーの所持アイテムを加算し、アイテムが有効状態であれば無効に
 					if (item->GetState() == Item::ACTIVE)
 					{
-						printfDx("アイテムにHIT");
+						// printfDx("アイテムにHIT");
 						player->AddHoldItem();                // プレイヤーのアイテム所持数を加算
 						item->SetDeactive();                  // アイテムを無効状態に
 					}

@@ -16,6 +16,17 @@ Player::Player(const int sourceModelHandle)
 	:Actor(sourceModelHandle)
 	,m_hitRadius(3.0f)
 {
+
+}
+
+// デストラクター
+Player::~Player()
+{
+	// 処理なし
+}
+
+void Player::Initialize()
+{
 	// 各種初期化
 	m_hitPoint = MAX_HP;
 	m_moveFlag = false;
@@ -25,12 +36,7 @@ Player::Player(const int sourceModelHandle)
 	m_angle = 0.0f;
 	m_hitTime = 0;
 	velocityY = JUMP_POWER;
-}
-
-// デストラクター
-Player::~Player()
-{
-	// 処理なし
+	m_holdItemNum = 0;
 }
 
 // 更新

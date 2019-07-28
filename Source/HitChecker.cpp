@@ -127,3 +127,58 @@ void HitChecker::CheckHitEnemy(EnemyManager & enemyManager, int enemy_num)
 		}
 	}
 }
+
+// プレイヤーとアイテム
+void HitChecker::CheckHitItem(PlayerManager & playerManager, ItemManager & itemManager)
+{
+	Player* player = playerManager.GetPlayerPointer();
+
+	// Z軸とX軸の二次元座標としてあたり判定を行う.
+	VECTOR yZeroPlayer = VGet(player->GetPosition().x, 0, player->GetPosition().z);
+	bool isHit = true;
+
+	// 一度でもぶつかったら位置が変わるのでヒット計算をしなおす.
+	while (isHit)
+	{
+		isHit = false;
+		for (int i = 0; i < itemManager.GetActiveItem(); i++)
+		{
+			Item* item = itemManager.GetItemPointer(i);
+			if (item != NULL)
+			{
+				VECTOR yZeroItem = VGet(item->GetPosition().x, 0, item->GetPosition().z);
+
+				// お互いのポジションと半径の距離が重なったら当たっていることになる.
+				VECTOR playerToObs = VSub(yZeroItem, yZeroPlayer);
+
+				// printfDx("playerToObs:%f %f %f\n", playerToObs.x, playerToObs.y, playerToObs.z);
+
+				if (VSize(playerToObs) < player->GetRadius() + item->GetRadius())
+				{
+					// アイテムが有効状態であれば無効に
+					if (item->GetState() == Item::ACTIVE)
+					{
+						item->SetDeactive();
+					}
+
+					// プレイヤーのアイテム所持数を加算
+					player->AddHoldItem();
+					
+					isHit = true;
+				}
+				//if (!(VSize(playerToObs) + 1.0f < player->GetRadius() + enemy->GetRadius()))
+				//{
+				//	enemy->SetHitPlayer(false);
+				//	break;
+				//}
+			}
+		}
+
+		// ヒットしてたら計算やりなおし+二次元座標としてのプレイヤーの位置を更新.
+		if (isHit)
+		{
+			yZeroPlayer = VGet(player->GetPosition().x, 0, player->GetPosition().z);
+			break;
+		}
+	}
+}

@@ -34,6 +34,8 @@ void PlayerManager::Initialize()
 	}
 	// プレイヤー生成
 	m_player = new Player(m_sourceModelHandle);
+	// 初期化
+	m_player->Initialize();
 }
 
 // 各種解放処理

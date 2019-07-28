@@ -67,7 +67,9 @@ void SceneInGame::Update(Camera & camera, float deltaTime)
 // 更新処理
 void SceneInGame::Update(Camera& camera, SceneResult& result, float deltaTime)
 {
-
+	//------------------------------------------------------+
+	// タイマーの初期化
+	//------------------------------------------------------+
 	if (m_setTimer == false)
 	{
 		TIMER_INSTANCE.Initialize();
@@ -80,15 +82,22 @@ void SceneInGame::Update(Camera& camera, SceneResult& result, float deltaTime)
 	// カメラの更新
 	camera.Update(*m_player);
 
+	//------------------------------------------------------+
 	// 当たり判定処理
+	//------------------------------------------------------+
+	// プレイヤーとエネミー
 	HitChecker::CheckHit(*m_player, *m_enemy);
-
+	// エネミー同士
 	for (int i = 0; i < m_enemy->GetActiveEnemy(); i++)
 	{
 		HitChecker::CheckHitEnemy(*m_enemy, i);
 	}
+	// プレイヤーとアイテム
+	HitChecker::CheckHitItem(*m_player, *m_item);
 
+	//------------------------------------------------------+
 	// プレイヤーの更新
+	//------------------------------------------------------+
 	m_player->Update(deltaTime);
 	// エネミーの更新
 	m_enemy->Update(*m_player, deltaTime);
@@ -187,8 +196,6 @@ void SceneInGame::Draw()
 	//m_obj->Draw();
 	// エネミーの描画
 	m_enemy->Draw();
-	// アイテムの描画
-	m_item->Draw();
 	// プレイヤーの描画
 	m_player->Draw();
 	// UIの描画

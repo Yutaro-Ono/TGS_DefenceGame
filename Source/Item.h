@@ -31,16 +31,20 @@ public:
 	void Draw();
 
 
+
 	// 状態のゲッター
 	const int& GetState() const { return m_state; }
 
 	// ポジションのセッター
 	void SetEmergence(const VECTOR popPos) { m_position = popPos; }
+	// Deactive(無効)状態へのセッター
+	void SetDeactive() { m_state = Item::DEACTIVE; }
 
 private:
 
-	int m_state;       // ゲーム中の状態
+	float m_hitRadius;         // 当たり判定用の半径
 
+	int m_state;               // ゲーム中の状態
 
 	static const float FALL_SPEED;       // 落下速度
 };

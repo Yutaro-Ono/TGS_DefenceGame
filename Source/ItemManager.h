@@ -26,20 +26,20 @@ public:
 
 	void Update(float deltaTime);
 
-	void Draw();
-
 	void AddItem();
 
 	// ランダムな出現位置のゲッター
 	const VECTOR& GetRandomPosition(const float sizeFieldX, const float sizeFieldZ) const;
+	// 生成したアイテムごとのポインタを返す
+	Item* GetItemPointer(int itemNum) { return m_item[itemNum]; }
+	// 生成したアイテムの総数を返す
+	const int& GetActiveItem()const { return (int)m_item.size(); }
 
 private:
 
 	int m_sourceModelHandle;                 // アイテムモデルのハンドル
 
 	std::vector<class Item*> m_item;         // アイテム
-
-	int m_numOnField;                        // 現在のフィールド上にあるアイテムの総数
 
 	static const int ITEM_START_NUM;         // 開始時のアイテムの数
 	static const int ITEM_MAX;               // アイテムの最大数

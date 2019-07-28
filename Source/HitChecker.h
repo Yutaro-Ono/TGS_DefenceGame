@@ -7,10 +7,12 @@
 #include "DxLib.h"
 #include "PlayerManager.h"
 #include "EnemyManager.h"
+#include "ItemManager.h"
 #include "ObjectManager.h"
 
 class PlayerManager;
 class EnemyManager;
+class ItemManager;
 class ObjectManager;
 
 class HitChecker final
@@ -23,5 +25,6 @@ public:
 	static void CheckHit(PlayerManager& playerManager, EnemyManager& enemyManager);
 	// エネミー同士の当たり判定チェッカー
 	static void CheckHitEnemy(EnemyManager& enemyManager, int enemy_num);
-
+	// プレイヤーとアイテムの当たり判定チェッカー
+	static void CheckHitItem(PlayerManager& playerManager, ItemManager& itemManager);
 };

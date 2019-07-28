@@ -1,29 +1,28 @@
 //-----------------------------------------------------------------------+
 // アイテムマネージャークラス           
-//                                              Last Update : 2019/07/25
+//                                              Last Update : 2019/07/28
 //-----------------------------------------------------------------------+
 #include "ItemManager.h"
 
-const int ItemManager::ITEM_START_NUM = 3;
-const int ItemManager::ITEM_MAX = 15;        // アイテムの最大数
+const int ItemManager::ITEM_START_NUM = 3;       // 開始時のアイテム総数
+const int ItemManager::ITEM_MAX = 15;            // アイテムの最大数
 
 // コンストラクタ
 ItemManager::ItemManager()
 	:m_sourceModelHandle(-1)
 {
-	
+	// 処理なし
 }
 
 // デストラクタ
 ItemManager::~ItemManager()
 {
+	// 処理なし
 }
 
 // 初期化処理
 void ItemManager::Initialize()
 {
-	// フィールド上のアイテム数を初期化
-	m_numOnField = 0;
 
 	// モデルのロード
 	m_sourceModelHandle = MV1LoadModel("Data/Model/Item/Score/20facestar.mv1");
@@ -38,7 +37,6 @@ void ItemManager::Initialize()
 	for (int i = 0; i < ITEM_START_NUM; i++)
 	{
 		m_item.emplace_back(new Item(m_sourceModelHandle));
-		m_numOnField++;
 	}
 
 	// アイテムの初期座標セット(ランダム)
@@ -75,23 +73,27 @@ void ItemManager::Update(float deltaTime)
 		{
 			item->Fall(deltaTime);
 			item->Update();
+			item->Draw();
 		}
 
 		// アクティブ状態ならアップデート
 		if (item->GetState() == Item::ACTIVE)
 		{
 			item->Update();
+			item->Draw();
 		}
-	}
-}
 
-// 描画処理
-void ItemManager::Draw()
-{
-	// アイテムの描画処理
-	for (auto item : m_item)
-	{
-		item->Draw();
+		// ディアクティブ状態なら
+		if (item->GetState() == Item::DEACTIVE)
+		{
+
+		}
+
+		// 回収されたら消す
+		if (item->GetState() == Item::DEAD)
+		{
+			m_item.clear();
+		}
 	}
 }
 
@@ -99,7 +101,7 @@ void ItemManager::Draw()
 void ItemManager::AddItem()
 {
 	// フィールド上のアイテムの総数が最大値より少なかったら
-	if (m_numOnField < ITEM_MAX)
+	if (m_item.size() < ITEM_MAX)
 	{
 		// 追加
 		m_item.emplace_back(new Item(m_sourceModelHandle));
@@ -107,11 +109,7 @@ void ItemManager::AddItem()
 		m_item.back()->Initialize();
 		// 出現位置の設定(ランダム)
 		m_item.back()->SetEmergence(GetRandomPosition(100.0f, 100.0f));
-
-		// 現在のアイテムの数を加算
-		m_numOnField++;
 	}
-
 }
 
 // ランダムな出現位置のゲッター

@@ -51,6 +51,7 @@ void SceneInGame::Initialize()
 void SceneInGame::Delete()
 {
 	m_item->Delete();
+	m_UI->Delete();
 
 	delete (m_player);
 	delete (m_enemy);
@@ -103,6 +104,8 @@ void SceneInGame::Update(Camera& camera, SceneResult& result, float deltaTime)
 	m_enemy->Update(*m_player, deltaTime);
 	// アイテムの更新
 	m_item->Update(deltaTime);
+	// UIの更新
+	m_UI->Update(*m_player->GetPlayerPointer());
 	// オブジェクトの更新
 	m_obj->Update();
 
@@ -194,7 +197,7 @@ void SceneInGame::PlaceEnemyByTime()
 void SceneInGame::Draw()
 {
 	// オブジェクトの描画
-	//m_obj->Draw();
+	m_obj->Draw();
 	// エネミーの描画
 	m_enemy->Draw();
 	// プレイヤーの描画

@@ -22,6 +22,8 @@ public:
 
 	void Initialize();                  // 各種初期化
 
+	void Delete();                      // 各種削除処理
+
 	void Update(Player& player);        // 更新処理
 
 	void Draw(Player& player);          // 描画処理

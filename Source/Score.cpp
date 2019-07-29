@@ -20,11 +20,20 @@ Score::~Score()
 void Score::Initialize()
 {
 	m_score = 0;
+	m_holdScore = 0;
+}
+
+void Score::Delete()
+{
+	
 }
 
 // 更新処理
-void Score::Update()
+void Score::Update(Player& player)
 {
+
+	m_holdScore = player.GetHoldItem();
+
 
 }
 
@@ -32,5 +41,5 @@ void Score::Update()
 void Score::Draw()
 {
 	// スコアの表示
-	DrawFormatString(0, 500, GetColor(255, 255, 255), "%d", m_score);
+	DrawFormatString(0, 500, GetColor(255, 255, 255), "%d", m_holdScore);
 }

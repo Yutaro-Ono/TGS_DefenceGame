@@ -14,7 +14,7 @@ InGameUIManager::InGameUIManager()
 // デストラクタ
 InGameUIManager::~InGameUIManager()
 {
-	delete (m_playerUI);
+
 }
 
 // 各種初期化処理
@@ -28,10 +28,16 @@ void InGameUIManager::Initialize()
 	m_score->Initialize();
 }
 
+void InGameUIManager::Delete()
+{
+	delete (m_playerUI);
+	delete (m_score);
+}
+
 // 更新処理
 void InGameUIManager::Update(Player & player)
 {
-	
+	m_score->Update(player);
 }
 
 // 描画処理

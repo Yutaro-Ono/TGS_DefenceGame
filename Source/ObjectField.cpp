@@ -71,5 +71,5 @@ void ObjectField::Initialize()
 void ObjectField::Update()
 {
 	// ‚Qƒ|ƒŠƒSƒ“‚Ì•`‰æ
-	DrawPolygon3D(m_vertex, 2, DX_NONE_GRAPH, FALSE);
+	// DrawPolygon3D(m_vertex, 2, DX_NONE_GRAPH, FALSE);
 }

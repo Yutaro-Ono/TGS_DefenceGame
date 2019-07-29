@@ -24,6 +24,7 @@ class ObjectManager;
 class Player;
 class Camera;
 
+
 class SceneInGame : public SceneBase
 {
 public:
@@ -68,5 +69,4 @@ private:
 	ItemManager* m_item;
 	InGameUIManager* m_UI;                         // UI
 	ObjectManager* m_obj;                          // オブジェクト
-
 };

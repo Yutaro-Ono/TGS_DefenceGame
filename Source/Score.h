@@ -16,7 +16,9 @@ public:
 
 	void Initialize();
 
-	void Update();
+	void Delete();
+
+	void Update(Player& player);
 
 	void Draw();
 
@@ -31,6 +33,8 @@ public:
 private:
 
 	int m_score;                        // スコア
+
+	int m_holdScore;                    // 所持中のスコア
 
 	static const int SCORE_POINT;       // スコアポイント(加算用)
 };

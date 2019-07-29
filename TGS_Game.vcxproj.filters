@@ -156,6 +156,9 @@
     <ClCompile Include="Source\Score.cpp">
       <Filter>ソース ファイル\UI</Filter>
     </ClCompile>
+    <ClCompile Include="Source\ObjectPod.cpp">
+      <Filter>ソース ファイル\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameSystem.h">
@@ -250,6 +253,9 @@
     </ClInclude>
     <ClInclude Include="Source\Score.h">
       <Filter>ソース ファイル\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ObjectPod.h">
+      <Filter>ソース ファイル\Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -39,6 +39,7 @@
     <ClCompile Include="Source\ObjectBase.cpp" />
     <ClCompile Include="Source\ObjectField.cpp" />
     <ClCompile Include="Source\ObjectManager.cpp" />
+    <ClCompile Include="Source\ObjectPod.cpp" />
     <ClCompile Include="Source\ObjectSky.cpp" />
     <ClCompile Include="Source\ObjectVisibleWall.cpp" />
     <ClCompile Include="Source\Player.cpp" />
@@ -72,6 +73,7 @@
     <ClInclude Include="Source\ObjectBase.h" />
     <ClInclude Include="Source\ObjectField.h" />
     <ClInclude Include="Source\ObjectManager.h" />
+    <ClInclude Include="Source\ObjectPod.h" />
     <ClInclude Include="Source\ObjectSky.h" />
     <ClInclude Include="Source\ObjectVisibleWall.h" />
     <ClInclude Include="Source\Player.h" />

@@ -86,6 +86,7 @@ void HitChecker::CheckHit(PlayerManager & playerManager, EnemyManager& enemyMana
 	}
 }
 
+// エネミー同士
 void HitChecker::CheckHitEnemy(EnemyManager & enemyManager, int enemy_num)
 {
 	Enemy* main_enemy = enemyManager.GetEnemyPointer(enemy_num);
@@ -155,7 +156,6 @@ void HitChecker::CheckHitItem(PlayerManager & playerManager, ItemManager & itemM
 
 				if (VSize(playerToObs) < player->GetRadius() + item->GetRadius())
 				{
-
 					// プレイヤーの所持アイテムを加算し、アイテムが有効状態であれば無効に
 					if (item->GetState() == Item::ACTIVE)
 					{
@@ -163,13 +163,52 @@ void HitChecker::CheckHitItem(PlayerManager & playerManager, ItemManager & itemM
 						player->AddHoldItem();                // プレイヤーのアイテム所持数を加算
 						item->SetDeactive();                  // アイテムを無効状態に
 					}
-
-					
 					isHit = true;
 				}
 			}
 		}
+		// ヒットしてたら計算やりなおし+二次元座標としてのプレイヤーの位置を更新.
+		if (isHit)
+		{
+			yZeroPlayer = VGet(player->GetPosition().x, 0, player->GetPosition().z);
+			break;
+		}
+	}
+}
 
+void HitChecker::CheckHitPod(PlayerManager & playerManager, ObjectManager & objectManager)
+{
+	Player* player = playerManager.GetPlayerPointer();
+
+	// Z軸とX軸の二次元座標としてあたり判定を行う.
+	VECTOR yZeroPlayer = VGet(player->GetPosition().x, 0, player->GetPosition().z);
+	bool isHit = true;
+
+	// 一度でもぶつかったら位置が変わるのでヒット計算をしなおす.
+	while (isHit)
+	{
+		isHit = false;
+		ObjectBase* podObj = objectManager.GetPodPointer();
+		if (podObj != NULL)
+		{
+			VECTOR yZeroItem = VGet(podObj->GetPosition().x, 0, podObj->GetPosition().z);
+
+			// お互いのポジションと半径の距離が重なったら当たっていることになる.
+			VECTOR playerToObs = VSub(yZeroItem, yZeroPlayer);
+
+			// printfDx("playerToObs:%f %f %f\n", playerToObs.x, playerToObs.y, playerToObs.z);
+
+			if (VSize(playerToObs) < player->GetRadius() + podObj->GetRadius())
+			{
+				// プレイヤーがアイテムを所持していた場合、アイテム回収フラグが立つ
+				if (player->GetHoldItem() > 0)
+				{
+					player->SetDeliveredItem(true);
+				}
+
+				isHit = true;
+			}
+		}
 		// ヒットしてたら計算やりなおし+二次元座標としてのプレイヤーの位置を更新.
 		if (isHit)
 		{

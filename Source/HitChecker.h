@@ -27,4 +27,6 @@ public:
 	static void CheckHitEnemy(EnemyManager& enemyManager, int enemy_num);
 	// プレイヤーとアイテムの当たり判定チェッカー
 	static void CheckHitItem(PlayerManager& playerManager, ItemManager& itemManager);
+	// プレイヤーと回収ポッドの当たり判定
+	static void CheckHitPod(PlayerManager& playerManager, ObjectManager& objectManager);
 };

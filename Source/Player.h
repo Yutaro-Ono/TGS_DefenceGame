@@ -34,16 +34,19 @@ public:
 	//----------------------------------------------------------------------------------------------------------------+
 	// Getter/Setter 関連
 	//----------------------------------------------------------------------------------------------------------------+
-	const float& GetRadius()const { return m_hitRadius; }        // 当たり判定半径のゲッター
-	const bool& GetHitEnemy() const { return m_hitEnemy; }       // エネミーと当たったかどうかのゲッター
-	const int& GetHitPoint() const { return m_hitPoint; }        // プレイヤー体力のゲッター
+	const float& GetRadius()const { return m_hitRadius; }                                 // 当たり判定半径のゲッター
+	const bool& GetHitEnemy() const { return m_hitEnemy; }                                // エネミーと当たったかどうかのゲッター
+	const int& GetHitPoint() const { return m_hitPoint; }                                 // プレイヤー体力のゲッター
+	// スコア関連
+	const int& GetHoldItem() const { return m_holdItemNum; }                              // 所持しているアイテムの数を返す
+	void AddHoldItem() { m_holdItemNum++; };                                              // 所持しているアイテムの数を増やす
+	void InitHoldItem() { m_holdItemNum = 0; }                                            // アイテム回収時、ホールドアイテムのリセット用
+	const bool& GetDeliveredItem() const { return m_deliverdItem; }                       // アイテムを回収したかどうかのゲッター
+	void SetDeliveredItem(bool in_delivered) { m_deliverdItem = in_delivered; }           // アイテムを回収したかどうかのセッター
 
-	const int& GetHoldItem() const { return m_holdItemNum; }     // 所持しているアイテムの数を返す
-	void AddHoldItem() { m_holdItemNum++; };                     // 所持しているアイテムの数を増やす
-
-	void SetHitEnemy(bool hit_e) { m_hitEnemy = hit_e; }         // エネミーとの当たり判定フラグのセッター
-	void SetInterval(const int count) { m_hitTime = count; }     // インターバルのセッター
-	void SetDamaged() { m_hitPoint -= 1; }                       // エネミー衝突時、体力減算処理
+	void SetHitEnemy(bool hit_e) { m_hitEnemy = hit_e; }                                  // エネミーとの当たり判定フラグのセッター
+	void SetInterval(const int count) { m_hitTime = count; }                              // インターバルのセッター
+	void SetDamaged() { m_hitPoint -= 1; }                                                // エネミー衝突時、体力減算処理
 
 
 
@@ -58,6 +61,7 @@ private:
 	bool m_moveFlag;                                             // 移動しているかどうかのフラグ
 
 	int m_holdItemNum;                                           // 現在所持しているスコアアイテムの数(スコアアイテムに衝突で加算、回収地点にもっていくと初期化しスコア加算)
+	bool m_deliverdItem;                                         // スコアを回収ポッドにもっていったかどうか
 
 	float m_hitRadius;                                           // 当たり判定用半径
 	bool m_hitEnemy;                                             // エネミーに当たったかどうかのフラグ
@@ -69,6 +73,5 @@ private:
 	static const int MAX_HP;                                     // 体力の最大値
 	static const float JUMP_POWER;                               // 移動モーションにおける小刻みジャンプの上方向パワー
 	static const float JUMP_SUB;                                 // 移動モーションにおける小刻みジャンプの減算処理に用いる
-	static const int SCORE_POINT;
 };
 

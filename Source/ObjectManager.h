@@ -24,6 +24,8 @@ public:
 
 	void Draw();
 
+	ObjectBase* GetPodPointer() { return m_podObj; }       // 回収ポッドのポインタゲッター
+
 private:
 
 	int m_fieldSourceHandle;                  // フィールドモデルのハンドル

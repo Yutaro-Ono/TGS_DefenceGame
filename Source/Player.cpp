@@ -37,6 +37,7 @@ void Player::Initialize()
 	m_hitTime = 0;
 	velocityY = JUMP_POWER;
 	m_holdItemNum = 0;
+	m_deliverdItem = false;
 }
 
 // çXêV

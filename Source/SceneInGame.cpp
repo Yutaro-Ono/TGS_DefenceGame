@@ -95,6 +95,8 @@ void SceneInGame::Update(Camera& camera, SceneResult& result, float deltaTime)
 	}
 	// プレイヤーとアイテム
 	HitChecker::CheckHitItem(*m_player, *m_item);
+	// プレイヤーと回収ポッド
+	HitChecker::CheckHitPod(*m_player, *m_obj);
 
 	//------------------------------------------------------+
 	// プレイヤーの更新

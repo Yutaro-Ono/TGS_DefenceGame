@@ -6,9 +6,11 @@
 #include "Actor.h"
 #include "Player.h"
 #include "PlayerManager.h"
+#include "Player.h"
 #include "EnemyManager.h"
 #include "ObjectManager.h"
 
+class Player;
 class EnemyManager;
 
 // コンストラクタ
@@ -156,8 +158,8 @@ void HitChecker::CheckHitItem(PlayerManager & playerManager, ItemManager & itemM
 
 				if (VSize(playerToObs) < player->GetRadius() + item->GetRadius())
 				{
-					// プレイヤーの所持アイテムを加算し、アイテムが有効状態であれば無効に
-					if (item->GetState() == Item::ACTIVE)
+					// アイテムがアクティブでなおかつプレイヤーの所持制限以下ならば、プレイヤーの所持アイテムを加算し、アイテムが有効状態であれば無効に
+					if (item->GetState() == Item::ACTIVE && player->GetHoldItem() < player->GetMaxHold())
 					{
 						// printfDx("アイテムにHIT");
 						player->AddHoldItem();                // プレイヤーのアイテム所持数を加算

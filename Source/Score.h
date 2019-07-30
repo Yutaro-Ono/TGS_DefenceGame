@@ -35,5 +35,5 @@ private:
 	int m_holdScore;                    // 所持中のスコア
 
 	static const int SCORE_POINT;       // スコアポイント(加算用)
-	static const double SCORE_MULTIPLE[5];                // 所持アイテム数によるスコア獲得倍率
+	static const double SCORE_MULTIPLE[6];                // 所持アイテム数によるスコア獲得倍率
 };

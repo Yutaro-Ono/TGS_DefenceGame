@@ -10,6 +10,7 @@ const float Player::INITIAL_POSITION_Y = 5.0f;
 const VECTOR Player::SCALE_SIZE = { 0.03f, 0.03f, 0.03f };
 const float Player::JUMP_POWER = 12.0f;
 const float Player::JUMP_SUB = 0.3f;
+const int Player::MAX_HOLDITEM = 100;
 
 // コンストラクタ(Actorの初期化子を付ける)
 Player::Player(const int sourceModelHandle)

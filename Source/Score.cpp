@@ -5,7 +5,7 @@
 #include "Score.h"
 
 const int Score::SCORE_POINT = 100;       // スコア加算用ポイント
-const double Score::SCORE_MULTIPLE[5] = { 1, 2, 3, 3.5, 4 };
+const double Score::SCORE_MULTIPLE[6] = { 1, 2, 3, 3.5, 4, 5 };
 
 Score::Score()
 {
@@ -32,14 +32,25 @@ void Score::Delete()
 // 更新処理
 void Score::Update(Player& player)
 {
+	double score_multiple = 0.0;
 	// プレイヤーの所持アイテムを追跡
 	m_holdScore = player.GetHoldItem();
 
 	// プレイヤーの回収フラグが立ったらスコアを加算し、フラグを折る
 	if (player.GetDeliveredItem() == true)
 	{
+		// アイテム所持数が一定以上なら倍率を最大に設定
+		if (player.GetHoldItem() >= 6)
+		{
+			score_multiple = SCORE_MULTIPLE[5];
+		}
+		else
+		{
+			score_multiple = SCORE_MULTIPLE[player.GetHoldItem() - 1];
+		}
+
 		// スコアに加算:プレイヤーの所持しているアイテム * 基本スコアポイント * 所持アイテム数による倍率
-		m_score += player.GetHoldItem() * SCORE_POINT * SCORE_MULTIPLE[player.GetHoldItem() - 1];
+		m_score += player.GetHoldItem() * SCORE_POINT * score_multiple;
 		player.InitHoldItem();
 		player.SetDeliveredItem(false);
 	}

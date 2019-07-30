@@ -115,13 +115,11 @@ void SceneInGame::Update(Camera& camera, SceneResult& result, float deltaTime)
 	if (TIMER_INSTANCE.GetTimer() == 50 && m_popCount == 0)
 	{
 		m_enemy->AddEnemy();
-		m_item->AddItem();
 		m_popCount = 1;
 	}
 	if (TIMER_INSTANCE.GetTimer() == 45 && m_popCount == 1)
 	{
 		m_enemy->AddEnemy();
-		m_item->AddItem();
 		m_popCount = 2;
 	}
 	if (TIMER_INSTANCE.GetTimer() == 40 && m_popCount == 2)
@@ -129,30 +127,24 @@ void SceneInGame::Update(Camera& camera, SceneResult& result, float deltaTime)
 		m_enemy->AddEnemy();
 		m_enemy->AddEnemy();
 		m_enemy->AddEnemy();
-		m_item->AddItem();
-		m_item->AddItem();
 		m_popCount = 3;
 	}
 	if (TIMER_INSTANCE.GetTimer() == 35 && m_popCount == 3)
 	{
 		m_enemy->AddEnemy();
 		m_enemy->AddEnemy();
-		m_item->AddItem();
-		m_item->AddItem();
 		m_popCount = 4;
 	}
 	if (TIMER_INSTANCE.GetTimer() == 30 && m_popCount == 4)
 	{
 		m_enemy->AddEnemy();
 		m_enemy->AddEnemy();
-		m_item->AddItem();
 		m_popCount = 5;
 	}
 	if (TIMER_INSTANCE.GetTimer() == 25 && m_popCount == 5)
 	{
 		m_enemy->AddEnemy();
 		m_enemy->AddEnemy();
-		m_item->AddItem();
 		m_popCount = 6;
 	}
 	if (TIMER_INSTANCE.GetTimer() == 20 && m_popCount == 6)
@@ -161,6 +153,11 @@ void SceneInGame::Update(Camera& camera, SceneResult& result, float deltaTime)
 		m_enemy->AddEnemy();
 
 		m_popCount = 7;
+	}
+
+	if (TIMER_INSTANCE.GetTimer() % 10 == 0)
+	{
+		m_item->AddItem();
 	}
 
 	// タイマーの更新

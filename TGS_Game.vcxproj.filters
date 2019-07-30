@@ -61,6 +61,15 @@
     <Filter Include="ソース ファイル\Scene\InGame">
       <UniqueIdentifier>{f4f4e35b-6f75-496e-a440-7db5319f55f1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Camera">
+      <UniqueIdentifier>{73203858-24d0-49af-94d0-14735f928da9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Input">
+      <UniqueIdentifier>{9fba6309-3c1f-47df-8bdf-ef8088e063ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Timer">
+      <UniqueIdentifier>{d5e639a2-9002-4724-841b-dcacc4e5d330}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameSystem.cpp">
@@ -72,9 +81,6 @@
     <ClCompile Include="Source\ModelLoader.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Camera.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Actor.cpp">
       <Filter>ソース ファイル\Actor</Filter>
     </ClCompile>
@@ -83,9 +89,6 @@
     </ClCompile>
     <ClCompile Include="Source\ObjectField.cpp">
       <Filter>ソース ファイル\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Input.cpp">
-      <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Source\PlayerManager.cpp">
       <Filter>ソース ファイル\Actor\Player\PlayerManager</Filter>
@@ -138,9 +141,6 @@
     <ClCompile Include="Source\SceneResult.cpp">
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Timer.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="SoundFX.cpp">
       <Filter>ソース ファイル\Sound</Filter>
     </ClCompile>
@@ -159,15 +159,21 @@
     <ClCompile Include="Source\ObjectPod.cpp">
       <Filter>ソース ファイル\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Camera.cpp">
+      <Filter>ソース ファイル\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Input.cpp">
+      <Filter>ソース ファイル\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Timer.cpp">
+      <Filter>ソース ファイル\Timer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameSystem.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Source\ModelLoader.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Camera.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Source\Actor.h">
@@ -178,9 +184,6 @@
     </ClInclude>
     <ClInclude Include="Source\ObjectField.h">
       <Filter>ソース ファイル\Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Input.h">
-      <Filter>ソース ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Source\PlayerManager.h">
       <Filter>ソース ファイル\Actor\Player\PlayerManager</Filter>
@@ -236,9 +239,6 @@
     <ClInclude Include="Source\SceneResult.h">
       <Filter>ソース ファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Timer.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="SoundFX.h">
       <Filter>ソース ファイル\Sound</Filter>
     </ClInclude>
@@ -256,6 +256,15 @@
     </ClInclude>
     <ClInclude Include="Source\ObjectPod.h">
       <Filter>ソース ファイル\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Camera.h">
+      <Filter>ソース ファイル\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Input.h">
+      <Filter>ソース ファイル\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Timer.h">
+      <Filter>ソース ファイル\Timer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

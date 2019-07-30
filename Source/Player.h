@@ -37,10 +37,12 @@ public:
 	const float& GetRadius()const { return m_hitRadius; }                                 // 当たり判定半径のゲッター
 	const bool& GetHitEnemy() const { return m_hitEnemy; }                                // エネミーと当たったかどうかのゲッター
 	const int& GetHitPoint() const { return m_hitPoint; }                                 // プレイヤー体力のゲッター
-	// スコア関連
+	// アイテム関連
 	const int& GetHoldItem() const { return m_holdItemNum; }                              // 所持しているアイテムの数を返す
+	const int& GetMaxHold() const { return Player::MAX_HOLDITEM; }                        // 所持できるアイテムの最大数を返す
 	void AddHoldItem() { m_holdItemNum++; };                                              // 所持しているアイテムの数を増やす
 	void InitHoldItem() { m_holdItemNum = 0; }                                            // アイテム回収時、ホールドアイテムのリセット用
+	// スコア関連
 	const bool& GetDeliveredItem() const { return m_deliverdItem; }                       // アイテムを回収したかどうかのゲッター
 	void SetDeliveredItem(bool in_delivered) { m_deliverdItem = in_delivered; }           // アイテムを回収したかどうかのセッター
 
@@ -73,5 +75,6 @@ private:
 	static const int MAX_HP;                                     // 体力の最大値
 	static const float JUMP_POWER;                               // 移動モーションにおける小刻みジャンプの上方向パワー
 	static const float JUMP_SUB;                                 // 移動モーションにおける小刻みジャンプの減算処理に用いる
+	static const int MAX_HOLDITEM;                               // アイテムの最大所持数
 };
 

@@ -32,6 +32,7 @@ void Score::Delete()
 // 更新処理
 void Score::Update(Player& player)
 {
+	// プレイヤーの所持アイテムを追跡
 	m_holdScore = player.GetHoldItem();
 
 	// プレイヤーの回収フラグが立ったらスコアを加算し、フラグを折る

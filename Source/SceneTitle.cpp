@@ -19,7 +19,7 @@ SceneTitle::~SceneTitle()
 void SceneTitle::Initialize()
 {
 	// タイトルロゴ画像をロード、サイズ取得
-	m_titleLogoGraph = LoadGraph("Data/Interface/Title_Logo.png");
+	m_titleLogoGraph = LoadGraph("Data/Interface/Title_Logo_2.png");
 	// タイトルロゴの画像サイズを取得
 	GetGraphSize(m_titleLogoGraph, &m_titleLogoW, &m_titleLogoH);
 }

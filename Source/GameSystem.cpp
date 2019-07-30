@@ -74,6 +74,7 @@ void GameSystem::Create()
 // íœ
 void GameSystem::Delete()
 {
+	// ƒCƒ“ƒQ[ƒ€‚Ì‰ð•úˆ—
 	m_inGameScene->Delete();
 
 	delete (m_titleScene);

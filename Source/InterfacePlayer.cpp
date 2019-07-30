@@ -1,5 +1,6 @@
 #include "InterfacePlayer.h"
 
+// 初期化処理
 void InterfacePlayer::Initialize()
 {
 	// 体力ゲージのロード(かったるいコード)
@@ -39,6 +40,7 @@ void InterfacePlayer::Update(Player & player)
 {
 }
 
+// 描画処理
 void InterfacePlayer::Draw(Player& player)
 {
 	for (int i = 0; i < player.GetHitPoint(); i++)

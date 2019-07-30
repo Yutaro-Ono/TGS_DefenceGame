@@ -1,4 +1,7 @@
-
+//-----------------------------------------------------------------------+
+// 回収ポッドクラス                 
+//                                              Last Update : 2019/07/30
+//-----------------------------------------------------------------------+
 #include "ObjectPod.h"
 
 const VECTOR ObjectPod::INITIAL_POSITION = VGet(0.0f, 0.0f, 0.0f);         // 開始時の初期位置
@@ -9,12 +12,13 @@ const VECTOR ObjectPod::SCALE_SIZE = VGet(5.0f, 5.0f, 5.0f);               // 拡
 ObjectPod::ObjectPod(int sourceModelHandle)
 	:ObjectBase(sourceModelHandle)
 {
-
+	// 処理なし
 }
 
 // デストラクタ
 ObjectPod::~ObjectPod()
 {
+	// 処理なし
 }
 
 // 各種初期化処理
@@ -22,7 +26,6 @@ void ObjectPod::Initialize()
 {
 	m_position = INITIAL_POSITION;
 	m_radius = HIT_RADIUS;
-
 }
 
 // 解放処理

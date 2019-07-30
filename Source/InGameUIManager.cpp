@@ -28,6 +28,7 @@ void InGameUIManager::Initialize()
 	m_score->Initialize();
 }
 
+// Šeí‰ğ•úˆ—
 void InGameUIManager::Delete()
 {
 	delete (m_playerUI);

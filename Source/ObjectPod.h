@@ -23,10 +23,7 @@ public:
 
 private:
 
-
-
-
-
 	static const VECTOR INITIAL_POSITION;              // ポッドの初期座標(固定値)
 	static const float HIT_RADIUS;                     // 当たり判定用の半径の定数
+	static const VECTOR SCALE_SIZE;                    // モデルの拡大率サイズ
 };

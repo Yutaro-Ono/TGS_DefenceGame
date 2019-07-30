@@ -9,12 +9,7 @@
 #include "Common.h"
 #include "ObjectBase.h"
 #include "ObjectField.h"
-#include "ObjectVisibleWall.h"
-
-#define OBJECT_NUM_W 5
-#define OBJECT_NUM_H 5
-
-class ObjectVisibleWall;
+#include "ObjectPod.h"
 
 class ObjectManager final
 {
@@ -33,13 +28,11 @@ private:
 
 	int m_fieldSourceHandle;                  // フィールドモデルのハンドル
 	int m_skySourceHandle;                    // スカイドームのハンドル
-									
-	//std::vector<ObjectVisibleWall*> m_visibleWall;        // 見えない壁
+	int m_podSourceHandle;                    // 回収ポッドのハンドル
 
 	ObjectBase* m_fieldObj;                   // フィールド
 	ObjectBase* m_skyObj;                     // 空
+	ObjectBase* m_podObj;                     // 回収ポッド
 
-	static const int WALL_NUM;
 
-	ObjectBase* m_object[OBJECT_NUM_H][OBJECT_NUM_W];
 };

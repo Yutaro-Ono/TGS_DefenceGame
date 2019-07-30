@@ -57,6 +57,7 @@ void ItemManager::Delete()
 	while (!m_item.empty())
 	{
 		delete m_item.back();
+		m_item.pop_back();
 	}
 	// アイテムベクトルのクリア
 	m_item.clear();

@@ -15,12 +15,11 @@ ObjectBase::~ObjectBase()
 	MV1DeleteModel(m_modelHandle);
 }
 
+// 描画処理
 void ObjectBase::Draw()
 {
+	// モデルを描画
 	MV1DrawModel(m_modelHandle);
-}
-
-const VECTOR & ObjectBase::GetPosition() const
-{
-	return m_position;
+	// 当たり判定確認用の球体
+	DrawSphere3D(m_position, m_radius, 5, 0x00ffff, 0x00ffff, FALSE);
 }

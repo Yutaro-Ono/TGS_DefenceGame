@@ -23,7 +23,7 @@ class ItemManager;
 class ObjectManager;
 class Player;
 class Camera;
-
+class Timer;
 
 class SceneInGame : public SceneBase
 {
@@ -64,9 +64,12 @@ private:
 
 	int m_popCount;                                // エネミーの出現カウンター
 
+	Timer* m_timer;                                  // タイマー
 	PlayerManager* m_player;                       // プレイヤー
 	EnemyManager* m_enemy;                         // エネミー
-	ItemManager* m_item;
+	ItemManager* m_item;                           // アイテム
 	InGameUIManager* m_UI;                         // UI
 	ObjectManager* m_obj;                          // オブジェクト
+
+	static const int MAX_GAME_TIME;     // ゲーム制限時間
 };

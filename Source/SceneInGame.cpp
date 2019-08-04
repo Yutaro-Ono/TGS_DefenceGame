@@ -7,8 +7,9 @@
 #include "PlayerManager.h"
 #include "Camera.h"
 #include "HitChecker.h"
-
 class Timer;
+
+const int SceneInGame::MAX_GAME_TIME = 60;
 
 // コンストラクタ
 SceneInGame::SceneInGame()
@@ -27,6 +28,9 @@ SceneInGame::~SceneInGame()
 // 各種初期化処理
 void SceneInGame::Initialize()
 {
+	// タイマーを生成、初期化
+	m_timer = new Timer();
+	m_timer->Initialize();
 	// プレイヤーを生成，初期化
 	m_player = new PlayerManager();
 	m_player->Initialize();
@@ -53,6 +57,7 @@ void SceneInGame::Delete()
 	m_item->Delete();
 	m_UI->Delete();
 
+	delete (m_timer);
 	delete (m_player);
 	delete (m_enemy);
 	delete (m_item);
@@ -73,7 +78,7 @@ void SceneInGame::Update(Camera& camera, SceneResult& result, float deltaTime)
 	//------------------------------------------------------+
 	if (m_setTimer == false)
 	{
-		TIMER_INSTANCE.Initialize();
+		m_timer->Initialize();
 		m_setTimer = true;
 	}
 
@@ -112,42 +117,42 @@ void SceneInGame::Update(Camera& camera, SceneResult& result, float deltaTime)
 	m_obj->Update();
 
 	// 残り時間によってエネミーとアイテムを追加
-	if (TIMER_INSTANCE.GetTimer() == 50 && m_popCount == 0)
+	if (m_timer->GetTimer() == 50 && m_popCount == 0)
 	{
 		m_enemy->AddEnemy();
 		m_popCount = 1;
 	}
-	if (TIMER_INSTANCE.GetTimer() == 45 && m_popCount == 1)
+	if (m_timer->GetTimer() == 45 && m_popCount == 1)
 	{
 		m_enemy->AddEnemy();
 		m_popCount = 2;
 	}
-	if (TIMER_INSTANCE.GetTimer() == 40 && m_popCount == 2)
+	if (m_timer->GetTimer() == 40 && m_popCount == 2)
 	{
 		m_enemy->AddEnemy();
 		m_enemy->AddEnemy();
 		m_enemy->AddEnemy();
 		m_popCount = 3;
 	}
-	if (TIMER_INSTANCE.GetTimer() == 35 && m_popCount == 3)
+	if (m_timer->GetTimer() == 35 && m_popCount == 3)
 	{
 		m_enemy->AddEnemy();
 		m_enemy->AddEnemy();
 		m_popCount = 4;
 	}
-	if (TIMER_INSTANCE.GetTimer() == 30 && m_popCount == 4)
+	if (m_timer->GetTimer() == 30 && m_popCount == 4)
 	{
 		m_enemy->AddEnemy();
 		m_enemy->AddEnemy();
 		m_popCount = 5;
 	}
-	if (TIMER_INSTANCE.GetTimer() == 25 && m_popCount == 5)
+	if (m_timer->GetTimer() == 25 && m_popCount == 5)
 	{
 		m_enemy->AddEnemy();
 		m_enemy->AddEnemy();
 		m_popCount = 6;
 	}
-	if (TIMER_INSTANCE.GetTimer() == 20 && m_popCount == 6)
+	if (m_timer->GetTimer() == 20 && m_popCount == 6)
 	{
 		m_enemy->AddEnemy();
 		m_enemy->AddEnemy();
@@ -155,13 +160,13 @@ void SceneInGame::Update(Camera& camera, SceneResult& result, float deltaTime)
 		m_popCount = 7;
 	}
 
-	if (TIMER_INSTANCE.GetTimer() % 10 == 0)
+	if (m_timer->GetTimer() % 10 == 0)
 	{
 		m_item->AddItem();
 	}
 
 	// タイマーの更新
-	TIMER_INSTANCE.Update();
+	m_timer->UpdateCountDown(MAX_GAME_TIME);
 
 	// 描画関数総合
 	Draw();
@@ -174,7 +179,7 @@ void SceneInGame::Update(Camera& camera, SceneResult& result, float deltaTime)
 void SceneInGame::SceneUpdate(SceneResult & result)
 {
 	// タイマーが0になったら、ゲームクリアとして次のシーンへ
-	if (TIMER_INSTANCE.GetTimer() <= 0)
+	if (m_timer->GetTimer() <= 0)
 	{
 		result.SetClear(true);      // ゲームを無事クリアした
 		toNext = 4;                 // リザルトへ
@@ -204,5 +209,5 @@ void SceneInGame::Draw()
 	// UIの描画
 	m_UI->Draw(*m_player->GetPlayerPointer());
 	// タイマーの描画
-	TIMER_INSTANCE.Draw();
+	m_timer->Draw();
 }

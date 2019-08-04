@@ -8,22 +8,18 @@ class Timer
 {
 public:
 
-	// シングルトン
-	static Timer& GetInstatnce()
-	{
-		static Timer timer;
-		return timer;
-	}
+	Timer();
+	~Timer();                                     // デストラクタ
 
-	~Timer();                 // デストラクタ
+	void Initialize();                            // タイマーの初期化
 
-	void Initialize();        // タイマーの初期化
+	void Delete();                                // タイマーの削除
 
-	void Delete();            // タイマーの削除
+	void CountUp();                               // タイマーの計測(カウントアップ式)
 
-	void Update();            // タイマーの計測
+	void UpdateCountDown(const int in_maxTime);         // タイマーの計測(カウントダウン)
 
-	void Draw();              // タイマーの描画
+	void Draw();                                  // タイマーの描画
 
 	const int& GetTimer() const { return m_countTimer; }     // カウントタイマーのゲッター
 
@@ -33,7 +29,7 @@ public:
 
 private:
 
-	Timer();
+
 
 	int m_countTimer;       // カウントダウン用タイマー
 
@@ -41,11 +37,6 @@ private:
 
 	int m_limitTime;        // 制限時間
 
-	int m_prevTimer;         // 前のタイマー
+	int m_prevTimer;        // 前のタイマー
 
-	
-
-	static const int LIMIT_TIME;     // 1ゲームの制限時間
 };
-
-#define TIMER_INSTANCE Timer::GetInstatnce()

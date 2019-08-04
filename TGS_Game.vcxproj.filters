@@ -70,7 +70,7 @@
     <Filter Include="ソース ファイル\Timer">
       <UniqueIdentifier>{d5e639a2-9002-4724-841b-dcacc4e5d330}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Direction">
+    <Filter Include="ソース ファイル\Director">
       <UniqueIdentifier>{a1f79c12-c8ec-4d82-b698-819e2de1d807}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -171,11 +171,14 @@
     <ClCompile Include="Source\SoundFX.cpp">
       <Filter>ソース ファイル\Sound</Filter>
     </ClCompile>
-    <ClCompile Include="Source\DirectionBase.cpp">
-      <Filter>ソース ファイル\Direction</Filter>
+    <ClCompile Include="Source\DirectorBase.cpp">
+      <Filter>ソース ファイル\Director</Filter>
     </ClCompile>
-    <ClCompile Include="Source\DirectionCountDown.cpp">
-      <Filter>ソース ファイル\Direction</Filter>
+    <ClCompile Include="Source\DirectorCountDown.cpp">
+      <Filter>ソース ファイル\Director</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DirectorScaler.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -275,11 +278,14 @@
     <ClInclude Include="Source\SoundFX.h">
       <Filter>ソース ファイル\Sound</Filter>
     </ClInclude>
-    <ClInclude Include="Source\DirectionBase.h">
-      <Filter>ソース ファイル\Direction</Filter>
+    <ClInclude Include="Source\DirectorBase.h">
+      <Filter>ソース ファイル\Director</Filter>
     </ClInclude>
-    <ClInclude Include="Source\DirectionCountDown.h">
-      <Filter>ソース ファイル\Direction</Filter>
+    <ClInclude Include="Source\DirectorCountDown.h">
+      <Filter>ソース ファイル\Director</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\DirectorScaler.h">
+      <Filter>ソース ファイル\Director</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -16,3 +16,9 @@ void DirectorScaler::Initialize()
 void DirectorScaler::Delete()
 {
 }
+
+void DirectorScaler::Zoomer(const int in_graphSize, const int in_maxSize, const int in_miniSize, float deltaTime)
+{
+	
+}
+

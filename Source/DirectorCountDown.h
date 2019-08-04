@@ -6,6 +6,9 @@
 #pragma once
 #include "DirectorBase.h"
 #include "Timer.h"
+#include "GameSystem.h"
+
+class Timer;
 
 class CountDown : public DirectorBase
 {
@@ -17,6 +20,8 @@ public:
 	void Initialize() override;       // 各種初期化処理
 
 	void Delete() override;           // 各種解放処理
+
+	void Draw();                      // 描画処理
 
 	void StartCountDown();            // ゲーム開始時のカウントダウン演出
 

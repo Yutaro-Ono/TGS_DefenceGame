@@ -12,6 +12,7 @@
 #include "ItemManager.h"
 #include "ObjectManager.h"
 #include "InGameUIManager.h"
+#include "DirectorCountDown.h"
 #include "Camera.h"
 #include "Timer.h"
 
@@ -22,6 +23,7 @@ class EnemyManager;
 class ItemManager;
 class ObjectManager;
 class Player;
+class CountDown;
 class Camera;
 class Timer;
 
@@ -31,6 +33,14 @@ public:
 
 	SceneInGame();                                // コンストラクタ
 	~SceneInGame();                               // デストラクタ
+
+	// ゲームシーン中のフェーズ
+	enum GAME_PHASE
+	{
+		START_COUNTDOWN,
+		IN_GAME,
+		INTERVAL,
+	};
 
 	void Initialize() override;                   // 各種初期化処理
 
@@ -70,6 +80,8 @@ private:
 	ItemManager* m_item;                           // アイテム
 	InGameUIManager* m_UI;                         // UI
 	ObjectManager* m_obj;                          // オブジェクト
+
+	CountDown* m_countdown;                     // カウントダウン演出
 
 	static const int MAX_GAME_TIME;     // ゲーム制限時間
 };

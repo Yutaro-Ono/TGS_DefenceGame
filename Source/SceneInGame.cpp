@@ -3,11 +3,7 @@
 //                                              Last Update : 2019/07/13
 //----------------------------------------------------------------------+
 #include "SceneInGame.h"
-#include "Timer.h"
-#include "PlayerManager.h"
-#include "Camera.h"
 #include "HitChecker.h"
-class Timer;
 
 const int SceneInGame::MAX_GAME_TIME = 60;
 
@@ -46,6 +42,9 @@ void SceneInGame::Initialize()
 	// オブジェクトを生成，初期化
 	m_obj = new ObjectManager();
 	m_obj->Initialize();
+	// カウントダウン演出の生成、初期化
+	m_countdown = new CountDown();
+	m_countdown->Initialize();
 
 	m_setTimer = false;
 	m_popCount = 0;
@@ -63,6 +62,7 @@ void SceneInGame::Delete()
 	delete (m_item);
 	delete (m_obj);
 	delete (m_UI);
+	delete (m_countdown);
 }
 
 // オーバーライドしたアップデート(処理なし)
@@ -73,6 +73,9 @@ void SceneInGame::Update(Camera & camera, float deltaTime)
 // 更新処理
 void SceneInGame::Update(Camera& camera, SceneResult& result, float deltaTime)
 {
+	// カウントダウン処理(本来はカウントダウン専用の状況を作らなければならない)
+	m_countdown->StartCountDown();
+
 	//------------------------------------------------------+
 	// タイマーの初期化
 	//------------------------------------------------------+

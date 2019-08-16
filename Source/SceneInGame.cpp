@@ -66,12 +66,12 @@ void SceneInGame::Delete()
 }
 
 // オーバーライドしたアップデート(処理なし)
-void SceneInGame::Update(Camera & camera, float deltaTime)
+void SceneInGame::Update(Camera & camera, Input& input, float deltaTime)
 {
 }
 
 // 更新処理
-void SceneInGame::Update(Camera& camera, SceneResult& result, float deltaTime)
+void SceneInGame::Update(Camera& camera, Input& input, SceneResult& result, float deltaTime)
 {
 	// カウントダウン処理(本来はカウントダウン専用の状況を作らなければならない)
 	m_countdown->StartCountDown();
@@ -84,9 +84,6 @@ void SceneInGame::Update(Camera& camera, SceneResult& result, float deltaTime)
 		m_timer->Initialize();
 		m_setTimer = true;
 	}
-
-	// キーの押下状態チェック
-	INPUT_INSTANCE.KeyChecker();
 
 	// カメラの更新
 	camera.Update(*m_player);
@@ -109,7 +106,7 @@ void SceneInGame::Update(Camera& camera, SceneResult& result, float deltaTime)
 	//------------------------------------------------------+
 	// プレイヤーの更新
 	//------------------------------------------------------+
-	m_player->Update(deltaTime);
+	m_player->Update(input, deltaTime);
 	// エネミーの更新
 	m_enemy->Update(*m_player, deltaTime);
 	// アイテムの更新

@@ -48,32 +48,94 @@ void Player::Update(float deltaTime)
 	//-----------------------------------------//
 	// 移動処理
 	//----------------------------------------//
-	if (INPUT_INSTANCE.GetKeyPad() & PAD_INPUT_UP)
-	{
-		m_position.z += MOVE_SPEED * deltaTime;
-		m_angle = 0.0f;
-	}
+	//if (INPUT_INSTANCE.GetKeyPad() & PAD_INPUT_UP)
+	//{
+	//	m_position.z += MOVE_SPEED * deltaTime;
+	//	m_angle = 0.0f;
+	//}
 
-	if (INPUT_INSTANCE.GetKeyPad() & PAD_INPUT_DOWN)
-	{
-		m_position.z -= MOVE_SPEED * deltaTime;
-		m_angle = -180.0f;
-	}
+	//if (INPUT_INSTANCE.GetKeyPad() & PAD_INPUT_DOWN)
+	//{
+	//	m_position.z -= MOVE_SPEED * deltaTime;
+	//	m_angle = -180.0f;
+	//}
 
-	if (INPUT_INSTANCE.GetKeyPad() & PAD_INPUT_LEFT)
+	//if (INPUT_INSTANCE.GetKeyPad() & PAD_INPUT_LEFT)
+	//{
+	//	m_position.x -= MOVE_SPEED * deltaTime;
+	//	m_angle = -90.0f;
+	//}
+
+	//if (INPUT_INSTANCE.GetKeyPad() & PAD_INPUT_RIGHT)
+	//{
+	//	m_position.x += MOVE_SPEED * deltaTime;
+	//	m_angle = 90.0f;
+	//}
+
+	//// いずれかのキーが押されている時
+	//if (INPUT_INSTANCE.GetKeyPad() != 0)
+	//{
+	//	if (m_moveFlag == false)
+	//	{
+	//		m_moveFlag = true;
+	//	}
+	//}
+
+	//// 簡易的なフィールド当たり判定処理(フィールドからはみ出したら戻す)
+	//HitWallUpdate(deltaTime);
+
+	//// 移動モーション
+	//MotionMove(deltaTime);
+
+	//// 当たり判定のインターバル処理
+	//HitInterval();
+
+	//// モデルの拡大率セット
+	//MV1SetScale(m_modelHandle, SCALE_SIZE);
+
+	//// 角度を設定
+	//MV1SetRotationXYZ(m_modelHandle, VGet(0.0f, m_angle / 180.0f * DX_PI_F, 0.0f));
+
+	//// ポジションをセット
+	//MV1SetPosition(m_modelHandle, m_position);
+
+	//printfDx("pos : x = %f\ny = %f\nz = %f\n", m_position.x, m_position.y, m_position.z);
+}
+
+void Player::Update(Input & input, float deltaTime)
+{
+	VECTOR prevPosition;
+	prevPosition = m_position;
+
+	//-----------------------------------------//
+    // 移動処理
+    //----------------------------------------//
+	if (input.GetLeftStickState(XINPUT_LSTICK::LSTICK_LEFT))
 	{
 		m_position.x -= MOVE_SPEED * deltaTime;
 		m_angle = -90.0f;
 	}
 
-	if (INPUT_INSTANCE.GetKeyPad() & PAD_INPUT_RIGHT)
+	if (input.GetLeftStickState(XINPUT_LSTICK::LSTICK_RIGHT))
 	{
 		m_position.x += MOVE_SPEED * deltaTime;
 		m_angle = 90.0f;
 	}
 
+	if (input.GetLeftStickState(XINPUT_LSTICK::LSTICK_UP))
+	{
+		m_position.z += MOVE_SPEED * deltaTime;
+		m_angle = 0.0f;
+	}
+
+	if (input.GetLeftStickState(XINPUT_LSTICK::LSTICK_DOWN))
+	{
+		m_position.z -= MOVE_SPEED * deltaTime;
+		m_angle = -180.0f;
+	}
+
 	// いずれかのキーが押されている時
-	if (INPUT_INSTANCE.GetKeyPad() != 0)
+	if (prevPosition.x != m_position.x || prevPosition.z != m_position.z)
 	{
 		if (m_moveFlag == false)
 		{
@@ -98,8 +160,6 @@ void Player::Update(float deltaTime)
 
 	// ポジションをセット
 	MV1SetPosition(m_modelHandle, m_position);
-
-	//printfDx("pos : x = %f\ny = %f\nz = %f\n", m_position.x, m_position.y, m_position.z);
 }
 
 

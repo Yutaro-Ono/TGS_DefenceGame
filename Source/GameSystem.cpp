@@ -69,6 +69,9 @@ void GameSystem::Create()
 	m_resultScene->Initialize();
 	// カメラ
 	m_camera = new Camera();
+	// 入力
+	m_input = new Input();
+
 }
 
 // 削除
@@ -131,6 +134,9 @@ void GameSystem::RunLoop()
 
 		ClearDrawScreen();
 
+		// 登録パッドの更新
+		m_input->ScanPadNum(PAD_NUM::PLAYER_1);
+
 		// シーンごとに更新処理
 		switch (sceneNum)
 		{
@@ -140,7 +146,7 @@ void GameSystem::RunLoop()
 			break;
 
 		case SCENE_PHASE::START:
-			m_titleScene->Update(*m_camera, m_deltaTime);
+			m_titleScene->Update(*m_camera, *m_input, m_deltaTime);
 			sceneNum = m_titleScene->GetNextScene();
 			break;
 
@@ -150,12 +156,12 @@ void GameSystem::RunLoop()
 
 		case SCENE_PHASE::GAME:
 			// シーンの更新
-			m_inGameScene->Update(*m_camera, *m_resultScene, m_deltaTime);
+			m_inGameScene->Update(*m_camera, *m_input, *m_resultScene, m_deltaTime);
 			sceneNum = m_inGameScene->GetNextScene();
 			break;
 
 		case SCENE_PHASE::GAME_END:
-			m_resultScene->Update(*m_camera, m_deltaTime);
+			m_resultScene->Update(*m_camera, *m_input, m_deltaTime);
 			m_resultScene->Draw();
 			sceneNum = m_resultScene->GetNextScene();
 			break;
@@ -180,6 +186,7 @@ void GameSystem::ShutDown()
 {
 	Delete();
 	delete (m_camera);
+	delete (m_input);
 
 	DxLib_End();
 }

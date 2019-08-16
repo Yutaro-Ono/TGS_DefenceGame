@@ -84,6 +84,7 @@ private:
 	SceneInGame* m_inGameScene;                  // インゲームシーン
 	SceneResult* m_resultScene;                  // リザルトシーン
 	Camera* m_camera;                            // カメラ
+	Input* m_input;                              // 入力
 
 	// ウィンドウ(Width : 幅, Height : 高さ)
 	int m_screenWidth;

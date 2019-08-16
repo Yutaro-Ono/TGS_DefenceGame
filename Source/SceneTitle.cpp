@@ -28,10 +28,15 @@ void SceneTitle::Delete()
 {
 }
 
-void SceneTitle::Update(Camera & camera, float deltaTime)
+void SceneTitle::Update(Camera & camera, Input& input, float deltaTime)
 {
-	INPUT_INSTANCE.KeyChecker();
+	// Aボタンで次のシーンへ
+	if (input.GetPushButtonState(XINPUT_BUTTON::XINPUT_START))
+	{
+		toNext = 3;
+	}
 
+	// スペースボタンで次のシーンへ
 	if (CheckHitKey(KEY_INPUT_SPACE))
 	{
 		toNext = 3;

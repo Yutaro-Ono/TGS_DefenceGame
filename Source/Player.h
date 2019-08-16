@@ -20,7 +20,9 @@ public:
 
 	void Delete() override {};                                   // 各種解放処理
 
-	void Update(float deltaTime) override;                       // プレイヤー関連の更新
+	void Update(float deltaTime) override;                       // プレイヤー関連の更新(オーバーライド)
+
+	void Update(Input& input, float deltaTime);                  // プレイヤー関連の更新
 
 	void Draw()override;                                         // プレイヤーの描画
 

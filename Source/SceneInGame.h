@@ -53,10 +53,10 @@ public:
 	void Draw()override;                          // 描画処理
 
 	// オーバーライドした更新処理(不要な関数のため掃除予定)
-	void Update(Camera& camera, float deltaTime)override;
+	void Update(Camera& camera, Input& input, float deltaTime)override;
 
 	// 更新処理
-	void Update(Camera& camera, SceneResult& result, float deltaTime);
+	void Update(Camera& camera, Input& input, SceneResult& result, float deltaTime);
 
 	//--------------------------------------------------------------------------------+
 	// Getter/Setter 関連

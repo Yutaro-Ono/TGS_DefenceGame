@@ -44,10 +44,10 @@ void PlayerManager::Delete()
 }
 
 // 更新処理
-void PlayerManager::Update(float deltaTime)
+void PlayerManager::Update(Input& input, float deltaTime)
 {
 	// プレイヤーの更新
-	m_player->Update(deltaTime);
+	m_player->Update(input, deltaTime);
 
 	// プレイヤーの体力が0になったら死亡状態にする
 	if (m_player->GetHitPoint() <= 0)

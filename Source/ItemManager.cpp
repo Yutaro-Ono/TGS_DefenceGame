@@ -5,7 +5,7 @@
 #include "ItemManager.h"
 
 const int ItemManager::ITEM_START_NUM = 3;       // 開始時のアイテム総数
-const int ItemManager::ITEM_MAX = 1500;            // アイテムの最大数
+const int ItemManager::ITEM_MAX = 150;            // アイテムの最大数
 
 // コンストラクタ
 ItemManager::ItemManager()

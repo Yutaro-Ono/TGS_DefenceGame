@@ -18,7 +18,7 @@ public:
 
 	void Delete() override;
 
-	void Update(Camera& camera, float deltaTime) override;
+	void Update(Camera& camera, Input& input, float deltaTime) override;
 
 	void Draw() override;
 

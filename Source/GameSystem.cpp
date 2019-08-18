@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------+
 #include <iostream>
 #include <Windows.h>
+#include "EffekseerForDXLib.h"
 #include "Camera.h"
 #include "GameSystem.h"
 #include "SceneTitle.h"
@@ -52,6 +53,13 @@ bool GameSystem::Initialize()
 
 	SetDrawScreen(DX_SCREEN_BACK);
 
+	// Effekseer関連
+	SetUseDirect3DVersion(DX_DIRECT3D_11);      // DirectX11を使用
+	SetChangeScreenModeGraphicsSystemResetFlag(FALSE);
+	Effekseer_SetGraphicsDeviceLostCallbackFunctions();
+	SetUseZBuffer3D(TRUE);
+	SetWriteZBuffer3D(TRUE);
+
 	return true;
 }
 
@@ -71,7 +79,6 @@ void GameSystem::Create()
 	m_camera = new Camera();
 	// 入力
 	m_input = new Input();
-
 }
 
 // 削除
@@ -134,6 +141,9 @@ void GameSystem::RunLoop()
 
 		ClearDrawScreen();
 
+		// Effekseer側のカメラとDxライブラリ側のカメラを同期する
+		Effekseer_Sync3DSetting();
+
 		// 登録パッドの更新
 		m_input->ScanPadNum(PAD_NUM::PLAYER_1);
 
@@ -175,6 +185,10 @@ void GameSystem::RunLoop()
 			break;
 		}
 
+		// Effekseerの更新と描画
+		UpdateEffekseer3D();
+		DrawEffekseer3D();
+
 		ScreenFlip();
 	}
 
@@ -187,7 +201,6 @@ void GameSystem::ShutDown()
 	Delete();
 	delete (m_camera);
 	delete (m_input);
-
 	DxLib_End();
 }
 

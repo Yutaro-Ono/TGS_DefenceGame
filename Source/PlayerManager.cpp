@@ -41,6 +41,7 @@ void PlayerManager::Initialize()
 // Šeí‰ğ•úˆ—
 void PlayerManager::Delete()
 {
+	m_player->Delete();
 }
 
 // XVˆ—

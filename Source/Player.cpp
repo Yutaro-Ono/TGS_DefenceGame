@@ -39,6 +39,15 @@ void Player::Initialize()
 	velocityY = JUMP_POWER;
 	m_holdItemNum = 0;
 	m_deliverdItem = false;
+	m_playEffect = false;
+
+	// エフェクトのロード
+	m_damageEffect = new PlayEffect("Data/Effects/Player_Damaged.efk");
+}
+
+void Player::Delete()
+{
+	delete (m_damageEffect);
 }
 
 // 更新
@@ -102,7 +111,7 @@ void Player::Update(float deltaTime)
 	//printfDx("pos : x = %f\ny = %f\nz = %f\n", m_position.x, m_position.y, m_position.z);
 }
 
-void Player::Update(Input & input, float deltaTime)
+void Player::Update(Input& input, float deltaTime)
 {
 	VECTOR prevPosition;
 	prevPosition = m_position;
@@ -151,6 +160,11 @@ void Player::Update(Input & input, float deltaTime)
 
 	// 当たり判定のインターバル処理
 	HitInterval();
+	// 当たり判定フラグが立ったらエフェクトを再生
+	if (m_hitEnemy == true)
+	{
+		m_damageEffect->PlayDamageEffect(m_position);
+	}
 
 	// モデルの拡大率セット
 	MV1SetScale(m_modelHandle, SCALE_SIZE);

@@ -24,6 +24,7 @@
     <ClCompile Include="Source\DirectorBase.cpp" />
     <ClCompile Include="Source\DirectorCountDown.cpp" />
     <ClCompile Include="Source\DirectorScaler.cpp" />
+    <ClCompile Include="Source\Effect.cpp" />
     <ClCompile Include="Source\Enemy.cpp" />
     <ClCompile Include="Source\EnemyManager.cpp" />
     <ClCompile Include="Source\GameSystem.cpp" />
@@ -62,6 +63,7 @@
     <ClInclude Include="Source\DirectorBase.h" />
     <ClInclude Include="Source\DirectorCountDown.h" />
     <ClInclude Include="Source\DirectorScaler.h" />
+    <ClInclude Include="Source\Effect.h" />
     <ClInclude Include="Source\Enemy.h" />
     <ClInclude Include="Source\EnemyManager.h" />
     <ClInclude Include="Source\GameSystem.h" />

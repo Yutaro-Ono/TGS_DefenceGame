@@ -6,8 +6,10 @@
 #pragma once
 #include "Actor.h"
 #include "Input.h"
+#include "Effect.h"
 #include "Enemy.h"
 
+class PlayEffect;
 class Enemy;
 
 class Player : public Actor
@@ -18,7 +20,7 @@ public:
 
 	void Initialize() override;                                  // 初期化処理
 
-	void Delete() override {};                                   // 各種解放処理
+	void Delete() override;                                   // 各種解放処理
 
 	void Update(float deltaTime) override;                       // プレイヤー関連の更新(オーバーライド)
 
@@ -70,6 +72,9 @@ private:
 	float m_hitRadius;                                           // 当たり判定用半径
 	bool m_hitEnemy;                                             // エネミーに当たったかどうかのフラグ
 	int m_hitTime;                                               // 当たり判定が連続で発生するまでのインターバル
+
+	bool m_playEffect;                                           // 現在エフェクトを再生しているかどうか
+	PlayEffect* m_damageEffect;                                  // ダメージエフェクト
 
 	static const float MOVE_SPEED;                               // プレイヤーの移動速度
 	static const float INITIAL_POSITION_Y;                       // PlayerのプレイヤーのY座標

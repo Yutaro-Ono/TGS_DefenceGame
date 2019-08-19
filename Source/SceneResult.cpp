@@ -15,16 +15,23 @@ SceneResult::~SceneResult()
 
 void SceneResult::Initialize()
 {
+	m_bgm = new SoundFX("Data/Music/BGM/Result/cyrf_dreamland.mp3");
 }
 
 void SceneResult::Delete()
 {
+	m_bgm->Delete();
+	delete (m_bgm);
 }
 
 void SceneResult::Update(Camera & camera, Input& input, float deltaTime)
 {
+	// BGMÄ¶
+	m_bgm->PlayLoopSoundFx();
+
 	if (CheckHitKey(KEY_INPUT_RETURN))
 	{
+		m_bgm->StopSoundFx();
 		toNext = 5;
 	}
 }

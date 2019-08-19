@@ -45,6 +45,9 @@ void SceneInGame::Initialize()
 	// カウントダウン演出の生成、初期化
 	m_countdown = new CountDown();
 	m_countdown->Initialize();
+	// BGMを生成
+	m_bgm = new SoundFX("Data/Music/BGM/Battle/cyrf_starcraft.mp3");
+	m_bgm->Initialize();
 
 	m_setTimer = false;
 	m_popCount = 0;
@@ -55,6 +58,7 @@ void SceneInGame::Delete()
 {
 	m_item->Delete();
 	m_UI->Delete();
+	m_bgm->Delete();
 
 	delete (m_timer);
 	delete (m_player);
@@ -63,6 +67,7 @@ void SceneInGame::Delete()
 	delete (m_obj);
 	delete (m_UI);
 	delete (m_countdown);
+	delete (m_bgm);
 }
 
 // オーバーライドしたアップデート(処理なし)
@@ -87,6 +92,9 @@ void SceneInGame::Update(Camera& camera, Input& input, SceneResult& result, floa
 
 	// カメラの更新
 	camera.Update(*m_player);
+
+	// BGMの再生
+	m_bgm->PlayLoopSoundFx();
 
 	//------------------------------------------------------+
 	// 当たり判定処理
@@ -181,6 +189,7 @@ void SceneInGame::SceneUpdate(SceneResult & result)
 	// タイマーが0になったら、ゲームクリアとして次のシーンへ
 	if (m_timer->GetTimer() <= 0)
 	{
+		m_bgm->StopSoundFx();       // BGMを止める
 		result.SetClear(true);      // ゲームを無事クリアした
 		toNext = 4;                 // リザルトへ
 	}
@@ -188,6 +197,7 @@ void SceneInGame::SceneUpdate(SceneResult & result)
 	// プレイヤーが死亡状態だったら、ゲームオーバーとして次のシーンへ
 	if (m_player->GetPlayerState() == m_player->PLAYER_STATE::DEAD)
 	{
+		m_bgm->StopSoundFx();        // BGMを止める
 		result.SetClear(false);      // ゲームオーバーとなった
 		toNext = 4;                  // リザルトへ
 	}

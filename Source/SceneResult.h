@@ -6,6 +6,9 @@
 #pragma once
 #include "SceneBase.h"
 #include "GameSystem.h"
+#include "SoundFX.h"
+
+class SoundFX;
 
 class SceneResult : public SceneBase
 {
@@ -35,5 +38,7 @@ private:
 	int m_score;
 
 	bool m_clear;           // ゲームクリアかゲームオーバーか判定するフラグ
+
+	SoundFX* m_bgm;         // BGM再生用
 
 };

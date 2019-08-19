@@ -5,7 +5,9 @@
 //-----------------------------------------------------------+
 #pragma once
 #include "SceneBase.h"
+#include "SoundFX.h"
 
+class SoundFX;
 
 class SceneTitle : public SceneBase
 {
@@ -35,5 +37,6 @@ private:
 	int m_titleLogoGraph;         // タイトルロゴの画像ハンドル
 	int m_titleLogoW, m_titleLogoH;
 
+	SoundFX* m_bgm;               // タイトルで再生するBGM
 
 };

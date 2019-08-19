@@ -7,9 +7,11 @@
 #include "Actor.h"
 #include "Input.h"
 #include "Effect.h"
+#include "SoundFX.h"
 #include "Enemy.h"
 
 class PlayEffect;
+class SoundFX;
 class Enemy;
 
 class Player : public Actor
@@ -44,11 +46,12 @@ public:
 	// アイテム関連
 	const int& GetHoldItem() const { return m_holdItemNum; }                              // 所持しているアイテムの数を返す
 	const int& GetMaxHold() const { return Player::MAX_HOLDITEM; }                        // 所持できるアイテムの最大数を返す
-	void AddHoldItem() { m_holdItemNum++; };                                              // 所持しているアイテムの数を増やす
+	void AddHoldItem() { m_getStarSound->PlaySoundFx();  m_holdItemNum++; };              // 所持しているアイテムの数を増やす
 	void InitHoldItem() { m_holdItemNum = 0; }                                            // アイテム回収時、ホールドアイテムのリセット用
 	// スコア関連
 	const bool& GetDeliveredItem() const { return m_deliverdItem; }                       // アイテムを回収したかどうかのゲッター
-	void SetDeliveredItem(bool in_delivered) { m_deliverdItem = in_delivered; }           // アイテムを回収したかどうかのセッター
+	void SetDeliveredItem(bool in_delivered) { m_deliverySound->PlaySoundFx(); 
+	                                           m_deliverdItem = in_delivered; }           // アイテムを回収したかどうかのセッター
 
 	void SetHitEnemy(bool hit_e) { m_hitEnemy = hit_e; }                                  // エネミーとの当たり判定フラグのセッター
 	void SetInterval(const int count) { m_hitTime = count; }                              // インターバルのセッター
@@ -75,6 +78,9 @@ private:
 
 	bool m_playEffect;                                           // 現在エフェクトを再生しているかどうか
 	PlayEffect* m_damageEffect;                                  // ダメージエフェクト
+	SoundFX* m_getStarSound;                                     // スターゲット時のサウンド
+	SoundFX* m_deliverySound;                                    // スター回収時のサウンド
+
 
 	static const float MOVE_SPEED;                               // プレイヤーの移動速度
 	static const float INITIAL_POSITION_Y;                       // PlayerのプレイヤーのY座標

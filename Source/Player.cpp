@@ -43,10 +43,18 @@ void Player::Initialize()
 
 	// エフェクトのロード
 	m_damageEffect = new PlayEffect("Data/Effects/Player_Damaged.efk");
+
+	// 効果音の生成
+	m_getStarSound = new SoundFX("Data/Music/SE/Player/Get/コイン6.mp3");
+	m_deliverySound = new SoundFX("Data/Music/SE/Player/Delivery/soundlogo6.mp3");
 }
 
 void Player::Delete()
 {
+	m_getStarSound->Delete();
+	m_deliverySound->Delete();
+	delete (m_getStarSound);
+	delete (m_deliverySound);
 	delete (m_damageEffect);
 }
 

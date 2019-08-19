@@ -84,8 +84,12 @@ void GameSystem::Create()
 // 削除
 void GameSystem::Delete()
 {
+	// タイトルの解放処理
+	m_titleScene->Delete();
 	// インゲームの解放処理
 	m_inGameScene->Delete();
+	// リザルトの解放処理
+	m_resultScene->Delete();
 
 	delete (m_titleScene);
 	delete (m_inGameScene);

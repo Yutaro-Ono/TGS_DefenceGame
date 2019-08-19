@@ -15,6 +15,7 @@
 #include "DirectorCountDown.h"
 #include "Camera.h"
 #include "Timer.h"
+#include "SoundFX.h"
 
 class SceneBase;
 class SceneResult;
@@ -26,6 +27,7 @@ class Player;
 class CountDown;
 class Camera;
 class Timer;
+class SoundFX;
 
 class SceneInGame : public SceneBase
 {
@@ -80,6 +82,7 @@ private:
 	ItemManager* m_item;                           // アイテム
 	InGameUIManager* m_UI;                         // UI
 	ObjectManager* m_obj;                          // オブジェクト
+	SoundFX* m_bgm;                                // BGM
 
 	CountDown* m_countdown;                     // カウントダウン演出
 

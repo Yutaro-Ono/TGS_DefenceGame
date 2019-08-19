@@ -31,7 +31,7 @@ public:
 	//	ALL_NUM,
 	//};
 
-	SoundFX();        // コンストラクタ
+	SoundFX(const char* in_fileName);        // コンストラクタ
 	~SoundFX();       // デストラクタ
 
 	void Initialize();     // 初期化処理
@@ -40,7 +40,13 @@ public:
 
 	void PlaySoundFx();    // サウンド再生関数
 
+	void PlayLoopSoundFx();  // サウンドのループ再生
+
+	void StopSoundFx();      // 再生中のサウンド停止
+
 private:
+
+	int m_sourceSoundHandle;
 
 	//int m_menuSFXHandle[SFX_MENU::ALL_NUM];         // メニューSEのハンドル
 

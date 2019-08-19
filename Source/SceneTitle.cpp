@@ -22,26 +22,38 @@ void SceneTitle::Initialize()
 	m_titleLogoGraph = LoadGraph("Data/Interface/Title_Logo_2.png");
 	// タイトルロゴの画像サイズを取得
 	GetGraphSize(m_titleLogoGraph, &m_titleLogoW, &m_titleLogoH);
+	// 再生するBGM
+	m_bgm = new SoundFX("Data/Music/BGM/Title/cyrf_lu_main_theme.mp3");
+
 }
 
 void SceneTitle::Delete()
 {
+	m_bgm->Delete();
+	delete (m_bgm);
 }
 
 void SceneTitle::Update(Camera & camera, Input& input, float deltaTime)
 {
+	// BGM再生
+	m_bgm->PlayLoopSoundFx();
+
 	// Aボタンで次のシーンへ
 	if (input.GetPushButtonState(XINPUT_BUTTON::XINPUT_START))
 	{
+		m_bgm->StopSoundFx();
 		toNext = 3;
 	}
 
 	// スペースボタンで次のシーンへ
 	if (CheckHitKey(KEY_INPUT_SPACE))
 	{
+		m_bgm->StopSoundFx();
 		toNext = 3;
 	}
 	
+
+	//描画
 	Draw();
 }
 

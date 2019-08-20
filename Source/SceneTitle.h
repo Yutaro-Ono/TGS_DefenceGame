@@ -36,7 +36,5 @@ private:
 	//--------------------------------------------------------------------------+
 	int m_titleLogoGraph;         // タイトルロゴの画像ハンドル
 	int m_titleLogoW, m_titleLogoH;
-
 	SoundFX* m_bgm;               // タイトルで再生するBGM
-
 };

@@ -3,6 +3,7 @@
 //                                              Last Update : 2019/07/13
 //-----------------------------------------------------------------------+
 #include "Player.h"
+#include <math.h>
 
 const int Player::MAX_HP = 5;
 const float Player::MOVE_SPEED = 80.0f;
@@ -150,7 +151,7 @@ void Player::Update(Input& input, float deltaTime)
 		m_position.z -= MOVE_SPEED * deltaTime;
 		m_angle = -180.0f;
 	}
-
+	
 	// いずれかのキーが押されている時
 	if (prevPosition.x != m_position.x || prevPosition.z != m_position.z)
 	{
@@ -177,11 +178,25 @@ void Player::Update(Input& input, float deltaTime)
 	// モデルの拡大率セット
 	MV1SetScale(m_modelHandle, SCALE_SIZE);
 
-	// 角度を設定
-	MV1SetRotationXYZ(m_modelHandle, VGet(0.0f, m_angle / 180.0f * DX_PI_F, 0.0f));
-
 	// ポジションをセット
 	MV1SetPosition(m_modelHandle, m_position);
+
+	int x, y;
+
+	GetJoypadAnalogInput(&x, &y, DX_INPUT_PAD1);
+	float angle = atan2((float)x / 1000.0f + DX_PI_F, (float)y / 1000.0f);
+	if (angle < 0)
+	{
+		angle += DX_PI_F * 2;
+	}
+
+	//// 角度を設定
+	//MV1SetRotationXYZ(m_modelHandle, VGet(0.0f, m_angle / 180.0f * DX_PI_F, 0.0f));
+	// 角度を設定
+	MV1SetRotationXYZ(m_modelHandle, VGet(0.0f, angle, 0.0f));
+	// 角度を設定
+	//MV1SetRotationXYZ(m_modelHandle, VGet(0.0f, angle, 0.0f));
+	//printfDx("%d", GetJoypadAnalogInput(DX_INPUT_PAD1, 0));
 }
 
 

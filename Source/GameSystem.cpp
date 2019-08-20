@@ -30,7 +30,7 @@ GameSystem::~GameSystem()
 // 各種初期化
 bool GameSystem::Initialize()
 {
-	if (DxLib_Init() == -1)		// ＤＸライブラリ初期化処理
+	if (DxLib_Init() == -1 || Effekseer_Init(8000) == -1)		// DXライブラリとEffekseerの初期化処理
 	{
 		return false;			// エラーが起きたら直ちに終了
 	}
@@ -188,10 +188,6 @@ void GameSystem::RunLoop()
 		default:
 			break;
 		}
-
-		// Effekseerの更新と描画
-		UpdateEffekseer3D();
-		DrawEffekseer3D();
 
 		ScreenFlip();
 	}

@@ -24,7 +24,6 @@ void SceneTitle::Initialize()
 	GetGraphSize(m_titleLogoGraph, &m_titleLogoW, &m_titleLogoH);
 	// çƒê∂Ç∑ÇÈBGM
 	m_bgm = new SoundFX("Data/Music/BGM/Title/cyrf_lu_main_theme.mp3");
-
 }
 
 void SceneTitle::Delete()

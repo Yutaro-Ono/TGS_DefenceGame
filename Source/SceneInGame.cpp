@@ -49,6 +49,7 @@ void SceneInGame::Initialize()
 	m_bgm = new SoundFX("Data/Music/BGM/Battle/cyrf_starcraft.mp3");
 	m_bgm->Initialize();
 
+
 	m_setTimer = false;
 	m_popCount = 0;
 }

@@ -3,3 +3,6 @@
 ・当たり判定をラフに
 ・遊びは2D、見た目は3D
 ・見た目のブラッシュアップに時間をかける
+
+DxLib隠し関数
+https://densanken.com/wiki/index.php?dx%A5%E9%A5%A4%A5%D6%A5%E9%A5%EA%B1%A3%A4%B7%B4%D8%BF%F4%A4%CE%A5%DA%A1%BC%A5%B8#dc639a15

@@ -32,4 +32,8 @@ void PlayEffect::PlayDamageEffect(const VECTOR in_playPos)
 
 	// エフェクトを再生する座標を指定
 	SetPosPlayingEffekseer3DEffect(m_damageEffectHandle, in_playPos.x, in_playPos.y, in_playPos.z);
+
+	// Effekseerの更新と描画
+	UpdateEffekseer3D();
+	DrawEffekseer3D();
 }

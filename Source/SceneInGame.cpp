@@ -180,6 +180,11 @@ void SceneInGame::Update(Camera& camera, Input& input, SceneResult& result, floa
 	// 描画関数総合
 	Draw();
 
+	// Effekseerの更新
+	UpdateEffekseer3D();
+	// Effekseerの描画
+	DrawEffekseer3D();
+
 	// シーンアップデート
 	SceneUpdate(result);
 }

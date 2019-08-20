@@ -31,7 +31,7 @@ GameSystem::~GameSystem()
 bool GameSystem::Initialize()
 {
 	// 画面を設定
-	SetScreen(1600, 900, true);
+	SetScreen(1920, 1080, true);
 
 	// 全画面表示フラグがオフだったらウィンドウモードにする
 	if (m_fullScreen)
@@ -196,10 +196,7 @@ void GameSystem::RunLoop()
 		default:
 			break;
 		}
-		// Effekseerの更新
-		UpdateEffekseer3D();
-		// Effekseerの描画
-		DrawEffekseer3D();
+
 
 		ScreenFlip();
 	}

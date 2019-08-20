@@ -26,11 +26,16 @@ void ObjectPod::Initialize()
 {
 	m_position = INITIAL_POSITION;
 	m_radius = HIT_RADIUS;
+	m_effect = new PlayEffect("Data/Effects/ItemPod_PodEffect.efk");
+	m_effect->Initialize();
 }
 
 // 解放処理
 void ObjectPod::Delete()
 {
+	m_effect->Delete();
+
+	delete (m_effect);
 }
 
 // 更新処理
@@ -40,4 +45,12 @@ void ObjectPod::Update()
 	MV1SetScale(m_modelHandle, SCALE_SIZE);
 	// モデルの座標セット
 	MV1SetPosition(m_modelHandle, m_position);
+
+	// ポッドエフェクトの再生
+	if (m_effect->GetNowPlaying() == -1)
+	{
+		m_effect->PlayEffekseer(GetPosition());
+		m_effect->SetEffectScale(12.0f, 12.0f, 12.0f);
+	}
+
 }

@@ -73,11 +73,4 @@ void ObjectField::Update()
 	// ‚Qƒ|ƒŠƒSƒ“‚Ì•`‰æ
 	// DrawPolygon3D(m_vertex, 2, DX_NONE_GRAPH, FALSE);
 
-	for (int i = 0; i < 5; i++)
-	{
-		for (int j = 0; j < 5; j++)
-		{
-			DrawCube3D(VGet((float)i * 10.0f, 0.0f, (float)j * 10.0f), VGet((float)i * 15.0f, 0.0f, (float)j * 15.0f), GetColor(0, 0, 255), GetColor(0, 0, 255), TRUE);
-		}
-	}
 }

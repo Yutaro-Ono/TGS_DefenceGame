@@ -49,7 +49,7 @@ public:
 	const int& GetHoldItem() const { return m_holdItemNum; }                              // 所持しているアイテムの数を返す
 	const int& GetMaxHold() const { return Player::MAX_HOLDITEM; }                        // 所持できるアイテムの最大数を返す
 	void AddHoldItem() { m_getStarSound->PlaySoundFx(); m_getEffect->PlayEffekseer(GetPosition()); m_holdItemNum++; };              // 所持しているアイテムの数を増やす
-	void InitHoldItem() { m_holdItemNum = 0; }                                            // アイテム回収時、ホールドアイテムのリセット用
+	void InitHoldItem() { m_delivereyEffect->PlayEffekseer(GetPosition()); m_holdItemNum = 0; }                                            // アイテム回収時、ホールドアイテムのリセット用
 	// スコア関連
 	const bool& GetDeliveredItem() const { return m_deliverdItem; }                       // アイテムを回収したかどうかのゲッター
 	void SetDeliveredItem(bool in_delivered) { m_deliverySound->PlaySoundFx(); 
@@ -80,7 +80,8 @@ private:
 
 	bool m_playEffect;                                           // 現在エフェクトを再生しているかどうか
 	PlayEffect* m_damageEffect;                                  // ダメージエフェクト
-	PlayEffect* m_getEffect;
+	PlayEffect* m_getEffect;                                     // スター獲得時エフェクト
+	PlayEffect* m_delivereyEffect;                               // スター回収時エフェクト
 	SoundFX* m_getStarSound;                                     // スターゲット時のサウンド
 	SoundFX* m_deliverySound;                                    // スター回収時のサウンド
 

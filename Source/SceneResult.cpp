@@ -29,10 +29,22 @@ void SceneResult::Update(Camera & camera, Input& input, float deltaTime)
 	// BGM再生
 	m_bgm->PlayLoopSoundFx();
 
+	// STARTかENTERで次のシーンへ
+	if (input.GetPushButtonState(XINPUT_BUTTON::XINPUT_START))
+	{
+		m_bgm->StopSoundFx();
+		toNext = 5;
+	}
 	if (CheckHitKey(KEY_INPUT_RETURN))
 	{
 		m_bgm->StopSoundFx();
 		toNext = 5;
+	}
+
+	// BACKでシャットダウン
+	if (input.GetPushButtonState(XINPUT_BUTTON::XINPUT_BACK))
+	{
+		GAME_INSTANCE.ShutDown();
 	}
 }
 
@@ -48,6 +60,6 @@ void SceneResult::Draw()
 	}
 
 	
-	DrawFormatString(GAME_INSTANCE.GetScreenWidth() / 2, GAME_INSTANCE.GetScreenHeight() / 2 + 50, GetColor(255, 255, 255), "ENTERキーでリトライ");
-	DrawFormatString(GAME_INSTANCE.GetScreenWidth() / 2, GAME_INSTANCE.GetScreenHeight() / 2 + 100, GetColor(255, 255, 255), "ESCAPEキーで終了");
+	DrawFormatString(GAME_INSTANCE.GetScreenWidth() / 2, GAME_INSTANCE.GetScreenHeight() / 2 + 50, GetColor(255, 255, 255), "STARTでリトライ");
+	DrawFormatString(GAME_INSTANCE.GetScreenWidth() / 2, GAME_INSTANCE.GetScreenHeight() / 2 + 100, GetColor(255, 255, 255), "BACKで終了");
 }

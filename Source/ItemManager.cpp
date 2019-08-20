@@ -109,7 +109,7 @@ void ItemManager::AddItem()
 		// 生成したアイテムの初期化
 		m_item.back()->Initialize();
 		// 出現位置の設定(ランダム)
-		m_item.back()->SetEmergence(GetRandomPosition(100.0f, 100.0f));
+		m_item.back()->SetEmergence(GetRandomPosition(90.0f, 90.0f));
 	}
 }
 

@@ -10,10 +10,10 @@ SoundFX::SoundFX(const char* in_fileName)
 {
 	m_sourceSoundHandle = LoadSoundMem(in_fileName);
 
-	if (m_sourceSoundHandle == -1)
-	{
-		printfDx("音楽データ読み込み失敗");
-	}
+	//if (m_sourceSoundHandle == -1)
+	//{
+	//	printfDx("音楽データ読み込み失敗");
+	//}
 }
 
 // デストラクタ

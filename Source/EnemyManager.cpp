@@ -86,5 +86,5 @@ void EnemyManager::AddEnemy()
 	 m_enemy.emplace_back(new Enemy(m_enemySourceHandle));
 
 	// エネミーの座標を設定
-	m_enemy.back()->SetEmergence(VGet(0.0f, 0.0f, 0.0f));
+	m_enemy.back()->SetEmergence(VGet(200.0f, 0.0f, 100.0f));
 }

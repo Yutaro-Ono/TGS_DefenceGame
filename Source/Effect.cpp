@@ -17,6 +17,8 @@ PlayEffect::~PlayEffect()
 
 void PlayEffect::Initialize()
 {
+	m_playPos = VGet(0.0f, 0.0f, 0.0f);
+	m_dotGraph = LoadGraph("Data/Effects/Effekseer1Dot.png", FALSE);
 	m_playingEffect = -1;
 }
 
@@ -35,9 +37,27 @@ void PlayEffect::PlayEffekseer(const VECTOR in_playPos)
 {
 	//printfDx(" (X座標 : %f, Y座標 : %f, Z座標 : %f ", in_playPos.x, in_playPos.y, in_playPos.z);
 
+	m_playPos = in_playPos;
+
 	// エフェクトの描画
 	m_playingEffect = PlayEffekseer3DEffect(m_effectHandle);
 
 	// エフェクトを再生する座標を指定
-	SetPosPlayingEffekseer3DEffect(m_effectHandle, in_playPos.x, in_playPos.y, in_playPos.z);
+	SetPosPlayingEffekseer3DEffect(m_playingEffect, m_playPos.x, m_playPos.y, m_playPos.z);
+
+	DrawGraph(0, 0, m_dotGraph, TRUE);
+
+}
+
+void PlayEffect::PlayEffekseer2D(const VECTOR in_playPos)
+{
+	m_playPos = in_playPos;
+
+	// エフェクトの描画
+	m_playingEffect = PlayEffekseer2DEffect(m_effectHandle);
+
+	// エフェクトを再生する座標を指定
+	SetPosPlayingEffekseer2DEffect(m_playingEffect, m_playPos.x, m_playPos.y, m_playPos.z);
+
+	DrawGraph(0, 0, m_dotGraph, TRUE);
 }

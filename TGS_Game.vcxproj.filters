@@ -34,12 +34,6 @@
     <Filter Include="ソース ファイル\Actor\NPC">
       <UniqueIdentifier>{1da5def1-e91f-4b5c-b020-4d9e7ab64b3c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Actor\Player">
-      <UniqueIdentifier>{39394b08-b19d-4194-bbab-6c33578e5d8b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Actor\Player\PlayerManager">
-      <UniqueIdentifier>{3437007a-e8d8-45ea-9b81-cf5ddc6608bf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Actor\Enemy\EnemyManager">
       <UniqueIdentifier>{f45539de-87ca-4df5-b62f-b9dceb979e70}</UniqueIdentifier>
     </Filter>
@@ -72,6 +66,12 @@
     </Filter>
     <Filter Include="ソース ファイル\Director">
       <UniqueIdentifier>{a1f79c12-c8ec-4d82-b698-819e2de1d807}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Actor\Player">
+      <UniqueIdentifier>{39394b08-b19d-4194-bbab-6c33578e5d8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Actor\Player\PlayerManager">
+      <UniqueIdentifier>{3437007a-e8d8-45ea-9b81-cf5ddc6608bf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -61,6 +61,7 @@ void Score::Draw()
 {
 	// スコアの表示
 	DrawFormatString(0, 450, GetColor(255, 255, 255), "%d", m_score);
+
 	// ホールド状態のスコアを表示
 	DrawFormatString(0, 500, GetColor(255, 255, 255), "%d", m_holdScore);
 }

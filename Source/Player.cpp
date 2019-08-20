@@ -45,8 +45,11 @@ void Player::Initialize()
 	// エフェクトのロード
 	m_damageEffect = new PlayEffect("Data/Effects/Player_Damaged.efk");
 	m_damageEffect->Initialize();
-	m_getEffect = new PlayEffect("Data/Effects/Player_StartLanding.efk");
+	m_getEffect = new PlayEffect("Data/Effects/Player_Cure.efk");
 	m_getEffect->Initialize();
+	m_delivereyEffect = new PlayEffect("Data/Effects/Player_StartLanding.efk");
+	m_delivereyEffect->Initialize();
+
 	// 効果音の生成
 	m_getStarSound = new SoundFX("Data/Music/SE/Player/Get/コイン6.mp3");
 	m_deliverySound = new SoundFX("Data/Music/SE/Player/Delivery/soundlogo6.mp3");
@@ -56,11 +59,15 @@ void Player::Delete()
 {
 	m_damageEffect->Delete();
 	m_getEffect->Delete();
+	m_delivereyEffect->Delete();
 	m_getStarSound->Delete();
 	m_deliverySound->Delete();
+	delete (m_damageEffect);
+	delete (m_getEffect);
+	delete (m_delivereyEffect);
 	delete (m_getStarSound);
 	delete (m_deliverySound);
-	delete (m_damageEffect);
+
 }
 
 // 更新
@@ -113,7 +120,7 @@ void Player::Update(Input& input, float deltaTime)
 	HitWallUpdate(deltaTime);
 
 	// 移動モーション
-	MotionMove(deltaTime);
+	//MotionMove(deltaTime);
 
 	// 当たり判定のインターバル処理
 	HitInterval();
@@ -167,11 +174,6 @@ void Player::Draw()
 	{
 		m_damageEffect->PlayEffekseer(m_position);
 	}
-	if (m_damageEffect->GetNowPlaying() == -1)
-	{
-		m_damageEffect->Initialize();
-	}
-
 
 	// 当たり判定確認用の球
 	//DrawSphere3D(m_position, m_hitRadius, 5, 0x00ffff, 0x00ffff, FALSE);

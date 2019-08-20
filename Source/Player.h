@@ -37,6 +37,8 @@ public:
 	void OnHitEnemy(Enemy& enemy);                               // エネミーとの当たり判定処理
 	void HitInterval();                                          // エネミー衝突時、次の当たり判定処理が行われるまでのインターバル
 
+	void ChangeAngle();                                          // プレイヤーの向きを変える
+
 	//----------------------------------------------------------------------------------------------------------------+
 	// Getter/Setter 関連
 	//----------------------------------------------------------------------------------------------------------------+
@@ -46,7 +48,7 @@ public:
 	// アイテム関連
 	const int& GetHoldItem() const { return m_holdItemNum; }                              // 所持しているアイテムの数を返す
 	const int& GetMaxHold() const { return Player::MAX_HOLDITEM; }                        // 所持できるアイテムの最大数を返す
-	void AddHoldItem() { m_getStarSound->PlaySoundFx();  m_holdItemNum++; };              // 所持しているアイテムの数を増やす
+	void AddHoldItem() { m_getStarSound->PlaySoundFx(); m_getEffect->PlayEffekseer(GetPosition()); m_holdItemNum++; };              // 所持しているアイテムの数を増やす
 	void InitHoldItem() { m_holdItemNum = 0; }                                            // アイテム回収時、ホールドアイテムのリセット用
 	// スコア関連
 	const bool& GetDeliveredItem() const { return m_deliverdItem; }                       // アイテムを回収したかどうかのゲッター
@@ -78,6 +80,7 @@ private:
 
 	bool m_playEffect;                                           // 現在エフェクトを再生しているかどうか
 	PlayEffect* m_damageEffect;                                  // ダメージエフェクト
+	PlayEffect* m_getEffect;
 	SoundFX* m_getStarSound;                                     // スターゲット時のサウンド
 	SoundFX* m_deliverySound;                                    // スター回収時のサウンド
 

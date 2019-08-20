@@ -72,7 +72,7 @@ void ObjectManager::Update()
 void ObjectManager::Draw()
 {
 	// フィールドの描画
-	m_fieldObj->Draw();
+	//m_fieldObj->Draw();
 	// スカイドームの描画
 	m_skyObj->Draw();
 	// 回収ポッドの描画

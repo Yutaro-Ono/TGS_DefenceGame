@@ -8,6 +8,7 @@
 #include "Input.h"
 #include "Actor.h"
 #include "Player.h"
+
 class Input;
 class Actor;
 class Player;
@@ -45,7 +46,5 @@ private:
 
 	int m_sourceModelHandle;      // モデルハンドル
 	Player* m_player;             // プレイヤー
-
-
 
 };

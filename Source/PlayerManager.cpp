@@ -34,7 +34,6 @@ void PlayerManager::Initialize()
 	}
 	// ƒvƒŒƒCƒ„[¶¬
 	m_player = new Player(m_sourceModelHandle);
-	// ‰Šú‰»
 	m_player->Initialize();
 }
 

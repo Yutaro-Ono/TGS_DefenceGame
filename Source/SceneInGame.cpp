@@ -211,6 +211,7 @@ void SceneInGame::PlaceEnemyByTime()
 // 描画処理
 void SceneInGame::Draw()
 {
+
 	// オブジェクトの描画
 	m_obj->Draw();
 	// エネミーの描画
@@ -221,4 +222,6 @@ void SceneInGame::Draw()
 	m_UI->Draw(*m_player->GetPlayerPointer());
 	// タイマーの描画
 	m_timer->Draw();
+
+
 }

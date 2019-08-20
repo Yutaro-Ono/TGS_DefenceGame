@@ -30,11 +30,6 @@ GameSystem::~GameSystem()
 // 各種初期化
 bool GameSystem::Initialize()
 {
-	if (DxLib_Init() == -1 || Effekseer_Init(8000) == -1)		// DXライブラリとEffekseerの初期化処理
-	{
-		return false;			// エラーが起きたら直ちに終了
-	}
-
 	// 画面を設定
 	SetScreen(1600, 900, true);
 
@@ -54,7 +49,18 @@ bool GameSystem::Initialize()
 	SetDrawScreen(DX_SCREEN_BACK);
 
 	// Effekseer関連
-	SetUseDirect3DVersion(DX_DIRECT3D_11);      // DirectX11を使用
+	SetUseDirect3DVersion(DX_DIRECT3D_9);      // DirectX11を使用
+
+	if (DxLib_Init() == -1)		// DXライブラリとEffekseerの初期化処理
+	{
+		return false;			// エラーが起きたら直ちに終了
+	}
+
+	if (Effekseer_Init(8000) == -1)		// DXライブラリとEffekseerの初期化処理
+	{
+		return false;			// エラーが起きたら直ちに終了
+	}
+
 	SetChangeScreenModeGraphicsSystemResetFlag(FALSE);
 	Effekseer_SetGraphicsDeviceLostCallbackFunctions();
 	SetUseZBuffer3D(TRUE);
@@ -151,6 +157,8 @@ void GameSystem::RunLoop()
 		// 登録パッドの更新
 		m_input->ScanPadNum(PAD_NUM::PLAYER_1);
 
+
+
 		// シーンごとに更新処理
 		switch (sceneNum)
 		{
@@ -188,6 +196,10 @@ void GameSystem::RunLoop()
 		default:
 			break;
 		}
+		// Effekseerの更新
+		UpdateEffekseer3D();
+		// Effekseerの描画
+		DrawEffekseer3D();
 
 		ScreenFlip();
 	}
@@ -201,6 +213,7 @@ void GameSystem::ShutDown()
 	Delete();
 	delete (m_camera);
 	delete (m_input);
+	Effkseer_End();
 	DxLib_End();
 }
 

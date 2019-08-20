@@ -14,14 +14,16 @@ public:
 
 	void Delete();
 
-	void PlayDamageEffect(const VECTOR in_playPos);
+	void PlayEffekseer(const VECTOR in_playPos);
 
-	
+	void StopEffect();
+
+	const int& GetNowPlaying()const { return IsEffekseer3DEffectPlaying(m_effectHandle); }    // エフェクトが再生中かどうか(0:再生中  1:再生されていない)
 
 private:
 
-	int m_damageEffectHandle;        // 被ダメージエフェクトのハンドル
-	int m_playingDamageEffect;
+	int m_effectHandle;        // 被ダメージエフェクトのハンドル
+	int m_playingEffect;
 
 
 };

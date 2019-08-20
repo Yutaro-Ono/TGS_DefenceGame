@@ -9,8 +9,8 @@ const int Player::MAX_HP = 5;
 const float Player::MOVE_SPEED = 80.0f;
 const float Player::INITIAL_POSITION_Y = 5.0f;
 const VECTOR Player::SCALE_SIZE = { 0.03f, 0.03f, 0.03f };
-const float Player::JUMP_POWER = 12.0f;
-const float Player::JUMP_SUB = 0.3f;
+const float Player::JUMP_POWER = 0.3f;
+const float Player::JUMP_SUB = 1.0f;
 const int Player::MAX_HOLDITEM = 100;
 
 // コンストラクタ(Actorの初期化子を付ける)
@@ -37,14 +37,16 @@ void Player::Initialize()
 	m_direction = VGet(0.0f, 0.0f, 0.0f);
 	m_angle = 0.0f;
 	m_hitTime = 0;
-	velocityY = JUMP_POWER;
+	velocityY = 0.0f;
 	m_holdItemNum = 0;
 	m_deliverdItem = false;
 	m_playEffect = false;
 
 	// エフェクトのロード
 	m_damageEffect = new PlayEffect("Data/Effects/Player_Damaged.efk");
-
+	m_damageEffect->Initialize();
+	m_getEffect = new PlayEffect("Data/Effects/Player_StartLanding.efk");
+	m_getEffect->Initialize();
 	// 効果音の生成
 	m_getStarSound = new SoundFX("Data/Music/SE/Player/Get/コイン6.mp3");
 	m_deliverySound = new SoundFX("Data/Music/SE/Player/Delivery/soundlogo6.mp3");
@@ -52,6 +54,8 @@ void Player::Initialize()
 
 void Player::Delete()
 {
+	m_damageEffect->Delete();
+	m_getEffect->Delete();
 	m_getStarSound->Delete();
 	m_deliverySound->Delete();
 	delete (m_getStarSound);
@@ -62,62 +66,6 @@ void Player::Delete()
 // 更新
 void Player::Update(float deltaTime)
 {
-
-	//-----------------------------------------//
-	// 移動処理
-	//----------------------------------------//
-	//if (INPUT_INSTANCE.GetKeyPad() & PAD_INPUT_UP)
-	//{
-	//	m_position.z += MOVE_SPEED * deltaTime;
-	//	m_angle = 0.0f;
-	//}
-
-	//if (INPUT_INSTANCE.GetKeyPad() & PAD_INPUT_DOWN)
-	//{
-	//	m_position.z -= MOVE_SPEED * deltaTime;
-	//	m_angle = -180.0f;
-	//}
-
-	//if (INPUT_INSTANCE.GetKeyPad() & PAD_INPUT_LEFT)
-	//{
-	//	m_position.x -= MOVE_SPEED * deltaTime;
-	//	m_angle = -90.0f;
-	//}
-
-	//if (INPUT_INSTANCE.GetKeyPad() & PAD_INPUT_RIGHT)
-	//{
-	//	m_position.x += MOVE_SPEED * deltaTime;
-	//	m_angle = 90.0f;
-	//}
-
-	//// いずれかのキーが押されている時
-	//if (INPUT_INSTANCE.GetKeyPad() != 0)
-	//{
-	//	if (m_moveFlag == false)
-	//	{
-	//		m_moveFlag = true;
-	//	}
-	//}
-
-	//// 簡易的なフィールド当たり判定処理(フィールドからはみ出したら戻す)
-	//HitWallUpdate(deltaTime);
-
-	//// 移動モーション
-	//MotionMove(deltaTime);
-
-	//// 当たり判定のインターバル処理
-	//HitInterval();
-
-	//// モデルの拡大率セット
-	//MV1SetScale(m_modelHandle, SCALE_SIZE);
-
-	//// 角度を設定
-	//MV1SetRotationXYZ(m_modelHandle, VGet(0.0f, m_angle / 180.0f * DX_PI_F, 0.0f));
-
-	//// ポジションをセット
-	//MV1SetPosition(m_modelHandle, m_position);
-
-	//printfDx("pos : x = %f\ny = %f\nz = %f\n", m_position.x, m_position.y, m_position.z);
 }
 
 void Player::Update(Input& input, float deltaTime)
@@ -130,26 +78,26 @@ void Player::Update(Input& input, float deltaTime)
     //----------------------------------------//
 	if (input.GetLeftStickState(XINPUT_LSTICK::LSTICK_LEFT))
 	{
+		ChangeAngle();
 		m_position.x -= MOVE_SPEED * deltaTime;
-		m_angle = -90.0f;
 	}
 
 	if (input.GetLeftStickState(XINPUT_LSTICK::LSTICK_RIGHT))
 	{
+		ChangeAngle();
 		m_position.x += MOVE_SPEED * deltaTime;
-		m_angle = 90.0f;
 	}
 
 	if (input.GetLeftStickState(XINPUT_LSTICK::LSTICK_UP))
 	{
+		ChangeAngle();
 		m_position.z += MOVE_SPEED * deltaTime;
-		m_angle = 0.0f;
 	}
 
 	if (input.GetLeftStickState(XINPUT_LSTICK::LSTICK_DOWN))
 	{
+		ChangeAngle();
 		m_position.z -= MOVE_SPEED * deltaTime;
-		m_angle = -180.0f;
 	}
 	
 	// いずれかのキーが押されている時
@@ -169,11 +117,7 @@ void Player::Update(Input& input, float deltaTime)
 
 	// 当たり判定のインターバル処理
 	HitInterval();
-	// 当たり判定フラグが立ったらエフェクトを再生
-	if (m_hitEnemy == true)
-	{
-		m_damageEffect->PlayDamageEffect(m_position);
-	}
+
 
 	// モデルの拡大率セット
 	MV1SetScale(m_modelHandle, SCALE_SIZE);
@@ -181,22 +125,8 @@ void Player::Update(Input& input, float deltaTime)
 	// ポジションをセット
 	MV1SetPosition(m_modelHandle, m_position);
 
-	int x, y;
-
-	GetJoypadAnalogInput(&x, &y, DX_INPUT_PAD1);
-	float angle = atan2((float)x / 1000.0f + DX_PI_F, (float)y / 1000.0f);
-	if (angle < 0)
-	{
-		angle += DX_PI_F * 2;
-	}
-
-	//// 角度を設定
-	//MV1SetRotationXYZ(m_modelHandle, VGet(0.0f, m_angle / 180.0f * DX_PI_F, 0.0f));
 	// 角度を設定
-	MV1SetRotationXYZ(m_modelHandle, VGet(0.0f, angle, 0.0f));
-	// 角度を設定
-	//MV1SetRotationXYZ(m_modelHandle, VGet(0.0f, angle, 0.0f));
-	//printfDx("%d", GetJoypadAnalogInput(DX_INPUT_PAD1, 0));
+	MV1SetRotationXYZ(m_modelHandle, VGet(0.0f, m_angle, 0.0f));
 }
 
 
@@ -232,6 +162,17 @@ void Player::Draw()
 		MV1DrawModel(m_modelHandle);
 	}
 
+	// 当たり判定フラグが立ったらエフェクトを再生
+	if (m_hitEnemy == true && m_damageEffect->GetNowPlaying() == -1)
+	{
+		m_damageEffect->PlayEffekseer(m_position);
+	}
+	if (m_damageEffect->GetNowPlaying() == -1)
+	{
+		m_damageEffect->Initialize();
+	}
+
+
 	// 当たり判定確認用の球
 	//DrawSphere3D(m_position, m_hitRadius, 5, 0x00ffff, 0x00ffff, FALSE);
 }
@@ -239,21 +180,39 @@ void Player::Draw()
 // 移動モーションにおける小刻みなジャンプモーション
 void Player::MotionMove(float deltaTime)
 {
+	//if (m_moveFlag == true)
+	//{
+	//	m_position.y = velocityY;
+	//	velocityY -= JUMP_SUB;
+	//	if (velocityY <= INITIAL_POSITION_Y)
+	//	{
+	//		m_moveFlag = false;
+	//	}
+	//}
+	//// 移動していないとき元のY座標に戻し、Y軸加速度を初期化
+	//if (m_moveFlag == false)
+	//{
+	//	m_position.y = INITIAL_POSITION_Y;
+	//	velocityY = 0.0f;
+	//}
 	if (m_moveFlag == true)
 	{
 		m_position.y = velocityY;
-		velocityY -= JUMP_SUB;
-		if (velocityY <= INITIAL_POSITION_Y)
+		if (velocityY >= 0)
 		{
-			m_moveFlag = false;
+			velocityY -= JUMP_SUB;
+		}
+		if (velocityY <= -100.0f)
+		{
+			velocityY += JUMP_SUB;
 		}
 	}
-	// 移動していないとき元のY座標に戻し、Y軸加速度を初期化
+
 	if (m_moveFlag == false)
 	{
-		m_position.y = INITIAL_POSITION_Y;
-		velocityY = JUMP_POWER;
+		velocityY = 0.0f;
 	}
+
 
 }
 
@@ -291,5 +250,21 @@ void Player::HitInterval()
 		{
 			m_hitEnemy = false;
 		}
+	}
+}
+
+// パッドの入力からプレイヤーの方向を調整する
+void Player::ChangeAngle()
+{
+	// 左スティックの入力値を格納する
+	int padX, padY;
+
+	GetJoypadAnalogInput(&padX, &padY, DX_INPUT_PAD1);         // 左スティックの入力値を得る
+	padY *= -1;                                                          // y軸を反転
+
+	m_angle = atan2((float)padX / 1000.0f, (float)padY / 1000.0f);          // プレイヤーの角度を求める
+	if (m_angle < 0)
+	{
+		m_angle += DX_PI_F * 2;
 	}
 }

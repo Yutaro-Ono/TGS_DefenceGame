@@ -36,5 +36,4 @@ private:
 	ObjectBase* m_skyObj;                     // ‹ó
 	ObjectBase* m_podObj;                     // ‰ñŽûƒ|ƒbƒh
 
-
 };

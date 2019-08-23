@@ -46,7 +46,7 @@ void PlayEffect::PlayEffekseer(const VECTOR in_playPos)
 	// エフェクトを再生する座標を指定
 	SetPosPlayingEffekseer3DEffect(m_playingEffect, m_playPos.x, m_playPos.y, m_playPos.z);
 
-	DrawGraph(0, 0, m_dotGraph, TRUE);
+	DrawGraph(0, 0, m_dotGraph, FALSE);
 
 }
 
@@ -60,5 +60,5 @@ void PlayEffect::PlayEffekseer2D(const VECTOR in_playPos)
 	// エフェクトを再生する座標を指定
 	SetPosPlayingEffekseer2DEffect(m_playingEffect, m_playPos.x, m_playPos.y, m_playPos.z);
 
-	DrawGraph(0, 0, m_dotGraph, TRUE);
+	DrawGraph(0, 0, m_dotGraph, FALSE);
 }

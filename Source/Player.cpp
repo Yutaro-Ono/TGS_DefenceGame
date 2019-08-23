@@ -122,7 +122,7 @@ void Player::Update(Input& input, float deltaTime)
 	HitWallUpdate(deltaTime);
 
 	// 移動モーション
-	//MotionMove(deltaTime);
+	MotionMove(deltaTime);
 
 	// 当たり判定のインターバル処理
 	HitInterval();
@@ -185,38 +185,38 @@ void Player::Draw()
 // 移動モーションにおける小刻みなジャンプモーション
 void Player::MotionMove(float deltaTime)
 {
-	//if (m_moveFlag == true)
-	//{
-	//	m_position.y = velocityY;
-	//	velocityY -= JUMP_SUB;
-	//	if (velocityY <= INITIAL_POSITION_Y)
-	//	{
-	//		m_moveFlag = false;
-	//	}
-	//}
-	//// 移動していないとき元のY座標に戻し、Y軸加速度を初期化
-	//if (m_moveFlag == false)
-	//{
-	//	m_position.y = INITIAL_POSITION_Y;
-	//	velocityY = 0.0f;
-	//}
 	if (m_moveFlag == true)
 	{
 		m_position.y = velocityY;
-		if (velocityY >= 0)
+		velocityY -= JUMP_SUB;
+		if (velocityY <= INITIAL_POSITION_Y)
 		{
-			velocityY -= JUMP_SUB;
-		}
-		if (velocityY <= -100.0f)
-		{
-			velocityY += JUMP_SUB;
+			m_moveFlag = false;
 		}
 	}
-
+	// 移動していないとき元のY座標に戻し、Y軸加速度を初期化
 	if (m_moveFlag == false)
 	{
+		m_position.y = INITIAL_POSITION_Y;
 		velocityY = 0.0f;
 	}
+	//if (m_moveFlag == true)
+	//{
+	//	m_position.y = velocityY;
+	//	if (velocityY >= 0)
+	//	{
+	//		velocityY -= JUMP_SUB;
+	//	}
+	//	if (velocityY <= -100.0f)
+	//	{
+	//		velocityY += JUMP_SUB;
+	//	}
+	//}
+
+	//if (m_moveFlag == false)
+	//{
+	//	velocityY = 0.0f;
+	//}
 
 
 }

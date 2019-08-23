@@ -44,7 +44,6 @@ void SceneInGame::Initialize()
 	m_obj->Initialize();
 	// カウントダウン演出の生成、初期化
 	m_countdown = new CountDown();
-	m_countdown->Initialize();
 	// BGMを生成
 	m_bgm = new SoundFX("Data/Music/BGM/Battle/cyrf_starcraft.mp3");
 	m_bgm->Initialize();
@@ -80,23 +79,23 @@ void SceneInGame::Update(Camera & camera, Input& input, float deltaTime)
 // 更新処理
 void SceneInGame::Update(Camera& camera, Input& input, SceneResult& result, float deltaTime)
 {
-	////------------------------------------------------------+
- //   // ゲーム開始タイマーの初期化
- //   //------------------------------------------------------+
-	//if (m_setTimer == false)
-	//{
-	//	m_countdown->Initialize();
-	//	m_setTimer = true;
-	//}
+	//------------------------------------------------------+
+    // ゲーム開始タイマーの初期化
+    //------------------------------------------------------+
+	if (m_setTimer == false)
+	{
+		m_countdown->Initialize();
+		m_setTimer = true;
+	}
 
-	//// ゲーム開始時のカウントダウン処理
-	//m_startGame = m_countdown->StartCountDown();
-	//if (m_startGame == true)
-	//{
-	//	m_setTimer = false;
-	//}
+	// ゲーム開始時のカウントダウン処理
+	m_startGame = m_countdown->StartCountDown();
+	if (m_startGame == true)
+	{
+		m_setTimer = false;
+	}
 
-	m_startGame = true;
+	//m_startGame = true;
 
 	// BGMの再生
 	m_bgm->PlayLoopSoundFx();
@@ -104,103 +103,105 @@ void SceneInGame::Update(Camera& camera, Input& input, SceneResult& result, floa
 	// カメラの更新
 	camera.Update(*m_player);
 
-	//------------------------------------------------------+
-	// タイマーの初期化
-	//------------------------------------------------------+
-	if (m_setTimer == false)
-	{
-		m_timer->Initialize();
-		m_setTimer = true;
-	}
 
-	//------------------------------------------------------+
-	// 当たり判定処理
-	//------------------------------------------------------+
-	// プレイヤーとエネミー
-	HitChecker::CheckHit(*m_player, *m_enemy);
-	// エネミー同士
-	for (int i = 0; i < m_enemy->GetActiveEnemy(); i++)
-	{
-		HitChecker::CheckHitEnemy(*m_enemy, i);
-	}
-	// プレイヤーとアイテム
-	HitChecker::CheckHitItem(*m_player, *m_item);
-	// プレイヤーと回収ポッド
-	HitChecker::CheckHitPod(*m_player, *m_obj);
-
-	//------------------------------------------------------+
-	// プレイヤーの更新
-	//------------------------------------------------------+
-	m_player->Update(input, deltaTime);
-	// エネミーの更新
-	m_enemy->Update(*m_player, deltaTime);
-	// アイテムの更新
-	m_item->Update(deltaTime);
-	// UIの更新
-	m_UI->Update(*m_player->GetPlayerPointer());
-	// オブジェクトの更新
-	m_obj->Update();
-
-	// 残り時間によってエネミーとアイテムを追加
-	if (m_timer->GetTimer() == 50 && m_popCount == 0)
-	{
-		m_enemy->AddEnemy();
-		m_popCount = 1;
-	}
-	if (m_timer->GetTimer() == 45 && m_popCount == 1)
-	{
-		m_enemy->AddEnemy();
-		m_popCount = 2;
-	}
-	if (m_timer->GetTimer() == 40 && m_popCount == 2)
-	{
-		m_enemy->AddEnemy();
-		m_enemy->AddEnemy();
-		m_enemy->AddEnemy();
-		m_popCount = 3;
-	}
-	if (m_timer->GetTimer() == 35 && m_popCount == 3)
-	{
-		m_enemy->AddEnemy();
-		m_enemy->AddEnemy();
-		m_popCount = 4;
-	}
-	if (m_timer->GetTimer() == 30 && m_popCount == 4)
-	{
-		m_enemy->AddEnemy();
-		m_enemy->AddEnemy();
-		m_popCount = 5;
-	}
-	if (m_timer->GetTimer() == 25 && m_popCount == 5)
-	{
-		m_enemy->AddEnemy();
-		m_enemy->AddEnemy();
-		m_popCount = 6;
-	}
-	if (m_timer->GetTimer() == 20 && m_popCount == 6)
-	{
-		m_enemy->AddEnemy();
-		m_enemy->AddEnemy();
-
-		m_popCount = 7;
-	}
-
-	if (m_timer->GetTimer() % 10 == 0)
-	{
-		m_item->AddItem();
-	}
-
-	// タイマーの更新
-	m_timer->UpdateCountDown(MAX_GAME_TIME);
-
-	// 描画関数総合
-	Draw();
 
 	if (m_startGame == true)
 	{
 
 
+		//------------------------------------------------------+
+		// タイマーの初期化
+		//------------------------------------------------------+
+		if (m_setTimer == false)
+		{
+			m_timer->Initialize();
+			m_setTimer = true;
+		}
+
+		//------------------------------------------------------+
+		// 当たり判定処理
+		//------------------------------------------------------+
+		// プレイヤーとエネミー
+		HitChecker::CheckHit(*m_player, *m_enemy);
+		// エネミー同士
+		for (int i = 0; i < m_enemy->GetActiveEnemy(); i++)
+		{
+			HitChecker::CheckHitEnemy(*m_enemy, i);
+		}
+		// プレイヤーとアイテム
+		HitChecker::CheckHitItem(*m_player, *m_item);
+		// プレイヤーと回収ポッド
+		HitChecker::CheckHitPod(*m_player, *m_obj);
+
+		//------------------------------------------------------+
+		// プレイヤーの更新
+		//------------------------------------------------------+
+		m_player->Update(input, deltaTime);
+		// エネミーの更新
+		m_enemy->Update(*m_player, deltaTime);
+		// アイテムの更新
+		m_item->Update(deltaTime);
+		// UIの更新
+		m_UI->Update(*m_player->GetPlayerPointer());
+		// オブジェクトの更新
+		m_obj->Update();
+
+		// 残り時間によってエネミーとアイテムを追加
+		if (m_timer->GetTimer() == 50 && m_popCount == 0)
+		{
+			m_enemy->AddEnemy();
+			m_popCount = 1;
+		}
+		if (m_timer->GetTimer() == 45 && m_popCount == 1)
+		{
+			m_enemy->AddEnemy();
+			m_popCount = 2;
+		}
+		if (m_timer->GetTimer() == 40 && m_popCount == 2)
+		{
+			m_enemy->AddEnemy();
+			m_enemy->AddEnemy();
+			m_enemy->AddEnemy();
+			m_popCount = 3;
+		}
+		if (m_timer->GetTimer() == 35 && m_popCount == 3)
+		{
+			m_enemy->AddEnemy();
+			m_enemy->AddEnemy();
+			m_popCount = 4;
+		}
+		if (m_timer->GetTimer() == 30 && m_popCount == 4)
+		{
+			m_enemy->AddEnemy();
+			m_enemy->AddEnemy();
+			m_popCount = 5;
+		}
+		if (m_timer->GetTimer() == 25 && m_popCount == 5)
+		{
+			m_enemy->AddEnemy();
+			m_enemy->AddEnemy();
+			m_popCount = 6;
+		}
+		if (m_timer->GetTimer() == 20 && m_popCount == 6)
+		{
+			m_enemy->AddEnemy();
+			m_enemy->AddEnemy();
+
+			m_popCount = 7;
+		}
+
+		if (m_timer->GetTimer() % 10 == 0)
+		{
+			m_item->AddItem();
+		}
+
+		// タイマーの更新
+		m_timer->UpdateCountDown(MAX_GAME_TIME);
 	}
+
+	// 描画関数総合
+	Draw();
+
 
 	// シーンアップデート
 	SceneUpdate(result);
@@ -235,16 +236,14 @@ void SceneInGame::PlaceEnemyByTime()
 void SceneInGame::Draw()
 {
 
-	// オブジェクトの描画
-	m_obj->Draw();
 	// エネミーの描画
 	m_enemy->Draw();
 	// プレイヤーの描画
 	m_player->Draw();
+	// オブジェクトの描画
+	m_obj->Draw();
 	// UIの描画
 	m_UI->Draw(*m_player->GetPlayerPointer());
 	// タイマーの描画
 	m_timer->Draw();
-
-
 }

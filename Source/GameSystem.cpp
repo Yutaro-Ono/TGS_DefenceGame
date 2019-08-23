@@ -49,7 +49,7 @@ bool GameSystem::Initialize()
 	SetDrawScreen(DX_SCREEN_BACK);
 
 	// Effekseer関連
-	SetUseDirect3DVersion(DX_DIRECT3D_9);      // DirectX11を使用
+	SetUseDirect3DVersion(DX_DIRECT3D_11);      // DirectX11を使用
 
 	if (DxLib_Init() == -1)		// DXライブラリとEffekseerの初期化処理
 	{
@@ -62,9 +62,13 @@ bool GameSystem::Initialize()
 	}
 
 	SetChangeScreenModeGraphicsSystemResetFlag(FALSE);
-	Effekseer_SetGraphicsDeviceLostCallbackFunctions();
 	SetUseZBuffer3D(TRUE);
 	SetWriteZBuffer3D(TRUE);
+
+	// カメラ
+	m_camera = new Camera();
+	// 入力
+	m_input = new Input();
 
 	return true;
 }
@@ -81,10 +85,7 @@ void GameSystem::Create()
 	// リザルト
 	m_resultScene = new SceneResult();
 	m_resultScene->Initialize();
-	// カメラ
-	m_camera = new Camera();
-	// 入力
-	m_input = new Input();
+
 }
 
 // 削除
@@ -157,8 +158,6 @@ void GameSystem::RunLoop()
 		// 登録パッドの更新
 		m_input->ScanPadNum(PAD_NUM::PLAYER_1);
 
-
-
 		// シーンごとに更新処理
 		switch (sceneNum)
 		{
@@ -196,6 +195,7 @@ void GameSystem::RunLoop()
 		default:
 			break;
 		}
+
 		// Effekseerの更新
 		UpdateEffekseer3D();
 		// Effekseerの描画

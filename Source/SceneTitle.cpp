@@ -102,4 +102,9 @@ void SceneTitle::Draw()
 		m_bgEffect->PlayEffekseer(VGet(700.0f, -150.0f, 0.0f));
 		m_bgEffect->SetEffectScale(100.0f, 100.0f, 100.0f);
 	}
+
+	// Effekseer‚ÌXV
+	UpdateEffekseer3D();
+	// Effekseer‚Ì•`‰æ
+	DrawEffekseer3D();
 }

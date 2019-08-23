@@ -9,7 +9,7 @@
 #include "Actor.h"
 #include "Player.h"
 #include "PlayerManager.h"
-
+#include "GameSystem.h"
 
 class Player;
 

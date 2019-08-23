@@ -23,6 +23,7 @@ class SceneResult;
 class PlayerManager;
 class EnemyManager;
 class ItemManager;
+class InGameUIManager;
 class ObjectManager;
 class Player;
 class CountDown;

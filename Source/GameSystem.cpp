@@ -85,6 +85,10 @@ void GameSystem::Create()
 	m_camera = new Camera();
 	// “ü—Í
 	m_input = new Input();
+
+	SetDrawScreen(DX_SCREEN_BACK);
+
+	ClearDrawScreen();
 }
 
 // íœ

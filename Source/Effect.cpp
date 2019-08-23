@@ -24,6 +24,7 @@ void PlayEffect::Initialize()
 
 void PlayEffect::Delete()
 {
+	DeleteEffekseerEffect(m_effectHandle);
 }
 
 void PlayEffect::StopEffect()

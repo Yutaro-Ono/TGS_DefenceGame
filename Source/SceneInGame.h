@@ -74,6 +74,8 @@ private:
 
 	int toNext;                                    // 次シーンへのハンドル
 
+	bool m_startGame;                              // このフラグが立ったらゲームを開始する
+
 	bool m_setTimer;                               // ゲームシーン起動時、タイマーのセットフラグ
 
 	int m_popCount;                                // エネミーの出現カウンター

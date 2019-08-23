@@ -196,12 +196,18 @@ void GameSystem::RunLoop()
 		default:
 			break;
 		}
-
+		// Effekseerの更新
+		UpdateEffekseer3D();
+		// Effekseerの描画
+		DrawEffekseer3D();
 
 		ScreenFlip();
 	}
 
 	ShutDown();
+
+	Effkseer_End();
+	DxLib_End();
 }
 
 // 終了処理
@@ -210,8 +216,6 @@ void GameSystem::ShutDown()
 	Delete();
 	delete (m_camera);
 	delete (m_input);
-	Effkseer_End();
-	DxLib_End();
 }
 
 // 画面情報(width : 横幅, Height : 縦幅, 全画面表示かどうか)のセッター

@@ -35,11 +35,11 @@ void CountDown::Delete()
 void CountDown::Draw()
 {
 	// カウントダウンタイマーの描画
-	DrawGraph(GAME_INSTANCE.GetScreenWidth() / 2, GAME_INSTANCE.GetScreenHeight() / 2, m_counterGraph[2], TRUE);
+	DrawGraph(GAME_INSTANCE.GetScreenWidth() / 2, GAME_INSTANCE.GetScreenHeight() / 2, m_counterGraph[-m_nowTime], TRUE);
 }
 
 // ゲーム開始時のカウントダウン演出
-void CountDown::StartCountDown()
+bool CountDown::StartCountDown()
 {
 	// カウントダウン処理
 	m_timer->UpdateCountDown(MAX_START_TIME);
@@ -50,9 +50,11 @@ void CountDown::StartCountDown()
 	// 描画
 	Draw();
 
-	// タイマーが0以下になったらディアクティベートする
-	if (m_nowTime <= 0)
+	// タイマーが0以下になったらtrueを返す
+	if (m_nowTime >= 0)
 	{
-		m_activate = false;
+		return true;
 	}
+
+	return false;
 }

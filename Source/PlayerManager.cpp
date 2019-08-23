@@ -18,8 +18,7 @@ PlayerManager::PlayerManager()
 // デストラクタ
 PlayerManager::~PlayerManager()
 {
-	MV1DeleteModel(m_sourceModelHandle);      // モデルの削除
-	delete(m_player);
+
 }
 
 // プレイヤーモデル生成処理
@@ -40,7 +39,11 @@ void PlayerManager::Initialize()
 // 各種解放処理
 void PlayerManager::Delete()
 {
+	MV1DeleteModel(m_sourceModelHandle);      // モデルの削除
+
 	m_player->Delete();
+
+	delete (m_player);
 }
 
 // 更新処理

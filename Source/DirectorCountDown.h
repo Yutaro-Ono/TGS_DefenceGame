@@ -23,7 +23,9 @@ public:
 
 	void Draw();                      // 描画処理
 
-	void StartCountDown();            // ゲーム開始時のカウントダウン演出
+	bool StartCountDown();            // ゲーム開始時のカウントダウン演出
+
+
 
 private:
 

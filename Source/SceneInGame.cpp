@@ -49,7 +49,7 @@ void SceneInGame::Initialize()
 	m_bgm = new SoundFX("Data/Music/BGM/Battle/cyrf_starcraft.mp3");
 	m_bgm->Initialize();
 
-
+	m_startGame = false;
 	m_setTimer = false;
 	m_popCount = 0;
 }
@@ -57,6 +57,7 @@ void SceneInGame::Initialize()
 // 各種解放処理
 void SceneInGame::Delete()
 {
+	m_player->Delete();
 	m_item->Delete();
 	m_UI->Delete();
 	m_bgm->Delete();
@@ -79,8 +80,29 @@ void SceneInGame::Update(Camera & camera, Input& input, float deltaTime)
 // 更新処理
 void SceneInGame::Update(Camera& camera, Input& input, SceneResult& result, float deltaTime)
 {
-	// カウントダウン処理(本来はカウントダウン専用の状況を作らなければならない)
-	m_countdown->StartCountDown();
+	////------------------------------------------------------+
+ //   // ゲーム開始タイマーの初期化
+ //   //------------------------------------------------------+
+	//if (m_setTimer == false)
+	//{
+	//	m_countdown->Initialize();
+	//	m_setTimer = true;
+	//}
+
+	//// ゲーム開始時のカウントダウン処理
+	//m_startGame = m_countdown->StartCountDown();
+	//if (m_startGame == true)
+	//{
+	//	m_setTimer = false;
+	//}
+
+	m_startGame = true;
+
+	// BGMの再生
+	m_bgm->PlayLoopSoundFx();
+
+	// カメラの更新
+	camera.Update(*m_player);
 
 	//------------------------------------------------------+
 	// タイマーの初期化
@@ -90,12 +112,6 @@ void SceneInGame::Update(Camera& camera, Input& input, SceneResult& result, floa
 		m_timer->Initialize();
 		m_setTimer = true;
 	}
-
-	// カメラの更新
-	camera.Update(*m_player);
-
-	// BGMの再生
-	m_bgm->PlayLoopSoundFx();
 
 	//------------------------------------------------------+
 	// 当たり判定処理
@@ -180,13 +196,15 @@ void SceneInGame::Update(Camera& camera, Input& input, SceneResult& result, floa
 	// 描画関数総合
 	Draw();
 
-	// Effekseerの更新
-	UpdateEffekseer3D();
-	// Effekseerの描画
-	DrawEffekseer3D();
+	if (m_startGame == true)
+	{
+
+
+	}
 
 	// シーンアップデート
 	SceneUpdate(result);
+
 }
 
 // シーンのアップデート(リザルトシーンへの遷移処理)

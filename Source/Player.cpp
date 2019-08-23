@@ -57,11 +57,13 @@ void Player::Initialize()
 
 void Player::Delete()
 {
+
 	m_damageEffect->Delete();
 	m_getEffect->Delete();
 	m_delivereyEffect->Delete();
 	m_getStarSound->Delete();
 	m_deliverySound->Delete();
+
 	delete (m_damageEffect);
 	delete (m_getEffect);
 	delete (m_delivereyEffect);
@@ -168,6 +170,7 @@ void Player::Draw()
 		// モデルの描画
 		MV1DrawModel(m_modelHandle);
 	}
+
 
 	// 当たり判定フラグが立ったらエフェクトを再生
 	if (m_hitEnemy == true && m_damageEffect->GetNowPlaying() == -1)

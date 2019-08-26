@@ -73,14 +73,14 @@ void ItemManager::Update(float deltaTime)
 		if (item->GetState() == Item::POP)
 		{
 			item->Fall(deltaTime);
-			item->Update();
+			item->Update(deltaTime);
 			item->Draw();
 		}
 
 		// アクティブ状態ならアップデート
 		if (item->GetState() == Item::ACTIVE)
 		{
-			item->Update();
+			item->Update(deltaTime);
 			item->Draw();
 		}
 

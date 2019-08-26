@@ -39,7 +39,7 @@ void ObjectPod::Delete()
 }
 
 // 更新処理
-void ObjectPod::Update()
+void ObjectPod::Update(float deltaTime)
 {
 	// モデルの拡大率セット
 	MV1SetScale(m_modelHandle, SCALE_SIZE);

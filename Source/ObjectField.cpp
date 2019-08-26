@@ -68,7 +68,7 @@ void ObjectField::Initialize()
 
 }
 
-void ObjectField::Update()
+void ObjectField::Update(float deltaTime)
 {
 	// ‚Qƒ|ƒŠƒSƒ“‚Ì•`‰æ
 	// DrawPolygon3D(m_vertex, 2, DX_NONE_GRAPH, FALSE);

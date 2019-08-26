@@ -16,7 +16,7 @@ public:
 
 	void Initialize() override;                  // Šeí‰Šú‰»
 
-	void Update() override {};
+	void Update(float deltaTime) override {};
 
 private:
 

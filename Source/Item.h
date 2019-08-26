@@ -24,7 +24,7 @@ public:
 
 	void Initialize();                // 各種初期化処理
 
-	void Update();                    // 更新処理
+	void Update(float deltaTime);                    // 更新処理
 
 	void Fall(float deltaTime);       // 出現時の落下処理
 
@@ -45,6 +45,11 @@ private:
 	float m_hitRadius;         // 当たり判定用の半径
 
 	int m_state;               // ゲーム中の状態
+
+	// モデルの回転角度設定用
+	float m_angleX;
+	float m_angleY;
+	float m_angleZ;
 
 	static const float FALL_SPEED;       // 落下速度
 };

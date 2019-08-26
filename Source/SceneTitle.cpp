@@ -74,13 +74,18 @@ void SceneTitle::Draw()
 	{
 		m_alpha -= 2;
 	}
-	SetDrawBlendMode(DX_BLENDMODE_ALPHA, m_alpha);       // ブレンドモード(透過)をオン
+
+	// ロゴの表示
 	DrawGraph((GAME_INSTANCE.GetScreenWidth() / 2) - (m_titleLogoW / 2), (GAME_INSTANCE.GetScreenHeight() / 2 - 100) - (m_titleLogoH / 3), m_titleLogoGraph, TRUE);
+
+	SetDrawBlendMode(DX_BLENDMODE_ALPHA, m_alpha);       // ブレンドモード(透過)をオン
+	// テキストの描画
+	m_text->DrawTextMessage(550, 720, "PRESS ANY KEY");
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);           //ブレンドモードをオフ
 
 	DrawString(GAME_INSTANCE.GetScreenWidth() / 2 - 700, GAME_INSTANCE.GetScreenHeight() / 2 + 50, "できるだけ多くの星を集めて中心のポッドへ持っていこう！", GetColor(255, 255, 255));
 	DrawString(GAME_INSTANCE.GetScreenWidth() / 2 - 250, GAME_INSTANCE.GetScreenHeight() / 2 + 100, "UFOに当たるとダメージ！", GetColor(255, 255, 255));
-	DrawString(GAME_INSTANCE.GetScreenWidth() / 2 - 350, GAME_INSTANCE.GetScreenHeight() / 2 + 250, "STARTボタンorSPACEキーでスタート", GetColor(255, 255, 255));
+	// DrawString(GAME_INSTANCE.GetScreenWidth() / 2 - 350, GAME_INSTANCE.GetScreenHeight() / 2 + 250, "STARTボタンorSPACEキーでスタート", GetColor(255, 255, 255));
 
 	// エフェクトの再生
 	if (m_bgEffect->GetNowPlaying() == -1)
@@ -89,12 +94,7 @@ void SceneTitle::Draw()
 		m_bgEffect->SetEffectScale(100.0f, 100.0f, 100.0f);
 	}
 
-	m_text->DrawTextMessage(0, 100, "PRESS ANY KEY");
 
-	// Effekseerの更新
-	UpdateEffekseer3D();
-	// Effekseerの描画
-	DrawEffekseer3D();
 }
 
 // 次のシーンへの遷移処理 (シーン遷移条件がtrueだったら次シーンへのポインタを返し、falseだったらこのクラスのポインタを返す)

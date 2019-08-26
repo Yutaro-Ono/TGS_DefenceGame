@@ -41,7 +41,9 @@ void PlayEffect::StopEffect()
 // 被ダメージエフェクトの描画
 void PlayEffect::PlayEffekseer(const VECTOR in_playPos)
 {
-	//printfDx(" (X座標 : %f, Y座標 : %f, Z座標 : %f ", in_playPos.x, in_playPos.y, in_playPos.z);
+	// printfDx(" (X座標 : %f, Y座標 : %f, Z座標 : %f ", in_playPos.x, in_playPos.y, in_playPos.z);
+
+	printfDx("エフェクト再生");
 
 	// エフェクトの座標を更新
 	m_playPos = in_playPos;

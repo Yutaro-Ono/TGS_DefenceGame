@@ -8,7 +8,7 @@
 #include "Player.h"
 
 // コンストラクタ
-PlayerManager::PlayerManager()
+PlayerManager::PlayerManager(int in_playerNum)
 	:m_sourceModelHandle(-1)
 	,m_playerState(PLAYER_STATE::ACTIVE)
 {

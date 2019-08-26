@@ -20,7 +20,7 @@ public:
 	void Initialize();
 	void Delete();
 
-	void Update();
+	void Update(float deltaTime);
 
 	void Draw();
 

@@ -62,10 +62,10 @@ void ObjectManager::Delete()
 }
 
 // XVˆ—
-void ObjectManager::Update()
+void ObjectManager::Update(float deltaTime)
 {
-	m_fieldObj->Update();
-	m_podObj->Update();
+	m_fieldObj->Update(deltaTime);
+	m_podObj->Update(deltaTime);
 }
 
 // •`‰æˆ—

@@ -30,7 +30,7 @@ void SceneInGame::Initialize()
 	m_timer = new Timer();
 	m_timer->Initialize();
 	// プレイヤーを生成，初期化
-	m_player = new PlayerManager();
+	m_player = new PlayerManager(1);
 	m_player->Initialize();
 	// エネミーを生成，初期化
 	m_enemy = new EnemyManager();
@@ -126,7 +126,7 @@ void SceneInGame::Update(Camera & camera, Input& input, float deltaTime)
 		// UIの更新
 		m_UI->Update(*m_player->GetPlayerPointer());
 		// オブジェクトの更新
-		m_obj->Update();
+		m_obj->Update(deltaTime);
 
 		// 残り時間によってエネミーとアイテムを追加
 		if (m_timer->GetTimer() == 50 && m_popCount == 0)
@@ -191,6 +191,7 @@ void SceneInGame::Update(Camera & camera, Input& input, float deltaTime)
 			m_isClear = true;
 		}
 	}
+
 }
 
 // シーンの更新(リザルトシーンへの遷移処理)
@@ -225,6 +226,7 @@ void SceneInGame::Draw()
 		m_player->Draw();
 		// オブジェクトの描画
 		m_obj->Draw();
+		
 		// UIの描画
 		m_UI->Draw(*m_player->GetPlayerPointer());
 		// タイマーの描画

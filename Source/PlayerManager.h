@@ -23,7 +23,7 @@ public:
 		DEAD,
 	};
 
-	PlayerManager();         // コンストラクタ
+	PlayerManager(int in_playerNum);         // コンストラクタ(プレイヤー番号を代入)
 	~PlayerManager();        // デストラクタ
 
 	void Initialize();       // プレイヤー初期化処理
@@ -41,6 +41,8 @@ public:
 	Player* GetPlayerPointer() { return m_player; }
 
 private:
+
+	int m_playerNum;              // プレイヤーの番号(1P, 2P, 3P, 4P)
 
 	int m_playerState;            // プレイヤーの状態格納
 

@@ -20,7 +20,7 @@ public:
 
 	void Delete();
 
-	void Update();
+	void Update(float deltaTime) override;
 
 
 

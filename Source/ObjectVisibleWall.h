@@ -19,7 +19,7 @@ public:
 
 	void SetPosition(const VECTOR in_position) { m_position = in_position; }
 
-	void Update();
+	void Update(float deltaTime);
 
 private:
 

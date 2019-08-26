@@ -35,6 +35,7 @@ bool GameSystem::Initialize()
 		return false;			                              // エラーが起きたら直ちに終了
 	}
 
+
 	// 画面を設定
 	SetScreen(1920, 1080, true);
 	// 全画面表示フラグがオフだったらウィンドウモードにする
@@ -45,15 +46,17 @@ bool GameSystem::Initialize()
 	// 画面設定を更新
 	SetGraphMode(m_screenWidth, m_screenHeight, 32, 60);
 
+
 	SetFontSize(50);                                          // 使用するフォントサイズを設定
 	SetMouseDispFlag(TRUE);                                   // マウスカーソルの表示
 	SetDrawScreen(DX_SCREEN_BACK);                            // 描画先を裏画面にセット
 
 	//---------------------------------------------------+
-	// Effekseer関連の初期化
-	//---------------------------------------------------+
+    // Effekseer関連の初期化
+    //---------------------------------------------------+
 	SetUseDirect3DVersion(DX_DIRECT3D_11);                    // DirectX11を使用
 	SetChangeScreenModeGraphicsSystemResetFlag(FALSE);
+	Effekseer_SetGraphicsDeviceLostCallbackFunctions();
 	SetUseZBuffer3D(TRUE);                                    // ZBufferを使用
 	SetWriteZBuffer3D(TRUE);                                  // ZBufferへの書き込みを許可
 
@@ -136,12 +139,12 @@ void GameSystem::RunLoop()
 		// シーンが変更されていなかった場合は描画を実行
 		if (tmpScene == m_scene)
 		{
-			// 描画処理
-			m_scene->Draw();
 			// Effekseerの更新
 			UpdateEffekseer3D();
 			// Effekseerの描画
 			DrawEffekseer3D();
+			// 描画処理
+			m_scene->Draw();
 		}
 		// シーンが変更されていた場合は描画をスキップしてシーン情報を更新
 		else
@@ -154,7 +157,6 @@ void GameSystem::RunLoop()
 
 	// 終了処理
 	ShutDown();
-	delete (tmpScene);
 
 	Effkseer_End();
 	DxLib_End();

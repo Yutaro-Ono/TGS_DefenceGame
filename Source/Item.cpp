@@ -18,17 +18,29 @@ Item::~Item()
 // 各種初期化処理
 void Item::Initialize()
 {
+	// 回転角度の初期化
+	m_angleY = 0.0f;
+	m_angleX = -45.0f;
+	m_angleZ = 0.0f;
 	// 半径を設定
 	m_radius = 3.0f;
 	// 状態をアクティブに
 	m_state = Item::POP;
+	// モデルの回転角度を設定
+	MV1SetRotationXYZ(m_modelHandle, VGet(m_angleX, m_angleY, m_angleZ));
 }
 
 // 更新処理
-void Item::Update()
+void Item::Update(float deltaTime)
 {
 	// ポジションを設定
 	MV1SetPosition(m_modelHandle, m_position);
+
+	// モデルを回転させる
+	MV1SetRotationXYZ(m_modelHandle, VGet(m_angleX, m_angleY, m_angleZ));
+
+	// 回転角度を更新
+	m_angleY += 1.0f * deltaTime;
 }
 
 // 出現時落下処理

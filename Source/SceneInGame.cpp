@@ -225,7 +225,7 @@ void SceneInGame::PlaceEnemyByTime()
 }
 
 // •`‰æˆ—
-void SceneInGame::Draw()
+void SceneInGame::Draw(TextGraph& text)
 {
 	if (m_startGame == true)
 	{

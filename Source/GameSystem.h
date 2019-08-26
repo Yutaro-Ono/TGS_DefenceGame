@@ -17,6 +17,7 @@
 #include "SceneInGame.h"
 #include "SceneResult.h"
 #include <vector>
+#include "TextGraph.h"
 
 #pragma comment(lib, "winmm.lib")
 
@@ -56,6 +57,9 @@ public:
 	const int& GetScreenHeight()const { return m_screenHeight; }
 	// 画面設定のセッター
 	void SetScreen(const int& scrWidth, const int& scrHeight, const bool& fullScreen);
+	// ゲーム終了のセッター
+	void SetGameQuit(bool in_quit) { m_isGameQuit = true; }
+
 
 private:
 	GameSystem();                                // コンストラクタ
@@ -67,6 +71,7 @@ private:
 	SceneBase* m_tmpScene;                       // シーン情報の一時保存用
 	Camera* m_camera;                            // カメラ
 	Input* m_input;                              // 入力
+	TextGraph* m_text;                           // 描画用フォント
 
 	// ウィンドウ(Width : 幅, Height : 高さ)
 	int m_screenWidth;

@@ -5,9 +5,11 @@
 //-----------------------------------------------------------+
 #pragma once
 #include "DxLib.h"
+#include "TextGraph.h"
 
 class Camera;
 class Input;
+class TextGraph;
 
 class SceneBase
 {
@@ -22,7 +24,7 @@ public:
 
 	virtual void Update(Camera& camera, Input& input, float deltaTime) = 0;
 
-	virtual void Draw() = 0;
+	virtual void Draw(TextGraph& text) = 0;
 
 	virtual SceneBase* SceneUpdate(Input& input) = 0;
 

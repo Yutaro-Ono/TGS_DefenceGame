@@ -7,11 +7,9 @@
 #include "SceneBase.h"
 #include "SoundFX.h"
 #include "Effect.h"
-#include "TextGraph.h"
 
 class SoundFX;
 class PlayEffect;
-class TextGraph;
 
 class SceneTitle : public SceneBase
 {
@@ -27,7 +25,7 @@ public:
 
 	void Update(Camera& camera, Input& input, float deltaTime) override;
 
-	void Draw() override;
+	void Draw(TextGraph& title) override;
 
 	const int& GetNextScene() const { return toNext; };
 

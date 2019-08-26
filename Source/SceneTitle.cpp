@@ -29,9 +29,6 @@ void SceneTitle::Initialize()
 	m_bgEffect->Initialize();
 	// 再生するBGM
 	m_bgm = new SoundFX("Data/Music/BGM/Title/cyrf_lu_main_theme.mp3");
-
-	m_text = new TextGraph();
-	m_text->Initialize();
 }
 
 void SceneTitle::Delete()
@@ -39,12 +36,8 @@ void SceneTitle::Delete()
 	m_bgEffect->Delete();
 	m_bgm->Delete();
 
-	m_text->Delete();
-
 	delete (m_bgEffect);
 	delete (m_bgm);
-
-	delete (m_text);
 }
 
 void SceneTitle::Update(Camera & camera, Input& input, float deltaTime)
@@ -54,7 +47,7 @@ void SceneTitle::Update(Camera & camera, Input& input, float deltaTime)
 
 }
 
-void SceneTitle::Draw()
+void SceneTitle::Draw(TextGraph& text)
 {
 
 	if (m_alpha >= 255)
@@ -80,8 +73,8 @@ void SceneTitle::Draw()
 
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, m_alpha);       // ブレンドモード(透過)をオン
 	// テキストの描画
-	m_text->DrawTextMessage(550, 720, "PRESS ANY KEY");
-	m_text->DrawTextMessage(600, 784, "Oh My God!!");
+	text.DrawTextMessage(550, 720, "PRESS ANY KEY");
+	text.DrawTextMessage(600, 784, "Oh My God!!");
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);           //ブレンドモードをオフ
 
 	DrawString(GAME_INSTANCE.GetScreenWidth() / 2 - 700, GAME_INSTANCE.GetScreenHeight() / 2 + 50, "できるだけ多くの星を集めて中心のポッドへ持っていこう！", GetColor(255, 255, 255));
@@ -108,6 +101,13 @@ SceneBase * SceneTitle::SceneUpdate(Input& input)
 		Delete();                         // 解放処理
 
 		return new SceneInGame();           // 次のシーンを返す
+	}
+
+	if (input.GetPushButtonState(XINPUT_BUTTON::XINPUT_BACK))
+	{
+		Delete();
+
+		GAME_INSTANCE.SetGameQuit
 	}
 
 	return this;

@@ -69,6 +69,9 @@ void GameSystem::Create()
 	m_camera = new Camera();
 	// 入力システムを生成
 	m_input = new Input();
+	// フォントシステムを生成
+	m_text = new TextGraph();
+	m_text->Initialize();
 	// シーンを生成(タイトル)
 	m_scene = new SceneTitle();
 	m_scene->Initialize();
@@ -108,7 +111,7 @@ void GameSystem::RunLoop()
 	// シーンの生成処理
 	Create();
 
-	while (ProgramLoop())
+	while (ProgramLoop() || m_isGameQuit == true)
 	{
 		//時間計測
 		nowTick = timeGetTime();
@@ -138,7 +141,7 @@ void GameSystem::RunLoop()
 		if (m_tmpScene == m_scene)
 		{
 			// 描画処理
-			m_scene->Draw();
+			m_scene->Draw(*m_text);
 			// Effekseerの更新
 			UpdateEffekseer3D();
 			// Effekseerの描画
@@ -164,10 +167,13 @@ void GameSystem::RunLoop()
 void GameSystem::ShutDown()
 {
 	Delete();
+	m_text->Delete();
+
 	delete (m_scene);
 	delete (m_tmpScene);
 	delete (m_camera);
 	delete (m_input);
+	delete (m_text);
 }
 
 // 画面情報(width : 横幅, Height : 縦幅, 全画面表示かどうか)のセッター

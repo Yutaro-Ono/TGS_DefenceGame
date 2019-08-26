@@ -23,7 +23,7 @@ public:
 
 	void Update(Camera& camera, Input& input, float deltaTime) override;
 
-	void Draw() override;
+	void Draw(TextGraph& text) override;
 
 	void SetScore(const int score) { m_score = score; }          // スコアのセッター
 

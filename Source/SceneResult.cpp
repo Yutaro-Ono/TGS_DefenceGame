@@ -37,7 +37,7 @@ void SceneResult::Update(Camera & camera, Input& input, float deltaTime)
 }
 
 // •`‰æˆ—
-void SceneResult::Draw()
+void SceneResult::Draw(TextGraph& text)
 {
 	if (m_gameOver == false)
 	{

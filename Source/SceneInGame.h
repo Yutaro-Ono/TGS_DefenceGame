@@ -16,7 +16,6 @@
 #include "Camera.h"
 #include "Timer.h"
 #include "SoundFX.h"
-#include "TextGraph.h"
 
 
 class SceneBase;
@@ -31,7 +30,6 @@ class CountDown;
 class Camera;
 class Timer;
 class SoundFX;
-class TextGraph;
 
 class SceneInGame : public SceneBase
 {
@@ -54,7 +52,7 @@ public:
 
 	void PlaceEnemyByTime();                      // 時間ごとにエネミーを追加配置する関数
 
-	void Draw()override;                          // 描画処理
+	void Draw(TextGraph& text) override;                          // 描画処理
 
 	// 更新処理
 	void Update(Camera& camera, Input& input, float deltaTime)override;

@@ -6,6 +6,7 @@
 #pragma once
 #include "DxLib.h"
 #include "ModelLoader.h"
+
 class ObjectBase
 {
 public:

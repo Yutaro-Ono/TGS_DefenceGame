@@ -29,13 +29,6 @@ GameSystem::~GameSystem()
 // 各種初期化
 bool GameSystem::Initialize()
 {
-	// DXライブラリとEffekseerの初期化処理
-	if (DxLib_Init() == -1 || Effekseer_Init(8000) == -1)
-	{
-		return false;			                              // エラーが起きたら直ちに終了
-	}
-
-
 	// 画面を設定
 	SetScreen(1920, 1080, true);
 	// 全画面表示フラグがオフだったらウィンドウモードにする
@@ -50,6 +43,12 @@ bool GameSystem::Initialize()
 	SetFontSize(50);                                          // 使用するフォントサイズを設定
 	SetMouseDispFlag(TRUE);                                   // マウスカーソルの表示
 	SetDrawScreen(DX_SCREEN_BACK);                            // 描画先を裏画面にセット
+
+		// DXライブラリとEffekseerの初期化処理
+	if (DxLib_Init() == -1 || Effekseer_Init(8000) == -1)
+	{
+		return false;			                              // エラーが起きたら直ちに終了
+	}
 
 	//---------------------------------------------------+
     // Effekseer関連の初期化
@@ -139,12 +138,12 @@ void GameSystem::RunLoop()
 		// シーンが変更されていなかった場合は描画を実行
 		if (tmpScene == m_scene)
 		{
+			// 描画処理
+			m_scene->Draw();
 			// Effekseerの更新
 			UpdateEffekseer3D();
 			// Effekseerの描画
 			DrawEffekseer3D();
-			// 描画処理
-			m_scene->Draw();
 		}
 		// シーンが変更されていた場合は描画をスキップしてシーン情報を更新
 		else

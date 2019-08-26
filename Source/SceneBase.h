@@ -24,7 +24,7 @@ public:
 
 	virtual void Draw() = 0;
 
-
+	virtual SceneBase* SceneUpdate(Input& input) = 0;
 
 protected:
 

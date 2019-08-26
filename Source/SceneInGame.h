@@ -51,25 +51,18 @@ public:
 
 	void Delete() override;                       // 各種解放処理
 
-	void SceneUpdate(SceneResult& result);        // シーンの更新処理(主にリザルトシーンへの遷移処理)
-
 	void PlaceEnemyByTime();                      // 時間ごとにエネミーを追加配置する関数
 
 	void Draw()override;                          // 描画処理
 
-	// オーバーライドした更新処理(不要な関数のため掃除予定)
-	void Update(Camera& camera, Input& input, float deltaTime)override;
-
 	// 更新処理
-	void Update(Camera& camera, Input& input, SceneResult& result, float deltaTime);
+	void Update(Camera& camera, Input& input, float deltaTime)override;
 
 	//--------------------------------------------------------------------------------+
 	// Getter/Setter 関連
 	//--------------------------------------------------------------------------------+
-	// 次のシーン(リザルト)へのenumを返す
-	const int& GetNextScene() const { return toNext; }
 
-
+	SceneBase* SceneUpdate(Input& input) override;
 
 private:
 
@@ -80,6 +73,10 @@ private:
 	bool m_setTimer;                               // ゲームシーン起動時、タイマーのセットフラグ
 
 	int m_popCount;                                // エネミーの出現カウンター
+
+	bool m_isGameOver;                             // ゲームオーバーになったかどうか   
+	
+	bool m_isClear;                                  // ゲームをクリアしたかどうか
 
 	Timer* m_timer;                                  // タイマー
 	PlayerManager* m_player;                       // プレイヤー

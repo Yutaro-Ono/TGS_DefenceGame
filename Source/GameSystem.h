@@ -1,7 +1,7 @@
 //-----------------------------------------------------------+
 // ゲームシステムクラス
 //      : 全ての処理を行う
-//                                  Last Update : 2019/07/01
+//                                  Last Update : 2019/08/24
 //-----------------------------------------------------------+
 #pragma once
 #include "DxLib.h"
@@ -28,17 +28,6 @@ class SceneResult;
 class GameSystem
 {
 public:
-
-	// ゲームシーン毎をフェーズとして定義
-	enum SCENE_PHASE
-	{
-		INIT = 0,
-		START,
-		TUTORIAL,
-		GAME,
-		GAME_END,
-		SHUT_DOWN,
-	};
 
 	// シングルトン
 	static GameSystem& GetInstance()
@@ -72,17 +61,9 @@ private:
 	GameSystem();                                // コンストラクタ
 
 	int Update();                                // Scene遷移更新用
-
-	void UpdateMove();                           // 移動関連の更新
-
-	void UpdateDraw();                           // 描画関連の更新
-
 	bool ProgramLoop();                          // Windowsプロセスのエラーを返す
 
-
-	SceneTitle* m_titleScene;                    // タイトルシーン
-	SceneInGame* m_inGameScene;                  // インゲームシーン
-	SceneResult* m_resultScene;                  // リザルトシーン
+	SceneBase* m_scene;                          // シーン
 	Camera* m_camera;                            // カメラ
 	Input* m_input;                              // 入力
 
@@ -92,8 +73,6 @@ private:
 
 	bool m_fullScreen;                           // フルスクリーンかどうか
 	bool m_isGameQuit;                           // ゲームを終了するかどうか
-
-	int sceneNum;                                // どのシーンか
 
 	float m_deltaTime;                           // 1フレームの更新時間
 };

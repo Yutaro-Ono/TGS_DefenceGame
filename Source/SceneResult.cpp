@@ -4,9 +4,11 @@
 //-----------------------------------------------------------------------+
 #include "SceneResult.h"
 
-SceneResult::SceneResult()
+SceneResult::SceneResult(bool in_isGameOver)
 	:toNext(4)
 {
+	// ゲームをクリアしたかどうか
+	m_gameOver = in_isGameOver;
 }
 
 SceneResult::~SceneResult()
@@ -24,37 +26,24 @@ void SceneResult::Delete()
 	delete (m_bgm);
 }
 
+// 更新処理
 void SceneResult::Update(Camera & camera, Input& input, float deltaTime)
 {
 	// BGM再生
 	m_bgm->PlayLoopSoundFx();
 
-	// STARTかENTERで次のシーンへ
-	if (input.GetPushButtonState(XINPUT_BUTTON::XINPUT_START))
-	{
-		m_bgm->StopSoundFx();
-		toNext = 5;
-	}
-	if (CheckHitKey(KEY_INPUT_RETURN))
-	{
-		m_bgm->StopSoundFx();
-		toNext = 5;
-	}
 
-	// BACKでシャットダウン
-	if (input.GetPushButtonState(XINPUT_BUTTON::XINPUT_BACK))
-	{
-		GAME_INSTANCE.ShutDown();
-	}
+
 }
 
+// 描画処理
 void SceneResult::Draw()
 {
-	if (m_clear == true)
+	if (m_gameOver == false)
 	{
 		DrawFormatString(GAME_INSTANCE.GetScreenWidth() / 2, GAME_INSTANCE.GetScreenHeight() / 2, GetColor(255, 255, 255), "生き残れた");
 	}
-	if (m_clear == false)
+	if (m_gameOver == true)
 	{
 		DrawFormatString(GAME_INSTANCE.GetScreenWidth() / 2, GAME_INSTANCE.GetScreenHeight() / 2, GetColor(255, 255, 255), "生き残れなかった");
 	}
@@ -62,4 +51,20 @@ void SceneResult::Draw()
 	
 	DrawFormatString(GAME_INSTANCE.GetScreenWidth() / 2, GAME_INSTANCE.GetScreenHeight() / 2 + 50, GetColor(255, 255, 255), "STARTでリトライ");
 	DrawFormatString(GAME_INSTANCE.GetScreenWidth() / 2, GAME_INSTANCE.GetScreenHeight() / 2 + 100, GetColor(255, 255, 255), "BACKで終了");
+}
+
+// シーンの更新処理
+SceneBase * SceneResult::SceneUpdate(Input & input)
+{
+	// STARTかENTERで次のシーンへ
+	if (input.GetPushButtonState(XINPUT_BUTTON::XINPUT_START) || CheckHitKey(KEY_INPUT_RETURN))
+	{
+		m_bgm->StopSoundFx();       // 音楽を停止
+		Delete();                   // 解放処理
+		// 次のシーンを返す
+		return new SceneTitle();
+	}
+
+	// 条件が揃わなければ自身のポインタを返す
+	return this;
 }

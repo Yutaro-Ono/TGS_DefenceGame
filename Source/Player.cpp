@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------+
 // プレイヤークラス                        
-//                                              Last Update : 2019/07/13
+//                                              Last Update : 2019/08/24
 //-----------------------------------------------------------------------+
 #include "Player.h"
 #include <math.h>
@@ -18,7 +18,7 @@ Player::Player(const int sourceModelHandle)
 	:Actor(sourceModelHandle)
 	,m_hitRadius(3.0f)
 {
-
+	// 処理なし
 }
 
 // デストラクター
@@ -217,8 +217,6 @@ void Player::MotionMove(float deltaTime)
 	//{
 	//	velocityY = 0.0f;
 	//}
-
-
 }
 
 // エネミーに当たった時の処理

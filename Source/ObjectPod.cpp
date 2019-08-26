@@ -46,11 +46,11 @@ void ObjectPod::Update()
 	// モデルの座標セット
 	MV1SetPosition(m_modelHandle, m_position);
 
-	//// ポッドエフェクトの再生
-	//if (m_effect->GetNowPlaying() == -1)
-	//{
-	//	m_effect->PlayEffekseer(GetPosition());
-	//	m_effect->SetEffectScale(12.0f, 12.0f, 12.0f);
-	//}
+	// ポッドエフェクトの再生
+	if (m_effect->GetNowPlaying() == -1)
+	{
+		m_effect->PlayEffekseer(GetPosition());
+		m_effect->SetEffectScale(12.0f, 12.0f, 12.0f);
+	}
 
 }

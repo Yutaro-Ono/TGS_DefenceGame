@@ -17,7 +17,5 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	// ゲームループ
 	GameSystem::GetInstance().RunLoop();
 
-
-
 	return 0;				// ソフトの終了 
 }

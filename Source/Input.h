@@ -63,10 +63,8 @@ public:
 	bool GetPushButtonState(const XINPUT_BUTTON in_padButton);
 	// ボタンの押下状態をスキャン
 	bool ScanPushButton(const int in_pushButton, const int in_num);
-
 	// 左スティック入力のゲッター
 	bool GetLeftStickState(const XINPUT_LSTICK in_stickDir);
-
 
 	// キーチェッカー
 	void KeyChecker();
@@ -78,7 +76,6 @@ public:
 	char GetInput(int keyCode) { return m_key[keyCode]; }
 
 private:
-
 
 	XINPUT_STATE m_xInput;
 

@@ -13,6 +13,8 @@ SceneInGame::SceneInGame()
 	m_player = NULL;
 	m_enemy = NULL;
 	m_item = NULL;
+	m_isGameOver = false;
+	m_isClear = false;
 	toNext = 3;
 }
 
@@ -44,6 +46,7 @@ void SceneInGame::Initialize()
 	m_obj->Initialize();
 	// カウントダウン演出の生成、初期化
 	m_countdown = new CountDown();
+	m_countdown->Initialize();
 	// BGMを生成
 	m_bgm = new SoundFX("Data/Music/BGM/Battle/cyrf_starcraft.mp3");
 	m_bgm->Initialize();
@@ -74,40 +77,19 @@ void SceneInGame::Delete()
 // オーバーライドしたアップデート(処理なし)
 void SceneInGame::Update(Camera & camera, Input& input, float deltaTime)
 {
-}
-
-// 更新処理
-void SceneInGame::Update(Camera& camera, Input& input, SceneResult& result, float deltaTime)
-{
 	//------------------------------------------------------+
     // ゲーム開始タイマーの初期化
     //------------------------------------------------------+
-	if (m_setTimer == false)
-	{
-		m_countdown->Initialize();
-		m_setTimer = true;
-	}
-
 	// ゲーム開始時のカウントダウン処理
 	m_startGame = m_countdown->StartCountDown();
-	if (m_startGame == true)
-	{
-		m_setTimer = false;
-	}
-
-	//m_startGame = true;
-
-	// BGMの再生
-	m_bgm->PlayLoopSoundFx();
-
-	// カメラの更新
-	camera.Update(*m_player);
-
-
 
 	if (m_startGame == true)
 	{
+		// カメラの更新
+		camera.Update(*m_player);
 
+		// BGMの再生
+		m_bgm->PlayLoopSoundFx();
 
 		//------------------------------------------------------+
 		// タイマーの初期化
@@ -197,36 +179,36 @@ void SceneInGame::Update(Camera& camera, Input& input, SceneResult& result, floa
 
 		// タイマーの更新
 		m_timer->UpdateCountDown(MAX_GAME_TIME);
+
+		// もしプレイヤーが死亡していたら、ゲームオーバーのフラグを立てる
+		if (m_player->GetPlayerState() == m_player->PLAYER_STATE::DEAD)
+		{
+			m_isGameOver = true;
+		}
+		// タイマーがだったらインゲームシーンを抜けるフラグを立てる
+		if (m_timer->GetTimer() <= 0)
+		{
+			m_isClear = true;
+		}
 	}
-
-	// 描画関数総合
-	Draw();
-
-
-	// シーンアップデート
-	SceneUpdate(result);
-
 }
 
-// シーンのアップデート(リザルトシーンへの遷移処理)
-void SceneInGame::SceneUpdate(SceneResult & result)
+// シーンの更新(リザルトシーンへの遷移処理)
+SceneBase * SceneInGame::SceneUpdate(Input & input)
 {
-	// タイマーが0になったら、ゲームクリアとして次のシーンへ
-	if (m_timer->GetTimer() <= 0)
+	// クリアフラグが立ったら次のシーンへ
+	if (m_isClear == true)
 	{
 		m_bgm->StopSoundFx();       // BGMを止める
-		result.SetClear(true);      // ゲームを無事クリアした
-		toNext = 4;                 // リザルトへ
+		Delete();                   // 解放処理
+		// クリアしたかどうかをセットしリザルトシーンへ
+		return new SceneResult(m_isGameOver);
 	}
 
-	// プレイヤーが死亡状態だったら、ゲームオーバーとして次のシーンへ
-	if (m_player->GetPlayerState() == m_player->PLAYER_STATE::DEAD)
-	{
-		m_bgm->StopSoundFx();        // BGMを止める
-		result.SetClear(false);      // ゲームオーバーとなった
-		toNext = 4;                  // リザルトへ
-	}
+	// 条件が揃わなければ自身のポインタを返す
+	return this;
 }
+
 
 void SceneInGame::PlaceEnemyByTime()
 {
@@ -235,15 +217,17 @@ void SceneInGame::PlaceEnemyByTime()
 // 描画処理
 void SceneInGame::Draw()
 {
-
-	// エネミーの描画
-	m_enemy->Draw();
-	// プレイヤーの描画
-	m_player->Draw();
-	// オブジェクトの描画
-	m_obj->Draw();
-	// UIの描画
-	m_UI->Draw(*m_player->GetPlayerPointer());
-	// タイマーの描画
-	m_timer->Draw();
+	if (m_startGame == true)
+	{
+		// エネミーの描画
+		m_enemy->Draw();
+		// プレイヤーの描画
+		m_player->Draw();
+		// オブジェクトの描画
+		m_obj->Draw();
+		// UIの描画
+		m_UI->Draw(*m_player->GetPlayerPointer());
+		// タイマーの描画
+		m_timer->Draw();
+	}
 }

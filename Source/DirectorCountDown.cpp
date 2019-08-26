@@ -35,26 +35,47 @@ void CountDown::Delete()
 void CountDown::Draw()
 {
 	// カウントダウンタイマーの描画
-	DrawGraph(GAME_INSTANCE.GetScreenWidth() / 2, GAME_INSTANCE.GetScreenHeight() / 2, m_counterGraph[-m_nowTime], TRUE);
+	DrawGraph(GAME_INSTANCE.GetScreenWidth() / 2, GAME_INSTANCE.GetScreenHeight() / 2, m_counterGraph[GetTimeGraphNum(m_nowTime)], TRUE);
 }
 
 // ゲーム開始時のカウントダウン演出
 bool CountDown::StartCountDown()
 {
 	// カウントダウン処理
-	m_timer->UpdateCountDown(MAX_START_TIME);
-
-	// カウントダウンタイマーの取得
-	m_nowTime = m_timer->GetTimer();
+	m_nowTime = m_timer->RunTimer(MAX_START_TIME);
 
 	// 描画
 	Draw();
 
 	// タイマーが0以下になったらtrueを返す
-	if (m_nowTime >= 0)
+	if (m_nowTime <= 0)
 	{
 		return true;
 	}
 
 	return false;
+}
+
+// カウンターに基づく画像参照番号のゲッター
+const int & CountDown::GetTimeGraphNum(const int in_nowTime) const
+{
+	// 3秒
+	if (m_nowTime == 3)
+	{
+		return 2;
+	}
+
+	// 2秒
+	if (m_nowTime == 2)
+	{
+		return 1;
+	}
+
+	// 1秒
+	if (m_nowTime == 1)
+	{
+		return 0;
+	}
+
+	return -1;
 }

@@ -1,5 +1,6 @@
 #include "Effect.h"
 
+// コンストラクタ
 PlayEffect::PlayEffect(const char* sourceEffectHandle)
 	:m_effectHandle(-1)
 {
@@ -11,10 +12,12 @@ PlayEffect::PlayEffect(const char* sourceEffectHandle)
 	}
 }
 
+// デストラクタ
 PlayEffect::~PlayEffect()
 {
 }
 
+// 初期化処理
 void PlayEffect::Initialize()
 {
 	m_playPos = VGet(0.0f, 0.0f, 0.0f);
@@ -22,11 +25,13 @@ void PlayEffect::Initialize()
 	m_playingEffect = -1;
 }
 
+// 解放処理
 void PlayEffect::Delete()
 {
 	DeleteEffekseerEffect(m_effectHandle);
 }
 
+// エフェクトの再生を止める
 void PlayEffect::StopEffect()
 {
 	StopEffekseer3DEffect(m_playingEffect);
@@ -38,6 +43,7 @@ void PlayEffect::PlayEffekseer(const VECTOR in_playPos)
 {
 	//printfDx(" (X座標 : %f, Y座標 : %f, Z座標 : %f ", in_playPos.x, in_playPos.y, in_playPos.z);
 
+	// エフェクトの座標を更新
 	m_playPos = in_playPos;
 
 	// エフェクトの描画
@@ -46,12 +52,13 @@ void PlayEffect::PlayEffekseer(const VECTOR in_playPos)
 	// エフェクトを再生する座標を指定
 	SetPosPlayingEffekseer3DEffect(m_playingEffect, m_playPos.x, m_playPos.y, m_playPos.z);
 
+	// 画像を描画しておく(透明)
 	DrawGraph(0, 0, m_dotGraph, FALSE);
-
 }
 
 void PlayEffect::PlayEffekseer2D(const VECTOR in_playPos)
 {
+	// エフェクトの座標を更新
 	m_playPos = in_playPos;
 
 	// エフェクトの描画
@@ -60,5 +67,6 @@ void PlayEffect::PlayEffekseer2D(const VECTOR in_playPos)
 	// エフェクトを再生する座標を指定
 	SetPosPlayingEffekseer2DEffect(m_playingEffect, m_playPos.x, m_playPos.y, m_playPos.z);
 
+	// 画像を描画しておく(透明)
 	DrawGraph(0, 0, m_dotGraph, FALSE);
 }

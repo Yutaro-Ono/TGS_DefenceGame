@@ -27,9 +27,11 @@ public:
 
 	const int& GetPrevTimer() const { return m_prevTimer; }  // 一秒前のタイマーゲッター
 
+	const int& RunTimer(const int in_limit);
+
 private:
 
-
+	bool m_isInsert;        // 制限時間をセットしたかどうか
 
 	int m_countTimer;       // カウントダウン用タイマー
 

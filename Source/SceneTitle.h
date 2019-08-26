@@ -7,9 +7,11 @@
 #include "SceneBase.h"
 #include "SoundFX.h"
 #include "Effect.h"
+#include "TextGraph.h"
 
 class SoundFX;
 class PlayEffect;
+class TextGraph;
 
 class SceneTitle : public SceneBase
 {
@@ -29,6 +31,9 @@ public:
 
 	const int& GetNextScene() const { return toNext; };
 
+	// 次のシーンへ移動
+	SceneBase* SceneUpdate(Input& input) override;
+
 private:
 
 	int toNext;
@@ -44,4 +49,5 @@ private:
 
 	PlayEffect* m_bgEffect;       // 背景のエフェクト
 	SoundFX* m_bgm;               // タイトルで再生するBGM
+	TextGraph* m_text;
 };

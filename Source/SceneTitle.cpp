@@ -29,6 +29,9 @@ void SceneTitle::Initialize()
 	m_bgEffect->Initialize();
 	// 再生するBGM
 	m_bgm = new SoundFX("Data/Music/BGM/Title/cyrf_lu_main_theme.mp3");
+
+	m_text = new TextGraph();
+	m_text->Initialize();
 }
 
 void SceneTitle::Delete()
@@ -36,8 +39,12 @@ void SceneTitle::Delete()
 	m_bgEffect->Delete();
 	m_bgm->Delete();
 
+	m_text->Delete();
+
 	delete (m_bgEffect);
 	delete (m_bgm);
+
+	delete (m_text);
 }
 
 void SceneTitle::Update(Camera & camera, Input& input, float deltaTime)
@@ -45,27 +52,6 @@ void SceneTitle::Update(Camera & camera, Input& input, float deltaTime)
 	// BGM再生
 	m_bgm->PlayLoopSoundFx();
 
-	// STARTボタンで次のシーンへ
-	if (input.GetPushButtonState(XINPUT_BUTTON::XINPUT_START))
-	{
-		m_bgm->StopSoundFx();
-		toNext = 3;
-	}
-
-	// スペースボタンで次のシーンへ
-	if (CheckHitKey(KEY_INPUT_SPACE))
-	{
-		m_bgm->StopSoundFx();
-		toNext = 3;
-	}
-
-	//描画
-	Draw();
-
-	// Effekseerの更新
-	UpdateEffekseer3D();
-	// Effekseerの描画
-	DrawEffekseer3D();
 }
 
 void SceneTitle::Draw()
@@ -103,8 +89,25 @@ void SceneTitle::Draw()
 		m_bgEffect->SetEffectScale(100.0f, 100.0f, 100.0f);
 	}
 
+	m_text->DrawTextMessage(0, 100, "PRESS ANY KEY");
+
 	// Effekseerの更新
 	UpdateEffekseer3D();
 	// Effekseerの描画
 	DrawEffekseer3D();
+}
+
+// 次のシーンへの遷移処理 (シーン遷移条件がtrueだったら次シーンへのポインタを返し、falseだったらこのクラスのポインタを返す)
+SceneBase * SceneTitle::SceneUpdate(Input& input)
+{
+	// STARTボタンかスペースキーで次のシーンへ
+	if (input.GetPushButtonState(XINPUT_BUTTON::XINPUT_START) || CheckHitKey(KEY_INPUT_SPACE))
+	{
+		m_bgm->StopSoundFx();
+		Delete();                         // 解放処理
+
+		return new SceneInGame();           // 次のシーンを返す
+	}
+
+	return this;
 }

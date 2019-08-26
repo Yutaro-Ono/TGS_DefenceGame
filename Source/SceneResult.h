@@ -14,7 +14,7 @@ class SceneResult : public SceneBase
 {
 public:
 
-	SceneResult();
+	SceneResult(bool in_isGameOver);
 	~SceneResult();
 
 	void Initialize() override;
@@ -27,9 +27,7 @@ public:
 
 	void SetScore(const int score) { m_score = score; }          // スコアのセッター
 
-	const int& GetNextScene() const { return toNext; }           // 次のシーンへのセッター
-
-	void SetClear(const bool clear) { m_clear = clear; }
+	SceneBase* SceneUpdate(Input& input) override;
 
 private:
 
@@ -37,7 +35,7 @@ private:
 
 	int m_score;
 
-	bool m_clear;           // ゲームクリアかゲームオーバーか判定するフラグ
+	bool m_gameOver;           // ゲームクリアかゲームオーバーか判定するフラグ
 
 	SoundFX* m_bgm;         // BGM再生用
 

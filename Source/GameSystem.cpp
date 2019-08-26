@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------+
 // ゲームシステムクラス                         
-//                                              Last Update : 2019/07/01
+//                                              Last Update : 2019/08/24
 //-----------------------------------------------------------------------+
 #include <iostream>
 #include <Windows.h>
@@ -15,7 +15,6 @@ GameSystem::GameSystem()
 	:m_screenWidth(0)
 	,m_screenHeight(0)
 	,m_fullScreen(false)
-	,sceneNum(1)
 	,m_deltaTime(0.0f)
 {
 	m_isGameQuit = false;
@@ -30,45 +29,33 @@ GameSystem::~GameSystem()
 // 各種初期化
 bool GameSystem::Initialize()
 {
+	// DXライブラリとEffekseerの初期化処理
+	if (DxLib_Init() == -1 || Effekseer_Init(8000) == -1)
+	{
+		return false;			                              // エラーが起きたら直ちに終了
+	}
+
 	// 画面を設定
 	SetScreen(1920, 1080, true);
-
 	// 全画面表示フラグがオフだったらウィンドウモードにする
 	if (m_fullScreen)
 	{
 		ChangeWindowMode(TRUE);
 	}
-
 	// 画面設定を更新
 	SetGraphMode(m_screenWidth, m_screenHeight, 32, 60);
 
-	SetFontSize(50);             // 使用するフォントサイズを設定
+	SetFontSize(50);                                          // 使用するフォントサイズを設定
+	SetMouseDispFlag(TRUE);                                   // マウスカーソルの表示
+	SetDrawScreen(DX_SCREEN_BACK);                            // 描画先を裏画面にセット
 
-	SetMouseDispFlag(TRUE);      // マウスカーソルの表示
-
-	SetDrawScreen(DX_SCREEN_BACK);
-
-	// Effekseer関連
-	SetUseDirect3DVersion(DX_DIRECT3D_11);      // DirectX11を使用
-
-	if (DxLib_Init() == -1)		// DXライブラリとEffekseerの初期化処理
-	{
-		return false;			// エラーが起きたら直ちに終了
-	}
-
-	if (Effekseer_Init(8000) == -1)		// DXライブラリとEffekseerの初期化処理
-	{
-		return false;			// エラーが起きたら直ちに終了
-	}
-
+	//---------------------------------------------------+
+	// Effekseer関連の初期化
+	//---------------------------------------------------+
+	SetUseDirect3DVersion(DX_DIRECT3D_11);                    // DirectX11を使用
 	SetChangeScreenModeGraphicsSystemResetFlag(FALSE);
-	SetUseZBuffer3D(TRUE);
-	SetWriteZBuffer3D(TRUE);
-
-	// カメラ
-	m_camera = new Camera();
-	// 入力
-	m_input = new Input();
+	SetUseZBuffer3D(TRUE);                                    // ZBufferを使用
+	SetWriteZBuffer3D(TRUE);                                  // ZBufferへの書き込みを許可
 
 	return true;
 }
@@ -76,47 +63,25 @@ bool GameSystem::Initialize()
 // 生成処理
 void GameSystem::Create()
 {
-	// タイトル
-	m_titleScene = new SceneTitle();
-	m_titleScene->Initialize();
-	// ゲーム中
-	m_inGameScene = new SceneInGame();
-	m_inGameScene->Initialize();
-	// リザルト
-	m_resultScene = new SceneResult();
-	m_resultScene->Initialize();
-
+	// カメラを生成
+	m_camera = new Camera();
+	// 入力システムを生成
+	m_input = new Input();
+	// シーンを生成(タイトル)
+	m_scene = new SceneTitle();
+	m_scene->Initialize();
 }
 
-// 削除
+// 解放処理
 void GameSystem::Delete()
 {
-	// タイトルの解放処理
-	m_titleScene->Delete();
-	// インゲームの解放処理
-	m_inGameScene->Delete();
-	// リザルトの解放処理
-	m_resultScene->Delete();
-
-	delete (m_titleScene);
-	delete (m_inGameScene);
-	delete (m_resultScene);
+	m_scene->Delete();
 }
 
 // 更新処理
 int GameSystem::Update()
 {
 	return 0;
-}
-
-// 移動関連の更新
-void GameSystem::UpdateMove()
-{
-}
-
-// 描画関連の更新
-void GameSystem::UpdateDraw()
-{
 }
 
 // エラー監視
@@ -137,7 +102,9 @@ void GameSystem::RunLoop()
 	// 現在時刻, 前回時刻を記録する
 	DWORD nowTick, prevTick;
 	prevTick = timeGetTime();
-
+	// シーン情報保存用
+	SceneBase* tmpScene;
+	// シーンの生成処理
 	Create();
 
 	while (ProgramLoop())
@@ -158,53 +125,36 @@ void GameSystem::RunLoop()
 		// 登録パッドの更新
 		m_input->ScanPadNum(PAD_NUM::PLAYER_1);
 
-		// シーンごとに更新処理
-		switch (sceneNum)
+		//----------------------------------------------------+
+		// ゲームシーンの更新処理
+		//----------------------------------------------------+
+		// シーンの更新処理
+		m_scene->Update(*m_camera, *m_input, m_deltaTime);
+		// 次のシーンをtmpに一時取得
+		tmpScene = m_scene->SceneUpdate(*m_input);
+
+		// シーンが変更されていなかった場合は描画を実行
+		if (tmpScene == m_scene)
 		{
-		case SCENE_PHASE::INIT:
-			Create();
-			sceneNum = SCENE_PHASE::START;
-			break;
-
-		case SCENE_PHASE::START:
-			m_titleScene->Update(*m_camera, *m_input, m_deltaTime);
-			sceneNum = m_titleScene->GetNextScene();
-			break;
-
-		case SCENE_PHASE::TUTORIAL:
-			sceneNum = SCENE_PHASE::GAME;
-			break;
-
-		case SCENE_PHASE::GAME:
-			// シーンの更新
-			m_inGameScene->Update(*m_camera, *m_input, *m_resultScene, m_deltaTime);
-			sceneNum = m_inGameScene->GetNextScene();
-			break;
-
-		case SCENE_PHASE::GAME_END:
-			m_resultScene->Update(*m_camera, *m_input, m_deltaTime);
-			m_resultScene->Draw();
-			sceneNum = m_resultScene->GetNextScene();
-			break;
-
-		case SCENE_PHASE::SHUT_DOWN:
-			Delete();
-			sceneNum = SCENE_PHASE::INIT;
-			break;
-
-		default:
-			break;
+			// 描画処理
+			m_scene->Draw();
+			// Effekseerの更新
+			UpdateEffekseer3D();
+			// Effekseerの描画
+			DrawEffekseer3D();
 		}
-
-		// Effekseerの更新
-		UpdateEffekseer3D();
-		// Effekseerの描画
-		DrawEffekseer3D();
-
+		// シーンが変更されていた場合は描画をスキップしてシーン情報を更新
+		else
+		{
+			m_scene = tmpScene;
+			m_scene->Initialize();
+		}
 		ScreenFlip();
 	}
 
+	// 終了処理
 	ShutDown();
+	delete (tmpScene);
 
 	Effkseer_End();
 	DxLib_End();
@@ -214,6 +164,7 @@ void GameSystem::RunLoop()
 void GameSystem::ShutDown()
 {
 	Delete();
+	delete (m_scene);
 	delete (m_camera);
 	delete (m_input);
 }

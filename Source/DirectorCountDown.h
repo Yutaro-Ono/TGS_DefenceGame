@@ -25,7 +25,7 @@ public:
 
 	bool StartCountDown();            // ゲーム開始時のカウントダウン演出
 
-
+	const int& GetTimeGraphNum(const int in_nowTime) const;        // タイマーに基づく画像番号のゲッター
 
 private:
 

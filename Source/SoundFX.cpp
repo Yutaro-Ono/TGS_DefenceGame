@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------+
 // サウンドエフェクト関連クラス                             
-//                                              Last Update : 2019/07/13
+//                                              Last Update : 2019/08/24
 //-----------------------------------------------------------------------+
 #include "SoundFX.h"
 
@@ -9,11 +9,10 @@ SoundFX::SoundFX(const char* in_fileName)
 	:m_sourceSoundHandle(-1)
 {
 	m_sourceSoundHandle = LoadSoundMem(in_fileName);
-
-	//if (m_sourceSoundHandle == -1)
-	//{
-	//	printfDx("音楽データ読み込み失敗");
-	//}
+	if (m_sourceSoundHandle == -1)
+	{
+		printfDx("音楽データ読み込み失敗");
+	}
 }
 
 // デストラクタ
@@ -35,7 +34,7 @@ void SoundFX::Delete()
 // サウンド再生関数
 void SoundFX::PlaySoundFx()
 {
-
+	// すでに再生していないことを確認して再生
 	if (CheckSoundMem(m_sourceSoundHandle) == 0)
 	{
 		PlaySoundMem(m_sourceSoundHandle, DX_PLAYTYPE_BACK, FALSE);
@@ -47,7 +46,6 @@ void SoundFX::PlaySoundFx()
 void SoundFX::PlayLoopSoundFx()
 {
 	PlaySoundMem(m_sourceSoundHandle, DX_PLAYTYPE_LOOP, FALSE);
-
 }
 
 // 再生中のサウンド停止

@@ -20,6 +20,7 @@ Timer::~Timer()
 
 void Timer::Initialize()
 {
+	m_isInsert = false;
 	m_limitTime = 0;
 	m_countTimer = 0;
 	m_startTimer = GetNowCount();
@@ -60,4 +61,24 @@ void Timer::UpdateCountDown(const int in_maxTime)
 void Timer::Draw()
 {
 	DrawFormatString(1100, 0, GetColor(255, 255, 255), "制限時間：%d", m_countTimer);
+}
+
+
+const int& Timer::RunTimer(const int in_limit)
+{
+	int comfortTime = 1;      // 時間計算のゆとり
+
+	// 制限時間を代入していなかった場合は代入し、開始時間もセット
+	if (m_isInsert == false)
+	{
+		m_limitTime = in_limit + comfortTime;
+		m_startTimer = GetNowCount();
+		m_isInsert = true;
+	}
+
+	// カウンターにスタートしてから何秒経ったかを代入
+	m_countTimer = (GetNowCount() / 1000) - (m_startTimer / 1000);
+
+	// 制限時間からカウンター分を引いた値を返す
+	return m_limitTime - m_countTimer;
 }

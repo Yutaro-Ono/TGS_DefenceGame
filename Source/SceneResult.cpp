@@ -50,7 +50,7 @@ void SceneResult::Draw()
 
 	
 	DrawFormatString(GAME_INSTANCE.GetScreenWidth() / 2, GAME_INSTANCE.GetScreenHeight() / 2 + 50, GetColor(255, 255, 255), "STARTでリトライ");
-	DrawFormatString(GAME_INSTANCE.GetScreenWidth() / 2, GAME_INSTANCE.GetScreenHeight() / 2 + 100, GetColor(255, 255, 255), "BACKで終了");
+	DrawFormatString(GAME_INSTANCE.GetScreenWidth() / 2, GAME_INSTANCE.GetScreenHeight() / 2 + 100, GetColor(255, 255, 255), "ESCAPEで終了");
 }
 
 // シーンの更新処理
@@ -64,6 +64,15 @@ SceneBase * SceneResult::SceneUpdate(Input & input)
 		// 次のシーンを返す
 		return new SceneTitle();
 	}
+
+	//// BACKキーで終了
+	//if(input.GetPushButtonState(XINPUT_BUTTON::XINPUT_BACK))
+	//{
+	//	m_bgm->StopSoundFx();       // 音楽を停止
+	//	Delete();                   // 解放処理
+	//	
+
+	//}
 
 	// 条件が揃わなければ自身のポインタを返す
 	return this;

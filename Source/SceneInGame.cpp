@@ -206,6 +206,15 @@ SceneBase * SceneInGame::SceneUpdate(Input & input)
 		return new SceneResult(m_isGameOver);
 	}
 
+	// ゲームオーバーしたら次のシーンへ
+	if (m_isGameOver == true)
+	{
+		m_bgm->StopSoundFx();       // BGMを止める
+		Delete();                   // 解放処理
+		// クリアしたかどうかをセットしリザルトシーンへ
+		return new SceneResult(m_isGameOver);
+	}
+
 	// 条件が揃わなければ自身のポインタを返す
 	return this;
 }

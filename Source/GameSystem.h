@@ -64,6 +64,7 @@ private:
 	bool ProgramLoop();                          // Windowsプロセスのエラーを返す
 
 	SceneBase* m_scene;                          // シーン
+	SceneBase* m_tmpScene;                       // シーン情報の一時保存用
 	Camera* m_camera;                            // カメラ
 	Input* m_input;                              // 入力
 

@@ -104,8 +104,7 @@ void GameSystem::RunLoop()
 	// 現在時刻, 前回時刻を記録する
 	DWORD nowTick, prevTick;
 	prevTick = timeGetTime();
-	// シーン情報保存用
-	SceneBase* tmpScene;
+
 	// シーンの生成処理
 	Create();
 
@@ -133,10 +132,10 @@ void GameSystem::RunLoop()
 		// シーンの更新処理
 		m_scene->Update(*m_camera, *m_input, m_deltaTime);
 		// 次のシーンをtmpに一時取得
-		tmpScene = m_scene->SceneUpdate(*m_input);
+		m_tmpScene = m_scene->SceneUpdate(*m_input);
 
 		// シーンが変更されていなかった場合は描画を実行
-		if (tmpScene == m_scene)
+		if (m_tmpScene == m_scene)
 		{
 			// 描画処理
 			m_scene->Draw();
@@ -148,7 +147,7 @@ void GameSystem::RunLoop()
 		// シーンが変更されていた場合は描画をスキップしてシーン情報を更新
 		else
 		{
-			m_scene = tmpScene;
+			m_scene = m_tmpScene;
 			m_scene->Initialize();
 		}
 		ScreenFlip();
@@ -166,6 +165,7 @@ void GameSystem::ShutDown()
 {
 	Delete();
 	delete (m_scene);
+	delete (m_tmpScene);
 	delete (m_camera);
 	delete (m_input);
 }

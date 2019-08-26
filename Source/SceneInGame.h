@@ -16,6 +16,7 @@
 #include "Camera.h"
 #include "Timer.h"
 #include "SoundFX.h"
+#include "TextGraph.h"
 
 
 class SceneBase;
@@ -30,7 +31,7 @@ class CountDown;
 class Camera;
 class Timer;
 class SoundFX;
-
+class TextGraph;
 
 class SceneInGame : public SceneBase
 {
@@ -85,7 +86,6 @@ private:
 	InGameUIManager* m_UI;                         // UI
 	ObjectManager* m_obj;                          // オブジェクト
 	SoundFX* m_bgm;                                // BGM
-
 
 	CountDown* m_countdown;                     // カウントダウン演出
 

@@ -26,7 +26,7 @@ ObjectManager::~ObjectManager()
 void ObjectManager::Initialize()
 {
 	// フィールドモデルのロード
-	m_fieldSourceHandle = MV1LoadModel("Data/Model/Field/チェックなドームルームver100/チェックなドームルームver100.mv1");
+	m_fieldSourceHandle = MV1LoadModel("Data/Model/Field/Field_Plate.mv1");
 	// スカイドームのロード
 	m_skySourceHandle = MV1LoadModel("Data/Skydome/Universe/Universe.mv1");
 	// 回収ポッドのモデルロード

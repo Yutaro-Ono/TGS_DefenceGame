@@ -57,7 +57,7 @@ public:
 
 	void SetHitEnemy(bool hit_e) { m_hitEnemy = hit_e; }                                  // エネミーとの当たり判定フラグのセッター
 	void SetInterval(const int count) { m_hitTime = count; }                              // インターバルのセッター
-	void SetDamaged() { m_hitPoint -= 1; }                                                // エネミー衝突時、体力減算処理
+	void SetDamaged() { m_hitPoint -= 1; m_hitEffect = true; }                                                // エネミー衝突時、体力減算処理
 
 
 
@@ -76,6 +76,7 @@ private:
 
 	float m_hitRadius;                                           // 当たり判定用半径
 	bool m_hitEnemy;                                             // エネミーに当たったかどうかのフラグ
+	bool m_hitEffect;                                            // エネミーに当たった時のエフェクト発生フラグ
 	int m_hitTime;                                               // 当たり判定が連続で発生するまでのインターバル
 
 	bool m_playEffect;                                           // 現在エフェクトを再生しているかどうか

@@ -39,13 +39,14 @@ void InGameUIManager::Delete()
 void InGameUIManager::Update(Player & player)
 {
 	m_score->Update(player);
+	m_playerUI->Update(player);
 }
 
 // 描画処理
-void InGameUIManager::Draw(Player & player)
+void InGameUIManager::Draw(Player& player, TextGraph& text)
 {
 	// プレイヤーステータスの描画
-	m_playerUI->Draw(player);
+	m_playerUI->Draw(player, text);
 
 	// スコアの描画
 	m_score->Draw();

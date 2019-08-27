@@ -10,8 +10,10 @@
 #include "Player.h"
 #include "PlayerManager.h"
 #include "GameSystem.h"
+#include "TextGraph.h"
 
 class Player;
+class TextGraph;
 
 class InGameUIManager final
 {
@@ -26,7 +28,7 @@ public:
 
 	void Update(Player& player);        // XVˆ—
 
-	void Draw(Player& player);          // •`‰æˆ—
+	void Draw(Player& player, TextGraph& text);          // •`‰æˆ—
 
 private:
 

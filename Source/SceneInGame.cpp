@@ -244,7 +244,7 @@ void SceneInGame::Draw(TextGraph& text)
 		m_obj->Draw();
 		
 		// UI‚Ì•`‰æ
-		m_UI->Draw(*m_player->GetPlayerPointer());
+		m_UI->Draw(*m_player->GetPlayerPointer(), text);
 		// ƒ^ƒCƒ}[‚Ì•`‰æ
 		m_timer->Draw();
 	}

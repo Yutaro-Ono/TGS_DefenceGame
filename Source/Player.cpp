@@ -41,6 +41,7 @@ void Player::Initialize()
 	m_holdItemNum = 0;
 	m_deliverdItem = false;
 	m_playEffect = false;
+	m_hitEffect = false;
 
 	// エフェクトのロード
 	m_damageEffect = new PlayEffect("Data/Effects/Player_Damaged.efk");
@@ -173,9 +174,10 @@ void Player::Draw()
 
 
 	// 当たり判定フラグが立ったらエフェクトを再生
-	if (m_hitEnemy == true && m_damageEffect->GetNowPlaying() == -1)
+	if (m_hitEffect == true && m_damageEffect->GetNowPlaying() == -1)
 	{
 		m_damageEffect->PlayEffekseer(m_position);
+		m_hitEffect = false;
 	}
 
 	// 当たり判定確認用の球

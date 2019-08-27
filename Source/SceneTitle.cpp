@@ -73,8 +73,7 @@ void SceneTitle::Draw(TextGraph& text)
 
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, m_alpha);       // ブレンドモード(透過)をオン
 	// テキストの描画
-	text.DrawTextMessage(550, 720, "PRESS ANY KEY");
-	text.DrawTextMessage(600, 784, "Oh My God!!");
+	text.DrawTextMessage(380, 720, "PRESS START BUTTON");
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);           //ブレンドモードをオフ
 
 	DrawString(GAME_INSTANCE.GetScreenWidth() / 2 - 700, GAME_INSTANCE.GetScreenHeight() / 2 + 50, "できるだけ多くの星を集めて中心のポッドへ持っていこう！", GetColor(255, 255, 255));

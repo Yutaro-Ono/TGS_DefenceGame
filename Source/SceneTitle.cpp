@@ -73,11 +73,11 @@ void SceneTitle::Draw(TextGraph& text)
 
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, m_alpha);              // ブレンドモード(透過)をオン
 	// テキストの描画
-	text.DrawTextMessage(700, 850, "PRESS START BUTTON");
+	text.DrawTextMessage(680, 700, "PRESS START BUTTON");
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);                  //ブレンドモードをオフ
 
-	DrawString(GAME_INSTANCE.GetScreenWidth() / 2 - 700, GAME_INSTANCE.GetScreenHeight() / 2 + 50, "できるだけ多くの星を集めて中心のポッドへ持っていこう！", GetColor(255, 255, 255));
-	DrawString(GAME_INSTANCE.GetScreenWidth() / 2 - 250, GAME_INSTANCE.GetScreenHeight() / 2 + 100, "UFOに当たるとダメージ！", GetColor(255, 255, 255));
+	// DrawString(GAME_INSTANCE.GetScreenWidth() / 2 - 700, GAME_INSTANCE.GetScreenHeight() / 2 + 50, "できるだけ多くの星を集めて中心のポッドへ持っていこう！", GetColor(255, 255, 255));
+	// DrawString(GAME_INSTANCE.GetScreenWidth() / 2 - 250, GAME_INSTANCE.GetScreenHeight() / 2 + 100, "UFOに当たるとダメージ！", GetColor(255, 255, 255));
 	// DrawString(GAME_INSTANCE.GetScreenWidth() / 2 - 350, GAME_INSTANCE.GetScreenHeight() / 2 + 250, "STARTボタンorSPACEキーでスタート", GetColor(255, 255, 255));
 
 	// エフェクトの再生

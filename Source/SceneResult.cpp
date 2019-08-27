@@ -65,14 +65,13 @@ SceneBase * SceneResult::SceneUpdate(Input & input)
 		return new SceneTitle();
 	}
 
-	//// BACKキーで終了
-	//if(input.GetPushButtonState(XINPUT_BUTTON::XINPUT_BACK))
-	//{
-	//	m_bgm->StopSoundFx();       // 音楽を停止
-	//	Delete();                   // 解放処理
-	//	
+	// BACKで終了
+	if (input.GetPushButtonState(XINPUT_BUTTON::XINPUT_BACK))
+	{
+		Delete();
 
-	//}
+		GAME_INSTANCE.SetGameQuit(true);
+	}
 
 	// 条件が揃わなければ自身のポインタを返す
 	return this;

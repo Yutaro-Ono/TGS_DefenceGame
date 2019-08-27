@@ -79,11 +79,11 @@ void InterfacePlayer::Draw(Player& player, TextGraph& text)
 	// アイテム所持数が1~99の時にプレイヤーの頭上に表示
 	if (m_holdItem > 0 && m_holdItem < 100)
 	{
-		text.DrawTextMessage(m_stockPosition.x - 90.0f, m_stockPosition.y - 110.0f, item);
+		text.DrawTextMessage(m_stockPosition.x - 60.0f, m_stockPosition.y - 110.0f, item);
 	}
 	// 所持アイテムが100個(上限)に到達したらMAX表示
 	if (m_holdItem == 100)
 	{
-		text.DrawTextMessage(m_stockPosition.x - 90.0f, m_stockPosition.y - 110.0f, "MAX");
+		text.DrawTextMessage(m_stockPosition.x - 60.0f, m_stockPosition.y - 110.0f, "MAX");
 	}
 }

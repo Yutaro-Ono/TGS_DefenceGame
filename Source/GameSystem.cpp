@@ -146,14 +146,21 @@ void GameSystem::RunLoop()
 			UpdateEffekseer3D();
 			// Effekseerの描画
 			DrawEffekseer3D();
+
+			ScreenFlip();
 		}
 		// シーンが変更されていた場合は描画をスキップしてシーン情報を更新
 		else
 		{
+			ScreenFlip();
+			// ロード中のテキスト表示
+			m_text->DrawTextMessage(1450, 1030, "NOW LOADING...");
+			ScreenFlip();
+
 			m_scene = m_tmpScene;
 			m_scene->Initialize();
 		}
-		ScreenFlip();
+
 	}
 
 	// 終了処理

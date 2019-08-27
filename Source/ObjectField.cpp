@@ -5,12 +5,12 @@
 #include "ObjectField.h"
 
 //const VECTOR ObjectField::SCALE_SIZE = { 1.8f, 1.5f, 1.8f };      // ƒ‚ƒfƒ‹‚ÌŠg‘å—¦
-const VECTOR ObjectField::SCALE_SIZE = { 0.25f, 0.3f, 0.19f };      // ƒ‚ƒfƒ‹‚ÌŠg‘å—¦
+const VECTOR ObjectField::SCALE_SIZE = { 20.0f, 5.0f, 18.0f };      // ƒ‚ƒfƒ‹‚ÌŠg‘å—¦
 
 ObjectField::ObjectField(int sourceModelHandle)
 	:ObjectBase(sourceModelHandle)
 {
-	m_position = VGet(0.0f, 0.0f, 0.0f);
+	m_position = VGet(0.0f, -10.0f, 0.0f);
 	m_direction = VGet(0.0f, 0.0f, 0.0f);
 	m_radius = 0.0f;
 }

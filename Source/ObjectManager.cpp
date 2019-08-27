@@ -26,7 +26,7 @@ ObjectManager::~ObjectManager()
 void ObjectManager::Initialize()
 {
 	// フィールドモデルのロード
-	m_fieldSourceHandle = MV1LoadModel("Data/Model/Field/Field_Plate.mv1");
+	m_fieldSourceHandle = MV1LoadModel("Data/Model/Field/Field/Field_Plate.mv1");
 	// スカイドームのロード
 	m_skySourceHandle = MV1LoadModel("Data/Skydome/Universe/Universe.mv1");
 	// 回収ポッドのモデルロード
@@ -71,10 +71,13 @@ void ObjectManager::Update(float deltaTime)
 // 描画処理
 void ObjectManager::Draw()
 {
-	// フィールドの描画
-	//m_fieldObj->Draw();
 	// スカイドームの描画
 	m_skyObj->Draw();
+
+	
+
+	// フィールドの描画
+	m_fieldObj->Draw();
 	// 回収ポッドの描画
 	m_podObj->Draw();
 }

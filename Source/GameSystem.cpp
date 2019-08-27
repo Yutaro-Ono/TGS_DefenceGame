@@ -161,6 +161,9 @@ void GameSystem::RunLoop()
 
 	Effkseer_End();
 	DxLib_End();
+
+	// メモリリーク検出
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 }
 
 // 終了処理

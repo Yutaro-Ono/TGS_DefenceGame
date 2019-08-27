@@ -7,8 +7,10 @@
 #include "DirectorBase.h"
 #include "Timer.h"
 #include "GameSystem.h"
+#include "TextGraph.h"
 
 class Timer;
+class TextGraph;
 
 class CountDown : public DirectorBase
 {
@@ -21,7 +23,7 @@ public:
 
 	void Delete() override;           // 各種解放処理
 
-	void Draw();                      // 描画処理
+	void Draw(TextGraph& text);                      // 描画処理
 
 	bool StartCountDown();            // ゲーム開始時のカウントダウン演出
 

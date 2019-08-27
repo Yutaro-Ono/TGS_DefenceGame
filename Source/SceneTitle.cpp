@@ -107,7 +107,7 @@ SceneBase * SceneTitle::SceneUpdate(Input& input)
 	{
 		Delete();
 
-		GAME_INSTANCE.SetGameQuit
+		GAME_INSTANCE.SetGameQuit(true);
 	}
 
 	return this;

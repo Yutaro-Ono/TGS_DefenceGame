@@ -75,7 +75,7 @@ void SceneInGame::Delete()
 }
 
 // オーバーライドしたアップデート(処理なし)
-void SceneInGame::Update(Camera & camera, Input& input, float deltaTime)
+void SceneInGame::Update(Camera& camera, Input& input, float deltaTime)
 {
 	//------------------------------------------------------+
     // ゲーム開始タイマーの初期化
@@ -227,6 +227,13 @@ void SceneInGame::PlaceEnemyByTime()
 // 描画処理
 void SceneInGame::Draw(TextGraph& text)
 {
+	// カウントダウン処理の描画
+	if (m_startGame == false)
+	{
+		m_countdown->Draw(text);
+	}
+
+	// ゲーム中の描画
 	if (m_startGame == true)
 	{
 		// エネミーの描画

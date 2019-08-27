@@ -242,10 +242,11 @@ void SceneInGame::Draw(TextGraph& text)
 		m_player->Draw();
 		// オブジェクトの描画
 		m_obj->Draw();
-		
 		// UIの描画
 		m_UI->Draw(*m_player->GetPlayerPointer(), text);
 		// タイマーの描画
 		m_timer->Draw();
 	}
+
+
 }

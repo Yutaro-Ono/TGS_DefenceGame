@@ -6,6 +6,9 @@
 #pragma once
 #include "DxLib.h"
 #include "PlayerManager.h"
+#include "TextGraph.h"
+
+class TextGraph;
 
 class Score final
 {
@@ -20,7 +23,7 @@ public:
 
 	void Update(Player& player);
 
-	void Draw();
+	void Draw(TextGraph& text);
 
 	//--------------------------------------------------------+
     // Getter/Setter ŠÖ˜A

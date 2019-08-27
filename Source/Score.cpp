@@ -3,7 +3,7 @@
 //                                              Last Update : 2019/07/28
 //-----------------------------------------------------------------------+
 #include "Score.h"
-
+#pragma warning(disable:4996)
 const int Score::SCORE_POINT = 100;       // スコア加算用ポイント
 const double Score::SCORE_MULTIPLE[6] = { 1, 2, 3, 3.5, 4, 5 };
 
@@ -57,11 +57,12 @@ void Score::Update(Player& player)
 }
 
 // 描画処理
-void Score::Draw()
+void Score::Draw(TextGraph& text)
 {
-	// スコアの表示
-	DrawFormatString(0, 450, GetColor(255, 255, 255), "%d", m_score);
+	char score[15];
+	sprintf(score, "%d", m_score);
 
-	// ホールド状態のスコアを表示
-	DrawFormatString(0, 500, GetColor(255, 255, 255), "%d", m_holdScore);
+	// SCORE:
+	text.DrawTextMessage(1500, 0, "SCORE:");
+	text.DrawTextMessage(1700, 0, score);
 }

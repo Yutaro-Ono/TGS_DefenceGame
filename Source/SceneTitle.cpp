@@ -71,10 +71,10 @@ void SceneTitle::Draw(TextGraph& text)
 	// ロゴの表示
 	DrawGraph((GAME_INSTANCE.GetScreenWidth() / 2) - (m_titleLogoW / 2), (GAME_INSTANCE.GetScreenHeight() / 2 - 100) - (m_titleLogoH / 3), m_titleLogoGraph, TRUE);
 
-	SetDrawBlendMode(DX_BLENDMODE_ALPHA, m_alpha);       // ブレンドモード(透過)をオン
+	SetDrawBlendMode(DX_BLENDMODE_ALPHA, m_alpha);              // ブレンドモード(透過)をオン
 	// テキストの描画
-	text.DrawTextMessage(380, 720, "PRESS START BUTTON");
-	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);           //ブレンドモードをオフ
+	text.DrawTextMessage(700, 850, "PRESS START BUTTON");
+	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);                  //ブレンドモードをオフ
 
 	DrawString(GAME_INSTANCE.GetScreenWidth() / 2 - 700, GAME_INSTANCE.GetScreenHeight() / 2 + 50, "できるだけ多くの星を集めて中心のポッドへ持っていこう！", GetColor(255, 255, 255));
 	DrawString(GAME_INSTANCE.GetScreenWidth() / 2 - 250, GAME_INSTANCE.GetScreenHeight() / 2 + 100, "UFOに当たるとダメージ！", GetColor(255, 255, 255));

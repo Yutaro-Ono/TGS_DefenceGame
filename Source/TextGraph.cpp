@@ -1,7 +1,7 @@
 #include "TextGraph.h"
 
-const int TextGraph::SIZE_X = 64;
-const int TextGraph::SIZE_Y = 64;
+const int TextGraph::SIZE_X = 32;
+const int TextGraph::SIZE_Y = 32;
 const int TextGraph::DIV_SIZE_X = 17;
 const int TextGraph::DIV_SIZE_Y = 6;
 const int TextGraph::FONT_ALL_NUM = 89;
@@ -24,7 +24,7 @@ TextGraph::~TextGraph()
 void TextGraph::Initialize()
 {
 	// フォント画像を分割ロード
-	LoadDivGraph("Data/Interface/Fonts/Font_Liner.png", FONT_ALL_NUM, DIV_SIZE_X, DIV_SIZE_Y, SIZE_X, SIZE_Y, m_fontImg);
+	LoadDivGraph("Data/Interface/Fonts/Font_Liner_S.png", FONT_ALL_NUM, DIV_SIZE_X, DIV_SIZE_Y, SIZE_X, SIZE_Y, m_fontImg);
 	// テキストの順序
 	TextMapping("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!?#$%&()-=.,/_\\<>@`[]{}*+;:");
 }

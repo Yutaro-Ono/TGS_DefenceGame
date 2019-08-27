@@ -49,7 +49,7 @@ void InGameUIManager::Draw(Player& player, TextGraph& text)
 	m_playerUI->Draw(player, text);
 
 	// スコアの描画
-	m_score->Draw();
+	m_score->Draw(text);
 
 	// チュートリアル画像(α版用)
 	// DrawGraph(1280, 50, m_tutorialGraph, TRUE);

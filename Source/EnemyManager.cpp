@@ -8,7 +8,7 @@
 class Enemy;
 
 const int EnemyManager::ENEMY_MAX_NUM = 5;           // 敵の一度に出現する最大数
-const int EnemyManager::ENEMY_ALL_NUM = 25;          // 敵の合計数
+const int EnemyManager::ENEMY_ALL_NUM = 10;          // 敵の合計数
 
 // 各種初期化(モデルの読み込み、ポジション設定)
 void EnemyManager::Initialize()

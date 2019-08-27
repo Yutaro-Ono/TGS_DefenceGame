@@ -11,7 +11,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	// Dxライブラリ初期化処理
 	if (GameSystem::GetInstance().Initialize() == false)
 	{
-		GameSystem::GetInstance().ShutDown();
+		GameSystem::GetInstance().ShutDown();              // 失敗したら終了
 	}
 
 	// ゲームループ

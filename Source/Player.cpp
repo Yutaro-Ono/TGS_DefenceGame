@@ -10,7 +10,7 @@ const float Player::MOVE_SPEED = 80.0f;
 const float Player::INITIAL_POSITION_Y = 5.0f;
 const VECTOR Player::SCALE_SIZE = { 0.03f, 0.03f, 0.03f };
 const float Player::JUMP_POWER = 0.3f;
-const float Player::JUMP_SUB = 1.0f;
+const float Player::JUMP_SUB = 5.0f;
 const int Player::MAX_HOLDITEM = 100;
 
 // コンストラクタ(Actorの初期化子を付ける)
@@ -190,7 +190,8 @@ void Player::MotionMove(float deltaTime)
 	if (m_moveFlag == true)
 	{
 		m_position.y = velocityY;
-		velocityY -= JUMP_SUB;
+		velocityY += 5.0f;
+
 		if (velocityY <= INITIAL_POSITION_Y)
 		{
 			m_moveFlag = false;
@@ -202,23 +203,23 @@ void Player::MotionMove(float deltaTime)
 		m_position.y = INITIAL_POSITION_Y;
 		velocityY = 0.0f;
 	}
-	//if (m_moveFlag == true)
-	//{
-	//	m_position.y = velocityY;
-	//	if (velocityY >= 0)
-	//	{
-	//		velocityY -= JUMP_SUB;
-	//	}
-	//	if (velocityY <= -100.0f)
-	//	{
-	//		velocityY += JUMP_SUB;
-	//	}
-	//}
+	if (m_moveFlag == true)
+	{
+		m_position.y = velocityY;
+		if (velocityY >= 0)
+		{
+			velocityY -= JUMP_SUB * deltaTime;
+		}
+		if (velocityY <= -20.0f)
+		{
+			velocityY += JUMP_SUB * deltaTime;
+		}
+	}
 
-	//if (m_moveFlag == false)
-	//{
-	//	velocityY = 0.0f;
-	//}
+	if (m_moveFlag == false)
+	{
+		velocityY = 0.0f;
+	}
 }
 
 // エネミーに当たった時の処理

@@ -17,6 +17,7 @@ ObjectSky::ObjectSky(int sourceModelHandle)
 
 ObjectSky::~ObjectSky()
 {
+	
 }
 
 void ObjectSky::Initialize()

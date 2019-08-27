@@ -22,7 +22,7 @@ public:
 
 	void Initialize() override;                                  // 初期化処理
 
-	void Delete() override;                                   // 各種解放処理
+	void Delete() override;                                      // 各種解放処理
 
 	void Update(float deltaTime) override;                       // プレイヤー関連の更新(オーバーライド)
 
@@ -42,22 +42,22 @@ public:
 	//----------------------------------------------------------------------------------------------------------------+
 	// Getter/Setter 関連
 	//----------------------------------------------------------------------------------------------------------------+
-	const float& GetRadius()const { return m_hitRadius; }                                 // 当たり判定半径のゲッター
-	const bool& GetHitEnemy() const { return m_hitEnemy; }                                // エネミーと当たったかどうかのゲッター
-	const int& GetHitPoint() const { return m_hitPoint; }                                 // プレイヤー体力のゲッター
+	const float& GetRadius()const { return m_hitRadius; }                                                                           // 当たり判定半径のゲッター
+	const bool& GetHitEnemy() const { return m_hitEnemy; }                                                                          // エネミーと当たったかどうかのゲッター
+	const int& GetHitPoint() const { return m_hitPoint; }                                                                           // プレイヤー体力のゲッター
 	// アイテム関連
-	const int& GetHoldItem() const { return m_holdItemNum; }                              // 所持しているアイテムの数を返す
-	const int& GetMaxHold() const { return Player::MAX_HOLDITEM; }                        // 所持できるアイテムの最大数を返す
+	const int& GetHoldItem() const { return m_holdItemNum; }                                                                        // 所持しているアイテムの数を返す
+	const int& GetMaxHold() const { return Player::MAX_HOLDITEM; }                                                                  // 所持できるアイテムの最大数を返す
 	void AddHoldItem() { m_getStarSound->PlaySoundFx(); m_getEffect->PlayEffekseer(GetPosition()); m_holdItemNum++; };              // 所持しているアイテムの数を増やす
-	void InitHoldItem() { m_delivereyEffect->PlayEffekseer(GetPosition()); m_holdItemNum = 0; }                                            // アイテム回収時、ホールドアイテムのリセット用
+	void InitHoldItem() { m_delivereyEffect->PlayEffekseer(GetPosition()); m_holdItemNum = 0; }                                     // アイテム回収時、ホールドアイテムのリセット用
 	// スコア関連
-	const bool& GetDeliveredItem() const { return m_deliverdItem; }                       // アイテムを回収したかどうかのゲッター
+	const bool& GetDeliveredItem() const { return m_deliverdItem; }                                                                 // アイテムを回収したかどうかのゲッター
 	void SetDeliveredItem(bool in_delivered) { m_deliverySound->PlaySoundFx(); 
-	                                           m_deliverdItem = in_delivered; }           // アイテムを回収したかどうかのセッター
+	                                           m_deliverdItem = in_delivered; }                                                     // アイテムを回収したかどうかのセッター
 
-	void SetHitEnemy(bool hit_e) { m_hitEnemy = hit_e; }                                  // エネミーとの当たり判定フラグのセッター
-	void SetInterval(const int count) { m_hitTime = count; }                              // インターバルのセッター
-	void SetDamaged() { m_hitPoint -= 1; m_hitEffect = true; }                                                // エネミー衝突時、体力減算処理
+	void SetHitEnemy(bool hit_e) { m_hitEnemy = hit_e; }                                                                            // エネミーとの当たり判定フラグのセッター
+	void SetInterval(const int count) { m_hitTime = count; }                                                                        // インターバルのセッター
+	void SetDamaged() { m_hitPoint -= 1; m_hitEffect = true; }                                                                      // エネミー衝突時、体力減算処理
 
 
 

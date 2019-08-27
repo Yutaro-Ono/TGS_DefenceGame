@@ -15,11 +15,13 @@ SceneResult::~SceneResult()
 {
 }
 
+// 各種初期化処理
 void SceneResult::Initialize()
 {
 	m_bgm = new SoundFX("Data/Music/BGM/Result/cyrf_dreamland.mp3");
 }
 
+// 各種解放処理
 void SceneResult::Delete()
 {
 	m_bgm->Delete();
@@ -31,14 +33,12 @@ void SceneResult::Update(Camera & camera, Input& input, float deltaTime)
 {
 	// BGM再生
 	m_bgm->PlayLoopSoundFx();
-
-
-
 }
 
 // 描画処理
 void SceneResult::Draw(TextGraph& text)
 {
+	// ゲームオーバーかどうかで処理を分岐
 	if (m_gameOver == false)
 	{
 		DrawFormatString(GAME_INSTANCE.GetScreenWidth() / 2, GAME_INSTANCE.GetScreenHeight() / 2, GetColor(255, 255, 255), "生き残れた");
@@ -48,7 +48,7 @@ void SceneResult::Draw(TextGraph& text)
 		DrawFormatString(GAME_INSTANCE.GetScreenWidth() / 2, GAME_INSTANCE.GetScreenHeight() / 2, GetColor(255, 255, 255), "生き残れなかった");
 	}
 
-	
+	// リトライ,終了のチュートリアル
 	DrawFormatString(GAME_INSTANCE.GetScreenWidth() / 2, GAME_INSTANCE.GetScreenHeight() / 2 + 50, GetColor(255, 255, 255), "STARTでリトライ");
 	DrawFormatString(GAME_INSTANCE.GetScreenWidth() / 2, GAME_INSTANCE.GetScreenHeight() / 2 + 100, GetColor(255, 255, 255), "ESCAPEで終了");
 }

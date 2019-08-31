@@ -81,6 +81,7 @@ void Score::Draw(TextGraph& text)
 	text.DrawTextMessage(m_scorePosition.x, m_scorePosition.y, score);
 }
 
+// 加算分スコアの表示
 void Score::DrawAddScore(TextGraph& text)
 {
 	if (m_addScore == true)

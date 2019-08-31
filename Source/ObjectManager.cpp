@@ -64,6 +64,7 @@ void ObjectManager::Delete()
 // 更新処理
 void ObjectManager::Update(float deltaTime)
 {
+	m_skyObj->Update(deltaTime);
 	m_fieldObj->Update(deltaTime);
 	m_podObj->Update(deltaTime);
 }
@@ -73,9 +74,6 @@ void ObjectManager::Draw()
 {
 	// スカイドームの描画
 	m_skyObj->Draw();
-
-	
-
 	// フィールドの描画
 	m_fieldObj->Draw();
 	// 回収ポッドの描画

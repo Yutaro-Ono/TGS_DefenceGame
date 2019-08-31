@@ -26,3 +26,13 @@ void ObjectSky::Initialize()
 	MV1SetRotationXYZ(m_modelHandle, ROTATE_RAD);           // 回転値の設定
 	MV1SetPosition(m_modelHandle, m_position);
 }
+
+void ObjectSky::Update(float deltaTime)
+{
+	// モデルを回転させる
+	MV1SetRotationXYZ(m_modelHandle, VGet(m_direction.x, m_direction.y, m_direction.z));
+
+	// 回転角度を更新
+	m_direction.x -= 0.02f * deltaTime;
+
+}

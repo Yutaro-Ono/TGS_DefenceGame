@@ -39,7 +39,6 @@ bool GameSystem::Initialize()
 	// 画面設定を更新
 	SetGraphMode(m_screenWidth, m_screenHeight, 32, 60);
 
-
 	SetFontSize(50);                                          // 使用するフォントサイズを設定
 	SetMouseDispFlag(TRUE);                                   // マウスカーソルの表示
 	SetDrawScreen(DX_SCREEN_BACK);                            // 描画先を裏画面にセット
@@ -160,7 +159,6 @@ void GameSystem::RunLoop()
 			m_scene = m_tmpScene;
 			m_scene->Initialize();
 		}
-
 	}
 
 	// 終了処理

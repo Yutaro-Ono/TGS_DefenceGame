@@ -68,10 +68,10 @@ void InterfacePlayer::Draw(Player& player, TextGraph& text)
 {
 	for (int i = 0; i < player.GetHitPoint(); i++)
 	{
-		DrawGraph(0, 0, hpGauge[i], TRUE);
+		DrawGraph(0, 20, hpGauge[i], TRUE);
 	}
 
-	DrawGraph(0, 0, hpFrame, TRUE);
+	DrawGraph(0, 20, hpFrame, TRUE);
 
 	//---------------------------------------------------------------------------------------+
 	// スコア関連描画

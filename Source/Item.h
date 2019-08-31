@@ -46,10 +46,5 @@ private:
 
 	int m_state;               // ゲーム中の状態
 
-	// モデルの回転角度設定用
-	float m_angleX;
-	float m_angleY;
-	float m_angleZ;
-
 	static const float FALL_SPEED;       // 落下速度
 };

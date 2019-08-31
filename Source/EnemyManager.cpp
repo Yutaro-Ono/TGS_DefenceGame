@@ -50,13 +50,11 @@ void EnemyManager::Delete()
 	//	delete (m_enemy[i]);
 	//	m_enemy[i] = NULL;
 	//}
-
 }
 
 // 更新処理
 void EnemyManager::Update(PlayerManager& playerManager, float deltaTime)
 {
-
 	for (int i = 0; i < m_enemy.size(); i++)
 	{
 		// プレイヤーとのヒットフラグが立っていない時のみ更新

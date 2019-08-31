@@ -36,6 +36,12 @@ void Enemy::Update(float deltaTime)
 	// 角度を設定
 	MV1SetRotationXYZ(m_modelHandle, VGet(0.0f, m_angle / 180.0f * DX_PI_F, 0.0f));
 	
+	// もし地面に埋まっていたら上に押し出す
+	if (m_position.y < 0.0f)
+	{
+		m_position.y = 0.0f;
+	}
+
 	// モデルの位置を設定
 	MV1SetPosition(m_modelHandle, m_position);
 }

@@ -44,29 +44,20 @@ void InterfacePlayer::Initialize()
 	// 座標関連の初期化
 	m_scorePosition = VGet(0.0f, 0.0f, 0.0f);
 	m_stockPosition = VGet(0.0f, 0.0f, 0.0f);
-	m_getPosition = VGet(0.0f, 10.0f, 0.0f);
+}
 
-	m_get = false;
-	m_getScore = 0;
+void InterfacePlayer::Delete()
+{
 }
 
 void InterfacePlayer::Update()
 {
 }
 
-void InterfacePlayer::Update(Player & player, Score& score)
+void InterfacePlayer::Update(Player & player)
 {
 	// プレイヤーの座標を追跡
 	m_stockPosition = ConvWorldPosToScreenPos(player.GetPosition());
-
-	// プレイヤーのスコアを
-
-	// スコアを取得したフラグがオフで且つプレイヤーがアイテムをポッドに運び込んだ時
-	if (m_get == false && player.GetDeliveredItem() == true)
-	{
-		// 取得フラグをオン
-		m_get = true;
-	}
 
 	// プレイヤーの所持アイテム数を更新
 	m_holdItem = player.GetHoldItem();
@@ -99,10 +90,4 @@ void InterfacePlayer::Draw(Player& player, TextGraph& text)
 		text.DrawTextMessage(m_stockPosition.x - 60.0f, m_stockPosition.y - 110.0f, "MAX");
 	}
 
-
-	// 取得したスコアの描画(ポッド上)
-	if (m_get == true)
-	{
-
-	}
 }

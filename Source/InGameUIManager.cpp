@@ -39,7 +39,7 @@ void InGameUIManager::Delete()
 void InGameUIManager::Update(Player & player)
 {
 	m_score->Update(player);
-	m_playerUI->Update(player, *m_score);
+	m_playerUI->Update(player);
 }
 
 // 描画処理
@@ -50,6 +50,7 @@ void InGameUIManager::Draw(Player& player, TextGraph& text)
 
 	// スコアの描画
 	m_score->Draw(text);
+	m_score->DrawAddScore(text);
 
 	// チュートリアル画像(α版用)
 	// DrawGraph(1280, 50, m_tutorialGraph, TRUE);

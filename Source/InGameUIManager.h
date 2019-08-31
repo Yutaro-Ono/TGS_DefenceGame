@@ -13,7 +13,9 @@
 #include "TextGraph.h"
 
 class Player;
+class InterfacePlayer;
 class TextGraph;
+class Score;
 
 class InGameUIManager final
 {

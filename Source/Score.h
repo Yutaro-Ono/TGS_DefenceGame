@@ -8,6 +8,7 @@
 #include "PlayerManager.h"
 #include "TextGraph.h"
 
+
 class TextGraph;
 
 class Score final
@@ -35,7 +36,9 @@ private:
 
 	int m_score;                        // スコア
 
-	int m_holdScore;                    // 所持中のスコア
+	int m_holdScore;                    // 所持中のスコア	
+
+	int m_prevGetScoreValue;            // 取得したスコアの値
 
 	static const int SCORE_POINT;       // スコアポイント(加算用)
 	static const double SCORE_MULTIPLE[6];                // 所持アイテム数によるスコア獲得倍率

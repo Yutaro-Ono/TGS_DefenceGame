@@ -39,7 +39,7 @@ void InGameUIManager::Delete()
 void InGameUIManager::Update(Player & player)
 {
 	m_score->Update(player);
-	m_playerUI->Update(player);
+	m_playerUI->Update(player, *m_score);
 }
 
 // •`‰æˆ—

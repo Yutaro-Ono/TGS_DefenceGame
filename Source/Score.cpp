@@ -22,6 +22,7 @@ void Score::Initialize()
 {
 	m_score = 0;
 	m_holdScore = 0;
+	m_prevGetScoreValue = 0;
 }
 
 void Score::Delete()
@@ -51,6 +52,7 @@ void Score::Update(Player& player)
 
 		// スコアに加算:プレイヤーの所持しているアイテム * 基本スコアポイント * 所持アイテム数による倍率
 		m_score += player.GetHoldItem() * SCORE_POINT * score_multiple;
+
 		player.InitHoldItem();
 		player.SetDeliveredItem(false);
 	}

@@ -60,8 +60,11 @@ void SceneInGame::Initialize()
 void SceneInGame::Delete()
 {
 	m_player->Delete();
+	m_enemy->Delete();
 	m_item->Delete();
 	m_UI->Delete();
+	m_obj->Delete();
+	m_countdown->Delete();
 	m_bgm->Delete();
 
 	delete (m_timer);
@@ -77,12 +80,15 @@ void SceneInGame::Delete()
 // オーバーライドしたアップデート(処理なし)
 void SceneInGame::Update(Camera& camera, Input& input, float deltaTime)
 {
-	//------------------------------------------------------+
-    // ゲーム開始タイマーの初期化
-    //------------------------------------------------------+
-	// ゲーム開始時のカウントダウン処理
-	m_startGame = m_countdown->StartCountDown();
 
+	// カウントダウン
+	if (m_startGame == false)
+	{
+        // ゲーム開始時のカウントダウン処理
+		m_startGame = m_countdown->StartCountDown();
+	}
+
+	// ゲーム開始
 	if (m_startGame == true)
 	{
 		// カメラの更新

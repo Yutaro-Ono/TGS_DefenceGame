@@ -9,9 +9,11 @@
 #include "Timer.h"
 #include "GameSystem.h"
 #include "TextGraph.h"
+#include "SoundFX.h"
 
 class Timer;
 class TextGraph;
+class SoundFX;
 
 class CountDown : public DirectorBase
 {
@@ -37,7 +39,10 @@ private:
 
 	int m_counterGraph[3];                                         // カウントダウンの描画用グラフィックハンドル
 
+	bool m_playSE;                                                 // SE再生のフラグ
+
 	Timer* m_timer;                                                // タイマークラス
+	SoundFX* m_sound;                                              // サウンド
 
 	static const int MAX_START_TIME;                               // 開始時の最大カウントダウン時間
 };

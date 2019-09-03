@@ -274,3 +274,33 @@ void Player::ChangeAngle()
 		m_angle += DX_PI_F * 2;
 	}
 }
+
+// 所持アイテムの初期化。初期化する際に回収エフェクトを再生(所持アイテム数によってエフェクトのサイズが変化)
+void Player::InitHoldItem()
+{
+	// アイテム80個以上
+	if (m_holdItemNum >= 80)
+	{
+		m_delivereyEffect->ChangeSizePlayEffekseer(m_position, VGet(1.0f, 1.0f, 1.0f));
+	}
+
+	// アイテム50個以上、80個未満
+	if (m_holdItemNum >= 50 && m_holdItemNum < 80)
+	{
+		m_delivereyEffect->ChangeSizePlayEffekseer(m_position, VGet(0.7f, 0.7f, 0.7f));
+	}
+
+	// アイテム10個以上、50個未満
+	if (m_holdItemNum >= 10 && m_holdItemNum < 50)
+	{
+		m_delivereyEffect->ChangeSizePlayEffekseer(m_position, VGet(0.5f, 0.5f, 0.5f));
+	}
+
+	// アイテム10個未満
+	if (m_holdItemNum < 10)
+	{
+		m_delivereyEffect->ChangeSizePlayEffekseer(m_position, VGet(0.3f, 0.3f, 0.3f));
+	}
+
+	m_holdItemNum = 0;
+}

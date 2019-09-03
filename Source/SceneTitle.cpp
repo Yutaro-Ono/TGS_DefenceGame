@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------+
 // タイトルシーン                  
-//                                              Last Update : 2019/07/11
+//                                              Last Update : 2019/09/03
 //-----------------------------------------------------------------------+
 
 #include "SceneTitle.h"
@@ -8,7 +8,7 @@
 #include "GameSystem.h"
 
 SceneTitle::SceneTitle()
-	:toNext(1)
+	:m_toNext(false)
 {
 }
 
@@ -16,6 +16,7 @@ SceneTitle::~SceneTitle()
 {
 }
 
+// 初期化処理
 void SceneTitle::Initialize()
 {
 	m_alpha = 255;
@@ -29,15 +30,21 @@ void SceneTitle::Initialize()
 	m_bgEffect->Initialize();
 	// 再生するBGM
 	m_bgm = new SoundFX("Data/Music/BGM/Title/cyrf_lu_main_theme.mp3");
+	// 決定音
+	m_enterSE = new SoundFX("Data/Music/SE/System/Enter/decision17.mp3");
 }
 
+
+// 解放処理
 void SceneTitle::Delete()
 {
 	m_bgEffect->Delete();
 	m_bgm->Delete();
+	m_enterSE->Delete();
 
 	delete (m_bgEffect);
 	delete (m_bgm);
+	delete (m_enterSE);
 }
 
 void SceneTitle::Update(Camera & camera, Input& input, float deltaTime)
@@ -96,17 +103,14 @@ SceneBase * SceneTitle::SceneUpdate(Input& input)
 	// STARTボタンかスペースキーで次のシーンへ
 	if (input.GetPushButtonState(XINPUT_BUTTON::XINPUT_START) || CheckHitKey(KEY_INPUT_SPACE))
 	{
-		m_bgm->StopSoundFx();
-		Delete();                         // 解放処理
-
-		return new SceneInGame();           // 次のシーンを返す
+		m_toNext = true;                    // 次シーンへ移動するフラグをオン
+		m_enterSE->PlaySoundFx();         // 決定音を鳴らす
 	}
-
-	if (input.GetPushButtonState(XINPUT_BUTTON::XINPUT_BACK))
+	// 決定音の再生が終わったら解放し、次のシーンを返す
+	if (m_toNext == true && m_enterSE->ScanNowPlaySound() == true)
 	{
-		Delete();
-
-		GAME_INSTANCE.SetGameQuit(true);
+		m_bgm->StopSoundFx();             // BGMは止める
+		return new SceneInGame();           // 次のシーンを返す
 	}
 
 	return this;

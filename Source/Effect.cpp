@@ -1,5 +1,6 @@
 #include "Effect.h"
 
+
 // コンストラクタ
 PlayEffect::PlayEffect(const char* sourceEffectHandle)
 	:m_effectHandle(-1)

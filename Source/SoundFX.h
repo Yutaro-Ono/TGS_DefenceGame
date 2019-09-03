@@ -44,6 +44,9 @@ public:
 
 	void StopSoundFx();      // 再生中のサウンド停止
 
+	// 今音楽ファイルを再生しているかどうか？
+	bool ScanNowPlaySound();
+
 private:
 
 	int m_sourceSoundHandle;

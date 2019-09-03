@@ -53,3 +53,21 @@ void SoundFX::StopSoundFx()
 {
 	StopSoundMem(m_sourceSoundHandle);
 }
+
+
+bool SoundFX::ScanNowPlaySound()
+{
+	// 現在音楽ファイルが再生中かどうかを調べ、再生していたらtrueを返し、再生していなかったらfalseを返す
+	if (CheckSoundMem(m_sourceSoundHandle) == 0)
+	{
+		return true;
+	}
+
+	else
+	{
+		return false;
+	}
+
+
+	return false;
+}

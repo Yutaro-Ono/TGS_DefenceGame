@@ -212,7 +212,6 @@ SceneBase * SceneInGame::SceneUpdate(Input & input)
 	if (m_isClear == true)
 	{
 		m_bgm->StopSoundFx();       // BGMを止める
-		Delete();                   // 解放処理
 		// クリアしたかどうかをセットしリザルトシーンへ
 		return new SceneResult(m_isGameOver, score);
 	}
@@ -221,7 +220,6 @@ SceneBase * SceneInGame::SceneUpdate(Input & input)
 	if (m_isGameOver == true)
 	{
 		m_bgm->StopSoundFx();       // BGMを止める
-		Delete();                   // 解放処理
 		// クリアしたかどうかをセットしリザルトシーンへ
 		return new SceneResult(m_isGameOver, score);
 	}
@@ -230,7 +228,7 @@ SceneBase * SceneInGame::SceneUpdate(Input & input)
 	return this;
 }
 
-
+// エネミーの配置関数
 void SceneInGame::PlaceEnemyByTime()
 {
 }
@@ -258,6 +256,4 @@ void SceneInGame::Draw(TextGraph& text)
 		// タイマーの描画
 		m_timer->Draw(text);
 	}
-
-
 }

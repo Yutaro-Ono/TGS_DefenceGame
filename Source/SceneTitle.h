@@ -27,14 +27,14 @@ public:
 
 	void Draw(TextGraph& title) override;
 
-	const int& GetNextScene() const { return toNext; };
+	const bool& GetNextScene() const { return m_toNext; };
 
 	// 次のシーンへ移動
 	SceneBase* SceneUpdate(Input& input) override;
 
 private:
 
-	int toNext;
+	bool m_toNext;
 
 	int m_alpha;                  // ロゴの透過表示用
 	bool m_alphaCount;            // 透過処理用
@@ -47,5 +47,7 @@ private:
 
 	PlayEffect* m_bgEffect;       // 背景のエフェクト
 	SoundFX* m_bgm;               // タイトルで再生するBGM
+	SoundFX* m_enterSE;           // 決定音
+
 	TextGraph* m_text;
 };

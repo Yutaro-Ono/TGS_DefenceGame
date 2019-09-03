@@ -70,18 +70,9 @@ SceneBase * SceneResult::SceneUpdate(Input & input)
 	if (input.GetPushButtonState(XINPUT_BUTTON::XINPUT_START) || CheckHitKey(KEY_INPUT_RETURN))
 	{
 		m_bgm->StopSoundFx();       // 音楽を停止
-		Delete();                   // 解放処理
 
 		// 次のシーンを返す
 		return new SceneTitle();
-	}
-
-	// BACKで終了
-	if (input.GetPushButtonState(XINPUT_BUTTON::XINPUT_BACK))
-	{
-		Delete();                     // 解放処理
-
-		GAME_INSTANCE.SetGameQuit(true);      // ゲームを抜ける
 	}
 
 	// 条件が揃わなければ自身のポインタを返す

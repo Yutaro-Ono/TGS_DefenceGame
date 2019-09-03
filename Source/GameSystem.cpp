@@ -92,7 +92,7 @@ int GameSystem::Update()
 // エラー監視
 bool GameSystem::ProgramLoop()
 {
-	// Windowsの処理にエラーが起こった,またはEscで終了
+	// Windowsの処理にエラーが起こった,またはEscキー,BACKボタンで終了
 	if (ProcessMessage() == -1 || CheckHitKey(KEY_INPUT_ESCAPE))
 	{
 		return false;
@@ -134,8 +134,10 @@ void GameSystem::RunLoop()
 		//----------------------------------------------------+
 		// シーンの更新処理
 		m_scene->Update(*m_camera, *m_input, m_deltaTime);
+
 		// 次のシーンをtmpに一時取得
 		m_tmpScene = m_scene->SceneUpdate(*m_input);
+
 
 		// シーンが変更されていなかった場合は描画を実行
 		if (m_tmpScene == m_scene)
@@ -157,6 +159,9 @@ void GameSystem::RunLoop()
 			m_text->DrawTextMessage(1450, 1030, "NOW LOADING...");
 			ScreenFlip();
 
+			// 解放処理
+			m_scene->Delete();
+			// 次のシーンを格納し初期化
 			m_scene = m_tmpScene;
 			m_scene->Initialize();
 		}

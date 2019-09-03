@@ -31,6 +31,7 @@ void Score::Initialize()
 	m_timer->Initialize();
 }
 
+// ‰ð•úˆ—
 void Score::Delete()
 {
 	m_timer->Delete();

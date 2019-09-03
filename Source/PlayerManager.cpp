@@ -18,7 +18,7 @@ PlayerManager::PlayerManager(int in_playerNum)
 // デストラクタ
 PlayerManager::~PlayerManager()
 {
-
+	// 処理なし
 }
 
 // プレイヤーモデル生成処理

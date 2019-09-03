@@ -14,7 +14,12 @@ public:
 
 	void Delete();
 
+	// Efekseer3Dの単純再生
 	void PlayEffekseer(const VECTOR in_playPos);
+
+	// Effekseer3Dのサイズを指定した再生
+	void ChangeSizePlayEffekseer(const VECTOR in_playPos, const VECTOR in_size);
+
 	// 2DのEffekseer再生
 	void PlayEffekseer2D(const VECTOR in_playPos);
 

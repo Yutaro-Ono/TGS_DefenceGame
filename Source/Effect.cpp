@@ -38,7 +38,7 @@ void PlayEffect::StopEffect()
 	m_playingEffect = -1;
 }
 
-// 被ダメージエフェクトの描画
+// Effekseer3Dの描画
 void PlayEffect::PlayEffekseer(const VECTOR in_playPos)
 {
 	// printfDx(" (X座標 : %f, Y座標 : %f, Z座標 : %f ", in_playPos.x, in_playPos.y, in_playPos.z);
@@ -57,6 +57,27 @@ void PlayEffect::PlayEffekseer(const VECTOR in_playPos)
 	// 画像を描画しておく(透明)
 	DrawGraph(0, 0, m_dotGraph, FALSE);
 }
+
+// Effekseer3Dのサイズを指定した再生
+void PlayEffect::ChangeSizePlayEffekseer(const VECTOR in_playPos, const VECTOR in_size)
+{
+	// エフェクトの座標更新
+	m_playPos = in_playPos;
+
+	// エフェクトの描画
+	m_playingEffect = PlayEffekseer3DEffect(m_effectHandle);
+
+	// エフェクトのサイズを設定
+	SetScalePlayingEffekseer3DEffect(m_playingEffect, in_size.x, in_size.y, in_size.z);
+
+	// エフェクトを再生する座標を指定
+	SetPosPlayingEffekseer3DEffect(m_playingEffect, m_playPos.x, m_playPos.y, m_playPos.z);
+
+	// 画像を描画しておく
+	DrawGraph(0, 0, m_dotGraph, FALSE);
+}
+
+
 
 void PlayEffect::PlayEffekseer2D(const VECTOR in_playPos)
 {

@@ -54,6 +54,8 @@ void SceneInGame::Initialize()
 	m_startGame = false;
 	m_setTimer = false;
 	m_popCount = 0;
+
+	Sleep(500);
 }
 
 // Šeí‰ğ•úˆ—

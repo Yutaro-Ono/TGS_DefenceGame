@@ -37,19 +37,11 @@ void EnemyManager::Delete()
 	// モデルを削除
 	MV1DeleteModel(m_enemySourceHandle);
 
-	//// エネミーの削除
-	//while (!m_enemy.empty())
-	//{
-	//	delete m_enemy.back();
-	//}
-	//m_enemy.clear();
-
 	// エネミーの削除
-	//for (int i = 0; i < m_enemy.size(); i++)
-	//{
-	//	delete (m_enemy[i]);
-	//	m_enemy[i] = NULL;
-	//}
+	for (int i = 0; i < m_enemy.size(); ++i)
+	{
+		delete m_enemy[i];
+	}
 }
 
 // 更新処理

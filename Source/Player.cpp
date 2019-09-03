@@ -143,16 +143,16 @@ void Player::Update(Input& input, float deltaTime)
 // 簡易的なフィールドの当たり判定
 void Player::HitWallUpdate(float deltaTime)
 {
-	if (m_position.x >= 110.0f)
+	if (m_position.x >= 100.0f)
 	{
 		m_position.x -= MOVE_SPEED * deltaTime;
 	}
-	if (m_position.x <= -110.0f)
+	if (m_position.x <= -100.0f)
 	{
 		m_position.x += MOVE_SPEED * deltaTime;
 	}
 
-	if (m_position.z >= 90.0f)
+	if (m_position.z >= 80.0f)
 	{
 		m_position.z -= MOVE_SPEED * deltaTime;
 	}

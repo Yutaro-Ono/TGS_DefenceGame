@@ -18,7 +18,6 @@
 #include "SceneResult.h"
 #include <vector>
 #include "TextGraph.h"
-
 #pragma comment(lib, "winmm.lib")
 
 class Input;
@@ -81,6 +80,8 @@ private:
 	bool m_isGameQuit;                           // ゲームを終了するかどうか
 
 	float m_deltaTime;                           // 1フレームの更新時間
+
+	int m_score;                                 // スコア保存用
 };
 
  #define GAME_INSTANCE GameSystem::GetInstance()

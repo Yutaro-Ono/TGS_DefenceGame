@@ -1,8 +1,14 @@
+//-----------------------------------------------------------+
 // タイマークラス
-
+//      : 制限時間処理などに用いるタイマー
+//                                  Last Update : 2019/09/03
+//-----------------------------------------------------------+
 #pragma once
 #include "DxLib.h"
 #include "SceneInGame.h"
+#include "TextGraph.h"
+
+class TextGraph;
 
 class Timer
 {
@@ -19,7 +25,7 @@ public:
 
 	void UpdateCountDown(const int in_maxTime);         // タイマーの計測(カウントダウン)
 
-	void Draw();                                  // タイマーの描画
+	void Draw(TextGraph& text);                                  // タイマーの描画
 
 	const int& GetTimer() const { return m_countTimer; }     // カウントタイマーのゲッター
 

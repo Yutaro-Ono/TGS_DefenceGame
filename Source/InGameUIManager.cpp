@@ -20,6 +20,8 @@ InGameUIManager::~InGameUIManager()
 // 各種初期化処理
 void InGameUIManager::Initialize()
 {
+	m_score = 0;
+
 	// プレイヤーステータスUI
 	m_playerUI = new InterfacePlayer();
 	m_playerUI->Initialize();
@@ -40,6 +42,9 @@ void InGameUIManager::Update(Player & player)
 {
 	m_score->Update(player);
 	m_playerUI->Update(player);
+
+	// スコアを更新
+	m_nowScore = m_score->GetScore();
 }
 
 // 描画処理

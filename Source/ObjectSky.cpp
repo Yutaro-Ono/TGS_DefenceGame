@@ -33,6 +33,6 @@ void ObjectSky::Update(float deltaTime)
 	MV1SetRotationXYZ(m_modelHandle, VGet(m_direction.x, m_direction.y, m_direction.z));
 
 	// ‰ñ“]Šp“x‚ğXV
-	m_direction.x -= 0.02f * deltaTime;
+	m_direction.y -= 0.01f * deltaTime;
 
 }

@@ -5,6 +5,8 @@
 #include "Timer.h"
 #include <iostream>
 
+#pragma warning(disable:4996)
+
 Timer::Timer()
 	:m_countTimer(0)
 	,m_startTimer(0)
@@ -58,9 +60,13 @@ void Timer::UpdateCountDown(const int in_maxTime)
 	}
 }
 
-void Timer::Draw()
+void Timer::Draw(TextGraph& text)
 {
-	DrawFormatString(1100, 0, GetColor(255, 255, 255), "êßå¿éûä‘ÅF%d", m_countTimer);
+	char time[20];
+	sprintf(time, "%d", m_countTimer);
+
+	text.DrawTextMessage(1100, 20, "Time:");
+	text.DrawTextMessage(1300, 20, time);
 }
 
 

@@ -178,6 +178,8 @@ void SceneInGame::Update(Camera& camera, Input& input, float deltaTime)
 			m_popCount = 7;
 		}
 
+
+		// 10秒ごとにアイテムを追加
 		if (m_timer->GetTimer() % 10 == 0)
 		{
 			m_item->AddItem();
@@ -203,13 +205,16 @@ void SceneInGame::Update(Camera& camera, Input& input, float deltaTime)
 // シーンの更新(リザルトシーンへの遷移処理)
 SceneBase * SceneInGame::SceneUpdate(Input & input)
 {
+	int score = m_UI->GetScore();
+
+
 	// クリアフラグが立ったら次のシーンへ
 	if (m_isClear == true)
 	{
 		m_bgm->StopSoundFx();       // BGMを止める
 		Delete();                   // 解放処理
 		// クリアしたかどうかをセットしリザルトシーンへ
-		return new SceneResult(m_isGameOver);
+		return new SceneResult(m_isGameOver, score);
 	}
 
 	// ゲームオーバーしたら次のシーンへ
@@ -218,7 +223,7 @@ SceneBase * SceneInGame::SceneUpdate(Input & input)
 		m_bgm->StopSoundFx();       // BGMを止める
 		Delete();                   // 解放処理
 		// クリアしたかどうかをセットしリザルトシーンへ
-		return new SceneResult(m_isGameOver);
+		return new SceneResult(m_isGameOver, score);
 	}
 
 	// 条件が揃わなければ自身のポインタを返す
@@ -251,7 +256,7 @@ void SceneInGame::Draw(TextGraph& text)
 		// UIの描画
 		m_UI->Draw(*m_player->GetPlayerPointer(), text);
 		// タイマーの描画
-		m_timer->Draw();
+		m_timer->Draw(text);
 	}
 
 

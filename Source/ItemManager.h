@@ -1,7 +1,7 @@
 //-----------------------------------------------------------+
 // アイテムマネージャークラス
 //      : フィールド上にアイテムを追加・管理するクラス
-//                                  Last Update : 2019/07/25
+//                                  Last Update : 2019/09/03
 //-----------------------------------------------------------+
 #pragma once
 #include "DxLib.h"
@@ -34,10 +34,15 @@ public:
 	Item* GetItemPointer(int itemNum) { return m_item[itemNum]; }
 	// 生成したアイテムの総数を返す
 	const int& GetActiveItem()const { return (int)m_item.size(); }
+	// 現在のフィールド上のアイテム個数ゲッター
+	const int& GetItemOnField()const { return m_nowItem; }
+
 
 private:
 
 	int m_sourceModelHandle;                 // アイテムモデルのハンドル
+
+	int m_nowItem;                           // アイテムが何個出ているか
 
 	std::vector<class Item*> m_item;         // アイテム
 

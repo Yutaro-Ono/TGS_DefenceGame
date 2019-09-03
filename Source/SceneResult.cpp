@@ -4,11 +4,15 @@
 //-----------------------------------------------------------------------+
 #include "SceneResult.h"
 
-SceneResult::SceneResult(bool in_isGameOver)
+#pragma warning(disable:4996)
+
+SceneResult::SceneResult(bool in_isGameOver, int in_score)
 	:toNext(4)
 {
 	// ゲームをクリアしたかどうか
 	m_gameOver = in_isGameOver;
+	// スコアを格納
+	m_score = in_score;
 }
 
 SceneResult::~SceneResult()
@@ -38,19 +42,25 @@ void SceneResult::Update(Camera & camera, Input& input, float deltaTime)
 // 描画処理
 void SceneResult::Draw(TextGraph& text)
 {
+	char score[20];
+	sprintf(score, "SCORE : %d", m_score);
+
+
 	// ゲームオーバーかどうかで処理を分岐
 	if (m_gameOver == false)
 	{
-		DrawFormatString(GAME_INSTANCE.GetScreenWidth() / 2, GAME_INSTANCE.GetScreenHeight() / 2, GetColor(255, 255, 255), "生き残れた");
+		text.DrawTextMessage(GAME_INSTANCE.GetScreenWidth() / 2, GAME_INSTANCE.GetScreenHeight() / 2, "Game Clear !!");
+		// スコアを表示
+		text.DrawTextMessage(GAME_INSTANCE.GetScreenWidth() / 2, GAME_INSTANCE.GetScreenHeight() / 2 + 50, score);
 	}
 	if (m_gameOver == true)
 	{
-		DrawFormatString(GAME_INSTANCE.GetScreenWidth() / 2, GAME_INSTANCE.GetScreenHeight() / 2, GetColor(255, 255, 255), "生き残れなかった");
+		text.DrawTextMessage(GAME_INSTANCE.GetScreenWidth() / 2, GAME_INSTANCE.GetScreenHeight() / 2, "Game Over ...");
 	}
 
 	// リトライ,終了のチュートリアル
-	DrawFormatString(GAME_INSTANCE.GetScreenWidth() / 2, GAME_INSTANCE.GetScreenHeight() / 2 + 50, GetColor(255, 255, 255), "STARTでリトライ");
-	DrawFormatString(GAME_INSTANCE.GetScreenWidth() / 2, GAME_INSTANCE.GetScreenHeight() / 2 + 100, GetColor(255, 255, 255), "ESCAPEで終了");
+	text.DrawTextMessage(GAME_INSTANCE.GetScreenWidth() / 2, GAME_INSTANCE.GetScreenHeight() / 2 + 140, "START : Retry");
+	text.DrawTextMessage(GAME_INSTANCE.GetScreenWidth() / 2, GAME_INSTANCE.GetScreenHeight() / 2 + 175, "ESCAPE : GAME END");
 }
 
 // シーンの更新処理
@@ -61,6 +71,7 @@ SceneBase * SceneResult::SceneUpdate(Input & input)
 	{
 		m_bgm->StopSoundFx();       // 音楽を停止
 		Delete();                   // 解放処理
+
 		// 次のシーンを返す
 		return new SceneTitle();
 	}
@@ -68,9 +79,9 @@ SceneBase * SceneResult::SceneUpdate(Input & input)
 	// BACKで終了
 	if (input.GetPushButtonState(XINPUT_BUTTON::XINPUT_BACK))
 	{
-		Delete();
+		Delete();                     // 解放処理
 
-		GAME_INSTANCE.SetGameQuit(true);
+		GAME_INSTANCE.SetGameQuit(true);      // ゲームを抜ける
 	}
 
 	// 条件が揃わなければ自身のポインタを返す

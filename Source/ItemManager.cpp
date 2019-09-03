@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------+
 // アイテムマネージャークラス           
-//                                              Last Update : 2019/07/28
+//                                              Last Update : 2019/09/03
 //-----------------------------------------------------------------------+
 #include "ItemManager.h"
 
@@ -43,8 +43,11 @@ void ItemManager::Initialize()
 	for (auto item : m_item)
 	{
 		item->Initialize();
-		item->SetEmergence(GetRandomPosition(100.0f, 100.0f));
+		item->SetEmergence(GetRandomPosition(90.0f, 85.0f));
 	}
+
+	// フィールド上のアイテムを初期化
+	m_nowItem = 0;
 }
 
 // 解放処理
@@ -90,9 +93,12 @@ void ItemManager::Update(float deltaTime)
 
 		}
 
-		// 回収されたら消す
+		// 回収されたら現在のフィールド上のアイテムを減算し、消す
 		if (item->GetState() == Item::DEAD)
 		{
+			// フィールド上のアイテムを減らす
+			m_nowItem--;
+			// アイテムの消去
 			m_item.clear();
 		}
 	}
@@ -109,7 +115,10 @@ void ItemManager::AddItem()
 		// 生成したアイテムの初期化
 		m_item.back()->Initialize();
 		// 出現位置の設定(ランダム)
-		m_item.back()->SetEmergence(GetRandomPosition(90.0f, 90.0f));
+		m_item.back()->SetEmergence(GetRandomPosition(90.0f, 85.0f));
+
+		// フィールド上のアイテムを更新
+		m_nowItem++;
 	}
 }
 
@@ -120,9 +129,19 @@ const VECTOR & ItemManager::GetRandomPosition(const float sizeFieldX, const floa
 
 	// X座標のポジション設定
 	randPos.x = GetRand(sizeFieldX);
+	// 回収ポッドと被らないように位置調整
+	if (randPos.x <= 10.0f)
+	{
+		randPos.x += 10.0f;
+	}
 
 	// Z座標のポジション設定
 	randPos.z = GetRand(sizeFieldZ);
+	// 回収ポッドと被らないように位置調整
+	if (randPos.z <= 15.0f)
+	{
+		randPos.z += 15.0f;
+	}
 
 	// X座標の正負設定
 	if (GetRand(1) == 0)
@@ -135,5 +154,6 @@ const VECTOR & ItemManager::GetRandomPosition(const float sizeFieldX, const floa
 		randPos.z *= -1.0f;
 	}
 
+	// ランダムなポジションを返す
 	return randPos;
 }

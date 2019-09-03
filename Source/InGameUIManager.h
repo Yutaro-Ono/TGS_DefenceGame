@@ -32,9 +32,15 @@ public:
 
 	void Draw(Player& player, TextGraph& text);          // 描画処理
 
+	// スコアのゲッター
+	const int& GetScore()const { return m_nowScore; }
+
+
 private:
 
 	int m_tutorialGraph;               // チュートリアルの画像ハンドル
+
+	int m_nowScore;                       // 現在のスコア
 
 	InterfacePlayer* m_playerUI;       // プレイヤーのUI
 	Score* m_score;                    // スコア

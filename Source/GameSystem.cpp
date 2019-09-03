@@ -16,6 +16,7 @@ GameSystem::GameSystem()
 	,m_screenHeight(0)
 	,m_fullScreen(false)
 	,m_deltaTime(0.0f)
+	,m_score(0)
 {
 	m_isGameQuit = false;
 }

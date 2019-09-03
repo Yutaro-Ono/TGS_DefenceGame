@@ -14,7 +14,7 @@ class SceneResult : public SceneBase
 {
 public:
 
-	SceneResult(bool in_isGameOver);
+	SceneResult(bool in_isGameOver, int in_score);
 	~SceneResult();
 
 	void Initialize() override;
@@ -31,12 +31,12 @@ public:
 
 private:
 
-	int toNext;
+	int toNext;                    // 次のシーンへのフラグ
 
-	int m_score;
+	int m_score;                   // スコア
 
-	bool m_gameOver;           // ゲームクリアかゲームオーバーか判定するフラグ
+	bool m_gameOver;               // ゲームクリアかゲームオーバーか判定するフラグ
 
-	SoundFX* m_bgm;         // BGM再生用
+	SoundFX* m_bgm;                // BGM再生用
 
 };

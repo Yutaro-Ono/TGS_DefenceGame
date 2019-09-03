@@ -20,11 +20,11 @@ Score::~Score()
 // 各種初期化処理
 void Score::Initialize()
 {
-	m_scorePosition = VGet(1700.0f, 0.0f, 0.0f);
+	m_scorePosition = VGet(1700.0f, 20.0f, 0.0f);
 	m_score = 0;
 	m_holdScore = 0;
 
-	m_addPosition = VGet(1650.0f, 40.0f, 0.0f);
+	m_addPosition = VGet(1650.0f, 60.0f, 0.0f);
 	m_addScore = false;
 
 	m_timer = new Timer();
@@ -77,7 +77,7 @@ void Score::Draw(TextGraph& text)
 	sprintf(score, "%d", m_score);
 
 	// スコアの表示
-	text.DrawTextMessage(1500, 0, "SCORE:");
+	text.DrawTextMessage(1500, 20, "SCORE:");
 	text.DrawTextMessage(m_scorePosition.x, m_scorePosition.y, score);
 }
 

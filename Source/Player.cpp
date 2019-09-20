@@ -1,7 +1,9 @@
 //-----------------------------------------------------------------------+
 // プレイヤークラス                        
-//                                              Last Update : 2019/09/03
+//                                                      2019 Yutaro Ono.
 //-----------------------------------------------------------------------+
+
+// インクルードファイル
 #include "Player.h"
 #include <math.h>
 
@@ -27,6 +29,7 @@ Player::~Player()
 	// 処理なし
 }
 
+// 初期化処理
 void Player::Initialize()
 {
 	// 各種初期化
@@ -56,6 +59,7 @@ void Player::Initialize()
 	m_deliverySound = new SoundFX("Data/Music/SE/Player/Delivery/soundlogo6.mp3");
 }
 
+// 解放処理
 void Player::Delete()
 {
 
@@ -73,11 +77,13 @@ void Player::Delete()
 
 }
 
-// 更新
+// 更新処理
 void Player::Update(float deltaTime)
 {
+	// 処理なし
 }
 
+// 更新処理
 void Player::Update(Input& input, float deltaTime)
 {
 	VECTOR prevPosition;
@@ -171,7 +177,6 @@ void Player::Draw()
 		// モデルの描画
 		MV1DrawModel(m_modelHandle);
 	}
-
 
 	// 当たり判定フラグが立ったらエフェクトを再生
 	if (m_hitEffect == true && m_damageEffect->GetNowPlaying() == -1)

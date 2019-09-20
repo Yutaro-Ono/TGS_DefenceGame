@@ -12,47 +12,24 @@ class SoundFX final
 {
 public:
 
-	//enum SFX_MENU
-	//{
-	//	ENTER,
-	//	CURSOL,
-	//	ALL_NUM,
-	//};
-
-	//enum SFX_PLAYER
-	//{
-	//	MOVE,
-	//	ALL_NUM,
-	//};
-
-	//enum SFX_ENEMY
-	//{
-	//	MOVE,
-	//	ALL_NUM,
-	//};
-
 	SoundFX(const char* in_fileName);        // コンストラクタ
-	~SoundFX();       // デストラクタ
+	~SoundFX();                              // デストラクタ
 
-	void Initialize();     // 初期化処理
+	void Initialize();                       // 初期化処理
 
-	void Delete();         // 解放処理
+	void Delete();                           // 解放処理
 
-	void PlaySoundFx();    // サウンド再生関数
+	void PlaySoundFx();                      // サウンド再生関数
 
-	void PlayLoopSoundFx();  // サウンドのループ再生
+	void PlayLoopSoundFx();                  // サウンドのループ再生
 
-	void StopSoundFx();      // 再生中のサウンド停止
+	void StopSoundFx();                      // 再生中のサウンド停止
 
 	// 今音楽ファイルを再生しているかどうか？
 	bool ScanNowPlaySound();
 
 private:
 
-	int m_sourceSoundHandle;
-
-	//int m_menuSFXHandle[SFX_MENU::ALL_NUM];         // メニューSEのハンドル
-
-	//int m_playerSFXHandle[SFX_PLAYER::ALL_NUM];     // プレイヤーSEのハンドル
+	int m_sourceSoundHandle;                 // 音楽ファイルのハンドル
 	
 };

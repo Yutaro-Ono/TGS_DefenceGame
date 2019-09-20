@@ -1,11 +1,14 @@
 //-----------------------------------------------------------------------+
 // カメラクラス                                 
-//                                              Last Update : 2019/07/13
+//                                                      2019 Yutaro Ono.
 //-----------------------------------------------------------------------+
+
+// インクルードファイル
 #include "Camera.h"
 #include "PlayerManager.h"
 #include "Actor.h"
 
+// クラス前方宣言
 class PlayerManager;
 
 #define USE_LERP_CAMERA 0        // Lerpを使用するかしないか

@@ -1,3 +1,9 @@
+//--------------------------------------------------------------+
+// カウントダウン系の演出総合クラス
+//                                             2019 Yutaro Ono.
+//--------------------------------------------------------------+
+
+// インクルードファイル
 #include "DirectorCountDown.h"
 
 const int CountDown::MAX_START_TIME = 3;
@@ -5,11 +11,13 @@ const int CountDown::MAX_START_TIME = 3;
 // コンストラクタ
 CountDown::CountDown()
 {
+	// 処理なし
 }
 
 // デストラクタ
 CountDown::~CountDown()
 {
+	// 処理なし
 }
 
 // 各種初期化処理

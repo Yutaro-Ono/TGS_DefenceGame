@@ -1,11 +1,12 @@
 //-----------------------------------------------------------------------+
 // リザルトシーン                         
-//                                              Last Update : 2019/09/03
+//                                                      2019 Yutaro Ono.
 //-----------------------------------------------------------------------+
 #include "SceneResult.h"
 
 #pragma warning(disable:4996)
 
+// コンストラクタ
 SceneResult::SceneResult(bool in_isGameOver, int in_score)
 	:toNext(4)
 {
@@ -15,8 +16,10 @@ SceneResult::SceneResult(bool in_isGameOver, int in_score)
 	m_score = in_score;
 }
 
+// デストラクタ
 SceneResult::~SceneResult()
 {
+	// 処理なし
 }
 
 // 各種初期化処理

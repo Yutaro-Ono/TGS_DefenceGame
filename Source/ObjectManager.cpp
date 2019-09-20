@@ -1,7 +1,9 @@
 //-----------------------------------------------------------------------+
 // オブジェクトマネージャークラス                                    
-//                                              Last Update : 2019/07/02
+//                                                      2019 Yutaro Ono.
 //-----------------------------------------------------------------------+
+
+// インクルードファイル
 #include "ObjectManager.h"
 #include "ObjectField.h"
 #include "ObjectSky.h"
@@ -14,12 +16,13 @@ ObjectManager::ObjectManager()
 	,m_skySourceHandle(-1)
 	,m_podSourceHandle(-1)
 {
-
+	// 処理なし
 }
 
 // デストラクタ
 ObjectManager::~ObjectManager()
 {
+	// 処理なし
 }
 
 // 各種初期化

@@ -1,13 +1,16 @@
 //-----------------------------------------------------------+
 // タイトルシーン
 //      : タイトル画面の処理
-//                                  Last Update : 2019/07/10
+//                                          2019 Yutaro Ono.
 //-----------------------------------------------------------+
 #pragma once
+
+// インクルードファイル
 #include "SceneBase.h"
 #include "SoundFX.h"
 #include "Effect.h"
 
+// クラス前方宣言
 class SoundFX;
 class PlayEffect;
 

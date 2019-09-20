@@ -10,8 +10,10 @@
 
 class Item : public ObjectBase
 {
+
 public:
 
+	// 状態enum
 	enum STATE_ITEM
 	{
 		NONE,
@@ -35,21 +37,17 @@ public:
 	//-------------------------------------------------------------+
     // Getter/Setter関連
     //-------------------------------------------------------------+
-	// 状態のゲッター
-	const int& GetState() const { return m_state; }
+	const int& GetState() const { return m_state; }                          // 状態のゲッター
 
-	// ポジションのセッター
-	void SetEmergence(const VECTOR popPos) { m_position = popPos; }
-	// Deactive(無効)状態へのセッター
-	void SetDeactive() { m_state = Item::DEACTIVE; }
+	void SetEmergence(const VECTOR popPos) { m_position = popPos; }          // ポジションのセッター
+	void SetDeactive() { m_state = Item::DEACTIVE; }                         // アイテムを無効状態にするセッター
 
 
 private:
 
 	float             m_hitRadius;          // 当たり判定用の半径
+	int                   m_state;          // ゲーム中の状態
 
-	int                   m_state;               // ゲーム中の状態
+	static const float FALL_SPEED;          // 落下速度
 
-
-	static const float FALL_SPEED;       // 落下速度
 };

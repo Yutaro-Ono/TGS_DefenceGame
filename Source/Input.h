@@ -1,9 +1,11 @@
 //-----------------------------------------------------------+
 // キー入力関連クラス
 //      : キーボードの押下状態を取得する
-//                                  Last Update : 2019/07/13
+//                                          2019 Yutaro Ono.
 //-----------------------------------------------------------+
 #pragma once
+
+// インクルードファイル
 #include "DxLib.h"
 
 enum PAD_NUM
@@ -43,6 +45,7 @@ enum XINPUT_LSTICK
 
 class Input final
 {
+
 public:
 
 	Input();
@@ -69,6 +72,9 @@ public:
 	// キーチェッカー
 	void KeyChecker();
 
+	//-------------------------------------------------------------+
+    // Getter/Setter関連
+    //-------------------------------------------------------------+
 	// キーのゲッター(簡易版)
 	const int& GetKeyPad() const { return key; };
 
@@ -79,16 +85,17 @@ private:
 
 	XINPUT_STATE m_xInput;
 
-	int m_nowButton[XINPUT_BUTTON::XINPUT_ALL];
-	int m_prevButton[XINPUT_BUTTON::XINPUT_ALL];
+	int      m_nowButton[XINPUT_BUTTON::XINPUT_ALL];          // 現在のボタン
+	int     m_prevButton[XINPUT_BUTTON::XINPUT_ALL];          // 前のフレームのボタン
 
-	char m_key[256];
-	char m_keyState[2][256];
+	char                                 m_key[256];          // 現在のキー
+	char                         m_keyState[2][256];          // キーの状態
 
-	BYTE m_nowKey;           // 今押したキー
-	BYTE m_prevKey;          // 前に押したキー
+	BYTE                                   m_nowKey;          // 今押したキー
+	BYTE                                  m_prevKey;          // 前に押したキー
 
-	int key;      // キー入力情報格納
+	int                                         key;          // キー入力情報を格納する
 
-	static const int LSTICK_DEADZONE;
+	static const int LSTICK_DEADZONE;                         // 左スティックのデッドゾーン
+
 };

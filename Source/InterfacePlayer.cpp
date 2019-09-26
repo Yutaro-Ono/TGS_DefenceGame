@@ -1,17 +1,22 @@
 //-----------------------------------------------------------------------+
 // インターフェース(プレイヤーステータス)クラス                                     
-//                                              Last Update : 2019/09/03
+//                                                      2019 Yutaro Ono.
 //-----------------------------------------------------------------------+
-#include "InterfacePlayer.h"
-
 #pragma warning (disable:4996)
 
+// インクルードファイル
+#include "InterfacePlayer.h"
+
+// コンストラクタ
 InterfacePlayer::InterfacePlayer()
 {
+	// 処理なし
 }
 
+// デストラクタ
 InterfacePlayer::~InterfacePlayer()
 {
+	// 処理なし
 }
 
 // 初期化処理
@@ -50,14 +55,19 @@ void InterfacePlayer::Initialize()
 	m_stockPosition = VGet(0.0f, 0.0f, 0.0f);
 }
 
+// 解放処理
 void InterfacePlayer::Delete()
 {
+	// 処理なし
 }
 
+// 更新処理
 void InterfacePlayer::Update()
 {
+	// 処理なし
 }
 
+// 更新処理(プレイヤー追跡)
 void InterfacePlayer::Update(Player & player)
 {
 	// プレイヤーの座標を追跡
@@ -93,5 +103,4 @@ void InterfacePlayer::Draw(Player& player, TextGraph& text)
 	{
 		text.DrawTextMessage(m_stockPosition.x - 60.0f, m_stockPosition.y - 110.0f, "MAX");
 	}
-
 }

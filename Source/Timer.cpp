@@ -1,25 +1,29 @@
 //-----------------------------------------------------------------------+
 // タイマークラス                        
-//                                              Last Update : 2019/07/13
+//                                                      2019 Yutaro Ono.
 //-----------------------------------------------------------------------+
+#pragma warning(disable:4996)
+
+// インクルードファイル
 #include "Timer.h"
 #include <iostream>
 
-#pragma warning(disable:4996)
-
+// コンストラクタ
 Timer::Timer()
 	:m_countTimer(0)
 	,m_startTimer(0)
 	,m_prevTimer(0)
 {
-
+	// 処理なし
 }
 
+// デストラクタ
 Timer::~Timer()
 {
-
+	// 処理なし
 }
 
+// 初期化処理
 void Timer::Initialize()
 {
 	m_isInsert = false;
@@ -29,15 +33,19 @@ void Timer::Initialize()
 	m_prevTimer = m_startTimer;
 }
 
+// 解放処理
 void Timer::Delete()
 {
+	// 処理なし
 }
 
+// カウントアップ処理
 void Timer::CountUp()
 {
-	// 未作成
+	// 未実装
 }
 
+// カウントダウン処理の更新
 void Timer::UpdateCountDown(const int in_maxTime)
 {
 	// 制限時間を入力したかどうか
@@ -60,6 +68,7 @@ void Timer::UpdateCountDown(const int in_maxTime)
 	}
 }
 
+// 描画処理
 void Timer::Draw(TextGraph& text)
 {
 	char time[20];
@@ -69,7 +78,7 @@ void Timer::Draw(TextGraph& text)
 	text.DrawTextMessage(1300, 20, time);
 }
 
-
+// タイマーを走らせる
 const int& Timer::RunTimer(const int in_limit)
 {
 	int comfortTime = 1;      // 時間計算のゆとり

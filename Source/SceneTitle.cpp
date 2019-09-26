@@ -1,24 +1,30 @@
 //-----------------------------------------------------------------------+
 // タイトルシーン                  
-//                                              Last Update : 2019/09/03
+//                                                      2019 Yutaro Ono.
 //-----------------------------------------------------------------------+
 
+// インクルードファイル
 #include "SceneTitle.h"
 #include "Input.h"
 #include "GameSystem.h"
 
+// コンストラクタ
 SceneTitle::SceneTitle()
 	:m_toNext(false)
 {
+	// 処理なし
 }
 
+// デストラクタ
 SceneTitle::~SceneTitle()
 {
+	// 処理なし
 }
 
 // 初期化処理
 void SceneTitle::Initialize()
 {
+	// アルファ値を最大にしておく
 	m_alpha = 255;
 	m_alphaCount = false;
 	// タイトルロゴ画像をロード、サイズ取得
@@ -51,9 +57,9 @@ void SceneTitle::Update(Camera & camera, Input& input, float deltaTime)
 {
 	// BGM再生
 	m_bgm->PlayLoopSoundFx();
-
 }
 
+// 描画処理
 void SceneTitle::Draw(TextGraph& text)
 {
 
@@ -77,15 +83,10 @@ void SceneTitle::Draw(TextGraph& text)
 
 	// ロゴの表示
 	DrawGraph((GAME_INSTANCE.GetScreenWidth() / 2) - (m_titleLogoW / 2), (GAME_INSTANCE.GetScreenHeight() / 2 - 100) - (m_titleLogoH / 3), m_titleLogoGraph, TRUE);
-
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, m_alpha);              // ブレンドモード(透過)をオン
 	// テキストの描画
 	text.DrawTextMessage(680, 700, "PRESS START BUTTON");
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);                  //ブレンドモードをオフ
-
-	// DrawString(GAME_INSTANCE.GetScreenWidth() / 2 - 700, GAME_INSTANCE.GetScreenHeight() / 2 + 50, "できるだけ多くの星を集めて中心のポッドへ持っていこう！", GetColor(255, 255, 255));
-	// DrawString(GAME_INSTANCE.GetScreenWidth() / 2 - 250, GAME_INSTANCE.GetScreenHeight() / 2 + 100, "UFOに当たるとダメージ！", GetColor(255, 255, 255));
-	// DrawString(GAME_INSTANCE.GetScreenWidth() / 2 - 350, GAME_INSTANCE.GetScreenHeight() / 2 + 250, "STARTボタンorSPACEキーでスタート", GetColor(255, 255, 255));
 
 	// エフェクトの再生
 	if (m_bgEffect->GetNowPlaying() == -1)
@@ -93,7 +94,6 @@ void SceneTitle::Draw(TextGraph& text)
 		m_bgEffect->PlayEffekseer(VGet(700.0f, -150.0f, 0.0f));
 		m_bgEffect->SetEffectScale(100.0f, 100.0f, 100.0f);
 	}
-
 
 }
 
@@ -104,12 +104,12 @@ SceneBase * SceneTitle::SceneUpdate(Input& input)
 	if (input.GetPushButtonState(XINPUT_BUTTON::XINPUT_START) || CheckHitKey(KEY_INPUT_SPACE))
 	{
 		m_toNext = true;                    // 次シーンへ移動するフラグをオン
-		m_enterSE->PlaySoundFx();         // 決定音を鳴らす
+		m_enterSE->PlaySoundFx();           // 決定音を鳴らす
 	}
 	// 決定音の再生が終わったら解放し、次のシーンを返す
 	if (m_toNext == true && m_enterSE->ScanNowPlaySound() == true)
 	{
-		m_bgm->StopSoundFx();             // BGMは止める
+		m_bgm->StopSoundFx();               // BGMは止める
 		return new SceneInGame();           // 次のシーンを返す
 	}
 

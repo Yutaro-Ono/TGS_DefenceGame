@@ -29,6 +29,11 @@ void PlayEffect::Initialize()
 // ‰ğ•úˆ—
 void PlayEffect::Delete()
 {
+	if (GetNowPlaying() == 0)
+	{
+		StopEffect();
+	}
+
 	DeleteEffekseerEffect(m_effectHandle);
 }
 

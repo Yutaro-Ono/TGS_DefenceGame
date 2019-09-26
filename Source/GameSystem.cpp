@@ -1,7 +1,9 @@
 //-----------------------------------------------------------------------+
 // ゲームシステムクラス                         
-//                                              Last Update : 2019/08/24
+//                                                      2019 Yutaro Ono.
 //-----------------------------------------------------------------------+
+
+// インクルードファイル
 #include <iostream>
 #include <Windows.h>
 #include "EffekseerForDXLib.h"
@@ -164,6 +166,12 @@ void GameSystem::RunLoop()
 			// 次のシーンを格納し初期化
 			m_scene = m_tmpScene;
 			m_scene->Initialize();
+		}
+
+		// BACKボタンでループを抜ける
+		if (m_input->GetPushButtonState(XINPUT_BUTTON::XINPUT_BACK))
+		{
+			break;
 		}
 	}
 

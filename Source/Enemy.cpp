@@ -2,10 +2,12 @@
 // エネミークラス                            
 //                                                      2019 Yutaro Ono.
 //-----------------------------------------------------------------------+
+
+// インクルードファイル
 #include "Enemy.h"
 
 const VECTOR Enemy::SCALE_SIZE = { 0.3f, 0.3f, 0.3f };
-const float Enemy::MOVE_SPEED = 93.0f;
+const float Enemy::MOVE_SPEED = 20000.0f;                       // 90.0f
 
 // コンストラクタ
 Enemy::Enemy(int sourceModelHandle)
@@ -23,6 +25,7 @@ Enemy::Enemy(int sourceModelHandle)
 // デストラクタ
 Enemy::~Enemy()
 {
+	// 処理なし
 }
 
 // 各種初期化処理

@@ -1,9 +1,12 @@
 //-----------------------------------------------------------+
 // ゲームシステムクラス
 //      : 全ての処理を行う
-//                                  Last Update : 2019/08/24
+//                                          2019 Yutaro Ono.
 //-----------------------------------------------------------+
 #pragma once
+#pragma comment(lib, "winmm.lib")
+
+// インクルードファイル
 #include "DxLib.h"
 #include "Math.h"
 #include "ModelLoader.h"
@@ -18,8 +21,8 @@
 #include "SceneResult.h"
 #include <vector>
 #include "TextGraph.h"
-#pragma comment(lib, "winmm.lib")
 
+// クラス前方宣言
 class Input;
 class Camera;
 class SceneInGame;
@@ -27,6 +30,7 @@ class SceneResult;
 
 class GameSystem
 {
+
 public:
 
 	// シングルトン
@@ -61,6 +65,7 @@ public:
 
 
 private:
+
 	GameSystem();                                // コンストラクタ
 
 	int Update();                                // Scene遷移更新用
@@ -82,6 +87,7 @@ private:
 	float m_deltaTime;                           // 1フレームの更新時間
 
 	int m_score;                                 // スコア保存用
+
 };
 
  #define GAME_INSTANCE GameSystem::GetInstance()

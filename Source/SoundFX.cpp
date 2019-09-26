@@ -1,7 +1,9 @@
 //-----------------------------------------------------------------------+
 // サウンドエフェクト関連クラス                             
-//                                              Last Update : 2019/08/24
+//                                                      2019 Yutaro Ono.
 //-----------------------------------------------------------------------+
+
+// インクルードファイル
 #include "SoundFX.h"
 
 // コンストラクタ
@@ -18,11 +20,13 @@ SoundFX::SoundFX(const char* in_fileName)
 // デストラクタ
 SoundFX::~SoundFX()
 {
+	// 処理なし
 }
 
 // 初期化処理
 void SoundFX::Initialize()
 {
+	// 処理なし
 }
 
 // 解放処理
@@ -39,7 +43,6 @@ void SoundFX::PlaySoundFx()
 	{
 		PlaySoundMem(m_sourceSoundHandle, DX_PLAYTYPE_BACK, FALSE);
 	}
-	
 }
 
 // サウンドのループ再生
@@ -54,7 +57,7 @@ void SoundFX::StopSoundFx()
 	StopSoundMem(m_sourceSoundHandle);
 }
 
-
+// 現在音楽が再生されているかどうかを検出
 bool SoundFX::ScanNowPlaySound()
 {
 	// 現在音楽ファイルが再生中かどうかを調べ、再生していたらtrueを返し、再生していなかったらfalseを返す
@@ -67,7 +70,6 @@ bool SoundFX::ScanNowPlaySound()
 	{
 		return false;
 	}
-
 
 	return false;
 }

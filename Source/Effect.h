@@ -5,6 +5,7 @@
 
 class PlayEffect
 {
+
 public:
 
 	PlayEffect(const char* sourceEffectHandle);
@@ -38,6 +39,5 @@ private:
 	int m_playingEffect;
 
 	int m_dotGraph;            // エフェクト再生に必要な描画用画像
-
 
 };

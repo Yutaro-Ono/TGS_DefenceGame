@@ -1,20 +1,22 @@
 //-----------------------------------------------------------------------+
 // ゲーム中におけるインターフェース統括クラス
-//                                              Last Update : 2019/07/28
+//                                                      2019 Yutaro Ono.
 //-----------------------------------------------------------------------+
+
+// インクルードファイル
 #include "InGameUIManager.h"
 #include "InterfacePlayer.h"
 
 // コンストラクタ
 InGameUIManager::InGameUIManager()
 {
-	//m_tutorialGraph = LoadGraph("Data/Interface/Control_Tutorial.png");
+	// 処理なし
 }
 
 // デストラクタ
 InGameUIManager::~InGameUIManager()
 {
-
+	// 処理なし
 }
 
 // 各種初期化処理
@@ -56,7 +58,4 @@ void InGameUIManager::Draw(Player& player, TextGraph& text)
 	// スコアの描画
 	m_score->Draw(text);
 	m_score->DrawAddScore(text);
-
-	// チュートリアル画像(α版用)
-	// DrawGraph(1280, 50, m_tutorialGraph, TRUE);
 }

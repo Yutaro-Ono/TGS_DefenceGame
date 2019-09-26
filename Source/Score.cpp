@@ -1,17 +1,22 @@
 //-----------------------------------------------------------------------+
 // スコアクラス                                 
-//                                              Last Update : 2019/07/28
+//                                                      2019 Yutaro Ono.
 //-----------------------------------------------------------------------+
-#include "Score.h"
 #pragma warning(disable:4996)
+
+// インクルードファイル
+#include "Score.h"
+
 const int Score::SCORE_POINT = 100;       // スコア加算用ポイント
 const double Score::SCORE_MULTIPLE[6] = { 1, 2, 3, 3.5, 4, 5 };
 
+// コンストラクタ
 Score::Score()
 {
 	// 処理なし
 }
 
+// デストラクタ
 Score::~Score()
 {
 	// 処理なし

@@ -1,17 +1,22 @@
 //-----------------------------------------------------------------------+
 // オブジェクト基底クラス                                   
-//                                              Last Update : 2019/07/01
+//                                                      2019 Yutaro Ono.
 //-----------------------------------------------------------------------+
+
+// インクルードファイル
 #include "ObjectBase.h"
 
+// コンストラクタ
 ObjectBase::ObjectBase(int sourceModelHandle)
 {
 	// 引数のモデルを自身のハンドルに複製
 	m_modelHandle = MV1DuplicateModel(sourceModelHandle);
 }
 
+// デストラクタ
 ObjectBase::~ObjectBase()
 {
+	// モデルの削除
 	MV1DeleteModel(m_modelHandle);
 }
 

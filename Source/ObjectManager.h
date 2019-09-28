@@ -1,9 +1,11 @@
 //-----------------------------------------------------------+
 // オブジェクトマネージャークラス
 //      : オブジェクトの総合的な処理を行う
-//                                  Last Update : 2019/07/01
+//                                         2019 Yutaro Ono.
 //-----------------------------------------------------------+
 #pragma once
+
+// インクルードファイル
 #include "DxLib.h"
 #include <vector>
 #include "Common.h"
@@ -13,27 +15,34 @@
 
 class ObjectManager final
 {
+
 public:
-	ObjectManager();
-	~ObjectManager();
 
-	void Initialize();
-	void Delete();
+	ObjectManager();                       // コンストラクタ
+	~ObjectManager();                      // デストラクタ
 
-	void Update();
+	void Initialize();                     // 初期化処理
+	void Delete();                         // 解放処理
 
-	void Draw();
+	void Update(float deltaTime);          // 更新処理
 
-	ObjectBase* GetPodPointer() { return m_podObj; }       // 回収ポッドのポインタゲッター
+	void Draw();                           // 描画処理
+
+	//-------------------------------------------------------------+
+    // Getter/Setter関連
+    //-------------------------------------------------------------+
+
+	ObjectBase* GetPodPointer() { return m_podObj; }          // 回収ポッドのポインタゲッター
+
 
 private:
 
-	int m_fieldSourceHandle;                  // フィールドモデルのハンドル
-	int m_skySourceHandle;                    // スカイドームのハンドル
-	int m_podSourceHandle;                    // 回収ポッドのハンドル
+	int       m_skySourceHandle;          // スカイドームのハンドル
+	int       m_podSourceHandle;          // 回収ポッドのハンドル
+	int     m_fieldSourceHandle;          // フィールドモデルのハンドル
 
-	ObjectBase* m_fieldObj;                   // フィールド
-	ObjectBase* m_skyObj;                     // 空
-	ObjectBase* m_podObj;                     // 回収ポッド
+	ObjectBase*        m_skyObj;          // 空
+	ObjectBase*        m_podObj;          // 回収ポッド
+	ObjectBase*      m_fieldObj;          // フィールド
 
 };

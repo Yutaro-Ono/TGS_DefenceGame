@@ -1,7 +1,9 @@
 //-----------------------------------------------------------------------+
 // プレイヤークラス                        
-//                                              Last Update : 2019/07/13
+//                                                      2019 Yutaro Ono.
 //-----------------------------------------------------------------------+
+
+// インクルードファイル
 #include "Player.h"
 #include <math.h>
 
@@ -10,7 +12,7 @@ const float Player::MOVE_SPEED = 80.0f;
 const float Player::INITIAL_POSITION_Y = 5.0f;
 const VECTOR Player::SCALE_SIZE = { 0.03f, 0.03f, 0.03f };
 const float Player::JUMP_POWER = 0.3f;
-const float Player::JUMP_SUB = 1.0f;
+const float Player::JUMP_SUB = 5.0f;
 const int Player::MAX_HOLDITEM = 100;
 
 // コンストラクタ(Actorの初期化子を付ける)
@@ -18,7 +20,7 @@ Player::Player(const int sourceModelHandle)
 	:Actor(sourceModelHandle)
 	,m_hitRadius(3.0f)
 {
-
+	// 処理なし
 }
 
 // デストラクター
@@ -27,6 +29,7 @@ Player::~Player()
 	// 処理なし
 }
 
+// 初期化処理
 void Player::Initialize()
 {
 	// 各種初期化
@@ -41,6 +44,7 @@ void Player::Initialize()
 	m_holdItemNum = 0;
 	m_deliverdItem = false;
 	m_playEffect = false;
+	m_hitEffect = false;
 
 	// エフェクトのロード
 	m_damageEffect = new PlayEffect("Data/Effects/Player_Damaged.efk");
@@ -55,13 +59,16 @@ void Player::Initialize()
 	m_deliverySound = new SoundFX("Data/Music/SE/Player/Delivery/soundlogo6.mp3");
 }
 
+// 解放処理
 void Player::Delete()
 {
+
 	m_damageEffect->Delete();
 	m_getEffect->Delete();
 	m_delivereyEffect->Delete();
 	m_getStarSound->Delete();
 	m_deliverySound->Delete();
+
 	delete (m_damageEffect);
 	delete (m_getEffect);
 	delete (m_delivereyEffect);
@@ -70,11 +77,13 @@ void Player::Delete()
 
 }
 
-// 更新
+// 更新処理
 void Player::Update(float deltaTime)
 {
+	// 処理なし
 }
 
+// 更新処理
 void Player::Update(Input& input, float deltaTime)
 {
 	VECTOR prevPosition;
@@ -120,7 +129,7 @@ void Player::Update(Input& input, float deltaTime)
 	HitWallUpdate(deltaTime);
 
 	// 移動モーション
-	//MotionMove(deltaTime);
+	MotionMove(deltaTime);
 
 	// 当たり判定のインターバル処理
 	HitInterval();
@@ -140,16 +149,16 @@ void Player::Update(Input& input, float deltaTime)
 // 簡易的なフィールドの当たり判定
 void Player::HitWallUpdate(float deltaTime)
 {
-	if (m_position.x >= 110.0f)
+	if (m_position.x >= 100.0f)
 	{
 		m_position.x -= MOVE_SPEED * deltaTime;
 	}
-	if (m_position.x <= -110.0f)
+	if (m_position.x <= -100.0f)
 	{
 		m_position.x += MOVE_SPEED * deltaTime;
 	}
 
-	if (m_position.z >= 90.0f)
+	if (m_position.z >= 80.0f)
 	{
 		m_position.z -= MOVE_SPEED * deltaTime;
 	}
@@ -170,9 +179,10 @@ void Player::Draw()
 	}
 
 	// 当たり判定フラグが立ったらエフェクトを再生
-	if (m_hitEnemy == true && m_damageEffect->GetNowPlaying() == -1)
+	if (m_hitEffect == true && m_damageEffect->GetNowPlaying() == -1)
 	{
 		m_damageEffect->PlayEffekseer(m_position);
+		m_hitEffect = false;
 	}
 
 	// 当たり判定確認用の球
@@ -182,31 +192,32 @@ void Player::Draw()
 // 移動モーションにおける小刻みなジャンプモーション
 void Player::MotionMove(float deltaTime)
 {
-	//if (m_moveFlag == true)
-	//{
-	//	m_position.y = velocityY;
-	//	velocityY -= JUMP_SUB;
-	//	if (velocityY <= INITIAL_POSITION_Y)
-	//	{
-	//		m_moveFlag = false;
-	//	}
-	//}
-	//// 移動していないとき元のY座標に戻し、Y軸加速度を初期化
-	//if (m_moveFlag == false)
-	//{
-	//	m_position.y = INITIAL_POSITION_Y;
-	//	velocityY = 0.0f;
-	//}
+	if (m_moveFlag == true)
+	{
+		m_position.y = velocityY;
+		velocityY += 5.0f;
+
+		if (velocityY <= INITIAL_POSITION_Y)
+		{
+			m_moveFlag = false;
+		}
+	}
+	// 移動していないとき元のY座標に戻し、Y軸加速度を初期化
+	if (m_moveFlag == false)
+	{
+		m_position.y = INITIAL_POSITION_Y;
+		velocityY = 0.0f;
+	}
 	if (m_moveFlag == true)
 	{
 		m_position.y = velocityY;
 		if (velocityY >= 0)
 		{
-			velocityY -= JUMP_SUB;
+			velocityY -= JUMP_SUB * deltaTime;
 		}
-		if (velocityY <= -100.0f)
+		if (velocityY <= -20.0f)
 		{
-			velocityY += JUMP_SUB;
+			velocityY += JUMP_SUB * deltaTime;
 		}
 	}
 
@@ -214,8 +225,6 @@ void Player::MotionMove(float deltaTime)
 	{
 		velocityY = 0.0f;
 	}
-
-
 }
 
 // エネミーに当たった時の処理
@@ -269,4 +278,35 @@ void Player::ChangeAngle()
 	{
 		m_angle += DX_PI_F * 2;
 	}
+}
+
+// 所持アイテムの初期化。初期化する際に回収エフェクトを再生(所持アイテム数によってエフェクトのサイズが変化)
+// アイテムをポッドに回収したときに一度だけ呼び出される
+void Player::InitHoldItem()
+{
+	// アイテム80個以上
+	if (m_holdItemNum >= 80)
+	{
+		m_delivereyEffect->ChangeSizePlayEffekseer(m_position, VGet(1.0f, 1.0f, 1.0f));
+	}
+
+	// アイテム50個以上、80個未満
+	if (m_holdItemNum >= 50 && m_holdItemNum < 80)
+	{
+		m_delivereyEffect->ChangeSizePlayEffekseer(m_position, VGet(0.7f, 0.7f, 0.7f));
+	}
+
+	// アイテム10個以上、50個未満
+	if (m_holdItemNum >= 10 && m_holdItemNum < 50)
+	{
+		m_delivereyEffect->ChangeSizePlayEffekseer(m_position, VGet(0.5f, 0.5f, 0.5f));
+	}
+
+	// アイテム10個未満
+	if (m_holdItemNum < 10)
+	{
+		m_delivereyEffect->ChangeSizePlayEffekseer(m_position, VGet(0.3f, 0.3f, 0.3f));
+	}
+
+	m_holdItemNum = 0;
 }

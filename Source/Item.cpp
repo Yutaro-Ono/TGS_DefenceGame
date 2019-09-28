@@ -1,3 +1,9 @@
+//-----------------------------------------------------------+
+// アイテムクラス
+//                                          2019 Yutaro Ono.
+//-----------------------------------------------------------+
+
+// インクルードファイル
 #include "Item.h"
 
 const float Item::FALL_SPEED = 50.0f;
@@ -18,17 +24,27 @@ Item::~Item()
 // 各種初期化処理
 void Item::Initialize()
 {
+	// 回転角度の初期化
+	m_direction = VGet(-45.0f, 0.0f, 0.0f);
 	// 半径を設定
 	m_radius = 3.0f;
 	// 状態をアクティブに
 	m_state = Item::POP;
+	// モデルの回転角度を設定
+	MV1SetRotationXYZ(m_modelHandle, m_direction);
 }
 
 // 更新処理
-void Item::Update()
+void Item::Update(float deltaTime)
 {
 	// ポジションを設定
 	MV1SetPosition(m_modelHandle, m_position);
+
+	// モデルを回転させる
+	MV1SetRotationXYZ(m_modelHandle, VGet(m_direction.x, m_direction.y, m_direction.z));
+
+	// 回転角度を更新
+	m_direction.y += 1.0f * deltaTime;
 }
 
 // 出現時落下処理

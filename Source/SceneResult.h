@@ -1,44 +1,47 @@
 //-----------------------------------------------------------+
 // リザルトシーン
 //      : リザルト画面での処理
-//                                  Last Update : 2019/07/11
+//                                         2019 Yutaro Ono.
 //-----------------------------------------------------------+
 #pragma once
+
+// インクルードファイル
 #include "SceneBase.h"
 #include "GameSystem.h"
 #include "SoundFX.h"
 
+// クラス前方宣言
 class SoundFX;
 
 class SceneResult : public SceneBase
 {
+
 public:
 
-	SceneResult();
-	~SceneResult();
+	SceneResult(bool in_isGameOver, int in_score);                                // コンストラクタ
+	~SceneResult();                                                               // デストラクタ
 
-	void Initialize() override;
+	void Initialize() override;                                                   // 初期化処理
+	void Delete() override;                                                       // 解放処理
 
-	void Delete() override;
+	void Update(Camera& camera, Input& input, float deltaTime) override;          // 更新処理
+	void Draw(TextGraph& text) override;                                          // 描画処理
 
-	void Update(Camera& camera, Input& input, float deltaTime) override;
+	//--------------------------------------------------------------------------------+
+	// Getter/Setter 関連
+	//--------------------------------------------------------------------------------+
+	// スコアのセッター
+	void SetScore(const int score) { m_score = score; }
+	// シーンが更新されたかどうかを取得
+	SceneBase* SceneUpdate(Input& input) override;
 
-	void Draw() override;
-
-	void SetScore(const int score) { m_score = score; }          // スコアのセッター
-
-	const int& GetNextScene() const { return toNext; }           // 次のシーンへのセッター
-
-	void SetClear(const bool clear) { m_clear = clear; }
 
 private:
 
-	int toNext;
+	int          toNext;          // 次のシーンへのフラグ
+	int         m_score;          // スコア
+	bool     m_gameOver;          // ゲームクリアかゲームオーバーか判定するフラグ
 
-	int m_score;
-
-	bool m_clear;           // ゲームクリアかゲームオーバーか判定するフラグ
-
-	SoundFX* m_bgm;         // BGM再生用
+	SoundFX*      m_bgm;          // BGM再生用
 
 };

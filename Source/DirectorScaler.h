@@ -1,13 +1,16 @@
 //-----------------------------------------------------------+
 // 様々なスケーリングを演出するクラス
 //      : 画像のサイズの拡大縮小などを主に担当する
-//                                  Last Update : 2019/08/04
+//                                          2019 Yutaro Ono.
 //-----------------------------------------------------------+
 #pragma once
+
+// インクルードファイル
 #include "DirectorBase.h"
 
 class DirectorScaler : public DirectorBase
 {
+
 public:
 
 	DirectorScaler();                     // コンストラクタ
@@ -24,6 +27,6 @@ public:
 
 private:
 
-	int m_graphScale;             // 画像サイズ
+	int     m_graphScale;          // 画像サイズ
 
 };

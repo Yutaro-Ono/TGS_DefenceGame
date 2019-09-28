@@ -1,9 +1,12 @@
 //-----------------------------------------------------------+
 // ゲームシステムクラス
 //      : 全ての処理を行う
-//                                  Last Update : 2019/07/01
+//                                          2019 Yutaro Ono.
 //-----------------------------------------------------------+
 #pragma once
+#pragma comment(lib, "winmm.lib")
+
+// インクルードファイル
 #include "DxLib.h"
 #include "Math.h"
 #include "ModelLoader.h"
@@ -17,9 +20,9 @@
 #include "SceneInGame.h"
 #include "SceneResult.h"
 #include <vector>
+#include "TextGraph.h"
 
-#pragma comment(lib, "winmm.lib")
-
+// クラス前方宣言
 class Input;
 class Camera;
 class SceneInGame;
@@ -27,18 +30,8 @@ class SceneResult;
 
 class GameSystem
 {
-public:
 
-	// ゲームシーン毎をフェーズとして定義
-	enum SCENE_PHASE
-	{
-		INIT = 0,
-		START,
-		TUTORIAL,
-		GAME,
-		GAME_END,
-		SHUT_DOWN,
-	};
+public:
 
 	// シングルトン
 	static GameSystem& GetInstance()
@@ -67,24 +60,22 @@ public:
 	const int& GetScreenHeight()const { return m_screenHeight; }
 	// 画面設定のセッター
 	void SetScreen(const int& scrWidth, const int& scrHeight, const bool& fullScreen);
+	// ゲーム終了のセッター
+	void SetGameQuit(bool in_quit) { m_isGameQuit = true; }
+
 
 private:
+
 	GameSystem();                                // コンストラクタ
 
 	int Update();                                // Scene遷移更新用
-
-	void UpdateMove();                           // 移動関連の更新
-
-	void UpdateDraw();                           // 描画関連の更新
-
 	bool ProgramLoop();                          // Windowsプロセスのエラーを返す
 
-
-	SceneTitle* m_titleScene;                    // タイトルシーン
-	SceneInGame* m_inGameScene;                  // インゲームシーン
-	SceneResult* m_resultScene;                  // リザルトシーン
+	SceneBase* m_scene;                          // シーン
+	SceneBase* m_tmpScene;                       // シーン情報の一時保存用
 	Camera* m_camera;                            // カメラ
 	Input* m_input;                              // 入力
+	TextGraph* m_text;                           // 描画用フォント
 
 	// ウィンドウ(Width : 幅, Height : 高さ)
 	int m_screenWidth;
@@ -93,9 +84,10 @@ private:
 	bool m_fullScreen;                           // フルスクリーンかどうか
 	bool m_isGameQuit;                           // ゲームを終了するかどうか
 
-	int sceneNum;                                // どのシーンか
-
 	float m_deltaTime;                           // 1フレームの更新時間
+
+	int m_score;                                 // スコア保存用
+
 };
 
  #define GAME_INSTANCE GameSystem::GetInstance()

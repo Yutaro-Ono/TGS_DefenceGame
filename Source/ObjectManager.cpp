@@ -1,7 +1,9 @@
 //-----------------------------------------------------------------------+
 // オブジェクトマネージャークラス                                    
-//                                              Last Update : 2019/07/02
+//                                                      2019 Yutaro Ono.
 //-----------------------------------------------------------------------+
+
+// インクルードファイル
 #include "ObjectManager.h"
 #include "ObjectField.h"
 #include "ObjectSky.h"
@@ -14,21 +16,22 @@ ObjectManager::ObjectManager()
 	,m_skySourceHandle(-1)
 	,m_podSourceHandle(-1)
 {
-
+	// 処理なし
 }
 
 // デストラクタ
 ObjectManager::~ObjectManager()
 {
+	// 処理なし
 }
 
 // 各種初期化
 void ObjectManager::Initialize()
 {
 	// フィールドモデルのロード
-	m_fieldSourceHandle = MV1LoadModel("Data/Model/Field/チェックなドームルームver100/チェックなドームルームver100.mv1");
+	m_fieldSourceHandle = MV1LoadModel("Data/Model/Field/Field/Field_Plate.mv1");
 	// スカイドームのロード
-	m_skySourceHandle = MV1LoadModel("Data/Skydome/Universe/Universe.mv1");
+	m_skySourceHandle = MV1LoadModel("Data/Skydome/Universe/Universe_Blue_ver.mv1");
 	// 回収ポッドのモデルロード
 	m_podSourceHandle = MV1LoadModel("Data/Model/Field/Collect_Pod/CollectPod.mv1");
 
@@ -62,19 +65,20 @@ void ObjectManager::Delete()
 }
 
 // 更新処理
-void ObjectManager::Update()
+void ObjectManager::Update(float deltaTime)
 {
-	m_fieldObj->Update();
-	m_podObj->Update();
+	m_skyObj->Update(deltaTime);
+	m_fieldObj->Update(deltaTime);
+	m_podObj->Update(deltaTime);
 }
 
 // 描画処理
 void ObjectManager::Draw()
 {
-	// フィールドの描画
-	//m_fieldObj->Draw();
 	// スカイドームの描画
 	m_skyObj->Draw();
+	// フィールドの描画
+	m_fieldObj->Draw();
 	// 回収ポッドの描画
 	m_podObj->Draw();
 }

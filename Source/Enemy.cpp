@@ -1,11 +1,13 @@
 //-----------------------------------------------------------------------+
 // エネミークラス                            
-//                                              Last Update : 2019/07/13
+//                                                      2019 Yutaro Ono.
 //-----------------------------------------------------------------------+
+
+// インクルードファイル
 #include "Enemy.h"
 
 const VECTOR Enemy::SCALE_SIZE = { 0.3f, 0.3f, 0.3f };
-const float Enemy::MOVE_SPEED = 93.0f;
+const float Enemy::MOVE_SPEED = 20000.0f;                       // 90.0f
 
 // コンストラクタ
 Enemy::Enemy(int sourceModelHandle)
@@ -23,6 +25,7 @@ Enemy::Enemy(int sourceModelHandle)
 // デストラクタ
 Enemy::~Enemy()
 {
+	// 処理なし
 }
 
 // 各種初期化処理
@@ -36,6 +39,12 @@ void Enemy::Update(float deltaTime)
 	// 角度を設定
 	MV1SetRotationXYZ(m_modelHandle, VGet(0.0f, m_angle / 180.0f * DX_PI_F, 0.0f));
 	
+	// もし地面に埋まっていたら上に押し出す
+	if (m_position.y < 0.0f)
+	{
+		m_position.y = 0.0f;
+	}
+
 	// モデルの位置を設定
 	MV1SetPosition(m_modelHandle, m_position);
 }

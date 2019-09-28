@@ -1,14 +1,16 @@
 //-----------------------------------------------------------------------+
 // プレイヤーマネージャークラス                                 
-//                                              Last Update : 2019/07/01
+//                                                      2019 Yutaro Ono.
 //-----------------------------------------------------------------------+
+
+// インクルードファイル
 #include "DxLib.h"
 #include "PlayerManager.h"
 #include "Actor.h"
 #include "Player.h"
 
 // コンストラクタ
-PlayerManager::PlayerManager()
+PlayerManager::PlayerManager(int in_playerNum)
 	:m_sourceModelHandle(-1)
 	,m_playerState(PLAYER_STATE::ACTIVE)
 {
@@ -18,8 +20,7 @@ PlayerManager::PlayerManager()
 // デストラクタ
 PlayerManager::~PlayerManager()
 {
-	MV1DeleteModel(m_sourceModelHandle);      // モデルの削除
-	delete(m_player);
+	// 処理なし
 }
 
 // プレイヤーモデル生成処理
@@ -40,7 +41,11 @@ void PlayerManager::Initialize()
 // 各種解放処理
 void PlayerManager::Delete()
 {
+	MV1DeleteModel(m_sourceModelHandle);      // モデルの削除
+
 	m_player->Delete();
+
+	delete (m_player);
 }
 
 // 更新処理

@@ -5,6 +5,7 @@
 
 class PlayEffect
 {
+
 public:
 
 	PlayEffect(const char* sourceEffectHandle);
@@ -14,7 +15,12 @@ public:
 
 	void Delete();
 
+	// Efekseer3Dの単純再生
 	void PlayEffekseer(const VECTOR in_playPos);
+
+	// Effekseer3Dのサイズを指定した再生
+	void ChangeSizePlayEffekseer(const VECTOR in_playPos, const VECTOR in_size);
+
 	// 2DのEffekseer再生
 	void PlayEffekseer2D(const VECTOR in_playPos);
 
@@ -33,6 +39,5 @@ private:
 	int m_playingEffect;
 
 	int m_dotGraph;            // エフェクト再生に必要な描画用画像
-
 
 };

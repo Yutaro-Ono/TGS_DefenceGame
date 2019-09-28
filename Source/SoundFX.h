@@ -1,55 +1,36 @@
 //-----------------------------------------------------------+
 // サウンドクラス
 //      : サウンド関連のロード、再生を一元管理
-//                                  Last Update : 2019/07/13
+//                                           2019 Yutaro Ono.
 //-----------------------------------------------------------+
 #pragma once
+
+// インクルードファイル
 #include "DxLib.h"
-
-
 
 class SoundFX final
 {
+
 public:
 
-	//enum SFX_MENU
-	//{
-	//	ENTER,
-	//	CURSOL,
-	//	ALL_NUM,
-	//};
+	SoundFX(const char* in_fileName);          // コンストラクタ
+	~SoundFX();                                // デストラクタ
 
-	//enum SFX_PLAYER
-	//{
-	//	MOVE,
-	//	ALL_NUM,
-	//};
+	void Initialize();                         // 初期化処理
 
-	//enum SFX_ENEMY
-	//{
-	//	MOVE,
-	//	ALL_NUM,
-	//};
+	void Delete();                             // 解放処理
 
-	SoundFX(const char* in_fileName);        // コンストラクタ
-	~SoundFX();       // デストラクタ
+	void PlaySoundFx();                        // サウンド再生関数
 
-	void Initialize();     // 初期化処理
+	void PlayLoopSoundFx();                    // サウンドのループ再生
 
-	void Delete();         // 解放処理
+	void StopSoundFx();                        // 再生中のサウンド停止
 
-	void PlaySoundFx();    // サウンド再生関数
+	bool ScanNowPlaySound();                   // 今音楽ファイルを再生しているかどうか？
 
-	void PlayLoopSoundFx();  // サウンドのループ再生
-
-	void StopSoundFx();      // 再生中のサウンド停止
 
 private:
 
-	int m_sourceSoundHandle;
-
-	//int m_menuSFXHandle[SFX_MENU::ALL_NUM];         // メニューSEのハンドル
-
-	//int m_playerSFXHandle[SFX_PLAYER::ALL_NUM];     // プレイヤーSEのハンドル
+	int m_sourceSoundHandle;                   // 音楽ファイルのハンドル
 	
 };

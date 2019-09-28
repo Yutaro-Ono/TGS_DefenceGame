@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------+
 // エネミーマネージャークラス                              
-//                                              Last Update : 2019/07/13
+//                                                      2019 Yutaro Ono.
 //-----------------------------------------------------------------------+
 #include "EnemyManager.h"
 #include "HitChecker.h"
@@ -8,7 +8,7 @@
 class Enemy;
 
 const int EnemyManager::ENEMY_MAX_NUM = 5;           // 敵の一度に出現する最大数
-const int EnemyManager::ENEMY_ALL_NUM = 25;          // 敵の合計数
+const int EnemyManager::ENEMY_ALL_NUM = 10;          // 敵の合計数
 
 // 各種初期化(モデルの読み込み、ポジション設定)
 void EnemyManager::Initialize()
@@ -36,27 +36,17 @@ void EnemyManager::Delete()
 {
 	// モデルを削除
 	MV1DeleteModel(m_enemySourceHandle);
-	
+
 	// エネミーの削除
-	while (!m_enemy.empty())
+	for (int i = 0; i < m_enemy.size(); ++i)
 	{
-		delete m_enemy.back();
+		delete m_enemy[i];
 	}
-	m_enemy.clear();
-
-	// エネミーの削除
-	//for (int i = 0; i < m_enemy.size(); i++)
-	//{
-	//	delete (m_enemy[i]);
-	//	m_enemy[i] = NULL;
-	//}
-
 }
 
 // 更新処理
 void EnemyManager::Update(PlayerManager& playerManager, float deltaTime)
 {
-
 	for (int i = 0; i < m_enemy.size(); i++)
 	{
 		// プレイヤーとのヒットフラグが立っていない時のみ更新

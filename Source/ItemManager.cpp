@@ -59,13 +59,18 @@ void ItemManager::Delete()
 	MV1DeleteModel(m_sourceModelHandle);
 
 	// アイテムの削除
-	while (!m_item.empty())
+	//while (!m_item.empty())
+	//{
+	//	delete m_item.back();
+	//}
+
+	for (int i = 0; i < m_item.size(); ++i)
 	{
-		delete m_item.back();
-		m_item.pop_back();
+		delete m_item[i];
 	}
+
 	// アイテムベクトルのクリア
-	m_item.clear();
+	std::vector<class Item*>().swap(m_item);
 }
 
 // 更新処理
@@ -101,7 +106,8 @@ void ItemManager::Update(float deltaTime)
 			// フィールド上のアイテムを減らす
 			m_nowItem--;
 			// アイテムの消去
-			m_item.clear();
+			item = m_item.back();
+			delete m_item.back();
 		}
 	}
 }

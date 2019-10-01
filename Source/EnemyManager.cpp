@@ -42,6 +42,14 @@ void EnemyManager::Delete()
 	{
 		delete m_enemy[i];
 	}
+
+	//while (!m_enemy.empty())
+	//{
+	//	delete m_enemy.back();
+	//}
+
+	// swap‰ğ•ú
+	std::vector<class Enemy*>().swap(m_enemy);
 }
 
 // XVˆ—

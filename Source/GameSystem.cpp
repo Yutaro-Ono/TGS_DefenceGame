@@ -46,7 +46,7 @@ bool GameSystem::Initialize()
 	SetMouseDispFlag(TRUE);                                   // マウスカーソルの表示
 	SetDrawScreen(DX_SCREEN_BACK);                            // 描画先を裏画面にセット
 
-		// DXライブラリとEffekseerの初期化処理
+	// DXライブラリとEffekseerの初期化処理
 	if (DxLib_Init() == -1 || Effekseer_Init(8000) == -1)
 	{
 		return false;			                              // エラーが起きたら直ちに終了
@@ -192,7 +192,6 @@ void GameSystem::ShutDown()
 	m_text->Delete();
 
 	delete (m_scene);
-	delete (m_tmpScene);
 	delete (m_camera);
 	delete (m_input);
 	delete (m_text);

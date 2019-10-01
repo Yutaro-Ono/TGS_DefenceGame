@@ -85,6 +85,8 @@ void SceneInGame::Delete()
 // オーバーライドしたアップデート(処理なし)
 void SceneInGame::Update(Camera& camera, Input& input, float deltaTime)
 {
+	// カメラの更新
+	camera.Update(*m_player);
 
 	// カウントダウン
 	if (m_startGame == false)
@@ -97,7 +99,7 @@ void SceneInGame::Update(Camera& camera, Input& input, float deltaTime)
 	if (m_startGame == true)
 	{
 		// カメラの更新
-		camera.Update(*m_player);
+		//camera.Update(*m_player);
 
 		// BGMの再生
 		m_bgm->PlayLoopSoundFx();

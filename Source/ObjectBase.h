@@ -7,7 +7,6 @@
 
 // インクルードファイル
 #include "DxLib.h"
-#include "ModelLoader.h"
 
 class ObjectBase
 {

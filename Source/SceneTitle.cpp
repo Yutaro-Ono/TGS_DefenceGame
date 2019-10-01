@@ -11,6 +11,7 @@
 // コンストラクタ
 SceneTitle::SceneTitle()
 	:m_toNext(false)
+	,m_screenAlpha(180)
 {
 	// 処理なし
 }
@@ -25,7 +26,7 @@ SceneTitle::~SceneTitle()
 void SceneTitle::Initialize()
 {
 	// アルファ値を最大にしておく
-	m_alpha = 255;
+	m_logoAlpha = 255;
 	m_alphaCount = false;
 	// タイトルロゴ画像をロード、サイズ取得
 	m_titleLogoGraph = LoadGraph("Data/Interface/Title_Logo_2.png");
@@ -63,30 +64,40 @@ void SceneTitle::Update(Camera & camera, Input& input, float deltaTime)
 void SceneTitle::Draw(TextGraph& text)
 {
 
-	if (m_alpha >= 255)
+	if (m_logoAlpha >= 255)
 	{
 		m_alphaCount = false;
 	}
-	if (m_alpha <= 32)
+	if (m_logoAlpha <= 32)
 	{
 		m_alphaCount = true;
 	}
 
 	if (m_alphaCount == true)
 	{
-		m_alpha += 2;
+		m_logoAlpha += 2;
 	}
 	if (m_alphaCount == false)
 	{
-		m_alpha -= 2;
+		m_logoAlpha -= 2;
 	}
 
 	// ロゴの表示
 	DrawGraph((GAME_INSTANCE.GetScreenWidth() / 2) - (m_titleLogoW / 2), (GAME_INSTANCE.GetScreenHeight() / 2 - 100) - (m_titleLogoH / 3), m_titleLogoGraph, TRUE);
-	SetDrawBlendMode(DX_BLENDMODE_ALPHA, m_alpha);              // ブレンドモード(透過)をオン
-	// テキストの描画
-	text.DrawTextMessage(680, 700, "PRESS START BUTTON");
-	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);                  //ブレンドモードをオフ
+
+
+	// テキストの描画(次のシーンへの遷移フラグが立っていたら内容を変える)
+	if (m_toNext == false)
+	{
+		SetDrawBlendMode(DX_BLENDMODE_ALPHA, m_logoAlpha);              // ブレンドモード(透過)をオン
+		text.DrawTextMessage(680, 700, "PRESS START BUTTON");
+		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);                      // ブレンドモードをオフ
+	}
+	else
+	{
+		text.DrawTextMessage(800, 700, "GAME START");
+	}
+
 
 	// エフェクトの再生
 	if (m_bgEffect->GetNowPlaying() == -1)
@@ -97,20 +108,43 @@ void SceneTitle::Draw(TextGraph& text)
 
 }
 
+// 次のシーンへ遷移する際のエフェクト
+int SceneTitle::SceneTransEffect(int in_alpha)
+{
+	if (in_alpha > 0)
+	{
+		SetDrawBlendMode(DX_BLENDMODE_ALPHA, in_alpha);
+		DrawBox(0, 0, GAME_INSTANCE.GetScreenWidth(), GAME_INSTANCE.GetScreenHeight(), GetColor(255, 255, 255), TRUE);
+	}
+
+	// アルファ値を返す
+	return --in_alpha;
+}
+
 // 次のシーンへの遷移処理 (シーン遷移条件がtrueだったら次シーンへのポインタを返し、falseだったらこのクラスのポインタを返す)
 SceneBase * SceneTitle::SceneUpdate(Input& input)
 {
 	// STARTボタンかスペースキーで次のシーンへ
 	if (input.GetPushButtonState(XINPUT_BUTTON::XINPUT_START) || CheckHitKey(KEY_INPUT_SPACE))
 	{
-		m_toNext = true;                    // 次シーンへ移動するフラグをオン
-		m_enterSE->PlaySoundFx();           // 決定音を鳴らす
+		m_toNext = true;                                            // 次シーンへ移動するフラグをオン
+		m_screenAlpha = SceneTransEffect(m_screenAlpha);            // 画面効果処理
+		m_enterSE->PlaySoundFx();                                   // 決定音を鳴らす
 	}
+
 	// 決定音の再生が終わったら解放し、次のシーンを返す
-	if (m_toNext == true && m_enterSE->ScanNowPlaySound() == true)
+	if (m_toNext == true)
 	{
-		m_bgm->StopSoundFx();               // BGMは止める
-		return new SceneInGame();           // 次のシーンを返す
+		m_screenAlpha = SceneTransEffect(m_screenAlpha);            // 画面効果処理
+
+		// 決定音が終了した、もしくは
+		if (m_enterSE->ScanNowPlaySound() == true && m_screenAlpha == 0)
+		{
+			m_bgm->StopSoundFx();                                   // BGMは止める
+			SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);              // 画面効果をオフ
+
+			return new SceneInGame();                               // 次のシーンを返す
+		}
 	}
 
 	return this;

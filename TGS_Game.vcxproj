@@ -29,7 +29,6 @@
     <ClCompile Include="Source\EnemyManager.cpp" />
     <ClCompile Include="Source\GameSystem.cpp" />
     <ClCompile Include="Source\HitChecker.cpp" />
-    <ClCompile Include="Source\Idol.cpp" />
     <ClCompile Include="Source\InGameUIManager.cpp" />
     <ClCompile Include="Source\Input.cpp" />
     <ClCompile Include="Source\InterfaceBase.cpp" />
@@ -37,8 +36,6 @@
     <ClCompile Include="Source\Item.cpp" />
     <ClCompile Include="Source\ItemManager.cpp" />
     <ClCompile Include="Source\main.cpp" />
-    <ClCompile Include="Source\ModelLoader.cpp" />
-    <ClCompile Include="Source\NpcManager.cpp" />
     <ClCompile Include="Source\ObjectBase.cpp" />
     <ClCompile Include="Source\ObjectField.cpp" />
     <ClCompile Include="Source\ObjectManager.cpp" />
@@ -69,15 +66,12 @@
     <ClInclude Include="Source\EnemyManager.h" />
     <ClInclude Include="Source\GameSystem.h" />
     <ClInclude Include="Source\HitChecker.h" />
-    <ClInclude Include="Source\Idol.h" />
     <ClInclude Include="Source\InGameUIManager.h" />
     <ClInclude Include="Source\Input.h" />
     <ClInclude Include="Source\InterfaceBase.h" />
     <ClInclude Include="Source\InterfacePlayer.h" />
     <ClInclude Include="Source\Item.h" />
     <ClInclude Include="Source\ItemManager.h" />
-    <ClInclude Include="Source\ModelLoader.h" />
-    <ClInclude Include="Source\NpcManager.h" />
     <ClInclude Include="Source\ObjectBase.h" />
     <ClInclude Include="Source\ObjectField.h" />
     <ClInclude Include="Source\ObjectManager.h" />

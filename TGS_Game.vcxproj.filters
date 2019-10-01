@@ -31,14 +31,8 @@
     <Filter Include="ソース ファイル\Actor\Enemy">
       <UniqueIdentifier>{069131f6-9a12-4c44-a3ad-c080f6811bdb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Actor\NPC">
-      <UniqueIdentifier>{1da5def1-e91f-4b5c-b020-4d9e7ab64b3c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\Actor\Enemy\EnemyManager">
       <UniqueIdentifier>{f45539de-87ca-4df5-b62f-b9dceb979e70}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Actor\NPC\NpcManager">
-      <UniqueIdentifier>{6910018e-cc61-4e55-996e-a1db97898040}</UniqueIdentifier>
     </Filter>
     <Filter Include="ソース ファイル\UI">
       <UniqueIdentifier>{368b5a80-4188-4920-a511-072e62658b63}</UniqueIdentifier>
@@ -81,9 +75,6 @@
     <ClCompile Include="Source\main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Source\ModelLoader.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Actor.cpp">
       <Filter>ソース ファイル\Actor</Filter>
     </ClCompile>
@@ -114,17 +105,11 @@
     <ClCompile Include="Source\Enemy.cpp">
       <Filter>ソース ファイル\Actor\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Idol.cpp">
-      <Filter>ソース ファイル\Actor\NPC</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Player.cpp">
       <Filter>ソース ファイル\Actor\Player</Filter>
     </ClCompile>
     <ClCompile Include="Source\EnemyManager.cpp">
       <Filter>ソース ファイル\Actor\Enemy\EnemyManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\NpcManager.cpp">
-      <Filter>ソース ファイル\Actor\NPC\NpcManager</Filter>
     </ClCompile>
     <ClCompile Include="Source\ObjectVisibleWall.cpp">
       <Filter>ソース ファイル\Object</Filter>
@@ -191,9 +176,6 @@
     <ClInclude Include="Source\GameSystem.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Source\ModelLoader.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Actor.h">
       <Filter>ソース ファイル\Actor</Filter>
     </ClInclude>
@@ -227,17 +209,11 @@
     <ClInclude Include="Source\Enemy.h">
       <Filter>ソース ファイル\Actor\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Idol.h">
-      <Filter>ソース ファイル\Actor\NPC</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Player.h">
       <Filter>ソース ファイル\Actor\Player</Filter>
     </ClInclude>
     <ClInclude Include="Source\EnemyManager.h">
       <Filter>ソース ファイル\Actor\Enemy\EnemyManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\NpcManager.h">
-      <Filter>ソース ファイル\Actor\NPC\NpcManager</Filter>
     </ClInclude>
     <ClInclude Include="Source\ObjectVisibleWall.h">
       <Filter>ソース ファイル\Object</Filter>

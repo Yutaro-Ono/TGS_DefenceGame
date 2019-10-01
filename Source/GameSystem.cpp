@@ -113,6 +113,9 @@ void GameSystem::RunLoop()
 	// シーンの生成処理
 	Create();
 
+	// 現在のシーンを仮シーンに格納
+	m_tmpScene = m_scene;
+
 	while (ProgramLoop() || m_isGameQuit == true)
 	{
 		//時間計測
@@ -137,9 +140,6 @@ void GameSystem::RunLoop()
 		// シーンの更新処理
 		m_scene->Update(*m_camera, *m_input, m_deltaTime);
 
-		// 次のシーンをtmpに一時取得
-		m_tmpScene = m_scene->SceneUpdate(*m_input);
-
 
 		// シーンが変更されていなかった場合は描画を実行
 		if (m_tmpScene == m_scene)
@@ -150,6 +150,9 @@ void GameSystem::RunLoop()
 			UpdateEffekseer3D();
 			// Effekseerの描画
 			DrawEffekseer3D();
+
+			// 次のシーンをtmpに一時取得
+			m_tmpScene = m_scene->SceneUpdate(*m_input);
 
 			ScreenFlip();
 		}

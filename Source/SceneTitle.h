@@ -28,6 +28,8 @@ public:
 	void Update(Camera& camera, Input& input, float deltaTime) override;          // 更新処理
 	void Draw(TextGraph& title) override;                                         // 描画処理
 
+	int SceneTransEffect(int in_alpha);                                           // シーン繊維のフェードエフェクト
+
 	const bool& GetNextScene() const { return m_toNext; };                        // 次のシーンへ移行するフラグを返す
 	SceneBase* SceneUpdate(Input& input) override;                                // 次のシーンへ移行する処理
 
@@ -36,7 +38,9 @@ private:
 
 	bool m_toNext;                // 次のシーンへ移行するフラグ
 
-	int m_alpha;                  // ロゴの透過表示用
+	unsigned int m_logoAlpha;                  // ロゴの透過表示用
+	unsigned int m_screenAlpha;                // 画面の透過表示用
+
 	bool m_alphaCount;            // 透過処理用
 
 	//--------------------------------------------------------------------------+

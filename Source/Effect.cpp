@@ -1,5 +1,10 @@
-#include "Effect.h"
+//-----------------------------------------------------------------------+
+// エフェクトクラス                         
+//                                                      2019 Yutaro Ono.
+//-----------------------------------------------------------------------+
 
+// インクルードファイル
+#include "Effect.h"
 
 // コンストラクタ
 PlayEffect::PlayEffect(const char* sourceEffectHandle)
@@ -16,6 +21,7 @@ PlayEffect::PlayEffect(const char* sourceEffectHandle)
 // デストラクタ
 PlayEffect::~PlayEffect()
 {
+	// 処理なし
 }
 
 // 初期化処理
@@ -82,8 +88,6 @@ void PlayEffect::ChangeSizePlayEffekseer(const VECTOR in_playPos, const VECTOR i
 	// 画像を描画しておく
 	DrawGraph(0, 0, m_dotGraph, FALSE);
 }
-
-
 
 void PlayEffect::PlayEffekseer2D(const VECTOR in_playPos)
 {

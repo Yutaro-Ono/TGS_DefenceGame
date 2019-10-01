@@ -8,7 +8,7 @@
 #include "DxLib.h"
 #include "GameSystem.h"
 
-// ランチャー起動用関数
+// ランチャー起動用関数(TGS2019展示用)
 void LauncherBoot()
 {
 	Sleep(500);
@@ -26,7 +26,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	// Dxライブラリ初期化処理
 	if (GameSystem::GetInstance().Initialize() == false)
 	{
-		GameSystem::GetInstance().ShutDown();              // 失敗したら終了
+		GameSystem::GetInstance().ShutDown();              // 初期化に失敗したら終了
 	}
 
 	// ゲームループ
